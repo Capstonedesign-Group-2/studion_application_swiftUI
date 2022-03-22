@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		55B98BF027E83E1D0057F168 /* studion_application_swiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */; };
+		55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BF127E83E1D0057F168 /* ContentView.swift */; };
+		55B98BF427E83E1D0057F168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B98BF327E83E1D0057F168 /* Assets.xcassets */; };
+		55B98BF727E83E1D0057F168 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B98BF627E83E1D0057F168 /* Preview Assets.xcassets */; };
+		55B98C0127E83F260057F168 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C0027E83F260057F168 /* LoginView.swift */; };
+		55B98C0527E857CA0057F168 /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C0427E857CA0057F168 /* AuthController.swift */; };
+		55B98C0727E85A460057F168 /* JWTToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C0627E85A460057F168 /* JWTToken.swift */; };
+		55B98C0A27E85A6C0057F168 /* SocketIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C0927E85A6C0057F168 /* SocketIO.swift */; };
+		55B98C0E27E85B090057F168 /* AuthCodableStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C0D27E85B090057F168 /* AuthCodableStruct.swift */; };
+		55B98C1027E85B950057F168 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C0F27E85B950057F168 /* UserInfo.swift */; };
+		55B98C1627E885D60057F168 /* ProgressViewBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C1527E885D60057F168 /* ProgressViewBar.swift */; };
+		55B98C1827E8895D0057F168 /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C1727E8895D0057F168 /* ProgressView.swift */; };
+		55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C1927E88B7F0057F168 /* SplashScreen.swift */; };
+		55B98C1C27E8BCD20057F168 /* PageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C1B27E8BCD20057F168 /* PageRouter.swift */; };
+		55B98C1E27E8BF4C0057F168 /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C1D27E8BF4C0057F168 /* RegisterView.swift */; };
+		55B98C2127E965DA0057F168 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C2027E965DA0057F168 /* MainView.swift */; };
+		55B98C2427E96A0A0057F168 /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C2327E96A0A0057F168 /* PostView.swift */; };
+		55B98C2727E96F340057F168 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C2627E96F340057F168 /* SettingView.swift */; };
+		55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C2B27E96F6B0057F168 /* ChatRoomList.swift */; };
+		55B98C3027E96FA40057F168 /* StudionRoomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C2F27E96FA40057F168 /* StudionRoomList.swift */; };
+		7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studion_application_swiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studion_application_swiftUIApp.swift; sourceTree = "<group>"; };
+		55B98BF127E83E1D0057F168 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		55B98BF327E83E1D0057F168 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		55B98BF627E83E1D0057F168 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		55B98C0027E83F260057F168 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		55B98C0427E857CA0057F168 /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
+		55B98C0627E85A460057F168 /* JWTToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTToken.swift; sourceTree = "<group>"; };
+		55B98C0927E85A6C0057F168 /* SocketIO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketIO.swift; sourceTree = "<group>"; };
+		55B98C0D27E85B090057F168 /* AuthCodableStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCodableStruct.swift; sourceTree = "<group>"; };
+		55B98C0F27E85B950057F168 /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		55B98C1527E885D60057F168 /* ProgressViewBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewBar.swift; sourceTree = "<group>"; };
+		55B98C1727E8895D0057F168 /* ProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		55B98C1927E88B7F0057F168 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		55B98C1B27E8BCD20057F168 /* PageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageRouter.swift; sourceTree = "<group>"; };
+		55B98C1D27E8BF4C0057F168 /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
+		55B98C2027E965DA0057F168 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		55B98C2327E96A0A0057F168 /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
+		55B98C2627E96F340057F168 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
+		55B98C2B27E96F6B0057F168 /* ChatRoomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomList.swift; sourceTree = "<group>"; };
+		55B98C2F27E96FA40057F168 /* StudionRoomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudionRoomList.swift; sourceTree = "<group>"; };
+		577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studion_application_swiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E8C3731F8D5A9843C908CC7 /* Pods-studion_application_swiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.debug.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.debug.xcconfig"; sourceTree = "<group>"; };
+		F764A19F6476AACD3B6CA653 /* Pods-studion_application_swiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.release.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		55B98BE927E83E1D0057F168 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		55B98BE327E83E1D0057F168 = {
+			isa = PBXGroup;
+			children = (
+				55B98BEE27E83E1D0057F168 /* studion_application_swiftUI */,
+				55B98BED27E83E1D0057F168 /* Products */,
+				640E38267862658A983A696A /* Pods */,
+				655A79E4A55B8107C07D46D9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		55B98BED27E83E1D0057F168 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		55B98BEE27E83E1D0057F168 /* studion_application_swiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C0B27E85AC30057F168 /* struct */,
+				55B98C0227E8579D0057F168 /* repository */,
+				55B98BFD27E83EFE0057F168 /* page */,
+				55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */,
+				55B98BF127E83E1D0057F168 /* ContentView.swift */,
+				55B98BF327E83E1D0057F168 /* Assets.xcassets */,
+				55B98BF527E83E1D0057F168 /* Preview Content */,
+			);
+			path = studion_application_swiftUI;
+			sourceTree = "<group>";
+		};
+		55B98BF527E83E1D0057F168 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				55B98BF627E83E1D0057F168 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		55B98BFD27E83EFE0057F168 /* page */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C2D27E96F8D0057F168 /* Studion */,
+				55B98C2827E96F420057F168 /* Chat */,
+				55B98C2527E96F270057F168 /* Setting */,
+				55B98C2227E969FA0057F168 /* Post */,
+				55B98C1F27E965CB0057F168 /* Main */,
+				55B98C1127E8859C0057F168 /* Progress */,
+				55B98BFE27E83F0E0057F168 /* Auth */,
+				55B98C1B27E8BCD20057F168 /* PageRouter.swift */,
+			);
+			path = page;
+			sourceTree = "<group>";
+		};
+		55B98BFE27E83F0E0057F168 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C0027E83F260057F168 /* LoginView.swift */,
+				55B98C1D27E8BF4C0057F168 /* RegisterView.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		55B98C0227E8579D0057F168 /* repository */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C0827E85A5E0057F168 /* SocketIO */,
+				55B98C0327E857AB0057F168 /* User */,
+				55B98C0627E85A460057F168 /* JWTToken.swift */,
+				55B98C0F27E85B950057F168 /* UserInfo.swift */,
+			);
+			path = repository;
+			sourceTree = "<group>";
+		};
+		55B98C0327E857AB0057F168 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C0427E857CA0057F168 /* AuthController.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		55B98C0827E85A5E0057F168 /* SocketIO */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C0927E85A6C0057F168 /* SocketIO.swift */,
+			);
+			path = SocketIO;
+			sourceTree = "<group>";
+		};
+		55B98C0B27E85AC30057F168 /* struct */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C0C27E85AFD0057F168 /* User */,
+			);
+			path = struct;
+			sourceTree = "<group>";
+		};
+		55B98C0C27E85AFD0057F168 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C0D27E85B090057F168 /* AuthCodableStruct.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		55B98C1127E8859C0057F168 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C1527E885D60057F168 /* ProgressViewBar.swift */,
+				55B98C1727E8895D0057F168 /* ProgressView.swift */,
+				55B98C1927E88B7F0057F168 /* SplashScreen.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		55B98C1F27E965CB0057F168 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C2027E965DA0057F168 /* MainView.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		55B98C2227E969FA0057F168 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C2327E96A0A0057F168 /* PostView.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		55B98C2527E96F270057F168 /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C2627E96F340057F168 /* SettingView.swift */,
+			);
+			path = Setting;
+			sourceTree = "<group>";
+		};
+		55B98C2827E96F420057F168 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C2A27E96F5E0057F168 /* Room */,
+				55B98C2927E96F500057F168 /* RoomList */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		55B98C2927E96F500057F168 /* RoomList */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C2B27E96F6B0057F168 /* ChatRoomList.swift */,
+			);
+			path = RoomList;
+			sourceTree = "<group>";
+		};
+		55B98C2A27E96F5E0057F168 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		55B98C2D27E96F8D0057F168 /* Studion */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C2E27E96F980057F168 /* RoomList */,
+			);
+			path = Studion;
+			sourceTree = "<group>";
+		};
+		55B98C2E27E96F980057F168 /* RoomList */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C2F27E96FA40057F168 /* StudionRoomList.swift */,
+			);
+			path = RoomList;
+			sourceTree = "<group>";
+		};
+		640E38267862658A983A696A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7E8C3731F8D5A9843C908CC7 /* Pods-studion_application_swiftUI.debug.xcconfig */,
+				F764A19F6476AACD3B6CA653 /* Pods-studion_application_swiftUI.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		655A79E4A55B8107C07D46D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		55B98BEB27E83E1D0057F168 /* studion_application_swiftUI */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 55B98BFA27E83E1D0057F168 /* Build configuration list for PBXNativeTarget "studion_application_swiftUI" */;
+			buildPhases = (
+				7E2F59FFEA9C174A4ECC40EA /* [CP] Check Pods Manifest.lock */,
+				55B98BE827E83E1D0057F168 /* Sources */,
+				55B98BE927E83E1D0057F168 /* Frameworks */,
+				55B98BEA27E83E1D0057F168 /* Resources */,
+				B16D459F7B6AC1E14F389BCB /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = studion_application_swiftUI;
+			productName = studion_application_swiftUI;
+			productReference = 55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		55B98BE427E83E1D0057F168 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					55B98BEB27E83E1D0057F168 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 55B98BE727E83E1D0057F168 /* Build configuration list for PBXProject "studion_application_swiftUI" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 55B98BE327E83E1D0057F168;
+			productRefGroup = 55B98BED27E83E1D0057F168 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				55B98BEB27E83E1D0057F168 /* studion_application_swiftUI */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		55B98BEA27E83E1D0057F168 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55B98BF727E83E1D0057F168 /* Preview Assets.xcassets in Resources */,
+				55B98BF427E83E1D0057F168 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7E2F59FFEA9C174A4ECC40EA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-studion_application_swiftUI-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B16D459F7B6AC1E14F389BCB /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		55B98BE827E83E1D0057F168 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				55B98C0127E83F260057F168 /* LoginView.swift in Sources */,
+				55B98C2127E965DA0057F168 /* MainView.swift in Sources */,
+				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
+				55B98C1E27E8BF4C0057F168 /* RegisterView.swift in Sources */,
+				55B98C0A27E85A6C0057F168 /* SocketIO.swift in Sources */,
+				55B98C2727E96F340057F168 /* SettingView.swift in Sources */,
+				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
+				55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */,
+				55B98C0727E85A460057F168 /* JWTToken.swift in Sources */,
+				55B98C3027E96FA40057F168 /* StudionRoomList.swift in Sources */,
+				55B98C1027E85B950057F168 /* UserInfo.swift in Sources */,
+				55B98C0E27E85B090057F168 /* AuthCodableStruct.swift in Sources */,
+				55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */,
+				55B98C1827E8895D0057F168 /* ProgressView.swift in Sources */,
+				55B98C1C27E8BCD20057F168 /* PageRouter.swift in Sources */,
+				55B98BF027E83E1D0057F168 /* studion_application_swiftUIApp.swift in Sources */,
+				55B98C2427E96A0A0057F168 /* PostView.swift in Sources */,
+				55B98C1627E885D60057F168 /* ProgressViewBar.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		55B98BF827E83E1D0057F168 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		55B98BF927E83E1D0057F168 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		55B98BFB27E83E1D0057F168 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7E8C3731F8D5A9843C908CC7 /* Pods-studion_application_swiftUI.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
+				DEVELOPMENT_TEAM = 49C98WAKUL;
+				ENABLE_BITCODE = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "studion.studion-application-swiftUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		55B98BFC27E83E1D0057F168 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F764A19F6476AACD3B6CA653 /* Pods-studion_application_swiftUI.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
+				DEVELOPMENT_TEAM = 49C98WAKUL;
+				ENABLE_BITCODE = NO;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "studion.studion-application-swiftUI";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		55B98BE727E83E1D0057F168 /* Build configuration list for PBXProject "studion_application_swiftUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55B98BF827E83E1D0057F168 /* Debug */,
+				55B98BF927E83E1D0057F168 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		55B98BFA27E83E1D0057F168 /* Build configuration list for PBXNativeTarget "studion_application_swiftUI" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				55B98BFB27E83E1D0057F168 /* Debug */,
+				55B98BFC27E83E1D0057F168 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 55B98BE427E83E1D0057F168 /* Project object */;
+}

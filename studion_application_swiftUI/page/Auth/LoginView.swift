@@ -1,0 +1,166 @@
+//
+//  Login.swift
+//  studion_application_swiftUI
+//
+//  Created by 김진홍 on 2022/03/21.
+//
+
+import SwiftUI
+
+
+let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0)
+
+struct LoginView: View {
+    @Binding var pageStatus: String
+    
+    
+    @State var email: String = ""
+    @State var password: String = ""
+    
+    
+    var body: some View {
+        
+        VStack {
+            Title()
+            BannerImage()
+            loginForm(pageStatus: $pageStatus, email: $email, password: $password)
+            Spacer()
+            HStack {
+                Button(action : {
+                    self.pageStatus = "/register"
+                }) {
+                    Text("회원가입")
+                }
+                Text("하러가기")
+            }
+        }
+        .padding()
+        
+    }
+    
+    
+    
+    
+    
+    
+}
+
+
+struct Title: View {
+    var body: some View{
+        Text("Studion")
+            .font(.largeTitle)
+            .fontWeight(.semibold)
+            .padding(.bottom, 20)
+    }
+}
+
+struct BannerImage: View {
+    var body: some View {
+        Image("piano")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 200, height: 200)
+            .padding(.bottom, 20)
+    }
+}
+
+struct loginForm: View {
+    @Binding var pageStatus: String
+    @Binding var email: String
+    @Binding var password: String
+    
+    @State var loginFail: Bool = false
+    
+    var body: some View{
+        emailForm(email: $email)
+        passwordForm(password: $password)
+        
+//        if loginFail {
+//            Text("아이디나 비밀번호가 잘못 되었습니다.")
+//                .offset(y: -10)
+//                .foregroundColor(.red)
+//        }
+//
+        Text(loginFail ? "아이디나 비밀번호가 잘못 되었습니다." : "")
+            .offset(y: -10)
+            .foregroundColor(.red)
+            .font(.system(size:15))
+        loginButton(pageStatus: $pageStatus, email: $email, password: $password, loginFail: $loginFail)
+        
+    }
+}
+
+struct emailForm: View {
+    @Binding var email: String
+    
+    
+    var body: some View{
+        TextField("E-mail", text: $email)
+            .padding()
+            .background(lightGreyColor)
+            .cornerRadius(5.0)
+            .padding(.bottom, 20)
+    }
+}
+
+struct passwordForm: View {
+    @Binding var password: String
+    
+    var body: some View {
+        SecureField("Password", text: $password)
+            .padding()
+            .background(lightGreyColor)
+            .cornerRadius(5.0)
+            .padding(.bottom, 20)
+    }
+}
+
+struct loginButton: View {
+    @Binding var pageStatus: String
+    @Binding var email: String
+    @Binding var password: String
+    @Binding var loginFail: Bool
+    
+    var body: some View {
+        Button(action: {
+//            login(email: email, password: password, loginFail: loginFail)
+            print("email : \(email)")
+            print("password: \(password)")
+            print("loginFail: \(loginFail)")
+            self.login(email: self.email, password: self.password) {data in
+                if(data as! Bool == true) {
+                    self.pageStatus = "/"
+                } else {
+                    self.loginFail = true
+                }
+            }
+            }) {
+            loginButtonLayout()
+        }
+    }
+    
+    func login(email: String, password: String, handler: @escaping (Any) -> Void) {
+        AuthController.sharedInstance.login(email: email, password: password) {data in
+            let response = data as! Dictionary<String, Any>
+            if(response["status"] as! Int == 200) {
+                handler(true)
+            } else {
+                handler(false)
+            }
+        }
+    }
+}
+
+struct loginButtonLayout: View {
+    
+    var body: some View {
+        Text("LOGIN")
+            .font(.headline)
+            .foregroundColor(.white)
+            .padding()
+            .frame(width: 220, height: 60)
+            .background(Color.green)
+            .cornerRadius(35.0)
+    }
+}
