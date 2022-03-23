@@ -76,12 +76,6 @@ struct loginForm: View {
         emailForm(email: $email)
         passwordForm(password: $password)
         
-//        if loginFail {
-//            Text("아이디나 비밀번호가 잘못 되었습니다.")
-//                .offset(y: -10)
-//                .foregroundColor(.red)
-//        }
-//
         Text(loginFail ? "아이디나 비밀번호가 잘못 되었습니다." : "")
             .offset(y: -10)
             .foregroundColor(.red)

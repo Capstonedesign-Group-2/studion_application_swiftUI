@@ -27,7 +27,7 @@ struct SplashScreen: View {
     func socketInit() {
         SocketIO.sharedInstance.establishConnection()
         let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
-        
+
         socket.on(clientEvent: .connect) {data, ack in
             print("socket connected")
         }

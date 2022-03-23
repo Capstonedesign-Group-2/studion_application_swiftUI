@@ -10,7 +10,9 @@ import Alamofire
 
 public class AuthController {
     
-    static let sharedInstance = AuthController(api: "http://172.21.2.52:8000/")
+    static let sharedInstance = AuthController(api: ServerAdress.sharedInstance.getApiServerAdress())
+//    static let sharedInstance = AuthController(api: "http://192.168.1.4:8000/")
+//    static let sharedInstance = AuthController(api: "http://172.20.10.3:8000/")
     
     var api: String
     

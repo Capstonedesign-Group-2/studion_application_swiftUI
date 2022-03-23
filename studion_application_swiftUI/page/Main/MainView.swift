@@ -30,7 +30,7 @@ struct MainView: View {
                 PostView()
                     .tag("/post/create")
                 
-                StudionRoomList()
+                StudionRoomList(mainRouter: $mainRouter)
                     .tag("/studion")
                 
                 SettingView(pageStatus: $pageStatus)

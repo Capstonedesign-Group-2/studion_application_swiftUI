@@ -12,7 +12,8 @@ class SocketIO: NSObject {
     static let sharedInstance = SocketIO()
     
 //    var manager:SocketManager = SocketManager(socketURL: URL(string: "http://192.168.1.4:9876/")!, config: [ .compress])
-    var manager:SocketManager = SocketManager(socketURL: URL(string: "http://172.21.2.52:9876/")!, config: [ .compress])
+    var manager:SocketManager = SocketManager(socketURL: URL(string: ServerAdress.sharedInstance.getSocketServerAdress())!, config: [ .compress])
+//    var manager:SocketManager = SocketManager(socketURL: URL(string: "http://172.20.10.3:9876/")!, config: [ .compress])
     var socket:SocketIOClient!
     
     

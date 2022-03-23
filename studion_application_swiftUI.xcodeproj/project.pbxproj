@@ -27,6 +27,12 @@
 		55B98C2727E96F340057F168 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C2627E96F340057F168 /* SettingView.swift */; };
 		55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C2B27E96F6B0057F168 /* ChatRoomList.swift */; };
 		55B98C3027E96FA40057F168 /* StudionRoomList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C2F27E96FA40057F168 /* StudionRoomList.swift */; };
+		55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3327E9EC4C0057F168 /* RoomCodableStruct.swift */; };
+		55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3527EA98E40057F168 /* RoomCardView.swift */; };
+		55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3727EA9C6B0057F168 /* ServerAdress.swift */; };
+		55B98C3B27EAA1530057F168 /* RoomListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3A27EAA1530057F168 /* RoomListController.swift */; };
+		55B98C3D27EAAB7B0057F168 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3C27EAAB7B0057F168 /* Test.swift */; };
+		55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */; };
 		7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -52,6 +58,12 @@
 		55B98C2627E96F340057F168 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		55B98C2B27E96F6B0057F168 /* ChatRoomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomList.swift; sourceTree = "<group>"; };
 		55B98C2F27E96FA40057F168 /* StudionRoomList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudionRoomList.swift; sourceTree = "<group>"; };
+		55B98C3327E9EC4C0057F168 /* RoomCodableStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCodableStruct.swift; sourceTree = "<group>"; };
+		55B98C3527EA98E40057F168 /* RoomCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCardView.swift; sourceTree = "<group>"; };
+		55B98C3727EA9C6B0057F168 /* ServerAdress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAdress.swift; sourceTree = "<group>"; };
+		55B98C3A27EAA1530057F168 /* RoomListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListController.swift; sourceTree = "<group>"; };
+		55B98C3C27EAAB7B0057F168 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCardModalView.swift; sourceTree = "<group>"; };
 		577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studion_application_swiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8C3731F8D5A9843C908CC7 /* Pods-studion_application_swiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.debug.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F764A19F6476AACD3B6CA653 /* Pods-studion_application_swiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.release.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +132,7 @@
 				55B98C1127E8859C0057F168 /* Progress */,
 				55B98BFE27E83F0E0057F168 /* Auth */,
 				55B98C1B27E8BCD20057F168 /* PageRouter.swift */,
+				55B98C3C27EAAB7B0057F168 /* Test.swift */,
 			);
 			path = page;
 			sourceTree = "<group>";
@@ -136,10 +149,12 @@
 		55B98C0227E8579D0057F168 /* repository */ = {
 			isa = PBXGroup;
 			children = (
+				55B98C3927EAA13F0057F168 /* Studion */,
 				55B98C0827E85A5E0057F168 /* SocketIO */,
 				55B98C0327E857AB0057F168 /* User */,
 				55B98C0627E85A460057F168 /* JWTToken.swift */,
 				55B98C0F27E85B950057F168 /* UserInfo.swift */,
+				55B98C3727EA9C6B0057F168 /* ServerAdress.swift */,
 			);
 			path = repository;
 			sourceTree = "<group>";
@@ -163,6 +178,7 @@
 		55B98C0B27E85AC30057F168 /* struct */ = {
 			isa = PBXGroup;
 			children = (
+				55B98C3127E9EC270057F168 /* Studion */,
 				55B98C0C27E85AFD0057F168 /* User */,
 			);
 			path = struct;
@@ -246,8 +262,34 @@
 			isa = PBXGroup;
 			children = (
 				55B98C2F27E96FA40057F168 /* StudionRoomList.swift */,
+				55B98C3527EA98E40057F168 /* RoomCardView.swift */,
+				55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */,
 			);
 			path = RoomList;
+			sourceTree = "<group>";
+		};
+		55B98C3127E9EC270057F168 /* Studion */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C3227E9EC2F0057F168 /* Room */,
+			);
+			path = Studion;
+			sourceTree = "<group>";
+		};
+		55B98C3227E9EC2F0057F168 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C3327E9EC4C0057F168 /* RoomCodableStruct.swift */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
+		55B98C3927EAA13F0057F168 /* Studion */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C3A27EAA1530057F168 /* RoomListController.swift */,
+			);
+			path = Studion;
 			sourceTree = "<group>";
 		};
 		640E38267862658A983A696A /* Pods */ = {
@@ -381,17 +423,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B98C3B27EAA1530057F168 /* RoomListController.swift in Sources */,
+				55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */,
 				55B98C0127E83F260057F168 /* LoginView.swift in Sources */,
 				55B98C2127E965DA0057F168 /* MainView.swift in Sources */,
 				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
+				55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */,
 				55B98C1E27E8BF4C0057F168 /* RegisterView.swift in Sources */,
 				55B98C0A27E85A6C0057F168 /* SocketIO.swift in Sources */,
 				55B98C2727E96F340057F168 /* SettingView.swift in Sources */,
+				55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */,
 				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
+				55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */,
 				55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */,
 				55B98C0727E85A460057F168 /* JWTToken.swift in Sources */,
 				55B98C3027E96FA40057F168 /* StudionRoomList.swift in Sources */,
 				55B98C1027E85B950057F168 /* UserInfo.swift in Sources */,
+				55B98C3D27EAAB7B0057F168 /* Test.swift in Sources */,
 				55B98C0E27E85B090057F168 /* AuthCodableStruct.swift in Sources */,
 				55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */,
 				55B98C1827E8895D0057F168 /* ProgressView.swift in Sources */,
