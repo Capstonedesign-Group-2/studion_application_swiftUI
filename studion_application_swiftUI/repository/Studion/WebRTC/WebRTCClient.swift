@@ -72,7 +72,7 @@ final class WebRTCClient: NSObject {
 
     }
 
-    func allUsers() {
+    func allUsers(handler: @escaping (Any) -> Void) {
         socket.on("all_users") {data, ack in
             print("[room] allUsers")
             let users: [Any] = data[0] as! [NSDictionary]
@@ -92,6 +92,13 @@ final class WebRTCClient: NSObject {
                 
                 self.offer(peerConnection: peerConnection, name: name, socketID: socketID) { data in
                     print("offer end")
+                    
+                    let dic: [String: Any] = [
+                        "pcDic" : self.pcDic,
+                        "dcDic" : self.dcDic
+                    ]
+                    
+                    handler(dic)
                 }
             }
 
@@ -167,9 +174,6 @@ final class WebRTCClient: NSObject {
         }
 
         self.dcDic[socketID] = dataChannel
-//        print("------------------------------")
-//        print("/"+String(describing: dataChannel) + "/")
-//        print("-------------------------------")
         return dataChannel
     }
 
@@ -233,7 +237,7 @@ final class WebRTCClient: NSObject {
 //    엔서 받기
 //  ************************************************************************************
 
-    func getAnswer() {
+    func getAnswer(handler: @escaping (Any) -> Void) {
 
         self.socket.on("getAnswer") { [self]data, ack in
             print("getAnswer")
@@ -247,11 +251,18 @@ final class WebRTCClient: NSObject {
 //
             peerConnection.setRemoteDescription(sdp) {data in
                 print("daas")
+                
+                let dic: [String: Any] = [
+                    "pcDic" : self.pcDic,
+                    "dcDic" : self.dcDic
+                ]
+                
+                handler(dic)
             }
         }
     }
 
-    func getOffer() {
+    func getOffer(handler: @escaping (Any) -> Void) {
         self.socket.on("getOffer") {data, ack in
             print("getOffer")
             let response = data[0] as! Dictionary<String, Any>
@@ -271,6 +282,13 @@ final class WebRTCClient: NSObject {
 
                 self.sendAnswer(peerConnection: peerConnection, answerReceiveID: response["offerSendID"] as! String) {data in
                     print("end")
+                    
+                    let dic: [String: Any] = [
+                        "pcDic" : self.pcDic,
+                        "dcDic" : self.dcDic
+                    ]
+                    
+                    handler(dic)
                 }
             }
 
@@ -310,7 +328,7 @@ final class WebRTCClient: NSObject {
     }
 
 
-    func getCandidate() {
+    func getCandidate(handler: @escaping (Any) -> Void) {
         socket.on("getCandidate") {data, ack in
             print("getCandidate")
             let response = data[0] as! Dictionary<String, Any>
@@ -321,18 +339,31 @@ final class WebRTCClient: NSObject {
             let candidate = RTCIceCandidate(sdp: candidateData["candidate"] as! String, sdpMLineIndex: Int32(candidateData["sdpMLineIndex"] as! Int), sdpMid: candidateData["sdpMid"] as! String)
 
             peerConnection.add( candidate )
+            
+            let dic: [String: Any] = [
+                "pcDic" : self.pcDic,
+                "dcDic" : self.dcDic
+            ]
+            
+            handler(dic)
 
         }
     }
 
 
-    func userExit() {
+    func userExit(handler: @escaping (Any) -> Void) {
         socket.on("user_exit") {data, ack in
             let response = data[0] as! Dictionary<String, String>
 
             self.pcDic.removeValue(forKey: response["id"]!)
             self.dcDic.removeValue(forKey: response["id"]!)
-            print("user_exit")
+            
+            let dic: [String: Any] = [
+                "pcDic" : self.pcDic,
+                "dcDic" : self.dcDic
+            ]
+            
+            handler(dic)
         }
     }
 

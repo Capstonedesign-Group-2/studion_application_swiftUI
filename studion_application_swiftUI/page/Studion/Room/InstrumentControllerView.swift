@@ -11,6 +11,9 @@ import SwiftUI
 
 var instrument = ["drum", "piano_button", "guitar"]
 struct InstrumentControllerView: View {
+    var dcDic:[String: Any]
+    
+    
     @State var selectedTab = "drum"
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets
     
@@ -19,7 +22,8 @@ struct InstrumentControllerView: View {
         VStack{
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                 TabView(selection: $selectedTab) {
-                    DrumView()
+                    
+                    DrumView(dcDic: dcDic)
                         .tag("drum")
                     
                     PianoView()
@@ -27,6 +31,7 @@ struct InstrumentControllerView: View {
                     
                     GuitarView()
                         .tag("guita")
+                    
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 .ignoresSafeArea(.all, edges: .bottom)

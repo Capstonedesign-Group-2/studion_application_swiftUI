@@ -21,7 +21,7 @@ struct RoomView: View {
     @ObservedObject var webRTCConnect = WebRTCConnect()
     
     var body: some View {
-        InstrumentControllerView()
+        InstrumentControllerView(dcDic: webRTCConnect.dcDic)
             .onAppear{
                 getRoomNumber = roomNumber
                 roomNumber = -1
@@ -42,15 +42,38 @@ final class WebRTCConnect: ObservableObject {
     
     let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
     let webRTCClient: WebRTCClient = WebRTCClient()
+    
+    @Published var pcDic: [String: Any]?
+    @Published var dcDic: [String: Any] = [:]
 
     
     init() {
         
-        webRTCClient.allUsers()
-        webRTCClient.getAnswer()
-        webRTCClient.getOffer()
-        webRTCClient.userExit()
-        webRTCClient.getCandidate()
+        webRTCClient.allUsers() {data in
+            let response = data as! Dictionary<String, Any>
+            self.pcDic = response["pcDic"] as? [String : Any]
+            self.dcDic = response["dcDic"] as! [String : Any]
+        }
+        webRTCClient.getAnswer() {data in
+            let response = data as! Dictionary<String, Any>
+            self.pcDic = response["pcDic"] as? [String : Any]
+            self.dcDic = response["dcDic"] as! [String : Any]
+        }
+        webRTCClient.getOffer() {data in
+            let response = data as! Dictionary<String, Any>
+            self.pcDic = response["pcDic"] as? [String : Any]
+            self.dcDic = response["dcDic"] as! [String : Any]
+        }
+        webRTCClient.userExit() { data in
+            let response = data as! Dictionary<String, Any>
+            self.pcDic = response["pcDic"] as? [String : Any]
+            self.dcDic = response["dcDic"] as! [String : Any]
+        }
+        webRTCClient.getCandidate() {data in
+            let response = data as! Dictionary<String, Any>
+            self.pcDic = response["pcDic"] as? [String : Any]
+            self.dcDic = response["dcDic"] as! [String : Any]
+        }
         
         
         
