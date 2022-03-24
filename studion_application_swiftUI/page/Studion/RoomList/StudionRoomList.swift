@@ -9,7 +9,8 @@ import SwiftUI
 import SocketIO
 
 struct StudionRoomList: View {
-    
+    @Binding var pageStatus: String
+    @Binding var roomNumber: Int
     @Binding var mainRouter: String
     
     @ObservedObject var roomSocket = RoomSocket()
@@ -69,6 +70,11 @@ struct StudionRoomList: View {
                                     Text("").frame(width:0, height:0))
                             }
                             
+                            Button( action: {
+                                self.roomNumber = 1
+                                self.pageStatus = "/room"
+                            }) {Text("test")}
+                            
                             ForEach(0..<(roomSocket.roomsInfo?.rooms?.count)!, id: \.self) { index in
 
                                 Button( action: {
@@ -95,7 +101,7 @@ struct StudionRoomList: View {
 
                     
                 }
-            RoomCardModalView(isShowing: $showModal, roomInfo: roomInfo)
+            RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo)
             
             
         
@@ -127,7 +133,7 @@ final class RoomSocket: ObservableObject {
                 let responseData = try JSONSerialization.data(withJSONObject: response, options: [.fragmentsAllowed])
 
                 self.roomsInfo = try decoder.decode(RoomCodableStruct.roomsInfo.self, from: responseData)
-                print(self.roomsInfo)
+//                print(self.roomsInfo)
             } catch {
                 print("error")
             }
@@ -136,7 +142,7 @@ final class RoomSocket: ObservableObject {
         
         socket.on("get_room_list_on") {data, ack in
             let response: [String: Any] = data[0] as! Dictionary<String, Any>
-            print(response)
+//            print(response)
             let decoder = JSONDecoder()
             do {
                 let responseData = try JSONSerialization.data(withJSONObject: response, options: [.fragmentsAllowed])

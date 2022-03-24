@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MainView: View {
     @Binding var pageStatus: String
+    @Binding var roomNumber: Int
     
     @State var mainRouter: String = "/"
     
@@ -30,7 +31,7 @@ struct MainView: View {
                 PostView()
                     .tag("/post/create")
                 
-                StudionRoomList(mainRouter: $mainRouter)
+                StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
                     .tag("/studion")
                 
                 SettingView(pageStatus: $pageStatus)

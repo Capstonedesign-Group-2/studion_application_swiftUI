@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PageRouter: View {
     @State var pageStatus: String = "/splashScreen"
+    @State var roomNumber: Int = -1
     
     var body: some View {
         VStack {
@@ -28,9 +29,12 @@ struct PageRouter: View {
                     .onDisappear{ print("/register end") }
                 
             case "/" :
-                MainView(pageStatus: $pageStatus)
+                MainView(pageStatus: $pageStatus, roomNumber: $roomNumber)
                     .onAppear{ print("/ start") }
                     .onDisappear{ print("/ end") }
+                
+            case "/room":
+                RoomView(pageStatus: $pageStatus, roomNumber: $roomNumber)
                 
             default :
                 SplashScreen(pageStatus: $pageStatus)

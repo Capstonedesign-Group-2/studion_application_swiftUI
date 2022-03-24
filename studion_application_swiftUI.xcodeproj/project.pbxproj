@@ -33,6 +33,8 @@
 		55B98C3B27EAA1530057F168 /* RoomListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3A27EAA1530057F168 /* RoomListController.swift */; };
 		55B98C3D27EAAB7B0057F168 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3C27EAAB7B0057F168 /* Test.swift */; };
 		55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */; };
+		55B98C4227EAEDB80057F168 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4127EAEDB80057F168 /* WebRTCClient.swift */; };
+		55B98C4427EAEE490057F168 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4327EAEE490057F168 /* RoomView.swift */; };
 		7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		55B98C3A27EAA1530057F168 /* RoomListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListController.swift; sourceTree = "<group>"; };
 		55B98C3C27EAAB7B0057F168 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCardModalView.swift; sourceTree = "<group>"; };
+		55B98C4127EAEDB80057F168 /* WebRTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
+		55B98C4327EAEE490057F168 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
 		577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studion_application_swiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8C3731F8D5A9843C908CC7 /* Pods-studion_application_swiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.debug.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F764A19F6476AACD3B6CA653 /* Pods-studion_application_swiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.release.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -253,6 +257,7 @@
 		55B98C2D27E96F8D0057F168 /* Studion */ = {
 			isa = PBXGroup;
 			children = (
+				55B98C4527EAEE4F0057F168 /* Room */,
 				55B98C2E27E96F980057F168 /* RoomList */,
 			);
 			path = Studion;
@@ -287,9 +292,26 @@
 		55B98C3927EAA13F0057F168 /* Studion */ = {
 			isa = PBXGroup;
 			children = (
+				55B98C4027EAEDA60057F168 /* WebRTC */,
 				55B98C3A27EAA1530057F168 /* RoomListController.swift */,
 			);
 			path = Studion;
+			sourceTree = "<group>";
+		};
+		55B98C4027EAEDA60057F168 /* WebRTC */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C4127EAEDB80057F168 /* WebRTCClient.swift */,
+			);
+			path = WebRTC;
+			sourceTree = "<group>";
+		};
+		55B98C4527EAEE4F0057F168 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C4327EAEE490057F168 /* RoomView.swift */,
+			);
+			path = Room;
 			sourceTree = "<group>";
 		};
 		640E38267862658A983A696A /* Pods */ = {
@@ -436,6 +458,7 @@
 				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
 				55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */,
 				55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */,
+				55B98C4227EAEDB80057F168 /* WebRTCClient.swift in Sources */,
 				55B98C0727E85A460057F168 /* JWTToken.swift in Sources */,
 				55B98C3027E96FA40057F168 /* StudionRoomList.swift in Sources */,
 				55B98C1027E85B950057F168 /* UserInfo.swift in Sources */,
@@ -445,6 +468,7 @@
 				55B98C1827E8895D0057F168 /* ProgressView.swift in Sources */,
 				55B98C1C27E8BCD20057F168 /* PageRouter.swift in Sources */,
 				55B98BF027E83E1D0057F168 /* studion_application_swiftUIApp.swift in Sources */,
+				55B98C4427EAEE490057F168 /* RoomView.swift in Sources */,
 				55B98C2427E96A0A0057F168 /* PostView.swift in Sources */,
 				55B98C1627E885D60057F168 /* ProgressViewBar.swift in Sources */,
 			);
@@ -582,6 +606,8 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "studion-application-swiftUI-Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "일단 허용해";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -614,6 +640,8 @@
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "studion-application-swiftUI-Info.plist";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "일단 허용해";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

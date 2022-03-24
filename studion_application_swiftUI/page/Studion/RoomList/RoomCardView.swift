@@ -37,19 +37,28 @@ struct RoomCardView: View {
                 .foregroundColor(.white)
                 .bold()
                 .font(.largeTitle)
-                .offset(x: -100, y: -50)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .frame(width: 200,alignment: .topLeading)
+                .offset(x: -25, y: -50)
             
             Text(roomInfo.content)
                 .foregroundColor(.white)
                 .fontWeight(.medium)
                 .font(.body)
-                .offset(x: -100, y: -10)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .frame(width: 200, alignment: .topLeading)
+                .offset(x: -25, y: -10)
             
             Text(String(roomInfo.users.count) + "/4")
                 .foregroundColor(.white)
                 .fontWeight(.medium)
                 .font(.body)
+                .frame(width: 200,alignment: .topLeading)
                 .offset(x: -100, y: 30)
+            
+            
             
         }
         .padding(.bottom, 10)
