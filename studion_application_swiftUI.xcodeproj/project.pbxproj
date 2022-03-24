@@ -35,6 +35,25 @@
 		55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */; };
 		55B98C4227EAEDB80057F168 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4127EAEDB80057F168 /* WebRTCClient.swift */; };
 		55B98C4427EAEE490057F168 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4327EAEE490057F168 /* RoomView.swift */; };
+		55B98C4D27EBF3750057F168 /* DataChannelCodableStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4C27EBF3750057F168 /* DataChannelCodableStruct.swift */; };
+		55B98C5027EBF5350057F168 /* InstrumentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4F27EBF5350057F168 /* InstrumentController.swift */; };
+		55B98C7927EBFDB70057F168 /* hi.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C6C27EBFDB70057F168 /* hi.wav */; };
+		55B98C7A27EBFDB70057F168 /* tom2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C6D27EBFDB70057F168 /* tom2.wav */; };
+		55B98C7B27EBFDB70057F168 /* tom3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C6E27EBFDB70057F168 /* tom3.wav */; };
+		55B98C7C27EBFDB70057F168 /* snoff.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C6F27EBFDB70057F168 /* snoff.wav */; };
+		55B98C7D27EBFDB70057F168 /* cr.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C7027EBFDB70057F168 /* cr.wav */; };
+		55B98C7E27EBFDB70057F168 /* snst.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C7127EBFDB70057F168 /* snst.wav */; };
+		55B98C7F27EBFDB70057F168 /* rL.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C7227EBFDB70057F168 /* rL.wav */; };
+		55B98C8027EBFDB70057F168 /* song1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C7327EBFDB70057F168 /* song1.mp3 */; };
+		55B98C8127EBFDB70057F168 /* sn.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C7427EBFDB70057F168 /* sn.wav */; };
+		55B98C8227EBFDB70057F168 /* tom1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C7527EBFDB70057F168 /* tom1.wav */; };
+		55B98C8327EBFDB70057F168 /* rS.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C7627EBFDB70057F168 /* rS.wav */; };
+		55B98C8427EBFDB70057F168 /* song2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C7727EBFDB70057F168 /* song2.mp3 */; };
+		55B98C8527EBFDB70057F168 /* ki.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55B98C7827EBFDB70057F168 /* ki.wav */; };
+		55B98C8727EC08070057F168 /* InstrumentControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C8627EC08070057F168 /* InstrumentControllerView.swift */; };
+		55B98C8A27EC09890057F168 /* DrumView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C8927EC09890057F168 /* DrumView.swift */; };
+		55B98C8C27EC09950057F168 /* PianoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C8B27EC09950057F168 /* PianoView.swift */; };
+		55B98C8E27EC09A20057F168 /* GuitarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C8D27EC09A20057F168 /* GuitarView.swift */; };
 		7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +87,25 @@
 		55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCardModalView.swift; sourceTree = "<group>"; };
 		55B98C4127EAEDB80057F168 /* WebRTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
 		55B98C4327EAEE490057F168 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
+		55B98C4C27EBF3750057F168 /* DataChannelCodableStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataChannelCodableStruct.swift; sourceTree = "<group>"; };
+		55B98C4F27EBF5350057F168 /* InstrumentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentController.swift; sourceTree = "<group>"; };
+		55B98C6C27EBFDB70057F168 /* hi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hi.wav; path = audios/drum/hi.wav; sourceTree = SOURCE_ROOT; };
+		55B98C6D27EBFDB70057F168 /* tom2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tom2.wav; path = audios/drum/tom2.wav; sourceTree = SOURCE_ROOT; };
+		55B98C6E27EBFDB70057F168 /* tom3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tom3.wav; path = audios/drum/tom3.wav; sourceTree = SOURCE_ROOT; };
+		55B98C6F27EBFDB70057F168 /* snoff.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = snoff.wav; path = audios/drum/snoff.wav; sourceTree = SOURCE_ROOT; };
+		55B98C7027EBFDB70057F168 /* cr.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = cr.wav; path = audios/drum/cr.wav; sourceTree = SOURCE_ROOT; };
+		55B98C7127EBFDB70057F168 /* snst.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = snst.wav; path = audios/drum/snst.wav; sourceTree = SOURCE_ROOT; };
+		55B98C7227EBFDB70057F168 /* rL.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = rL.wav; path = audios/drum/rL.wav; sourceTree = SOURCE_ROOT; };
+		55B98C7327EBFDB70057F168 /* song1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song1.mp3; path = audios/drum/song1.mp3; sourceTree = SOURCE_ROOT; };
+		55B98C7427EBFDB70057F168 /* sn.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = sn.wav; path = audios/drum/sn.wav; sourceTree = SOURCE_ROOT; };
+		55B98C7527EBFDB70057F168 /* tom1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = tom1.wav; path = audios/drum/tom1.wav; sourceTree = SOURCE_ROOT; };
+		55B98C7627EBFDB70057F168 /* rS.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = rS.wav; path = audios/drum/rS.wav; sourceTree = SOURCE_ROOT; };
+		55B98C7727EBFDB70057F168 /* song2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = song2.mp3; path = audios/drum/song2.mp3; sourceTree = SOURCE_ROOT; };
+		55B98C7827EBFDB70057F168 /* ki.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = ki.wav; path = audios/drum/ki.wav; sourceTree = SOURCE_ROOT; };
+		55B98C8627EC08070057F168 /* InstrumentControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstrumentControllerView.swift; sourceTree = "<group>"; };
+		55B98C8927EC09890057F168 /* DrumView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumView.swift; sourceTree = "<group>"; };
+		55B98C8B27EC09950057F168 /* PianoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoView.swift; sourceTree = "<group>"; };
+		55B98C8D27EC09A20057F168 /* GuitarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuitarView.swift; sourceTree = "<group>"; };
 		577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studion_application_swiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8C3731F8D5A9843C908CC7 /* Pods-studion_application_swiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.debug.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F764A19F6476AACD3B6CA653 /* Pods-studion_application_swiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.release.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -285,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				55B98C3327E9EC4C0057F168 /* RoomCodableStruct.swift */,
+				55B98C4C27EBF3750057F168 /* DataChannelCodableStruct.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -301,6 +340,7 @@
 		55B98C4027EAEDA60057F168 /* WebRTC */ = {
 			isa = PBXGroup;
 			children = (
+				55B98C4E27EBF5170057F168 /* Instrument */,
 				55B98C4127EAEDB80057F168 /* WebRTCClient.swift */,
 			);
 			path = WebRTC;
@@ -309,9 +349,50 @@
 		55B98C4527EAEE4F0057F168 /* Room */ = {
 			isa = PBXGroup;
 			children = (
+				55B98C8827EC097A0057F168 /* Instrument */,
 				55B98C4327EAEE490057F168 /* RoomView.swift */,
+				55B98C8627EC08070057F168 /* InstrumentControllerView.swift */,
 			);
 			path = Room;
+			sourceTree = "<group>";
+		};
+		55B98C4E27EBF5170057F168 /* Instrument */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C6B27EBFD9A0057F168 /* Drum */,
+				55B98C4F27EBF5350057F168 /* InstrumentController.swift */,
+			);
+			path = Instrument;
+			sourceTree = "<group>";
+		};
+		55B98C6B27EBFD9A0057F168 /* Drum */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C7027EBFDB70057F168 /* cr.wav */,
+				55B98C6C27EBFDB70057F168 /* hi.wav */,
+				55B98C7827EBFDB70057F168 /* ki.wav */,
+				55B98C7227EBFDB70057F168 /* rL.wav */,
+				55B98C7627EBFDB70057F168 /* rS.wav */,
+				55B98C7427EBFDB70057F168 /* sn.wav */,
+				55B98C6F27EBFDB70057F168 /* snoff.wav */,
+				55B98C7127EBFDB70057F168 /* snst.wav */,
+				55B98C7327EBFDB70057F168 /* song1.mp3 */,
+				55B98C7727EBFDB70057F168 /* song2.mp3 */,
+				55B98C7527EBFDB70057F168 /* tom1.wav */,
+				55B98C6D27EBFDB70057F168 /* tom2.wav */,
+				55B98C6E27EBFDB70057F168 /* tom3.wav */,
+			);
+			path = Drum;
+			sourceTree = "<group>";
+		};
+		55B98C8827EC097A0057F168 /* Instrument */ = {
+			isa = PBXGroup;
+			children = (
+				55B98C8927EC09890057F168 /* DrumView.swift */,
+				55B98C8B27EC09950057F168 /* PianoView.swift */,
+				55B98C8D27EC09A20057F168 /* GuitarView.swift */,
+			);
+			path = Instrument;
 			sourceTree = "<group>";
 		};
 		640E38267862658A983A696A /* Pods */ = {
@@ -391,7 +472,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55B98C8327EBFDB70057F168 /* rS.wav in Resources */,
+				55B98C7B27EBFDB70057F168 /* tom3.wav in Resources */,
+				55B98C8027EBFDB70057F168 /* song1.mp3 in Resources */,
+				55B98C7F27EBFDB70057F168 /* rL.wav in Resources */,
+				55B98C8427EBFDB70057F168 /* song2.mp3 in Resources */,
+				55B98C7C27EBFDB70057F168 /* snoff.wav in Resources */,
 				55B98BF727E83E1D0057F168 /* Preview Assets.xcassets in Resources */,
+				55B98C7D27EBFDB70057F168 /* cr.wav in Resources */,
+				55B98C8127EBFDB70057F168 /* sn.wav in Resources */,
+				55B98C7E27EBFDB70057F168 /* snst.wav in Resources */,
+				55B98C8527EBFDB70057F168 /* ki.wav in Resources */,
+				55B98C7927EBFDB70057F168 /* hi.wav in Resources */,
+				55B98C8227EBFDB70057F168 /* tom1.wav in Resources */,
+				55B98C7A27EBFDB70057F168 /* tom2.wav in Resources */,
 				55B98BF427E83E1D0057F168 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -449,21 +543,26 @@
 				55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */,
 				55B98C0127E83F260057F168 /* LoginView.swift in Sources */,
 				55B98C2127E965DA0057F168 /* MainView.swift in Sources */,
+				55B98C4D27EBF3750057F168 /* DataChannelCodableStruct.swift in Sources */,
 				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
 				55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */,
 				55B98C1E27E8BF4C0057F168 /* RegisterView.swift in Sources */,
 				55B98C0A27E85A6C0057F168 /* SocketIO.swift in Sources */,
 				55B98C2727E96F340057F168 /* SettingView.swift in Sources */,
+				55B98C5027EBF5350057F168 /* InstrumentController.swift in Sources */,
 				55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */,
 				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
 				55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */,
 				55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */,
+				55B98C8727EC08070057F168 /* InstrumentControllerView.swift in Sources */,
 				55B98C4227EAEDB80057F168 /* WebRTCClient.swift in Sources */,
 				55B98C0727E85A460057F168 /* JWTToken.swift in Sources */,
 				55B98C3027E96FA40057F168 /* StudionRoomList.swift in Sources */,
 				55B98C1027E85B950057F168 /* UserInfo.swift in Sources */,
 				55B98C3D27EAAB7B0057F168 /* Test.swift in Sources */,
 				55B98C0E27E85B090057F168 /* AuthCodableStruct.swift in Sources */,
+				55B98C8A27EC09890057F168 /* DrumView.swift in Sources */,
+				55B98C8C27EC09950057F168 /* PianoView.swift in Sources */,
 				55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */,
 				55B98C1827E8895D0057F168 /* ProgressView.swift in Sources */,
 				55B98C1C27E8BCD20057F168 /* PageRouter.swift in Sources */,
@@ -471,6 +570,7 @@
 				55B98C4427EAEE490057F168 /* RoomView.swift in Sources */,
 				55B98C2427E96A0A0057F168 /* PostView.swift in Sources */,
 				55B98C1627E885D60057F168 /* ProgressViewBar.swift in Sources */,
+				55B98C8E27EC09A20057F168 /* GuitarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -611,6 +711,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -645,6 +746,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

@@ -45,6 +45,7 @@ final class WebRTCClient: NSObject {
 
 //    private var name: String?
     private var socketID: String?
+    let instrumentController = InstrumentController()
     
 
     let socket:SocketIOClient = SocketIO.sharedInstance.getSocket()
@@ -263,7 +264,7 @@ final class WebRTCClient: NSObject {
 //            let peerConnection: RTCPeerConnection = self.pcDic[response["offerSendID"] as! String] as! RTCPeerConnection
 
             let peerConnection: RTCPeerConnection = self.createPeerConnection(name: response["offerSendName"] as! String, socketID: response["offerSendID"] as! String)
-
+            print("core?")
             
             let createSdp: RTCSessionDescription = RTCSessionDescription(type: RTCSdpType.offer, sdp: sdp["sdp"] as! String)
             peerConnection.setRemoteDescription(createSdp) { data in
@@ -331,6 +332,7 @@ final class WebRTCClient: NSObject {
 
             self.pcDic.removeValue(forKey: response["id"]!)
             self.dcDic.removeValue(forKey: response["id"]!)
+            print("user_exit")
         }
     }
 
@@ -423,13 +425,11 @@ extension WebRTCClient: RTCDataChannelDelegate {
       let decoder = JSONDecoder()
 
       do {
-//          let json = try decoder.decode(Drum.key.self, from: buffer.data)
-//          print(json)
+          let json = try decoder.decode(DataChannelCodableStruct.dataChannel.self, from: buffer.data)
+          instrumentController.instrumentController(instrument: json)
       } catch {
           print("error")
       }
-
-      print("눌림!")
       self.delegate?.webRTCClient(self, didReceiveData: buffer.data)
   }
 
