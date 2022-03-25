@@ -12,9 +12,11 @@ class InstrumentController {
     
     var player: AVAudioPlayer?
     var drumKey: [String: Any] = [:]
+    var drumPlay: [String: Any] = [:]
     
     init() {
         self.drumSettings()
+        self.drumSettings2()
     }
     
     func instrumentController(instrument: DataChannelCodableStruct.dataChannel) {
@@ -35,38 +37,47 @@ class InstrumentController {
             case "Q":
                 print("Q")
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player!.play()
                 break
             case "W":
                 print("W")
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player!.play()
                 break
             case "E":
                 print("E")
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player!.play()
                 break
             case "A":
                 print("A")
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player!.play()
                 break
             case "S":
                 print("S")
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player!.play()
                 break
             case "D":
                 print("D")
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player!.play()
                 break
             case "Z":
                 print("Z")
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player!.play()
                 break
             case "X":
                 print("X")
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player!.play()
                 break
             case "C":
                 print("C")
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player!.play()
                 break
                 
             default:
@@ -77,11 +88,82 @@ class InstrumentController {
             print("drum error")
         }
         
-        player!.play()
+        
+        
+    }
+    
+    func drumController_my(key: String) {
+        do {
+            switch key {
+            case "Q":
+                print("Q")
+                let player10 = try AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                player10.play()
+                
+                break
+            case "W":
+                print("W")
+//                try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                let player2 = drumPlay[key] as! AVAudioPlayer
+                player2.play()
+                break
+            case "E":
+                print("E")
+//                try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                let player2 = drumPlay[key] as! AVAudioPlayer
+                player2.play()
+                break
+            case "A":
+                print("A")
+//                try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                let player2 = drumPlay[key] as! AVAudioPlayer
+                player2.play()
+                break
+            case "S":
+                print("S")
+//                try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                let player2 = drumPlay[key] as! AVAudioPlayer
+                player2.play()
+                break
+            case "D":
+                print("D")
+//                try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                let player2 = drumPlay[key] as! AVAudioPlayer
+                player2.play()
+                break
+            case "Z":
+                print("Z")
+//                try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                let player2 = drumPlay[key] as! AVAudioPlayer
+                player2.play()
+                break
+            case "X":
+                print("X")
+//                try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
+                let player2 = drumPlay[key] as! AVAudioPlayer
+                player2.play()
+                break
+            case "C":
+                print("C")
+                let url = Bundle.main.url(forResource: "sn", withExtension: "wav")!
+                let player3 = try AVAudioPlayer(contentsOf: url)
+                player3.play()
+                break
+                
+            default:
+                print("other key")
+                break
+            }
+        } catch {
+            print("drum error")
+        }
+        
+//        player!.play()
         
     }
     
     func drumSettings() {
+        
         var url = Bundle.main.url(forResource: "cr", withExtension: "wav")!
         drumKey["Q"] = url
         
@@ -109,5 +191,52 @@ class InstrumentController {
         url = Bundle.main.url(forResource: "sn", withExtension: "wav")!
         drumKey["C"] = url
         
+        
+        
+        
     }
+    
+    func drumSettings2() {
+        do {
+            var url = Bundle.main.url(forResource: "cr", withExtension: "wav")!
+            player = try AVAudioPlayer(contentsOf: url)
+            drumPlay["Q"] = player
+            
+            url = Bundle.main.url(forResource: "hi", withExtension: "wav")!
+            player = try AVAudioPlayer(contentsOf: url)
+            drumPlay["W"] = player
+            
+            url = Bundle.main.url(forResource: "rS", withExtension: "wav")!
+            player = try AVAudioPlayer(contentsOf: url)
+            drumPlay["E"] = player
+            
+            url = Bundle.main.url(forResource: "tom3", withExtension: "wav")!
+            player = try AVAudioPlayer(contentsOf: url)
+            drumPlay["A"] = player
+            
+            url = Bundle.main.url(forResource: "tom2", withExtension: "wav")!
+            player = try AVAudioPlayer(contentsOf: url)
+            drumPlay["S"] = player
+            
+            url = Bundle.main.url(forResource: "tom1", withExtension: "wav")!
+            player = try AVAudioPlayer(contentsOf: url)
+            drumPlay["D"] = player
+            
+            url = Bundle.main.url(forResource: "snst", withExtension: "wav")!
+            player = try AVAudioPlayer(contentsOf: url)
+            drumPlay["Z"] = player
+            
+            url = Bundle.main.url(forResource: "ki", withExtension: "wav")!
+            player = try AVAudioPlayer(contentsOf: url)
+            drumPlay["X"] = player
+            
+            url = Bundle.main.url(forResource: "sn", withExtension: "wav")!
+            player = try AVAudioPlayer(contentsOf: url)
+            drumPlay["C"] = player
+        } catch {
+            print("drum setting error")
+        }
+        
+    }
+        
 }

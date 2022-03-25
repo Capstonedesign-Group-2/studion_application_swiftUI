@@ -16,47 +16,114 @@ struct InstrumentControllerView: View {
     
     @State var selectedTab = "drum"
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets
-    
+    @State var showLeftMenu: Bool = false
     
     var body: some View {
-        VStack{
-            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
-                TabView(selection: $selectedTab) {
-                    
-                    DrumView(dcDic: dcDic)
-                        .tag("drum")
-                    
-                    PianoView()
-                        .tag("piano_button")
-                    
-                    GuitarView()
-                        .tag("guita")
-                    
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                .ignoresSafeArea(.all, edges: .bottom)
-                
-                HStack(spacing: 0) {
-                    ForEach(instrument, id: \.self) { image in
-                        InstrumentButton(image: image, selectedTab: $selectedTab)
-                        
-                        if image != instrument.last {
-                            Spacer(minLength: 0)
+        NavigationView {
+            ZStack {
+                VStack{
+                    ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+                        TabView(selection: $selectedTab) {
+                            
+                            DrumView(dcDic: dcDic)
+                                .tag("drum")
+                            
+                            PianoView()
+                                .tag("piano_button")
+                            
+                            GuitarView()
+                                .tag("guita")
+                            
                         }
+                        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+                        .ignoresSafeArea(.all, edges: .bottom)
+                        
+                        
+                        
+                        
+                        HStack(spacing: 0) {
+                            ForEach(instrument, id: \.self) { image in
+                                InstrumentButton(image: image, selectedTab: $selectedTab)
+                                
+                                if image != instrument.last {
+                                    Spacer(minLength: 0)
+                                }
+                            }
+                        }
+                        .padding(.horizontal, 25)
+                        .padding(.vertical, 5)
+                        .background(Color.white)
+                        .clipShape(Capsule())
+                        .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y: 5)
+                        .shadow(color: Color.black.opacity(0.15), radius: 5, x: -5, y: -5)
+                        .padding(.horizontal)
+                        .padding(.bottom, edge!.bottom == 0 ? 20: 0)
                     }
+                    Spacer()
                 }
-                .padding(.horizontal, 25)
-                .padding(.vertical, 5)
-                .background(Color.white)
-                .clipShape(Capsule())
-                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y: 5)
-                .shadow(color: Color.black.opacity(0.15), radius: 5, x: -5, y: -5)
-                .padding(.horizontal)
-                .padding(.bottom, edge!.bottom == 0 ? 20: 0)
+                
+                
+//                GeometryReader { _ in
+//                    HStack {
+//                        LeftBarView()
+//                            .offset(x: showLeftMenu ? UIScreen.main.bounds.height * 3/4 : -UIScreen.main.bounds.height * 3/4)
+//                            .animation(.easeInOut(duration: 0.3), value: showLeftMenu)
+//                        Spacer()
+//                    }
+//                }
+//                .background(Color.black.opacity(showLeftMenu ? 0.5 : 0))
             }
-            .ignoresSafeArea(.keyboard, edges: .bottom)
-            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    
+                    
+                    Button( action: {
+                        print("left button")
+                        self.showLeftMenu.toggle()
+                    }) {
+                        if showLeftMenu {
+                            Image(systemName: "xmark.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .font(.title)
+                                .offset(y: 20)
+                        } else {
+                            Image(systemName: "speaker.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .font(.title)
+                                .offset(y: 20)
+                        }
+                        
+                        
+                            
+                    }
+                
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button( action: {
+                        print("right button")
+                    }) {
+                        
+                        Image(systemName: "message.circle.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 40, height: 40)
+                            .font(.title)
+                            .offset(y: 20)
+
+                    }
+
+                }
+            }
+            
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
+        .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
+        
     }
 }
 

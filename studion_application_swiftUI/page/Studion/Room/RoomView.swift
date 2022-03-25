@@ -12,7 +12,7 @@ import Alamofire
 struct RoomView: View {
     @Binding var pageStatus: String
     @Binding var roomNumber: Int
-    
+        
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     
@@ -22,7 +22,7 @@ struct RoomView: View {
     
     var body: some View {
         InstrumentControllerView(dcDic: webRTCConnect.dcDic)
-            .onAppear{
+        .onAppear{
                 getRoomNumber = roomNumber
                 roomNumber = -1
                 
@@ -31,7 +31,8 @@ struct RoomView: View {
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation") // Forcing the rotation to portrait
                 AppDelegate.orientationLock = .landscapeRight
             }
-            .onDisappear{ AppDelegate.orientationLock = .all }
+        .onDisappear{ AppDelegate.orientationLock = .all }
+        
     }
 }
 
@@ -51,28 +52,40 @@ final class WebRTCConnect: ObservableObject {
         
         webRTCClient.allUsers() {data in
             let response = data as! Dictionary<String, Any>
-            self.pcDic = response["pcDic"] as? [String : Any]
-            self.dcDic = response["dcDic"] as! [String : Any]
+            
+            DispatchQueue.main.async {
+                self.pcDic = response["pcDic"] as? [String : Any]
+                self.dcDic = response["dcDic"] as! [String : Any]
+            }
+            
         }
         webRTCClient.getAnswer() {data in
             let response = data as! Dictionary<String, Any>
-            self.pcDic = response["pcDic"] as? [String : Any]
-            self.dcDic = response["dcDic"] as! [String : Any]
+            DispatchQueue.main.async {
+                self.pcDic = response["pcDic"] as? [String : Any]
+                self.dcDic = response["dcDic"] as! [String : Any]
+            }
         }
         webRTCClient.getOffer() {data in
             let response = data as! Dictionary<String, Any>
-            self.pcDic = response["pcDic"] as? [String : Any]
-            self.dcDic = response["dcDic"] as! [String : Any]
+            DispatchQueue.main.async {
+                self.pcDic = response["pcDic"] as? [String : Any]
+                self.dcDic = response["dcDic"] as! [String : Any]
+            }
         }
         webRTCClient.userExit() { data in
             let response = data as! Dictionary<String, Any>
-            self.pcDic = response["pcDic"] as? [String : Any]
-            self.dcDic = response["dcDic"] as! [String : Any]
+            DispatchQueue.main.async {
+                self.pcDic = response["pcDic"] as? [String : Any]
+                self.dcDic = response["dcDic"] as! [String : Any]
+            }
         }
         webRTCClient.getCandidate() {data in
             let response = data as! Dictionary<String, Any>
-            self.pcDic = response["pcDic"] as? [String : Any]
-            self.dcDic = response["dcDic"] as! [String : Any]
+            DispatchQueue.main.async {
+                self.pcDic = response["pcDic"] as? [String : Any]
+                self.dcDic = response["dcDic"] as! [String : Any]
+            }
         }
         
         

@@ -11,6 +11,7 @@ import WebRTC
 struct DrumView: View {
     var dcDic: [String: Any]?
     
+    let instrumentController = InstrumentController()
     
     let items = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
     let layout = [
@@ -19,8 +20,8 @@ struct DrumView: View {
     
     var body: some View {
         VStack (spacing: 20){
-            Spacer()
-                .frame(height: 20)
+//            Spacer()
+//                .frame(height: 20)
             HStack (spacing: 20){
                 
                 Button(action: {
@@ -130,7 +131,6 @@ struct DrumView: View {
     }
     
     func buttonClick(key: String) {
-        print(dcDic)
         
         
         let data: [String: String] = [
@@ -153,6 +153,8 @@ struct DrumView: View {
         } catch {
             print("error")
         }
+        
+        instrumentController.drumController_my(key: key)
         
         
     }

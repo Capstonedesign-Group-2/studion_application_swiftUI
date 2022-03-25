@@ -9,6 +9,7 @@ import Foundation
 import WebRTC
 import SocketIO
 import IOSurface
+import SceneKit
 
 protocol WebRTCClientDelegate: AnyObject {
   func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate)
@@ -51,24 +52,29 @@ final class WebRTCClient: NSObject {
     let socket:SocketIOClient = SocketIO.sharedInstance.getSocket()
 
     func joinRoom(room: Int) {
-        let userInfo = UserInfo()
+        do {
+            let userInfo = UserInfo()
+            let user = UserInfo.userInfo.getUserInfo()!
+            
+            
 
-        let user: AuthCodableStruct.userInfo = UserInfo.userInfo.getUserInfo()!
-
-        let userData : [String: Any] = [
-            "id" : user.id as Any,
-            "name" : user.name as Any,
-            "email" : user.email as Any,
-            "image" : user.image as Any,
-            "created_at" : user.created_at as Any,
-            "updated_at" : user.updated_at as Any,
-        ]
-        let data : [String: Any] = [
-            "room_id" : room,
-            "user" : userData,
-        ]
-        print(2)
-        socket.emit("join_room", data)
+            let userData : [String: Any] = [
+                "id" : user.id as Any,
+                "name" : user.name as Any,
+                "email" : user.email as Any,
+                "image" : user.image as Any,
+                "created_at" : user.created_at as Any,
+                "updated_at" : user.updated_at as Any,
+            ]
+            let data : [String: Any] = [
+                "room_id" : room,
+                "user" : userData,
+            ]
+            print(2)
+            socket.emit("join_room", data)
+        } catch {
+            print("user info error")
+        }
 
     }
 
@@ -152,8 +158,13 @@ final class WebRTCClient: NSObject {
         // Audio
         let audioTrack = self.createAudioTrack()
         peerConnection.add(audioTrack, streamIds: [streamId])
-
-
+        
+        print("******************************")
+        print(peerConnection)
+        print(audioTrack.source)
+//        RTCAudioSession.setInputGain
+        print("******************************")
+        
         // Data
         if let dataChannel = createDataChannel(peerConnection: peerConnection, name: name, socketID: socketID) {
           dataChannel.delegate = self
@@ -353,6 +364,7 @@ final class WebRTCClient: NSObject {
 
     func userExit(handler: @escaping (Any) -> Void) {
         socket.on("user_exit") {data, ack in
+            print("user_exit")
             let response = data[0] as! Dictionary<String, String>
 
             self.pcDic.removeValue(forKey: response["id"]!)
@@ -379,6 +391,12 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didAdd stream: RTCMediaStream) {
 //    debugPrint("peerConnection did add stream")
+      print("-----------------------------------")
+      print(peerConnection)
+      print(stream.audioTracks[0].source)
+      stream.audioTracks[0].source.volume = -1
+      print("-----------------------------------")
+      
   }
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didRemove stream: RTCMediaStream) {
@@ -406,17 +424,18 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
         "sdpMid" : candidate.sdpMid,
         "sdpMLineIndex" : candidate.sdpMLineIndex
       ]
-
-
-
         for key in self.pcDic.keys {
-            let data: [String: Any] = [
-              "candidate" : sendCandidate,
-              "candidateSendID" : socket.sid,
-              "candidateReceiveID" : key
-            ]
-////            print("key : \(key)")
-            self.socket.emit("candidate", data)
+            if(self.pcDic[key] == peerConnection) {
+                let data: [String: Any] = [
+                  "candidate" : sendCandidate,
+                  "candidateSendID" : socket.sid,
+                  "candidateReceiveID" : key
+                ]
+                self.socket.emit("candidate", data)
+                break
+            }
+            
+            
         }
         
 //        let data: [String: Any] = [
