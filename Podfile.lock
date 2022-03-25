@@ -1,5 +1,21 @@
 PODS:
   - Alamofire (5.5.0)
+  - AudioKit (5.1.0):
+    - AudioKit/C (= 5.1.0)
+    - AudioKit/Core (= 5.1.0)
+    - AudioKit/Soundpipe (= 5.1.0)
+    - AudioKit/Sporth (= 5.1.0)
+    - AudioKit/STK (= 5.1.0)
+  - AudioKit/C (5.1.0):
+    - AudioKit/Soundpipe
+    - AudioKit/Sporth
+    - AudioKit/STK
+  - AudioKit/Core (5.1.0):
+    - AudioKit/C
+  - AudioKit/Soundpipe (5.1.0)
+  - AudioKit/Sporth (5.1.0):
+    - AudioKit/Soundpipe
+  - AudioKit/STK (5.1.0)
   - GoogleWebRTC (1.1.31999)
   - Socket.IO-Client-Swift (15.2.0):
     - Starscream (~> 3.1)
@@ -7,22 +23,25 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - AudioKit
   - GoogleWebRTC
   - Socket.IO-Client-Swift (~> 15.2.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - AudioKit
     - GoogleWebRTC
     - Socket.IO-Client-Swift
     - Starscream
 
 SPEC CHECKSUMS:
   Alamofire: 1c4fb5369c3fe93d2857c780d8bbe09f06f97e7c
+  AudioKit: 81246a4ccdd7ca3c6e0076f913070e90987b4369
   GoogleWebRTC: b39a78c4f5cc6b0323415b9233db03a2faa7b0f0
   Socket.IO-Client-Swift: 1e3e3a1f09f3312a167f0d781eb2f383d477357c
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
 
-PODFILE CHECKSUM: 5071a240b47de5fb64bfd2dd93488e6666331564
+PODFILE CHECKSUM: c8cd7591a21a240f5207edfc969ba209a5a2ce12
 
 COCOAPODS: 1.11.2

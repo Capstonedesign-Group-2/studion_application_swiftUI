@@ -9,5 +9,6 @@ target 'studion_application_swiftUI' do
   pod 'Alamofire'
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   pod 'GoogleWebRTC'
+  pod 'AudioKit'
 
 end

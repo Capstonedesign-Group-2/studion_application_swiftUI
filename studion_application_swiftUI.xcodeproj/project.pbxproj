@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55420D2C27ED8A5F001A9AB4 /* DrumsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55420D2B27ED8A5F001A9AB4 /* DrumsController.swift */; };
 		55B98BF027E83E1D0057F168 /* studion_application_swiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */; };
 		55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BF127E83E1D0057F168 /* ContentView.swift */; };
 		55B98BF427E83E1D0057F168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B98BF327E83E1D0057F168 /* Assets.xcassets */; };
@@ -61,6 +62,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		55420D2B27ED8A5F001A9AB4 /* DrumsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsController.swift; sourceTree = "<group>"; };
 		55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studion_application_swiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studion_application_swiftUIApp.swift; sourceTree = "<group>"; };
 		55B98BF127E83E1D0057F168 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -389,6 +391,7 @@
 				55B98C7527EBFDB70057F168 /* tom1.wav */,
 				55B98C6D27EBFDB70057F168 /* tom2.wav */,
 				55B98C6E27EBFDB70057F168 /* tom3.wav */,
+				55420D2B27ED8A5F001A9AB4 /* DrumsController.swift */,
 			);
 			path = Drum;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				55B98C2427E96A0A0057F168 /* PostView.swift in Sources */,
 				55B98C1627E885D60057F168 /* ProgressViewBar.swift in Sources */,
 				55B98C8E27EC09A20057F168 /* GuitarView.swift in Sources */,
+				55420D2C27ED8A5F001A9AB4 /* DrumsController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

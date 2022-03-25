@@ -138,7 +138,9 @@ struct loginButton: View {
         AuthController.sharedInstance.login(email: email, password: password) {data in
             let response = data as! Dictionary<String, Any>
             if(response["status"] as! Int == 200) {
-                handler(true)
+                AuthController.sharedInstance.loginCheck() {data in
+                    handler(true)
+                }
             } else {
                 handler(false)
             }
