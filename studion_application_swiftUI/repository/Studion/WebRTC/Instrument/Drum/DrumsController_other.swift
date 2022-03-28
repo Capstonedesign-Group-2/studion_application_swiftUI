@@ -3,7 +3,7 @@ import SwiftUI
 import AVFoundation
 
 // swiftlint:disable:next type_body_length
-class DrumsController: NSObject, ObservableObject {
+class DrumsController_other: NSObject, ObservableObject {
 
   private let engine = AVAudioEngine()
   private let player = AVAudioPlayerNode()
@@ -31,7 +31,7 @@ class DrumsController: NSObject, ObservableObject {
 
     return playerTime.sampleTime
   }
-  func setting(key: String) {
+    func setting(key: String, socketId: String) {
       setupAudio(key: key)
     setupDisplayLink()
   }
