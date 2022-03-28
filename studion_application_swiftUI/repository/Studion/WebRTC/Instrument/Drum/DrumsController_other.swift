@@ -31,13 +31,16 @@ class DrumsController_other: NSObject, ObservableObject {
 
     return playerTime.sampleTime
   }
-    func setting(key: String, socketId: String) {
+    func setting() {
       setupAudio(key: key)
     setupDisplayLink()
   }
 
-  func playOrPause() {
-
+    func playOrPause(key: String, socketId: String) {
+//        if()
+        if(audioFile == nil) {
+            return
+        }
       player.play()
   }
 
@@ -121,6 +124,7 @@ class DrumsController_other: NSObject, ObservableObject {
 
     do {
       try engine.start()
+//      player.play()
 
       scheduleAudioFile()
     } catch {

@@ -36,8 +36,10 @@ class DrumsController: NSObject, ObservableObject {
     setupDisplayLink()
   }
 
-  func playOrPause() {
-
+    func playOrPause() {
+        if(audioFile == nil) {
+            return
+        }
       player.play()
   }
 
