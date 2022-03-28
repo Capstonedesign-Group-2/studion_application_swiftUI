@@ -12,34 +12,41 @@ struct PageRouter: View {
     @State var roomNumber: Int = -1
     
     var body: some View {
-        VStack {
-            switch pageStatus {
-            case "/splashScreen":
-             SplashScreen(pageStatus: $pageStatus)
-                    .onAppear{ print("/splashScreen start") }
-                    .onDisappear{ print("/splashScreen end") }
-                
-            case "/login":
-                LoginView(pageStatus: $pageStatus)
-                    .onAppear{ print("/login start") }
-                    .onDisappear{ print("/login end") }
-            case "/register":
-                RegisterView(pageStatus: $pageStatus)
-                    .onAppear{ print("/register start") }
-                    .onDisappear{ print("/register end") }
-                
-            case "/" :
-                MainView(pageStatus: $pageStatus, roomNumber: $roomNumber)
-                    .onAppear{ print("/ start") }
-                    .onDisappear{ print("/ end") }
-                
-            case "/room":
-                RoomView(pageStatus: $pageStatus, roomNumber: $roomNumber)
-                
-            default :
-                SplashScreen(pageStatus: $pageStatus)
+//        NavigationView {
+            VStack {
+                switch pageStatus {
+                case "/splashScreen":
+                 SplashScreen(pageStatus: $pageStatus)
+                        .onAppear{ print("/splashScreen start") }
+                        .onDisappear{ print("/splashScreen end") }
+
+                case "/login":
+                    LoginView(pageStatus: $pageStatus)
+                        .onAppear{ print("/login start") }
+                        .onDisappear{ print("/login end") }
+//                        .offset(y: -100)
+                case "/register":
+                    RegisterView(pageStatus: $pageStatus)
+                        .onAppear{ print("/register start") }
+                        .onDisappear{ print("/register end") }
+//                        .offset(y: -100)
+
+                case "/" :
+                    MainView(pageStatus: $pageStatus, roomNumber: $roomNumber)
+                        .onAppear{ print("/ start") }
+                        .onDisappear{ print("/ end") }
+
+                case "/room":
+                    RoomView(pageStatus: $pageStatus, roomNumber: roomNumber)
+
+                default :
+                    SplashScreen(pageStatus: $pageStatus)
+                }
             }
-        }
+            
+//        } // NavigationView
+        
+        
     }
 }
 

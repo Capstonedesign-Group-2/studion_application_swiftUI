@@ -34,7 +34,7 @@ final class WebRTCClient: NSObject {
     }()
 
     weak var delegate: WebRTCClientDelegate?
-    private let rtcAudioSession =  RTCAudioSession.sharedInstance()
+//    private let rtcAudioSession =  RTCAudioSession.sharedInstance()
     private let audioQueue = DispatchQueue(label: "audio")
     private let mediaConstrains = [kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueTrue,
                                    kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue]
@@ -133,12 +133,8 @@ final class WebRTCClient: NSObject {
 
         self.pcDic[socketID] = peerConnection
 
-
-        print("first save")
-        print(self.pcDic[socketID])
-
         self.createMediaSenders(peerConnection: peerConnection, name: name, socketID: socketID)
-        self.configureAudioSession()
+//        self.configureAudioSession()
         print("createPeerConnection end \(peerConnection)")
 
         
@@ -196,18 +192,18 @@ final class WebRTCClient: NSObject {
         return audioTrack
     }
 
-    func configureAudioSession() {
-        self.rtcAudioSession.lockForConfiguration()
-        do {
-          try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue)
-          try self.rtcAudioSession.setMode(AVAudioSession.Mode.voiceChat.rawValue)
-        } catch let error {
-          debugPrint("Error changeing AVAudioSession category: \(error)")
-        }
-        self.rtcAudioSession.unlockForConfiguration()
-
-        print("configureAudioSession end")
-    }
+//    func configureAudioSession() {
+//        self.rtcAudioSession.lockForConfiguration()
+//        do {
+//            try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue)
+//          try self.rtcAudioSession.setMode(AVAudioSession.Mode.voiceChat.rawValue)
+//        } catch let error {
+//          debugPrint("Error changeing AVAudioSession category: \(error)")
+//        }
+//        self.rtcAudioSession.unlockForConfiguration()
+//
+//        print("configureAudioSession end")
+//    }
 
 //  ************************************************************************************
 //    오퍼 만들기
@@ -367,6 +363,11 @@ final class WebRTCClient: NSObject {
             print("user_exit")
             let response = data[0] as! Dictionary<String, String>
 
+            let peerConnection = self.pcDic[response["id"]!]
+            peerConnection!.close()
+            let dcConnection = self.dcDic[response["id"]!]
+            dcConnection!.close()
+            
             self.pcDic.removeValue(forKey: response["id"]!)
             self.dcDic.removeValue(forKey: response["id"]!)
             

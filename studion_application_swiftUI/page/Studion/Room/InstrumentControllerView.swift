@@ -11,6 +11,8 @@ import SwiftUI
 
 var instrument = ["drum", "piano_button", "guitar"]
 struct InstrumentControllerView: View {
+    
+    
     var dcDic:[String: Any]
     
     
@@ -27,6 +29,8 @@ struct InstrumentControllerView: View {
                             
                             DrumView(dcDic: dcDic)
                                 .tag("drum")
+//                            DrumsView()
+//                                .tag("drum")
                             
                             PianoView()
                                 .tag("piano_button")
@@ -123,6 +127,7 @@ struct InstrumentControllerView: View {
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
+        
         
     }
 }

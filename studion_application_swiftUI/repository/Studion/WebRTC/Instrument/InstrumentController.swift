@@ -7,13 +7,14 @@
 
 import Foundation
 import AVFoundation
-import AudioKit
 
 class InstrumentController {
     
+    
+    
     var player: AVAudioPlayer?
     var drumKey: [String: Any] = [:]
-    var audioFiles: [AVAudioFile] = []
+//    var audioFiles: [AVAudioFile] = []
     
     init() {
         self.drumSettings()
@@ -24,8 +25,9 @@ class InstrumentController {
         switch instrument.type {
         case "drum":
             drumController(key: instrument.key, socketId: instrument.socketId)
-            break
-            
+//            let drumsController = DrumsController()
+//            drumsController.drumPlay(key: instrument.key, socketId: instrument.socketId, handler: { data in
+//            })
         default:
             print("other instrument")
         }
@@ -79,7 +81,7 @@ class InstrumentController {
                 try player = AVAudioPlayer(contentsOf: drumKey[key] as! URL)
                 player!.play()
                 break
-                
+
             default:
                 print("other key")
                 break
@@ -87,11 +89,11 @@ class InstrumentController {
         } catch {
             print("drum error")
         }
-        
-        
-        
+
+
+
     }
-    
+
 //    func drumController_my(key: String) {
 //        do {
 //            switch key {
@@ -122,8 +124,8 @@ class InstrumentController {
 //            case "C":
 //                DrumsController.sharedInstance.playPad(padNumber: 8)
 //                break
-//            
-//                
+//
+//
 //            default:
 //                print("other key")
 //                break
@@ -131,43 +133,43 @@ class InstrumentController {
 //        } catch {
 //            print("drum error")
 //        }
-//        
+//
 ////        player!.play()
-//        
+//
 //    }
-    
+
     func drumSettings() {
-        
+
         var url = Bundle.main.url(forResource: "cr", withExtension: "wav")!
         drumKey["Q"] = url
-        
+
         url = Bundle.main.url(forResource: "hi", withExtension: "wav")!
         drumKey["W"] = url
-        
+
         url = Bundle.main.url(forResource: "rS", withExtension: "wav")!
         drumKey["E"] = url
-        
+
         url = Bundle.main.url(forResource: "tom3", withExtension: "wav")!
         drumKey["A"] = url
-        
+
         url = Bundle.main.url(forResource: "tom2", withExtension: "wav")!
         drumKey["S"] = url
-        
+
         url = Bundle.main.url(forResource: "tom1", withExtension: "wav")!
         drumKey["D"] = url
-        
+
         url = Bundle.main.url(forResource: "snst", withExtension: "wav")!
         drumKey["Z"] = url
-        
+
         url = Bundle.main.url(forResource: "ki", withExtension: "wav")!
         drumKey["X"] = url
-        
+
         url = Bundle.main.url(forResource: "sn", withExtension: "wav")!
         drumKey["C"] = url
-        
-        
-        
-        
+
+
+
+
     }
     
         

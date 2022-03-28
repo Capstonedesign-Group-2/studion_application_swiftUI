@@ -82,13 +82,16 @@ struct RoomCardModalView: View {
                             .padding(.bottom, 20)
                     }
                     
-                    Button( action : {
-                        
+//                    NavigationLink(destination: RoomView(pageStatus: $pageStatus, roomNumber: roomInfo!.id), label: {
+//                        Text("enter")
+//                    })
+//                    .padding(.horizontal, 30)
+//                    .padding(.bottom, 100)
+                    
+                    Button( action: {
                         self.roomNumber = roomInfo!.id
-                        self.isShowing = false
                         self.pageStatus = "/room"
-                        print("modal click")
-                    }) {
+                    } ) {
                         Text("enter")
                     }
                     .padding(.horizontal, 30)

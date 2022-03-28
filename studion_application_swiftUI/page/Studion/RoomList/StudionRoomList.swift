@@ -22,92 +22,102 @@ struct StudionRoomList: View {
     
     var body: some View {
         
-            
-        ZStack {
-            VStack {
-                
-                
-                    HStack(spacing: 12) {
-                        Spacer()
-                            .frame(width:20)
-                        Text("Studion")
-                            .font(.largeTitle)
-                            .fontWeight(.heavy)
-                            .foregroundColor(.black)
-                        Spacer(minLength: 0)
-                    }
-                    .padding(.horizontal)
-                    .padding(.top, isHide ? 0:top!-10)
-//                    .padding(.top,1)
-                
-                
-                                
-                if roomSocket.roomsInfo != nil {
-
+//        NavigationView {
+            ZStack {
+                VStack {
                     
-
-                    ScrollView(showsIndicators: false) {
-                        
-                        VStack(spacing: 0) {
-                            GeometryReader{ reader -> AnyView in
-                                let yAxis = reader.frame(in: .global).minY
-                                print(yAxis)
-                                
-                                if(yAxis < 0 && !isHide) {
-                                    DispatchQueue.main.async {
-                                        withAnimation{ isHide = true }
-                                    }
-                                }
-                                
-                                if(yAxis > 0 && isHide) {
-                                    DispatchQueue.main.async {
-                                        withAnimation{ isHide = false }
-                                    }
-                                }
-
-                                
-                                return AnyView(
-                                    Text("").frame(width:0, height:0))
-                            }
-                            
-                            Button( action: {
-                                self.roomNumber = 1
-                                self.pageStatus = "/room"
-                            }) {Text("test")}
-                            
-                            ForEach(0..<(roomSocket.roomsInfo?.rooms?.count)!, id: \.self) { index in
-
-                                Button( action: {
-                                    self.roomInfo = (roomSocket.roomsInfo?.rooms![index])!
-                                    self.showModal = true
-                                }) {
-                                    RoomCardView(roomInfo: roomSocket.roomsInfo?.rooms![index] as! RoomCodableStruct.roomInfo )
-                                }
-                            }
+                    
+                        HStack(spacing: 12) {
+                            Spacer()
+                                .frame(width:20)
+                            Text("Studion")
+                                .font(.largeTitle)
+                                .fontWeight(.heavy)
+                                .foregroundColor(.black)
+                            Spacer(minLength: 0)
                         }
-                        
-                        
+                        .padding(.horizontal)
+                        .padding(.top, isHide ? 0:top!-10)
+                        .padding(.top,1)
+                    
+                    
+                                    
+                    if roomSocket.roomsInfo != nil {
 
                         
-                    }
 
-                    }else {
-                        Spacer()
-                        Text("방이 읎어")
-                        Spacer()
+                        ScrollView(showsIndicators: false) {
+                            
+                            VStack(spacing: 0) {
+                                GeometryReader{ reader -> AnyView in
+                                    let yAxis = reader.frame(in: .global).minY
+                                    print(yAxis)
+                                    
+                                    if(yAxis < 0 && !isHide) {
+                                        DispatchQueue.main.async {
+                                            withAnimation{ isHide = true }
+                                        }
+                                    }
+                                    
+                                    if(yAxis > 0 && isHide) {
+                                        DispatchQueue.main.async {
+                                            withAnimation{ isHide = false }
+                                        }
+                                    }
 
+                                    
+                                    return AnyView(
+                                        Text("").frame(width:0, height:0))
+                                }
+                                
+//                                NavigationLink(destination: RoomView(pageStatus: $pageStatus, roomNumber: 1), label: {
+//                                    Text("enter")
+//                                })
+                                
+                                Button( action: {
+                                    self.pageStatus = "/room"
+                                    self.roomNumber = 1
+                                } ) {
+                                    Text("enter")
+                                }
+                                
+                                ForEach(0..<(roomSocket.roomsInfo?.rooms?.count)!, id: \.self) { index in
+
+                                    Button( action: {
+                                        self.roomInfo = (roomSocket.roomsInfo?.rooms![index])!
+                                        self.showModal = true
+                                    }) {
+                                        RoomCardView(roomInfo: roomSocket.roomsInfo?.rooms![index] as! RoomCodableStruct.roomInfo )
+                                    }
+                                }
+                            }
+                            
+                            
+
+                            
+                        }.navigationTitle("Studion")
+
+                        }else {
+                            Spacer()
+                            Text("방이 읎어")
+                                .navigationTitle("Studion")
+                            Spacer()
+
+                        }
+                    
+
+                        
                     }
                 
-
-                    
-                }
-            RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo)
+                RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo)
+                
+                
             
-            
-        
-        }
-            
+            } // ZStack
+//        }
         .onAppear{ roomSocket.getRoomList() }
+        
+        
 
             
         
@@ -161,5 +171,12 @@ final class RoomSocket: ObservableObject {
         roomListController.getRoomList()
         
         let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
+    }
+}
+
+
+extension UINavigationBar {
+    open override func sizeThatFits(_ size: CGSize) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 50)
     }
 }

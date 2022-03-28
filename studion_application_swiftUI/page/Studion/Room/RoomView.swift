@@ -11,7 +11,7 @@ import Alamofire
 
 struct RoomView: View {
     @Binding var pageStatus: String
-    @Binding var roomNumber: Int
+    var roomNumber: Int
         
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
@@ -24,7 +24,7 @@ struct RoomView: View {
         InstrumentControllerView(dcDic: webRTCConnect.dcDic)
         .onAppear{
                 getRoomNumber = roomNumber
-                roomNumber = -1
+                
                 
                 webRTCConnect.joinRoom(room: getRoomNumber)
                 
