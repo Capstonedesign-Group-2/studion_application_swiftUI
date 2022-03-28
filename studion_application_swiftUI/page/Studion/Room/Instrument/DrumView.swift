@@ -175,8 +175,7 @@ struct DrumView: View {
 
         
         let drumsController = DrumsController()
-        drumsController.setupAudio(key: key)
+        drumsController.setting(key: key)
         drumsController.playOrPause()
-
     }
 }
