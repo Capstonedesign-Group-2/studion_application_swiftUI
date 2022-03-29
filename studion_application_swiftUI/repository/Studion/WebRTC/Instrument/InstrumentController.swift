@@ -11,7 +11,6 @@ import AVFoundation
 class InstrumentController {
     
     func instrumentController(instrument: DataChannelCodableStruct.dataChannel) {
-        print("test")
         switch instrument.type {
         case "drum":
            let drumsController_other = DrumsController_other()

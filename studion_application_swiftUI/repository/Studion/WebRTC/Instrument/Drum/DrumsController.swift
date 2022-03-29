@@ -90,10 +90,16 @@ class DrumsController: NSObject, ObservableObject {
             break
             
         default:
+            fileURL = nil
             return
         }
 
     do {
+        try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers])
+        try AVAudioSession.sharedInstance().setActive(true)
+        try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+        
+        
       let file = try AVAudioFile(forReading: fileURL!)
       let format = file.processingFormat
 
@@ -119,7 +125,6 @@ class DrumsController: NSObject, ObservableObject {
 
     engine.prepare()
     
-    print(1)
 
     do {
       try engine.start()

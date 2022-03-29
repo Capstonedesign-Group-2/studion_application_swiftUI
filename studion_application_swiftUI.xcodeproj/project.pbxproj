@@ -58,7 +58,6 @@
 		55B98C8E27EC09A20057F168 /* GuitarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C8D27EC09A20057F168 /* GuitarView.swift */; };
 		55B98C9127EC782D0057F168 /* LeftBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C9027EC782D0057F168 /* LeftBarView.swift */; };
 		55B98C9327EC78970057F168 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C9227EC78970057F168 /* CustomTabView.swift */; };
-		55B98C9527EC91A70057F168 /* AVAudioEngine_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C9427EC91A70057F168 /* AVAudioEngine_test.swift */; };
 		7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -115,7 +114,6 @@
 		55B98C8D27EC09A20057F168 /* GuitarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuitarView.swift; sourceTree = "<group>"; };
 		55B98C9027EC782D0057F168 /* LeftBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBarView.swift; sourceTree = "<group>"; };
 		55B98C9227EC78970057F168 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
-		55B98C9427EC91A70057F168 /* AVAudioEngine_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVAudioEngine_test.swift; sourceTree = "<group>"; };
 		577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studion_application_swiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8C3731F8D5A9843C908CC7 /* Pods-studion_application_swiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.debug.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F764A19F6476AACD3B6CA653 /* Pods-studion_application_swiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.release.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -372,7 +370,6 @@
 			children = (
 				55B98C6B27EBFD9A0057F168 /* Drum */,
 				55B98C4F27EBF5350057F168 /* InstrumentController.swift */,
-				55B98C9427EC91A70057F168 /* AVAudioEngine_test.swift */,
 			);
 			path = Instrument;
 			sourceTree = "<group>";
@@ -565,7 +562,6 @@
 				55B98C3B27EAA1530057F168 /* RoomListController.swift in Sources */,
 				55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */,
 				55B98C0127E83F260057F168 /* LoginView.swift in Sources */,
-				55B98C9527EC91A70057F168 /* AVAudioEngine_test.swift in Sources */,
 				55B98C9327EC78970057F168 /* CustomTabView.swift in Sources */,
 				55B98C2127E965DA0057F168 /* MainView.swift in Sources */,
 				55B98C4D27EBF3750057F168 /* DataChannelCodableStruct.swift in Sources */,

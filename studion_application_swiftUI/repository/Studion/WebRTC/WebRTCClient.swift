@@ -34,7 +34,7 @@ final class WebRTCClient: NSObject {
     }()
 
     weak var delegate: WebRTCClientDelegate?
-//    private let rtcAudioSession =  RTCAudioSession.sharedInstance()
+    private let rtcAudioSession =  RTCAudioSession.sharedInstance()
     private let audioQueue = DispatchQueue(label: "audio")
     private let mediaConstrains = [kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueTrue,
                                    kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue]
@@ -134,7 +134,7 @@ final class WebRTCClient: NSObject {
         self.pcDic[socketID] = peerConnection
 
         self.createMediaSenders(peerConnection: peerConnection, name: name, socketID: socketID)
-//        self.configureAudioSession()
+        self.configureAudioSession()
         print("createPeerConnection end \(peerConnection)")
 
         
@@ -192,18 +192,20 @@ final class WebRTCClient: NSObject {
         return audioTrack
     }
 
-//    func configureAudioSession() {
-//        self.rtcAudioSession.lockForConfiguration()
-//        do {
-//            try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue)
-//          try self.rtcAudioSession.setMode(AVAudioSession.Mode.voiceChat.rawValue)
-//        } catch let error {
-//          debugPrint("Error changeing AVAudioSession category: \(error)")
-//        }
-//        self.rtcAudioSession.unlockForConfiguration()
-//
-//        print("configureAudioSession end")
-//    }
+    func configureAudioSession() {
+        self.rtcAudioSession.lockForConfiguration()
+        do {
+            try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue, with: [.mixWithOthers])
+//          try self.rtcAudioSession.setMode(AVAudioSession.Mode.videoChat.rawValue)
+          try self.rtcAudioSession.setActive(true)
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers])
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch let error {
+          debugPrint("Error changeing AVAudioSession category: \(error)")
+        }
+        self.rtcAudioSession.unlockForConfiguration()
+
+    }
 
 //  ************************************************************************************
 //    오퍼 만들기

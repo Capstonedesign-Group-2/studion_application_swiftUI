@@ -31,12 +31,12 @@ class DrumsController_other: NSObject, ObservableObject {
 
     return playerTime.sampleTime
   }
-    func setting() {
-      setupAudio(key: key)
+    func setting(key: String, socketId: String) {
+    setupAudio(key: key)
     setupDisplayLink()
   }
 
-    func playOrPause(key: String, socketId: String) {
+    func playOrPause() {
 //        if()
         if(audioFile == nil) {
             return
@@ -97,6 +97,7 @@ class DrumsController_other: NSObject, ObservableObject {
     do {
       let file = try AVAudioFile(forReading: fileURL!)
       let format = file.processingFormat
+        
 
 
 
