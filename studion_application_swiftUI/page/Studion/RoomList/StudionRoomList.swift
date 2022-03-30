@@ -143,6 +143,8 @@ final class RoomSocket: ObservableObject {
                 let responseData = try JSONSerialization.data(withJSONObject: response, options: [.fragmentsAllowed])
 
                 self.roomsInfo = try decoder.decode(RoomCodableStruct.roomsInfo.self, from: responseData)
+                
+                print("room list update")
 //                print(self.roomsInfo)
             } catch {
                 print("error")

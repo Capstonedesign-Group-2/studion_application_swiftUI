@@ -8,24 +8,31 @@
 import SwiftUI
 import WebRTC
 import Combine
-import AudioKit
 import AVFoundation
 
 struct DrumView: View {
+    
+    
 
     var dcDic: [String: Any]?
 
     let instrumentController = InstrumentController()
     
+    @StateObject var drumsControllerAudioKit = DrumsConductor()
     
     
     let items = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
     let layout = [
         GridItem(.adaptive(minimum: 9, maximum: 9))
     ]
+    
 
     var body: some View {
         VStack (spacing: 20){
+            
+            
+                
+            
 //            Spacer()
 //                .frame(height: 20)
             HStack (spacing: 20){
@@ -41,6 +48,8 @@ struct DrumView: View {
                         .frame(width: 60, height: 60)
                         .aspectRatio(contentMode: .fit)
                 }
+                .buttonStyle(MyButtonStyle())
+                
 
                 Button(action: {
                     print("W")
@@ -54,6 +63,7 @@ struct DrumView: View {
                         .aspectRatio(contentMode: .fit)
 
                 }
+                .buttonStyle(MyButtonStyle())
 
                 Button(action: {
                     print("E")
@@ -64,6 +74,7 @@ struct DrumView: View {
                         .frame(width: 60, height: 60)
                         .aspectRatio(contentMode: .fit)
                 }
+                .buttonStyle(MyButtonStyle())
 
             } // HStack
 
@@ -79,6 +90,7 @@ struct DrumView: View {
                         .frame(width: 60, height: 60)
                         .aspectRatio(contentMode: .fit)
                 }
+                .buttonStyle(MyButtonStyle())
 
                 Button(action: {
                     print("S")
@@ -90,6 +102,7 @@ struct DrumView: View {
                         .frame(width: 60, height: 60)
                         .aspectRatio(contentMode: .fit)
                 }
+                .buttonStyle(MyButtonStyle())
 
                 Button(action: {
                     print("D")
@@ -101,6 +114,7 @@ struct DrumView: View {
                         .frame(width: 60, height: 60)
                         .aspectRatio(contentMode: .fit)
                 }
+                .buttonStyle(MyButtonStyle())
 
 
             } // HStack
@@ -117,6 +131,7 @@ struct DrumView: View {
                         .frame(width: 60, height: 60)
                         .aspectRatio(contentMode: .fit)
                 }
+                .buttonStyle(MyButtonStyle())
 
                 Button(action: {
                     print("X")
@@ -128,6 +143,7 @@ struct DrumView: View {
                         .frame(width: 60, height: 60)
                         .aspectRatio(contentMode: .fit)
                 }
+                .buttonStyle(MyButtonStyle())
 
                 Button(action: {
                     print("C")
@@ -139,13 +155,18 @@ struct DrumView: View {
                         .frame(width: 60, height: 60)
                         .aspectRatio(contentMode: .fit)
                 }
+                .buttonStyle(MyButtonStyle())
 
             } // HStack
 
             Spacer()
 
         } // Vstack
-        
+        .onAppear{
+            self.drumsControllerAudioKit.start()
+            
+            
+        }
 
     }
 
@@ -175,8 +196,22 @@ struct DrumView: View {
 
         
         let drumsController = DrumsController()
-        drumsController.setupAudio(key: key)
+        drumsController.setting(key: key)
         drumsController.playOrPause()
+        
+//        drumsControllerAudioKit.playPad(padNumber: 0)
+        
+    }
+}
 
+
+struct MyButtonStyle: PrimitiveButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration
+            .label
+            .onLongPressGesture(
+                minimumDuration: 0,
+                perform: configuration.trigger
+            )
     }
 }

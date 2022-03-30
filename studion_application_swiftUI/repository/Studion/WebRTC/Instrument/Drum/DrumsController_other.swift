@@ -3,10 +3,11 @@ import SwiftUI
 import AVFoundation
 
 // swiftlint:disable:next type_body_length
-class DrumsController: NSObject, ObservableObject {
+class DrumsController_other: NSObject, ObservableObject {
 
   private let engine = AVAudioEngine()
   private let player = AVAudioPlayerNode()
+  private let timeEffect = AVAudioUnitTimePitch()
 
   private var displayLink: CADisplayLink?
 
@@ -30,30 +31,30 @@ class DrumsController: NSObject, ObservableObject {
 
     return playerTime.sampleTime
   }
-  func setting(key: String) {
-      setupAudio(key: key)
+    func setting(key: String, socketId: String) {
+    setupAudio(key: key)
     setupDisplayLink()
   }
 
     func playOrPause() {
+//        if()
         if(audioFile == nil) {
             return
         }
-        
       player.play()
   }
 
-//  func skip(forwards: Bool) {
-//    let timeToSeek: Double
-//
-//    if forwards {
-//      timeToSeek = 10
-//    } else {
-//      timeToSeek = -10
-//    }
-//
-//    seek(to: timeToSeek)
-//  }
+  func skip(forwards: Bool) {
+    let timeToSeek: Double
+
+    if forwards {
+      timeToSeek = 10
+    } else {
+      timeToSeek = -10
+    }
+
+    seek(to: timeToSeek)
+  }
 
   // MARK: - Private
 
@@ -61,7 +62,6 @@ class DrumsController: NSObject, ObservableObject {
         
         var fileURL: URL?
         switch key {
-            
         case "Q" :
             fileURL = Bundle.main.url(forResource: "cr", withExtension: "wav")
             break
@@ -91,15 +91,20 @@ class DrumsController: NSObject, ObservableObject {
             break
             
         default:
-            fileURL = nil
             return
-            
         }
 
     do {
       let file = try AVAudioFile(forReading: fileURL!)
       let format = file.processingFormat
         
+        
+//        try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers])
+//        try AVAudioSession.sharedInstance().setActive(true)
+//        try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+
+
+
       audioFile = file
 
       configureEngine(with: format)
@@ -109,21 +114,22 @@ class DrumsController: NSObject, ObservableObject {
   }
 
   private func configureEngine(with format: AVAudioFormat) {
-      
-      player.volume = 20
-      
     engine.attach(player)
+//    engine.attach(timeEffect)
 
     engine.connect(
       player,
-      to: engine.mainMixerNode,
+      to: engine.outputNode,
       format: format)
     
+
     engine.prepare()
     
+    print(1)
 
     do {
       try engine.start()
+//      player.play()
 
       scheduleAudioFile()
     } catch {
@@ -181,7 +187,6 @@ class DrumsController: NSObject, ObservableObject {
         player.play()
       }
     }
-      
   }
 
   // MARK: Audio metering
@@ -253,6 +258,7 @@ class DrumsController: NSObject, ObservableObject {
 
     if currentPosition >= audioLengthSamples {
       player.stop()
+
       seekFrame = 0
       currentPosition = 0
 
@@ -261,5 +267,4 @@ class DrumsController: NSObject, ObservableObject {
       disconnectVolumeTap()
     }
   }
-    
 }

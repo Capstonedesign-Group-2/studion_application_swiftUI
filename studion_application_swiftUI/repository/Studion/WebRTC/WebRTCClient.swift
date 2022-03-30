@@ -10,6 +10,7 @@ import WebRTC
 import SocketIO
 import IOSurface
 import SceneKit
+import AVFoundation
 
 protocol WebRTCClientDelegate: AnyObject {
   func webRTCClient(_ client: WebRTCClient, didDiscoverLocalCandidate candidate: RTCIceCandidate)
@@ -18,7 +19,7 @@ protocol WebRTCClientDelegate: AnyObject {
 }
 
 final class WebRTCClient: NSObject {
-
+    
 
     var pcDic: [String: RTCPeerConnection] = [:]
     var dcDic: [String: RTCDataChannel] = [:]
@@ -34,7 +35,7 @@ final class WebRTCClient: NSObject {
     }()
 
     weak var delegate: WebRTCClientDelegate?
-//    private let rtcAudioSession =  RTCAudioSession.sharedInstance()
+    private let rtcAudioSession =  RTCAudioSession.sharedInstance()
     private let audioQueue = DispatchQueue(label: "audio")
     private let mediaConstrains = [kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueTrue,
                                    kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue]
@@ -134,7 +135,7 @@ final class WebRTCClient: NSObject {
         self.pcDic[socketID] = peerConnection
 
         self.createMediaSenders(peerConnection: peerConnection, name: name, socketID: socketID)
-//        self.configureAudioSession()
+        self.configureAudioSession()
         print("createPeerConnection end \(peerConnection)")
 
         
@@ -154,11 +155,18 @@ final class WebRTCClient: NSObject {
         // Audio
         let audioTrack = self.createAudioTrack()
         peerConnection.add(audioTrack, streamIds: [streamId])
-        
         print("******************************")
-        print(peerConnection)
-        print(audioTrack.source)
-//        RTCAudioSession.setInputGain
+////        print(peerConnection)
+//        print(audioTrack)
+//        audioTrack.source.volume = 0
+//////        RTCAudioSession.setInputGain
+//        peerConnection.transceivers
+//            .compactMap { return $0.sender.track }
+//            .forEach {
+//                print(type(of: $0))
+//                ($0 as! RTCAudioTrack).isEnabled = true
+//
+//            }
         print("******************************")
         
         // Data
@@ -169,12 +177,12 @@ final class WebRTCClient: NSObject {
 
 
 
-        print("createMediaSenders end")
+//        print("createMediaSenders end")
     }
 
     func createDataChannel(peerConnection: RTCPeerConnection, name: String, socketID: String) -> RTCDataChannel?{
         let config = RTCDataChannelConfiguration()
-        print("create data channel")
+//        print("create data channel")
         guard let dataChannel = peerConnection.dataChannel(forLabel: socketID, configuration: config) else {
           debugPrint("Warning: Couldn't create data channel.")
           return nil
@@ -192,18 +200,37 @@ final class WebRTCClient: NSObject {
         return audioTrack
     }
 
-//    func configureAudioSession() {
-//        self.rtcAudioSession.lockForConfiguration()
-//        do {
-//            try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue)
-//          try self.rtcAudioSession.setMode(AVAudioSession.Mode.voiceChat.rawValue)
-//        } catch let error {
-//          debugPrint("Error changeing AVAudioSession category: \(error)")
-//        }
-//        self.rtcAudioSession.unlockForConfiguration()
-//
-//        print("configureAudioSession end")
-//    }
+    func configureAudioSession() {
+        self.rtcAudioSession.lockForConfiguration()
+        do {
+            try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue, with: [.mixWithOthers])
+            
+//            try self.rtcAudioSession.setMode(AVAudioSession.Mode.voiceChat.rawValue)
+//            try self.rtcAudioSession.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
+            try self.rtcAudioSession.setActive(true)
+            
+            
+            
+//            try self.rtcAudioSession.overrideOutputAudioPort(.speaker)
+//            try self.rtcAudioSession.useManualAudio = true
+//            try self.rtcAudioSession.isAudioEnabled = false
+//            try self.rtcAudioSession.setActive(true)
+            
+            
+//            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers])
+//            try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+//            try AVAudioSession.sharedInstance().setActive(true)
+        } catch let error {
+          debugPrint("Error changeing AVAudioSession category: \(error)")
+        }
+        self.rtcAudioSession.unlockForConfiguration()
+
+//        print("##############################")
+//        print(self.rtcAudioSession.category)
+////        print(self.rtcAudioSession.categoryOptions.)
+//        print(self.rtcAudioSession.outputLatency)
+//        print("##############################")
+    }
 
 //  ************************************************************************************
 //    오퍼 만들기
@@ -364,10 +391,13 @@ final class WebRTCClient: NSObject {
             let response = data[0] as! Dictionary<String, String>
 
             let peerConnection = self.pcDic[response["id"]!]
-            peerConnection!.close()
+            if(peerConnection != nil) {
+                peerConnection!.close()
+            }
             let dcConnection = self.dcDic[response["id"]!]
-            dcConnection!.close()
-            
+            if(dcConnection != nil) {
+                dcConnection!.close()
+            }
             self.pcDic.removeValue(forKey: response["id"]!)
             self.dcDic.removeValue(forKey: response["id"]!)
             
@@ -392,11 +422,11 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didAdd stream: RTCMediaStream) {
 //    debugPrint("peerConnection did add stream")
-      print("-----------------------------------")
-      print(peerConnection)
-      print(stream.audioTracks[0].source)
-      stream.audioTracks[0].source.volume = -1
-      print("-----------------------------------")
+//      print("-----------------------------------")
+//      print(peerConnection)
+//      print(stream.audioTracks[0].source)
+//      stream.audioTracks[0].source.volume = -1
+//      print("-----------------------------------")
       
   }
 
@@ -418,7 +448,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
   }
 
     func peerConnection(_ peerConnection: RTCPeerConnection, didGenerate candidate: RTCIceCandidate) {
-      print("peerConnection candidate ??11")
+//      print("peerConnection candidate ??11")
 //      print(candidate)
       let sendCandidate: [String: Any] = [
         "candidate" : candidate.sdp,
@@ -445,7 +475,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
 //          "candidateReceiveID" : socketID!
 //        ]
 //            print("key : \(key)")
-        print("send candidate")
+//        print("send candidate")
 //        self.socket.emit("candidate", data)
 
 //      print("send")

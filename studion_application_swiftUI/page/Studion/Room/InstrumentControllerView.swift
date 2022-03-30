@@ -14,6 +14,7 @@ struct InstrumentControllerView: View {
     
     
     var dcDic:[String: Any]
+    var pcDic:[String: Any]
     
     
     @State var selectedTab = "drum"
@@ -32,7 +33,7 @@ struct InstrumentControllerView: View {
 //                            DrumsView()
 //                                .tag("drum")
                             
-                            PianoView()
+                            PianoView(pcDic: pcDic)
                                 .tag("piano_button")
                             
                             GuitarView()
