@@ -29,7 +29,7 @@ struct PageRouter: View {
                     .onDisappear{ print("/register end") }
                 
             case "/" :
-                MainView(pageStatus: $pageStatus, roomNumber: $roomNumber)
+                MainView(pageStatus: $pageStatus, roomNumber: $roomNumber )
                     .onAppear{ print("/ start") }
                     .onDisappear{ print("/ end") }
                 
@@ -43,8 +43,8 @@ struct PageRouter: View {
     }
 }
 
-struct PageRouter_Previews: PreviewProvider {
-    static var previews: some View {
-        PageRouter()
-    }
-}
+//struct PageRouter_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PageRouter()
+//    }
+//}
