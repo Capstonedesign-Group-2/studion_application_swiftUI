@@ -42,16 +42,11 @@ struct PageRouter: View {
                 default :
                     SplashScreen(pageStatus: $pageStatus)
                 }
-            }
+
             
 //        } // NavigationView
         
         
     }
 }
-
-struct PageRouter_Previews: PreviewProvider {
-    static var previews: some View {
-        PageRouter()
-    }
 }

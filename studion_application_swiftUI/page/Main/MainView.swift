@@ -28,7 +28,7 @@ struct MainView: View {
                 ChatRoomList()
                     .tag("/chat")
               
-                PostView()
+                CreateView()
                     .tag("/post/create")
                 
                 StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
@@ -166,7 +166,7 @@ struct TabButton: View {
                 self.mainRouter = "/chat"
                 self.currentPage = 1
             case "plus" :
-                self.mainRouter = "/create"
+                self.mainRouter = "/post/create"
                 self.currentPage = 2
             case "rectangle.righthalf.inset.filled.arrow.right" :
                 self.mainRouter = "/studion"
@@ -188,3 +188,8 @@ struct TabButton: View {
     }
 }
 
+//struct MainView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        MainView(pageStatus: $pageStatus, roomNumber: <#Binding<Int>#>)
+//    }
+//}
