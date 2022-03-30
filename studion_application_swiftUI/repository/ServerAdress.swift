@@ -16,12 +16,13 @@ public class ServerAdress {
 //    let api: String = "http://172.21.2.201"
     let api: String = "http://192.168.0.78"
     
+    
     func getApiServerAdress() -> String {
         return api + ":8000/"
     }
     
     func getSocketServerAdress() -> String {
-        return api + ":9876/"
+        return api + ":3690/"
     }
     
     
