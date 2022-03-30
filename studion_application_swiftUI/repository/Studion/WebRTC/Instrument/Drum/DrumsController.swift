@@ -7,7 +7,6 @@ class DrumsController: NSObject, ObservableObject {
 
   private let engine = AVAudioEngine()
   private let player = AVAudioPlayerNode()
-  private let timeEffect = AVAudioUnitTimePitch()
 
   private var displayLink: CADisplayLink?
 
@@ -43,17 +42,17 @@ class DrumsController: NSObject, ObservableObject {
       player.play()
   }
 
-  func skip(forwards: Bool) {
-    let timeToSeek: Double
-
-    if forwards {
-      timeToSeek = 10
-    } else {
-      timeToSeek = -10
-    }
-
-    seek(to: timeToSeek)
-  }
+//  func skip(forwards: Bool) {
+//    let timeToSeek: Double
+//
+//    if forwards {
+//      timeToSeek = 10
+//    } else {
+//      timeToSeek = -10
+//    }
+//
+//    seek(to: timeToSeek)
+//  }
 
   // MARK: - Private
 
@@ -95,16 +94,9 @@ class DrumsController: NSObject, ObservableObject {
         }
 
     do {
-        try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers])
-        try AVAudioSession.sharedInstance().setActive(true)
-        try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
-        
-        
       let file = try AVAudioFile(forReading: fileURL!)
       let format = file.processingFormat
-
-
-
+        
       audioFile = file
 
       configureEngine(with: format)
@@ -115,7 +107,6 @@ class DrumsController: NSObject, ObservableObject {
 
   private func configureEngine(with format: AVAudioFormat) {
     engine.attach(player)
-//    engine.attach(timeEffect)
 
     engine.connect(
       player,
@@ -185,6 +176,7 @@ class DrumsController: NSObject, ObservableObject {
         player.play()
       }
     }
+      
   }
 
   // MARK: Audio metering
@@ -256,7 +248,6 @@ class DrumsController: NSObject, ObservableObject {
 
     if currentPosition >= audioLengthSamples {
       player.stop()
-
       seekFrame = 0
       currentPosition = 0
 
@@ -265,4 +256,5 @@ class DrumsController: NSObject, ObservableObject {
       disconnectVolumeTap()
     }
   }
+    
 }

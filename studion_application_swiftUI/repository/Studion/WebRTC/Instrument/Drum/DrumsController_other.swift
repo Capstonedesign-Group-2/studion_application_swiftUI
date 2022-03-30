@@ -98,6 +98,10 @@ class DrumsController_other: NSObject, ObservableObject {
       let file = try AVAudioFile(forReading: fileURL!)
       let format = file.processingFormat
         
+        
+//        try AVAudioSession.sharedInstance().setCategory(.playAndRecord, mode: .default, options: [.mixWithOthers])
+//        try AVAudioSession.sharedInstance().setActive(true)
+//        try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
 
 
 
