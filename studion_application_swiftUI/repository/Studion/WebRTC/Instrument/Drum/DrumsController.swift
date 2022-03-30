@@ -39,6 +39,7 @@ class DrumsController: NSObject, ObservableObject {
         if(audioFile == nil) {
             return
         }
+        
       player.play()
   }
 
@@ -60,6 +61,7 @@ class DrumsController: NSObject, ObservableObject {
         
         var fileURL: URL?
         switch key {
+            
         case "Q" :
             fileURL = Bundle.main.url(forResource: "cr", withExtension: "wav")
             break
@@ -91,6 +93,7 @@ class DrumsController: NSObject, ObservableObject {
         default:
             fileURL = nil
             return
+            
         }
 
     do {
@@ -106,14 +109,16 @@ class DrumsController: NSObject, ObservableObject {
   }
 
   private func configureEngine(with format: AVAudioFormat) {
+      
+      player.volume = 20
+      
     engine.attach(player)
 
     engine.connect(
       player,
-      to: engine.outputNode,
+      to: engine.mainMixerNode,
       format: format)
     
-
     engine.prepare()
     
 

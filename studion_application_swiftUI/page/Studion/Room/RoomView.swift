@@ -23,7 +23,7 @@ struct RoomView: View {
     @ObservedObject var webRTCConnect = WebRTCConnect()
     
     var body: some View {
-        InstrumentControllerView(dcDic: webRTCConnect.dcDic)
+        InstrumentControllerView(dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic)
         .onAppear{
                 getRoomNumber = roomNumber
                 
@@ -47,7 +47,7 @@ final class WebRTCConnect: ObservableObject {
     let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
     let webRTCClient: WebRTCClient = WebRTCClient()
     
-    @Published var pcDic: [String: Any]?
+    @Published var pcDic: [String: Any] = [:]
     @Published var dcDic: [String: Any] = [:]
 
     
@@ -57,7 +57,7 @@ final class WebRTCConnect: ObservableObject {
             let response = data as! Dictionary<String, Any>
             
             DispatchQueue.main.async {
-                self.pcDic = response["pcDic"] as? [String : Any]
+                self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
             }
             
@@ -65,28 +65,28 @@ final class WebRTCConnect: ObservableObject {
         webRTCClient.getAnswer() {data in
             let response = data as! Dictionary<String, Any>
             DispatchQueue.main.async {
-                self.pcDic = response["pcDic"] as? [String : Any]
+                self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
             }
         }
         webRTCClient.getOffer() {data in
             let response = data as! Dictionary<String, Any>
             DispatchQueue.main.async {
-                self.pcDic = response["pcDic"] as? [String : Any]
+                self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
             }
         }
         webRTCClient.userExit() { data in
             let response = data as! Dictionary<String, Any>
             DispatchQueue.main.async {
-                self.pcDic = response["pcDic"] as? [String : Any]
+                self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
             }
         }
         webRTCClient.getCandidate() {data in
             let response = data as! Dictionary<String, Any>
             DispatchQueue.main.async {
-                self.pcDic = response["pcDic"] as? [String : Any]
+                self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
             }
         }

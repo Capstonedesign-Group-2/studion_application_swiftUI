@@ -155,12 +155,19 @@ final class WebRTCClient: NSObject {
         // Audio
         let audioTrack = self.createAudioTrack()
         peerConnection.add(audioTrack, streamIds: [streamId])
-        
-//        print("******************************")
-//        print(peerConnection)
-//        print(audioTrack.source)
-////        RTCAudioSession.setInputGain
-//        print("******************************")
+        print("******************************")
+////        print(peerConnection)
+//        print(audioTrack)
+//        audioTrack.source.volume = 0
+//////        RTCAudioSession.setInputGain
+//        peerConnection.transceivers
+//            .compactMap { return $0.sender.track }
+//            .forEach {
+//                print(type(of: $0))
+//                ($0 as! RTCAudioTrack).isEnabled = true
+//
+//            }
+        print("******************************")
         
         // Data
         if let dataChannel = createDataChannel(peerConnection: peerConnection, name: name, socketID: socketID) {
@@ -218,11 +225,11 @@ final class WebRTCClient: NSObject {
         }
         self.rtcAudioSession.unlockForConfiguration()
 
-        print("##############################")
-        print(self.rtcAudioSession.category)
-//        print(self.rtcAudioSession.categoryOptions.)
-        print(self.rtcAudioSession.outputLatency)
-        print("##############################")
+//        print("##############################")
+//        print(self.rtcAudioSession.category)
+////        print(self.rtcAudioSession.categoryOptions.)
+//        print(self.rtcAudioSession.outputLatency)
+//        print("##############################")
     }
 
 //  ************************************************************************************

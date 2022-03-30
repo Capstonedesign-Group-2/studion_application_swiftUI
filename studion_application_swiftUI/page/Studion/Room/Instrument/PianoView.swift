@@ -6,15 +6,23 @@
 //
 
 import SwiftUI
+import WebRTC
 
 struct PianoView: View {
+    var pcDic: [String: Any]
+    
     var body: some View {
-        Text("piano")
+        Button("test") {
+            print(pcDic.keys)
+            for key in pcDic.keys {
+                (pcDic[key] as! RTCPeerConnection).transceivers
+                    .compactMap{ return $0.sender.track}
+                    .forEach{ ($0 as! RTCAudioTrack).source.volume = 0
+                        
+                    }
+            }
+        }
     }
 }
 
-struct PianoView_Previews: PreviewProvider {
-    static var previews: some View {
-        PianoView()
-    }
-}
+
