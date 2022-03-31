@@ -18,7 +18,6 @@ struct DrumView: View {
 
     let instrumentController = InstrumentController()
     
-    @StateObject var drumsControllerAudioKit = DrumsConductor()
     
     
     let items = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
@@ -162,11 +161,7 @@ struct DrumView: View {
             Spacer()
 
         } // Vstack
-        .onAppear{
-            self.drumsControllerAudioKit.start()
-            
-            
-        }
+        
 
     }
 

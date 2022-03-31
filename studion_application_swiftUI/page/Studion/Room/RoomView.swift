@@ -29,7 +29,13 @@ struct RoomView: View {
                 
                 
                 webRTCConnect.joinRoom(room: getRoomNumber)
-            
+                
+//            do {
+//                try AVAudioSession.sharedInstance().setCategory(.playAndRecord)
+//                try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+//            } catch {
+//                print("error")
+//            }
             
                 
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation") // Forcing the rotation to portrait
