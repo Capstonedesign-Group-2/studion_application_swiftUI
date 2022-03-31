@@ -40,12 +40,22 @@ class DrumsController: NSObject, ObservableObject {
         if(audioFile == nil) {
             return
         }
+        
         print(AVAudioSession.sharedInstance().category)
+//        print(AVAudioSession.sharedInstance().categoryOptions.rawValue)
+        print(AVAudioSession.sharedInstance().categoryOptions.contains(.mixWithOthers))
+        print(AVAudioSession.sharedInstance().categoryOptions.contains(.allowAirPlay))
+        print(AVAudioSession.sharedInstance().categoryOptions.contains(.allowBluetoothA2DP))
+        print(AVAudioSession.sharedInstance().categoryOptions.contains(.allowBluetooth))
+        print(AVAudioSession.sharedInstance().categoryOptions.contains(.defaultToSpeaker))
+        print(AVAudioSession.sharedInstance().categoryOptions.contains(.duckOthers))
+        print(AVAudioSession.sharedInstance().categoryOptions.contains(.interruptSpokenAudioAndMixWithOthers))
+        print(AVAudioSession.sharedInstance().categoryOptions.contains(.overrideMutedMicrophoneInterruption))
+        
         print(AVAudioSession.sharedInstance().categoryOptions.rawValue)
-        print(AVAudioSession.sharedInstance())
         print("-----------------------------------------------------------")
         print(RTCAudioSession.sharedInstance().category)
-        print(RTCAudioSession.sharedInstance().categoryOptions.contains(.mixWithOthers))
+        print(RTCAudioSession.sharedInstance().categoryOptions.contains(.allowBluetooth))
         
       player.play()
   }

@@ -29,7 +29,13 @@ struct RoomView: View {
                 
                 
                 webRTCConnect.joinRoom(room: getRoomNumber)
-            
+                
+//            do {
+//                try AVAudioSession.sharedInstance().setCategory(.playAndRecord)
+//                try AVAudioSession.sharedInstance().overrideOutputAudioPort(.speaker)
+//            } catch {
+//                print("error")
+//            }
             
             
                 

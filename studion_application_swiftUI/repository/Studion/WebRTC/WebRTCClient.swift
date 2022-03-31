@@ -203,9 +203,10 @@ final class WebRTCClient: NSObject {
     func configureAudioSession() {
         self.rtcAudioSession.lockForConfiguration()
         do {
-            try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue, with: [.mixWithOthers])
-            
-            try self.rtcAudioSession.setMode(AVAudioSession.Mode.voiceChat.rawValue)
+            try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue)
+//            try self.rtcAudioSession.setMode(AVAudioSession.Mode.voiceChat.rawValue)
+            try self.rtcAudioSession.overrideOutputAudioPort(.none)
+        
         } catch let error {
           debugPrint("Error changeing AVAudioSession category: \(error)")
         }
