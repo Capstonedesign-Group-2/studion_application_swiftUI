@@ -30,11 +30,17 @@ struct RoomView: View {
                 
                 webRTCConnect.joinRoom(room: getRoomNumber)
             
+            
+            
                 
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation") // Forcing the rotation to portrait
                 AppDelegate.orientationLock = .landscapeRight
             }
-        .onDisappear{ AppDelegate.orientationLock = .all }
+        
+        .onDisappear{
+            AppDelegate.orientationLock = .all
+            
+        }
         
     }
 }
@@ -96,7 +102,6 @@ final class WebRTCConnect: ObservableObject {
     }
     
     func joinRoom(room: Int) {
-        print(1)
         webRTCClient.joinRoom(room: room)
         
     }

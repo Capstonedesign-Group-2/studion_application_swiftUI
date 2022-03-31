@@ -22,7 +22,7 @@ public class ServerAdress {
     }
     
     func getSocketServerAdress() -> String {
-        return api + ":3690/"
+        return api + ":9876/"
     }
     
     

@@ -1,6 +1,7 @@
 
 import SwiftUI
 import AVFoundation
+import WebRTC
 
 // swiftlint:disable:next type_body_length
 class DrumsController: NSObject, ObservableObject {
@@ -39,6 +40,12 @@ class DrumsController: NSObject, ObservableObject {
         if(audioFile == nil) {
             return
         }
+        print(AVAudioSession.sharedInstance().category)
+        print(AVAudioSession.sharedInstance().categoryOptions.rawValue)
+        print(AVAudioSession.sharedInstance())
+        print("-----------------------------------------------------------")
+        print(RTCAudioSession.sharedInstance().category)
+        print(RTCAudioSession.sharedInstance().categoryOptions.contains(.mixWithOthers))
         
       player.play()
   }
@@ -110,7 +117,7 @@ class DrumsController: NSObject, ObservableObject {
 
   private func configureEngine(with format: AVAudioFormat) {
       
-      player.volume = 20
+    player.volume = 20
       
     engine.attach(player)
 
