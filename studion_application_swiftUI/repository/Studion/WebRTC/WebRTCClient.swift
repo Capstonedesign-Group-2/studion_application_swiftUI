@@ -155,19 +155,6 @@ final class WebRTCClient: NSObject {
         // Audio
         let audioTrack = self.createAudioTrack()
         peerConnection.add(audioTrack, streamIds: [streamId])
-        print("******************************")
-////        print(peerConnection)
-//        print(audioTrack)
-//        audioTrack.source.volume = 0
-//////        RTCAudioSession.setInputGain
-//        peerConnection.transceivers
-//            .compactMap { return $0.sender.track }
-//            .forEach {
-//                print(type(of: $0))
-//                ($0 as! RTCAudioTrack).isEnabled = true
-//
-//            }
-        print("******************************")
         
         // Data
         if let dataChannel = createDataChannel(peerConnection: peerConnection, name: name, socketID: socketID) {
@@ -203,19 +190,14 @@ final class WebRTCClient: NSObject {
     func configureAudioSession() {
         self.rtcAudioSession.lockForConfiguration()
         do {
-            try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue, with: [.mixWithOthers])
-            
-            try self.rtcAudioSession.setMode(AVAudioSession.Mode.voiceChat.rawValue)
+            try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue)
+
+        
         } catch let error {
           debugPrint("Error changeing AVAudioSession category: \(error)")
         }
         self.rtcAudioSession.unlockForConfiguration()
 
-//        print("##############################")
-//        print(self.rtcAudioSession.category)
-////        print(self.rtcAudioSession.categoryOptions.)
-//        print(self.rtcAudioSession.outputLatency)
-//        print("##############################")
     }
 
 //  ************************************************************************************
@@ -454,17 +436,6 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
             
             
         }
-        
-//        let data: [String: Any] = [
-//          "candidate" : sendCandidate,
-//          "candidateSendID" : socket.sid,
-//          "candidateReceiveID" : socketID!
-//        ]
-//            print("key : \(key)")
-//        print("send candidate")
-//        self.socket.emit("candidate", data)
-
-//      print("send")
 
 
     self.delegate?.webRTCClient(self, didDiscoverLocalCandidate: candidate)

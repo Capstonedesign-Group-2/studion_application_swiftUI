@@ -40,12 +40,6 @@ class DrumsController: NSObject, ObservableObject {
         if(audioFile == nil) {
             return
         }
-        print(AVAudioSession.sharedInstance().category)
-        print(AVAudioSession.sharedInstance().categoryOptions.rawValue)
-        print(AVAudioSession.sharedInstance())
-        print("-----------------------------------------------------------")
-        print(RTCAudioSession.sharedInstance().category)
-        print(RTCAudioSession.sharedInstance().categoryOptions.contains(.mixWithOthers))
         
       player.play()
   }

@@ -31,7 +31,6 @@ struct RoomView: View {
                 webRTCConnect.joinRoom(room: getRoomNumber)
             
             
-            
                 
                 UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation") // Forcing the rotation to portrait
                 AppDelegate.orientationLock = .landscapeRight
