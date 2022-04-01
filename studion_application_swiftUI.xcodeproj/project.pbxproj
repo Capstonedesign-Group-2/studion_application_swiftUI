@@ -63,6 +63,7 @@
 		55B98C9127EC782D0057F168 /* LeftBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C9027EC782D0057F168 /* LeftBarView.swift */; };
 		55B98C9327EC78970057F168 /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C9227EC78970057F168 /* CustomTabView.swift */; };
 		55C648FA27F467CB005603A2 /* crBig.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55C648F927F467CB005603A2 /* crBig.wav */; };
+		55C648FC27F57B02005603A2 /* UserVolumeStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C648FB27F57B02005603A2 /* UserVolumeStruct.swift */; };
 		7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +125,7 @@
 		55B98C9027EC782D0057F168 /* LeftBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftBarView.swift; sourceTree = "<group>"; };
 		55B98C9227EC78970057F168 /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
 		55C648F927F467CB005603A2 /* crBig.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = crBig.wav; path = audios/drum/crBig.wav; sourceTree = SOURCE_ROOT; };
+		55C648FB27F57B02005603A2 /* UserVolumeStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVolumeStruct.swift; sourceTree = "<group>"; };
 		577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studion_application_swiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8C3731F8D5A9843C908CC7 /* Pods-studion_application_swiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.debug.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F764A19F6476AACD3B6CA653 /* Pods-studion_application_swiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.release.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -361,6 +363,7 @@
 			children = (
 				55B98C3327E9EC4C0057F168 /* RoomCodableStruct.swift */,
 				55B98C4C27EBF3750057F168 /* DataChannelCodableStruct.swift */,
+				55C648FB27F57B02005603A2 /* UserVolumeStruct.swift */,
 			);
 			path = Room;
 			sourceTree = "<group>";
@@ -600,6 +603,7 @@
 				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
 				55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */,
 				55B98C1E27E8BF4C0057F168 /* RegisterView.swift in Sources */,
+				55C648FC27F57B02005603A2 /* UserVolumeStruct.swift in Sources */,
 				55B98C0A27E85A6C0057F168 /* SocketIO.swift in Sources */,
 				55B98C2727E96F340057F168 /* SettingView.swift in Sources */,
 				55B98C5027EBF5350057F168 /* InstrumentController.swift in Sources */,

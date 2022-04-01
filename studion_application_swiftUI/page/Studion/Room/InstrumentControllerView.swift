@@ -15,11 +15,14 @@ struct InstrumentControllerView: View {
     
     var dcDic:[String: Any]
     var pcDic:[String: Any]
+    var volumeDic: [String: Any]
     
     
     @State var selectedTab = "drum"
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets
     @State var showLeftMenu: Bool = false
+    @State var showRightMenu: Bool = false
+    @State var width = UIScreen.main.bounds.height
     
     var body: some View {
         NavigationView {
@@ -77,6 +80,10 @@ struct InstrumentControllerView: View {
 //                    }
 //                }
 //                .background(Color.black.opacity(showLeftMenu ? 0.5 : 0))
+                
+                LeftBarView(volumeDic: volumeDic)
+                    .offset(x: showLeftMenu ? 0 : -(width))
+                    .background(Color.black.opacity(showLeftMenu ? 0.5 : 0).ignoresSafeArea(.all))
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -84,42 +91,55 @@ struct InstrumentControllerView: View {
                     
                     Button( action: {
                         print("left button")
-                        self.showLeftMenu.toggle()
+                        withAnimation(.spring()){self.showLeftMenu.toggle()}
                     }) {
-                        if showLeftMenu {
-                            Image(systemName: "xmark.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
-                                .font(.title)
-                                .offset(y: 20)
-                        } else {
-                            Image(systemName: "speaker.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 40, height: 40)
-                                .font(.title)
-                                .offset(y: 20)
+                        
+                        if showRightMenu == false {
+                            if showLeftMenu {
+                                Image(systemName: "xmark.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                                    .font(.title)
+                                    .offset(y: 20)
+                            } else {
+                                Image(systemName: "speaker.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                                    .font(.title)
+                                    .offset(y: 20)
+                            }
                         }
-                        
-                        
-                            
                     }
                 
                 }
                 
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button( action: {
                         print("right button")
+                        self.showRightMenu.toggle()
                     }) {
+                        if showLeftMenu == false {
+                            if showRightMenu {
+                                Image(systemName: "xmark.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                                    .font(.title)
+                                    .offset(y: 20)
+                            } else {
+                                Image(systemName: "message.circle.fill")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 40, height: 40)
+                                    .font(.title)
+                                    .offset(y: 20)
+                            }
+                            
+                        }
                         
-                        Image(systemName: "message.circle.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 40, height: 40)
-                            .font(.title)
-                            .offset(y: 20)
-
                     }
 
                 }

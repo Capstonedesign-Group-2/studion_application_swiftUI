@@ -15,6 +15,8 @@ public class ServerAdress {
 //    let api: String = "http://172.20.10.3"
 //    let api: String = "http://172.21.2.201"
     let api: String = "http://192.168.0.78"
+//    let api: String = "http://192.168.38.71"
+//    let api: String = "https://api.liveroom.shop/"
     
     
     func getApiServerAdress() -> String {
@@ -22,6 +24,7 @@ public class ServerAdress {
     }
     
     func getSocketServerAdress() -> String {
+//        return api + ":5000/"
         return api + ":9876/"
     }
     

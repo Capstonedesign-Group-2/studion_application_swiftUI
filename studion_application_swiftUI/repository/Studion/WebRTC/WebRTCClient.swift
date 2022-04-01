@@ -24,6 +24,7 @@ final class WebRTCClient: NSObject {
     var pcDic: [String: RTCPeerConnection] = [:]
     var dcDic: [String: RTCDataChannel] = [:]
     var nameDic: [String: String] = [:]
+    var volumeDic: [String: UserVolumeStruct.volume] = [:]
 
 
 
@@ -102,7 +103,8 @@ final class WebRTCClient: NSObject {
                     
                     let dic: [String: Any] = [
                         "pcDic" : self.pcDic,
-                        "dcDic" : self.dcDic
+                        "dcDic" : self.dcDic,
+                        "volumeDic" : self.volumeDic
                     ]
                     
                     handler(dic)
@@ -133,6 +135,7 @@ final class WebRTCClient: NSObject {
         peerConnection = WebRTCClient.factory.peerConnection(with: config, constraints: constraints, delegate: self)
 
         self.pcDic[socketID] = peerConnection
+        self.volumeDic[socketID] = UserVolumeStruct.volume(socketId: socketID, volume: 0.8, masterVolume: 0.8)
 
         self.createMediaSenders(peerConnection: peerConnection, name: name, socketID: socketID)
         self.configureAudioSession()
@@ -256,7 +259,8 @@ final class WebRTCClient: NSObject {
                 
                 let dic: [String: Any] = [
                     "pcDic" : self.pcDic,
-                    "dcDic" : self.dcDic
+                    "dcDic" : self.dcDic,
+                    "volumeDic" : self.volumeDic
                 ]
                 
                 handler(dic)
@@ -287,7 +291,8 @@ final class WebRTCClient: NSObject {
                     
                     let dic: [String: Any] = [
                         "pcDic" : self.pcDic,
-                        "dcDic" : self.dcDic
+                        "dcDic" : self.dcDic,
+                        "volumeDic" : self.volumeDic
                     ]
                     
                     handler(dic)
@@ -344,7 +349,8 @@ final class WebRTCClient: NSObject {
             
             let dic: [String: Any] = [
                 "pcDic" : self.pcDic,
-                "dcDic" : self.dcDic
+                "dcDic" : self.dcDic,
+                "volumeDic" : self.volumeDic
             ]
             
             handler(dic)
@@ -368,10 +374,12 @@ final class WebRTCClient: NSObject {
             }
             self.pcDic.removeValue(forKey: response["id"]!)
             self.dcDic.removeValue(forKey: response["id"]!)
+            self.volumeDic.removeValue(forKey: response["id"]!)
             
             let dic: [String: Any] = [
                 "pcDic" : self.pcDic,
-                "dcDic" : self.dcDic
+                "dcDic" : self.dcDic,
+                "volumeDic" : self.volumeDic
             ]
             
             handler(dic)

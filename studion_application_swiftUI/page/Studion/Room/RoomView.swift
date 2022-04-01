@@ -23,7 +23,7 @@ struct RoomView: View {
     @ObservedObject var webRTCConnect = WebRTCConnect()
     
     var body: some View {
-        InstrumentControllerView(dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic)
+        InstrumentControllerView(dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic, volumeDic: webRTCConnect.volumeDic)
         .onAppear{
                 getRoomNumber = roomNumber
                 
@@ -60,6 +60,7 @@ final class WebRTCConnect: ObservableObject {
     
     @Published var pcDic: [String: Any] = [:]
     @Published var dcDic: [String: Any] = [:]
+    @Published var volumeDic: [String: Any] = [:]
 
     
     init() {
@@ -70,6 +71,7 @@ final class WebRTCConnect: ObservableObject {
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
+                self.volumeDic = response["volumeDic"] as! [String: Any]
             }
             
         }
@@ -78,6 +80,7 @@ final class WebRTCConnect: ObservableObject {
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
+                self.volumeDic = response["volumeDic"] as! [String: Any]
             }
         }
         webRTCClient.getOffer() {data in
@@ -85,6 +88,7 @@ final class WebRTCConnect: ObservableObject {
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
+                self.volumeDic = response["volumeDic"] as! [String: Any]
             }
         }
         webRTCClient.userExit() { data in
@@ -92,6 +96,7 @@ final class WebRTCConnect: ObservableObject {
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
+                self.volumeDic = response["volumeDic"] as! [String: Any]
             }
         }
         webRTCClient.getCandidate() {data in
@@ -99,6 +104,7 @@ final class WebRTCConnect: ObservableObject {
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
+                self.volumeDic = response["volumeDic"] as! [String: Any]
             }
         }
         

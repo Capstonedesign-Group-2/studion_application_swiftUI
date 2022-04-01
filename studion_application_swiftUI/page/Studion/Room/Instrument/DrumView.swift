@@ -17,6 +17,7 @@ struct DrumView: View {
     var dcDic: [String: Any]?
 
     let instrumentController = InstrumentController()
+//    let drumsController = DrumsControllerAudioKit()
     
     
     
@@ -185,6 +186,7 @@ struct DrumView: View {
                 dataChannel.sendData(buffer)
                 print("send data channel")
             }
+            
         } catch {
             print("error")
         }
@@ -195,6 +197,8 @@ struct DrumView: View {
         drumsController.playOrPause()
         
 //        drumsControllerAudioKit.playPad(padNumber: 0)
+        
+//        self.drumsController.play()
         
     }
 }
