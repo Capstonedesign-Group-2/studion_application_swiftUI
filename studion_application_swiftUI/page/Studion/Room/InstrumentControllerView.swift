@@ -15,14 +15,15 @@ struct InstrumentControllerView: View {
     
     var dcDic:[String: Any]
     var pcDic:[String: Any]
-    var volumeDic: [String: Any]
+    var userArray:[String]
+    var nameDic: [String: String]
     
     
     @State var selectedTab = "drum"
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets
     @State var showLeftMenu: Bool = false
     @State var showRightMenu: Bool = false
-    @State var width = UIScreen.main.bounds.height
+    @State var width = UIScreen.main.bounds.height * 4/5
     
     var body: some View {
         NavigationView {
@@ -30,18 +31,17 @@ struct InstrumentControllerView: View {
                 VStack{
                     ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                         TabView(selection: $selectedTab) {
-                            
+
                             DrumView(dcDic: dcDic)
                                 .tag("drum")
-//                            DrumsView()
-//                                .tag("drum")
-                            
+
+
                             PianoView(pcDic: pcDic)
                                 .tag("piano_button")
-                            
+
                             GuitarView()
                                 .tag("guita")
-                            
+
                         }
                         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                         .ignoresSafeArea(.all, edges: .bottom)
@@ -66,25 +66,24 @@ struct InstrumentControllerView: View {
                         .shadow(color: Color.black.opacity(0.15), radius: 5, x: -5, y: -5)
                         .padding(.horizontal)
                         .padding(.bottom, edge!.bottom == 0 ? 20: 0)
-                    }
+                        
+                        
+                        
+                        
+                    }  // ZStack
                     Spacer()
-                }
+                    
+                    
+                } // VStack
                 
                 
-//                GeometryReader { _ in
-//                    HStack {
-//                        LeftBarView()
-//                            .offset(x: showLeftMenu ? UIScreen.main.bounds.height * 3/4 : -UIScreen.main.bounds.height * 3/4)
-//                            .animation(.easeInOut(duration: 0.3), value: showLeftMenu)
-//                        Spacer()
-//                    }
-//                }
-//                .background(Color.black.opacity(showLeftMenu ? 0.5 : 0))
                 
-                LeftBarView(volumeDic: volumeDic)
+                LeftBarView(userArray: userArray, nameDic: nameDic)
                     .offset(x: showLeftMenu ? 0 : -(width))
                     .background(Color.black.opacity(showLeftMenu ? 0.5 : 0).ignoresSafeArea(.all))
-            }
+                
+                
+            } // ZStack
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     
@@ -113,7 +112,7 @@ struct InstrumentControllerView: View {
                         }
                     }
                 
-                }
+                } // ToolbarItem
                 
                 
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -142,10 +141,14 @@ struct InstrumentControllerView: View {
                         
                     }
 
-                }
-            }
+                } // ToolbarItem
+                
+            } // toolbar
             
-        }
+            
+
+            
+        } // NavigationView
         .ignoresSafeArea(.keyboard, edges: .bottom)
         .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
         
@@ -170,3 +173,5 @@ struct InstrumentButton: View {
         }
     }
 }
+
+

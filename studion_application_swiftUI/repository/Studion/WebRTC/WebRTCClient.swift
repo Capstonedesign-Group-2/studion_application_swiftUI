@@ -24,7 +24,7 @@ final class WebRTCClient: NSObject {
     var pcDic: [String: RTCPeerConnection] = [:]
     var dcDic: [String: RTCDataChannel] = [:]
     var nameDic: [String: String] = [:]
-    var volumeDic: [String: UserVolumeStruct.volume] = [:]
+    var userArray: [String] = []
 
 
 
@@ -104,7 +104,9 @@ final class WebRTCClient: NSObject {
                     let dic: [String: Any] = [
                         "pcDic" : self.pcDic,
                         "dcDic" : self.dcDic,
-                        "volumeDic" : self.volumeDic
+//                        "volumeDic" : self.volumeDic
+                        "userArray" : self.userArray,
+                        "nameDic" : self.nameDic
                     ]
                     
                     handler(dic)
@@ -135,7 +137,12 @@ final class WebRTCClient: NSObject {
         peerConnection = WebRTCClient.factory.peerConnection(with: config, constraints: constraints, delegate: self)
 
         self.pcDic[socketID] = peerConnection
-        self.volumeDic[socketID] = UserVolumeStruct.volume(socketId: socketID, volume: 0.8, masterVolume: 0.8)
+//        self.volumeDic[socketID] = UserVolumeStruct.volume(socketId: socketID, volume: 0.8, masterVolume: 0.8)
+        self.nameDic[socketID] = name
+        VolumeController.sharedInstance.setVolumeDic(socketID: socketID)
+        if(userArray.contains(socketID) == false) {
+            userArray.append(socketID)
+        }
 
         self.createMediaSenders(peerConnection: peerConnection, name: name, socketID: socketID)
         self.configureAudioSession()
@@ -260,7 +267,9 @@ final class WebRTCClient: NSObject {
                 let dic: [String: Any] = [
                     "pcDic" : self.pcDic,
                     "dcDic" : self.dcDic,
-                    "volumeDic" : self.volumeDic
+//                    "volumeDic" : self.volumeDic
+                    "userArray" : self.userArray,
+                    "nameDic" : self.nameDic
                 ]
                 
                 handler(dic)
@@ -292,7 +301,9 @@ final class WebRTCClient: NSObject {
                     let dic: [String: Any] = [
                         "pcDic" : self.pcDic,
                         "dcDic" : self.dcDic,
-                        "volumeDic" : self.volumeDic
+//                        "volumeDic" : self.volumeDic
+                        "userArray" : self.userArray,
+                        "nameDic" : self.nameDic
                     ]
                     
                     handler(dic)
@@ -350,7 +361,9 @@ final class WebRTCClient: NSObject {
             let dic: [String: Any] = [
                 "pcDic" : self.pcDic,
                 "dcDic" : self.dcDic,
-                "volumeDic" : self.volumeDic
+//                "volumeDic" : self.volumeDic
+                "userArray" : self.userArray,
+                "nameDic" : self.nameDic
             ]
             
             handler(dic)
@@ -374,12 +387,22 @@ final class WebRTCClient: NSObject {
             }
             self.pcDic.removeValue(forKey: response["id"]!)
             self.dcDic.removeValue(forKey: response["id"]!)
-            self.volumeDic.removeValue(forKey: response["id"]!)
+            self.nameDic.removeValue(forKey: response["id"]!)
+//            self.volumeDic.removeValue(forKey: response["id"]!)
+            VolumeController.sharedInstance.removeVolumeSetting(socketID: response["id"]!)
+            
+            for i in 0...self.userArray.count-1 {
+                if(self.userArray[i] == response["id"]) {
+                    self.userArray.remove(at: i)
+                }
+            }
             
             let dic: [String: Any] = [
                 "pcDic" : self.pcDic,
                 "dcDic" : self.dcDic,
-                "volumeDic" : self.volumeDic
+//                "volumeDic" : self.volumeDic
+                "userArray" : self.userArray,
+                "nameDic" : self.nameDic
             ]
             
             handler(dic)
