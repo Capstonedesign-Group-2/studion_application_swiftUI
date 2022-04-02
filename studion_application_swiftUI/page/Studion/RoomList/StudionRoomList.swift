@@ -20,6 +20,9 @@ struct StudionRoomList: View {
     
     @State var roomInfo: RoomCodableStruct.roomInfo?
     
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     var body: some View {
         
 //        NavigationView {
@@ -115,7 +118,12 @@ struct StudionRoomList: View {
             
             } // ZStack
 //        }
-        .onAppear{ roomSocket.getRoomList() }
+        .onAppear{
+            roomSocket.getRoomList()
+            
+            UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
+            AppDelegate.orientationLock = .portrait
+        }
         
         
 
@@ -182,3 +190,5 @@ extension UINavigationBar {
         return CGSize(width: UIScreen.main.bounds.width, height: 50)
     }
 }
+
+

@@ -13,6 +13,7 @@ import AVFoundation
 
 struct RoomView: View {
     @Binding var pageStatus: String
+    @Binding var mainRouter: String
     var roomNumber: Int
         
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -23,7 +24,7 @@ struct RoomView: View {
     @ObservedObject var webRTCConnect = WebRTCConnect()
     
     var body: some View {
-        InstrumentControllerView(dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic, userArray: webRTCConnect.userArray, nameDic: webRTCConnect.nameDic)
+        InstrumentControllerView(mainRouter: $mainRouter, pageStatus: $pageStatus, dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic, userArray: webRTCConnect.userArray, nameDic: webRTCConnect.nameDic)
         .onAppear{
                 getRoomNumber = roomNumber
                 
@@ -43,7 +44,8 @@ struct RoomView: View {
             }
         
         .onDisappear{
-            AppDelegate.orientationLock = .all
+            AppDelegate.orientationLock = .portrait
+            print("room end")
             
         }
         

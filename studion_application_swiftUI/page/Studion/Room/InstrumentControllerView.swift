@@ -11,7 +11,8 @@ import SwiftUI
 
 var instrument = ["drum", "piano_button", "guitar"]
 struct InstrumentControllerView: View {
-    
+    @Binding var mainRouter: String
+    @Binding var pageStatus: String
     
     var dcDic:[String: Any]
     var pcDic:[String: Any]
@@ -91,6 +92,8 @@ struct InstrumentControllerView: View {
                     Button( action: {
                         print("left button")
                         withAnimation(.spring()){self.showLeftMenu.toggle()}
+                        
+                        
                     }) {
                         
                         if showRightMenu == false {
@@ -118,11 +121,17 @@ struct InstrumentControllerView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button( action: {
                         print("right button")
-                        self.showRightMenu.toggle()
+                        if(showLeftMenu == false) {
+                            self.showRightMenu.toggle()
+                        } else {
+                            print("end button")
+                            self.mainRouter = "/studion"
+                            self.pageStatus = "/"
+                        }
                     }) {
                         if showLeftMenu == false {
                             if showRightMenu {
-                                Image(systemName: "xmark.circle.fill")
+                                Image(systemName: "arrowshape.turn.up.backward.2.circle.fill")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: 40, height: 40)
@@ -137,6 +146,13 @@ struct InstrumentControllerView: View {
                                     .offset(y: 20)
                             }
                             
+                        } else {
+                            Image(systemName: "arrowshape.turn.up.backward.2.circle.fill")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 40, height: 40)
+                                .font(.title)
+                                .offset(y: 20)
                         }
                         
                     }

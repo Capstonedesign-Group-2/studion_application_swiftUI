@@ -20,6 +20,7 @@ class DrumsController_other: NSObject, ObservableObject {
   private var seekFrame: AVAudioFramePosition = 0
   private var currentPosition: AVAudioFramePosition = 0
   private var audioLengthSamples: AVAudioFramePosition = 0
+    
 
   private var currentFrame: AVAudioFramePosition {
     guard
@@ -31,8 +32,9 @@ class DrumsController_other: NSObject, ObservableObject {
 
     return playerTime.sampleTime
   }
+    
     func setting(key: String, socketId: String) {
-      setupAudio(key: key)
+        setupAudio(key: key, socketID: socketId)
     setupDisplayLink()
   }
 
@@ -58,7 +60,7 @@ class DrumsController_other: NSObject, ObservableObject {
 
   // MARK: - Private
 
-    private func setupAudio(key: String) {
+    private func setupAudio(key: String, socketID: String) {
         
         var fileURL: URL?
         switch key {
@@ -103,15 +105,25 @@ class DrumsController_other: NSObject, ObservableObject {
         
       audioFile = file
 
-      configureEngine(with: format)
+        configureEngine(socketID: socketID, with: format)
     } catch {
       print("Error reading the audio file: \(error.localizedDescription)")
     }
   }
 
-  private func configureEngine(with format: AVAudioFormat) {
+    private func configureEngine(socketID: String, with format: AVAudioFormat) {
       
-    player.volume = 20
+        print("socketID : \(socketID)")
+      let volume = VolumeController.sharedInstance.getVolume(socketID: socketID)
+      
+      print("volume : \(volume.volume)")
+      print("masterVolume : \(volume.masterVolume)")
+      
+    player.volume = Float(20 * volume.volume * volume.masterVolume)
+      
+      print("volumeaaa: \(Float(20 * volume.volume * volume.masterVolume))")
+        
+        print(VolumeController.sharedInstance.getUser())
       
     engine.attach(player)
 

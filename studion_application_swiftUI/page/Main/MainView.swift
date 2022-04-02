@@ -11,7 +11,7 @@ struct MainView: View {
     @Binding var pageStatus: String
     @Binding var roomNumber: Int
     
-    @State var mainRouter: String = "/"
+    @Binding var mainRouter: String
     
     let tabBarImageNames = ["house", "message", "plus", "rectangle.righthalf.inset.filled.arrow.right", "gearshape"]
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets

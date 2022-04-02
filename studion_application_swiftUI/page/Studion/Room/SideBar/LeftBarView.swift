@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LeftBarView: View {
     
+    
     var userArray: [String]
     var nameDic: [String: String]
     
@@ -53,9 +54,14 @@ struct LeftBarView: View {
                                     value: $volume4,
                                     in: 0...100,
                                     step: 1
-                                ).rotationEffect(.degrees(-90.0), anchor: .topLeading)
+                                )
+                                    .onChange(of: volume4, perform: {newVolume in
+                                        VolumeController.sharedInstance.setVolume(socketID: userArray[3], volume: newVolume / 100)
+                                    })
+                                    .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                     .frame(width: geo.size.height * 3/4)
                                 .offset(y: geo.size.height * 3/4)
+                                
 
                             }
                         } else {
@@ -86,9 +92,14 @@ struct LeftBarView: View {
                                     value: $volume3,
                                     in: 0...100,
                                     step: 1
-                                ).rotationEffect(.degrees(-90.0), anchor: .topLeading)
+                                )
+                                    .onChange(of: volume3, perform: {newVolume in
+                                        VolumeController.sharedInstance.setVolume(socketID: userArray[2], volume: newVolume / 100)
+                                    })
+                                    .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                     .frame(width: geo.size.height * 3/4)
                                 .offset(y: geo.size.height * 3/4)
+                                
 
                             }
                         } else {
@@ -118,9 +129,15 @@ struct LeftBarView: View {
                                     value: $volume2,
                                     in: 0...100,
                                     step: 1
-                                ).rotationEffect(.degrees(-90.0), anchor: .topLeading)
+                                )
+                                    .onChange(of: volume2, perform: {newVolume in
+                                        VolumeController.sharedInstance.setVolume(socketID: userArray[1], volume: newVolume / 100)
+                                        print(userArray[1])
+                                    })
+                                    .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                     .frame(width: geo.size.height * 3/4)
                                 .offset(y: geo.size.height * 3/4)
+                                
 
                             }
                         }
@@ -152,9 +169,14 @@ struct LeftBarView: View {
                                     value: $volume1,
                                     in: 0...100,
                                     step: 1
-                                ).rotationEffect(.degrees(-90.0), anchor: .topLeading)
+                                )
+                                    .onChange(of: volume1, perform: {newVolume in
+                                        VolumeController.sharedInstance.setVolume(socketID: userArray[0], volume: newVolume / 100)
+                                    })
+                                    .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                     .frame(width: geo.size.height * 3/4)
                                 .offset(y: geo.size.height * 3/4)
+                                
                                 
 
                             }
@@ -165,6 +187,7 @@ struct LeftBarView: View {
                                     .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                     .frame(width: geo.size.height * 3/4)
                                 .offset(y: geo.size.height * 3/4)
+                                
 
                             }
 
@@ -192,9 +215,14 @@ struct LeftBarView: View {
                                 value: $myVolume,
                                 in: 0...100,
                                 step: 1
-                            ).rotationEffect(.degrees(-90.0), anchor: .topLeading)
+                            )
+                                .onChange(of: myVolume, perform: {newVolume in
+                                    VolumeController.sharedInstance.setVolume(socketID: "me", volume: newVolume / 100)
+                                })
+                                .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                 .frame(width: geo.size.height * 3/4)
                             .offset(y: geo.size.height * 3/4)
+                            
 
                         }
                         
@@ -212,9 +240,14 @@ struct LeftBarView: View {
                                 value: $masterVolume,
                                 in: 0...100,
                                 step: 1
-                            ).rotationEffect(.degrees(-90.0), anchor: .topLeading)
+                            ).onChange(of: masterVolume, perform: { newVolume in
+                                VolumeController.sharedInstance.setMasterVolume(masterVolume: newVolume / 100)
+                            })
+                                
+                                .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                 .frame(width: geo.size.height * 3/4)
                             .offset(y: geo.size.height * 3/4)
+                            
 
                         }
                         
@@ -246,6 +279,7 @@ struct LeftBarView: View {
         
             
     }
+    
 }
 
 

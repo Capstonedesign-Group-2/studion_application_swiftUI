@@ -10,7 +10,7 @@ import Foundation
 class VolumeController {
     static let sharedInstance = VolumeController()
     
-    var volumeDic: [String: UserVolumeStruct.volume] = [:]
+    var volumeDic: [String: UserVolumeStruct.volume] = ["me" : UserVolumeStruct.volume(socketId: "me", volume: 0.8, masterVolume: 0.8)]
     
     func setVolumeDic(socketID: String) {
         volumeDic[socketID] = UserVolumeStruct.volume(socketId: socketID, volume: 0.8, masterVolume: 0.8)
@@ -20,6 +20,8 @@ class VolumeController {
         if(volumeDic[socketID] == nil) {
             return
         }
+        
+        print("setVolume : \(socketID)")
         
         volumeDic[socketID]?.volume = volume
     
@@ -33,6 +35,18 @@ class VolumeController {
     
     func removeVolumeSetting(socketID: String) {
         volumeDic.removeValue(forKey: socketID)
+    }
+    
+    func getMyVolume() -> UserVolumeStruct.volume{
+        return volumeDic["me"]!
+    }
+    
+    func getVolume(socketID: String) -> UserVolumeStruct.volume {
+        return volumeDic[socketID]!
+    }
+    
+    func getUser() -> Any {
+        return volumeDic.keys
     }
     
 }
