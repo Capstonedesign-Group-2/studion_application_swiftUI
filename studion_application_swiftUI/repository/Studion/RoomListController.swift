@@ -7,13 +7,15 @@
 
 import Foundation
 import SocketIO
+import Alamofire
 
 class RoomListController {
     
     
     func getRoomList() {
-        let socket = SocketIO.sharedInstance.getSocket()
-        
-        socket.emit("get_room_list")
-    }
+            let socket = SocketIO.sharedInstance.getSocket()
+            
+            socket.emit("get_room_list")
+        }
+    
 }

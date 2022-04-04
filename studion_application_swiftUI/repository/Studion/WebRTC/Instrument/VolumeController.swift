@@ -49,4 +49,8 @@ class VolumeController {
         return volumeDic.keys
     }
     
+    func exitRoom() {
+        volumeDic = ["me" : UserVolumeStruct.volume(socketId: "me", volume: 0.8, masterVolume: 0.8)]
+    }
+    
 }

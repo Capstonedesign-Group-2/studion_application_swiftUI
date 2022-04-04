@@ -98,7 +98,9 @@ final class WebRTCClient: NSObject {
                 self.socketID = socketID
                 let peerConnection = self.createPeerConnection(name: name, socketID: socketID) as! RTCPeerConnection
                 
-                self.offer(peerConnection: peerConnection, name: name, socketID: socketID) { data in
+                let userInfo = UserInfo.userInfo.getUserInfo()
+                
+                self.offer(peerConnection: peerConnection, name: (userInfo?.name)!, socketID: socketID) { data in
                     print("offer end")
                     
                     let dic: [String: Any] = [
@@ -164,7 +166,9 @@ final class WebRTCClient: NSObject {
 
         // Audio
         let audioTrack = self.createAudioTrack()
+        
         peerConnection.add(audioTrack, streamIds: [streamId])
+        
         
         // Data
         if let dataChannel = createDataChannel(peerConnection: peerConnection, name: name, socketID: socketID) {
@@ -180,7 +184,7 @@ final class WebRTCClient: NSObject {
     func createDataChannel(peerConnection: RTCPeerConnection, name: String, socketID: String) -> RTCDataChannel?{
         let config = RTCDataChannelConfiguration()
 //        print("create data channel")
-        guard let dataChannel = peerConnection.dataChannel(forLabel: socketID, configuration: config) else {
+        guard let dataChannel = peerConnection.dataChannel(forLabel: socket.sid, configuration: config) else {
           debugPrint("Warning: Couldn't create data channel.")
           return nil
         }
@@ -391,13 +395,23 @@ final class WebRTCClient: NSObject {
 //            self.volumeDic.removeValue(forKey: response["id"]!)
             VolumeController.sharedInstance.removeVolumeSetting(socketID: response["id"]!)
             
-            if(self.userArray.count >= 1) {
-                for i in 0...self.userArray.count-1 {
-                    if(self.userArray[i] == response["id"]) {
-                        self.userArray.remove(at: i)
-                    }
+//            if(self.userArray.count >= 1) {
+//                for i in 0...self.userArray.count-1 {
+//                    if(self.userArray[i] == response["id"]) {
+//                        self.userArray.remove(at: i)
+//                    }
+//                }
+//            }
+            var num = 0
+            var num_check = 0
+            self.userArray.forEach {
+                if($0 == response["id"]){
+                    num_check = num
                 }
+                num = num + 1
             }
+            
+            self.userArray.remove(at: num_check)
             
             
             let dic: [String: Any] = [
@@ -410,6 +424,31 @@ final class WebRTCClient: NSObject {
             
             handler(dic)
         }
+    }
+    
+    func exit() {
+        
+        for key in self.pcDic.keys {
+            self.pcDic[key]?.close()
+            print("---------------------------------")
+            print("exit pcDic : \(self.pcDic[key])")
+            print("---------------------------------")
+        }
+        
+        self.pcDic = [:]
+        for key in self.dcDic.keys {
+            self.dcDic[key]?.close()
+            print("---------------------------------")
+            print("exit dcDic : \(self.dcDic[key])")
+            print("---------------------------------")
+            
+        }
+        self.dcDic = [:]
+        self.nameDic = [:]
+        self.userArray = []
+        
+        VolumeController.sharedInstance.exitRoom()
+        
     }
 
 
@@ -434,6 +473,8 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didRemove stream: RTCMediaStream) {
 //    debugPrint("peerConnection did remove stream")
+      print("peerConnection remove stream")
+      peerConnection.remove(stream)
   }
 
   func peerConnectionShouldNegotiate(_ peerConnection: RTCPeerConnection) {
@@ -467,15 +508,14 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
                 self.socket.emit("candidate", data)
                 break
             }
-            
-            
         }
-
-
+        
     self.delegate?.webRTCClient(self, didDiscoverLocalCandidate: candidate)
   }
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]) {
+      print("peerConnection remove candidate")
+      peerConnection.remove(candidates)
 //    debugPrint("peerConnection did remove candidate(s)")
   }
 
@@ -493,16 +533,28 @@ extension WebRTCClient: RTCDataChannelDelegate {
 
   func dataChannel(_ dataChannel: RTCDataChannel, didReceiveMessageWith buffer: RTCDataBuffer) {
 
+      
       print("data channel ?? : \(buffer.data)")
+      print("------------------------------------")
+      print("data channel : \(dataChannel)")
+      print("------------------------------------")
       let decoder = JSONDecoder()
 
       do {
           let json = try decoder.decode(DataChannelCodableStruct.dataChannel.self, from: buffer.data)
-          instrumentController.instrumentController(instrument: json)
+          
+          print("----------------------------------------")
+          print(self.dcDic)
+          print("----------------------------------------")
+          
+          if((self.dcDic[json.socketId]) != nil) {
+              instrumentController.instrumentController(instrument: json)
+          }
+//
       } catch {
           print("error")
       }
-      self.delegate?.webRTCClient(self, didReceiveData: buffer.data)
+//      self.delegate?.webRTCClient(self, didReceiveData: buffer.data)
   }
 
 }

@@ -46,6 +46,9 @@ struct RoomView: View {
         .onDisappear{
             AppDelegate.orientationLock = .portrait
             print("room end")
+            webRTCConnect.exitRoom()
+            
+            
             
         }
         
@@ -58,7 +61,7 @@ struct RoomView: View {
 final class WebRTCConnect: ObservableObject {
     
     let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
-    let webRTCClient: WebRTCClient = WebRTCClient()
+    var webRTCClient: WebRTCClient? = WebRTCClient()
     
     @Published var pcDic: [String: Any] = [:]
     @Published var dcDic: [String: Any] = [:]
@@ -69,7 +72,7 @@ final class WebRTCConnect: ObservableObject {
     
     init() {
         
-        webRTCClient.allUsers() {data in
+        webRTCClient!.allUsers() {data in
             let response = data as! Dictionary<String, Any>
             
             DispatchQueue.main.async {
@@ -82,7 +85,7 @@ final class WebRTCConnect: ObservableObject {
             }
             
         }
-        webRTCClient.getAnswer() {data in
+        webRTCClient!.getAnswer() {data in
             let response = data as! Dictionary<String, Any>
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
@@ -92,7 +95,7 @@ final class WebRTCConnect: ObservableObject {
                 self.nameDic = response["nameDic"] as! [String: String]
             }
         }
-        webRTCClient.getOffer() {data in
+        webRTCClient!.getOffer() {data in
             let response = data as! Dictionary<String, Any>
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
@@ -102,7 +105,7 @@ final class WebRTCConnect: ObservableObject {
                 self.nameDic = response["nameDic"] as! [String: String]
             }
         }
-        webRTCClient.userExit() { data in
+        webRTCClient!.userExit() { data in
             let response = data as! Dictionary<String, Any>
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
@@ -112,7 +115,7 @@ final class WebRTCConnect: ObservableObject {
                 self.nameDic = response["nameDic"] as! [String: String]
             }
         }
-        webRTCClient.getCandidate() {data in
+        webRTCClient!.getCandidate() {data in
             let response = data as! Dictionary<String, Any>
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
@@ -128,8 +131,16 @@ final class WebRTCConnect: ObservableObject {
     }
     
     func joinRoom(room: Int) {
-        webRTCClient.joinRoom(room: room)
+        webRTCClient!.joinRoom(room: room)
+    }
+    
+    func exitRoom() {
+        webRTCClient!.exit()
+        print("socket connected")
+        socket.emit("exit_room")
         
+        webRTCClient = nil
+        print("room exit")
     }
 }
 

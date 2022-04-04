@@ -45,4 +45,8 @@ class SocketIO: NSObject {
     func getSocketIOId() -> String {
         return socket.sid
     }
+    
+    func disconnectSocket() {
+        socket.disconnect()
+    }
 }
