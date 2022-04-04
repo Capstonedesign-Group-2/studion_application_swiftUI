@@ -43,7 +43,7 @@ public class AuthController {
                 
                 var status = response.response?.statusCode ?? 500
                 print("logincheck [swift]")
-                print(response.result)
+                print(url)
                 switch response.result {
                 case .success(let data):
                     if(status == 401) {

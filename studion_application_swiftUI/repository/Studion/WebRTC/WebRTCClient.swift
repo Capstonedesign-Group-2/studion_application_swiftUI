@@ -391,11 +391,14 @@ final class WebRTCClient: NSObject {
 //            self.volumeDic.removeValue(forKey: response["id"]!)
             VolumeController.sharedInstance.removeVolumeSetting(socketID: response["id"]!)
             
-            for i in 0...self.userArray.count-1 {
-                if(self.userArray[i] == response["id"]) {
-                    self.userArray.remove(at: i)
+            if(self.userArray.count >= 1) {
+                for i in 0...self.userArray.count-1 {
+                    if(self.userArray[i] == response["id"]) {
+                        self.userArray.remove(at: i)
+                    }
                 }
             }
+            
             
             let dic: [String: Any] = [
                 "pcDic" : self.pcDic,

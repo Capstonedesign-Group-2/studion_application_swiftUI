@@ -45,60 +45,56 @@ struct StudionRoomList: View {
                     
                     
                                     
-                    if roomSocket.roomsInfo != nil {
+                    if roomSocket.roomsInfo?.rooms?.count != 0 {
+                        
+                        if roomSocket.roomsInfo != nil {
+                            ScrollView(showsIndicators: false) {
+                                
+                                VStack(spacing: 0) {
+                                    GeometryReader{ reader -> AnyView in
+                                        let yAxis = reader.frame(in: .global).minY
+                                        print(yAxis)
+                                        
+                                        if(yAxis < 0 && !isHide) {
+                                            DispatchQueue.main.async {
+                                                withAnimation{ isHide = true }
+                                            }
+                                        }
+                                        
+                                        if(yAxis > 0 && isHide) {
+                                            DispatchQueue.main.async {
+                                                withAnimation{ isHide = false }
+                                            }
+                                        }
+
+                                        
+                                        return AnyView(
+                                            Text("").frame(width:0, height:0))
+                                    }
+                                    
+    //                                NavigationLink(destination: RoomView(pageStatus: $pageStatus, roomNumber: 1), label: {
+    //                                    Text("enter")
+    //                                })
+                                    
+                                    
+                                    ForEach(0..<(roomSocket.roomsInfo?.rooms?.count)!, id: \.self) { index in
+
+                                        Button( action: {
+                                            self.roomInfo = (roomSocket.roomsInfo?.rooms![index])!
+                                            self.showModal = true
+                                        }) {
+                                            RoomCardView(roomInfo: roomSocket.roomsInfo?.rooms![index] as! RoomCodableStruct.roomInfo )
+                                        }
+                                    }
+                                }
+                                
+                                
+
+                                
+                            }.navigationTitle("Studion")
+                        }
 
                         
-
-                        ScrollView(showsIndicators: false) {
-                            
-                            VStack(spacing: 0) {
-                                GeometryReader{ reader -> AnyView in
-                                    let yAxis = reader.frame(in: .global).minY
-                                    print(yAxis)
-                                    
-                                    if(yAxis < 0 && !isHide) {
-                                        DispatchQueue.main.async {
-                                            withAnimation{ isHide = true }
-                                        }
-                                    }
-                                    
-                                    if(yAxis > 0 && isHide) {
-                                        DispatchQueue.main.async {
-                                            withAnimation{ isHide = false }
-                                        }
-                                    }
-
-                                    
-                                    return AnyView(
-                                        Text("").frame(width:0, height:0))
-                                }
-                                
-//                                NavigationLink(destination: RoomView(pageStatus: $pageStatus, roomNumber: 1), label: {
-//                                    Text("enter")
-//                                })
-                                
-                                Button( action: {
-                                    self.pageStatus = "/room"
-                                    self.roomNumber = 1
-                                } ) {
-                                    Text("enter")
-                                }
-                                
-                                ForEach(0..<(roomSocket.roomsInfo?.rooms?.count)!, id: \.self) { index in
-
-                                    Button( action: {
-                                        self.roomInfo = (roomSocket.roomsInfo?.rooms![index])!
-                                        self.showModal = true
-                                    }) {
-                                        RoomCardView(roomInfo: roomSocket.roomsInfo?.rooms![index] as! RoomCodableStruct.roomInfo )
-                                    }
-                                }
-                            }
-                            
-                            
-
-                            
-                        }.navigationTitle("Studion")
 
                         }else {
                             Spacer()
@@ -123,6 +119,9 @@ struct StudionRoomList: View {
             
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
             AppDelegate.orientationLock = .portrait
+            
+            print("AAAAAAAAAAAAAAAAAAAA")
+            print(roomSocket.roomsInfo?.rooms)
         }
         
         
