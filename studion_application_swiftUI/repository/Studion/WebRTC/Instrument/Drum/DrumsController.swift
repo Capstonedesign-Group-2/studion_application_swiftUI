@@ -40,12 +40,6 @@ class DrumsController: NSObject, ObservableObject {
         if(audioFile == nil) {
             return
         }
-        print(AVAudioSession.sharedInstance().category)
-        print(AVAudioSession.sharedInstance().categoryOptions.rawValue)
-        print(AVAudioSession.sharedInstance())
-        print("-----------------------------------------------------------")
-        print(RTCAudioSession.sharedInstance().category)
-        print(RTCAudioSession.sharedInstance().categoryOptions.contains(.mixWithOthers))
         
       player.play()
   }
@@ -117,7 +111,14 @@ class DrumsController: NSObject, ObservableObject {
 
   private func configureEngine(with format: AVAudioFormat) {
       
-    player.volume = 20
+      let volume = VolumeController.sharedInstance.getMyVolume()
+      
+      print("volume : \(volume.volume)")
+      print("masterVolume : \(volume.masterVolume)")
+      
+    player.volume = Float(20 * volume.volume * volume.masterVolume)
+      
+      print("volumeaaa: \(Float(20 * volume.volume * volume.masterVolume))")
       
     engine.attach(player)
 

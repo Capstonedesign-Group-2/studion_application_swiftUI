@@ -10,5 +10,11 @@ import SwiftUI
 struct GuitarView: View {
     var body: some View {
         Text("gutiar")
+            .onAppear{
+                print("gutiar start")
+            }
+            .onDisappear{
+                print("gutiar end")
+            }
     }
 }

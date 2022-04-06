@@ -14,6 +14,10 @@ struct CreateView: View {
     @State var audio: String = ""
     @State var showDocPicker = false
     
+    
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
+    
     var body: some View {
         VStack {
             CreateTitle()
@@ -45,6 +49,10 @@ struct CreateView: View {
                     }
                 }
                 
+            }
+            .onAppear{
+                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
+                AppDelegate.orientationLock = .portrait
             }
 //            .navigationTitle("Create")
         }

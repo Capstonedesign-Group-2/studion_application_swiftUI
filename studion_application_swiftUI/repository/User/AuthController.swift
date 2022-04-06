@@ -43,7 +43,7 @@ public class AuthController {
                 
                 var status = response.response?.statusCode ?? 500
                 print("logincheck [swift]")
-                print(response.result)
+                print(url)
                 switch response.result {
                 case .success(let data):
                     if(status == 401) {
@@ -105,6 +105,8 @@ public class AuthController {
             switch response.result {
             case .success(let data):
                 
+                print(response.result)
+                
                 if(status == 200) {
                     
                     
@@ -124,6 +126,7 @@ public class AuthController {
                 
                             UserDefaults.standard.set(json.access_token!, forKey: JWTTOKEN)
                             UserDefaults.standard.synchronize()
+                            
                             
                             let response_data : [String: Any] = [
                                 "status" : status,

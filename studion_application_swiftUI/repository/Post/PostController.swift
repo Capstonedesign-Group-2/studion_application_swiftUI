@@ -39,7 +39,7 @@ public class PostController {
         let TOKEN:String? = tokenController.getToken()
         
         if (TOKEN != nil) {
-            let url = api + "api/posts/create"
+            let url = api + "api/posts"
             let headers: HTTPHeaders = [
                 "Authorization" : "Bearer \(TOKEN!)"
             ]
@@ -85,19 +85,19 @@ public class PostController {
 //    Read
 //****************************************************************************************************************
     
-    public func show(data: [String: Any], handler: @escaping (Any) -> Void){
-        let url = api + "api/posts/show"
+    public func show(handler: @escaping (Any) -> Void){
+        let url = api + "api/posts"
         
-        let JWTTOKEN = "stadium_jwt_token"
-        let TOKEN = UserDefaults.standard.string(forKey: JWTTOKEN)
+//        let JWTTOKEN = "stadium_jwt_token"
+//        let TOKEN = UserDefaults.standard.string(forKey: JWTTOKEN)
+//
+//        let headers: HTTPHeaders = [
+//            "Authorization" : "Bearer \(TOKEN!)",
+//            "Content-Type":"application/json",
+//            "Accept":"application/json",
+//        ]
         
-        let headers: HTTPHeaders = [
-            "Authorization" : "Bearer \(TOKEN!)",
-            "Content-Type":"application/json",
-            "Accept":"application/json",
-        ]
-        
-        AF.request(url, method: .get, headers: headers).responseJSON{ response in
+        AF.request(url, method: .get).responseJSON{ response in
             
             var status = response.response?.statusCode ?? 500
             
@@ -115,13 +115,17 @@ public class PostController {
                     
                     handler(response_data)
                 } else if (status == 200) {
-                    let response_data: [String: Any] = [
-                        "status" : 200,
-                        "data" : data,
-                    ]
                     
-                    handler(response_data)
-                }
+                    let decoder = JSONDecoder()
+                    do{
+//                        let json = try decoder.decode(PostCodableStruct.Show.self, from: data)
+                        handler(data)
+                    } catch {
+                        print("error")
+                    }
+                    
+                    
+                                   }
                 
                 
 //                print(status)

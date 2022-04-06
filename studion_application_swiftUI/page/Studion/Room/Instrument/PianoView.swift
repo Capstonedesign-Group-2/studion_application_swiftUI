@@ -12,16 +12,13 @@ struct PianoView: View {
     var pcDic: [String: Any]
     
     var body: some View {
-        Button("test") {
-            print(pcDic.keys)
-            for key in pcDic.keys {
-                (pcDic[key] as! RTCPeerConnection).transceivers
-                    .compactMap{ return $0.sender.track}
-                    .forEach{ ($0 as! RTCAudioTrack).source.volume = 0
-                        
-                    }
+        Text("PianoView")
+            .onAppear{
+                print("piano start")
             }
-        }
+            .onDisappear{
+                print("piano end")
+            }
     }
 }
 

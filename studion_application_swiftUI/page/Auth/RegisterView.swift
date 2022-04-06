@@ -153,12 +153,13 @@ struct registerButton: View {
                 
                 let register = data as! Dictionary<String, Any>
                 
-                if(register["status"] as! Int == 200) {
+                if(register["status"] as! Int == 422) {
+                    print(register)
                     self.registerErrorTitle = "회원가입 오류"
                     self.registerError = "이미 가입이 되어 있는 이메일 입니다."
                     self.registerErrorStatus = true
                     return
-                } else {
+                } else if(register["status"] as! Int == 200) {
                     
                     self.pageStatus = "/"
                     return
