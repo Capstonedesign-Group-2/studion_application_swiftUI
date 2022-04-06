@@ -162,6 +162,12 @@ struct DrumView: View {
             Spacer()
 
         } // Vstack
+        .onAppear{
+            print("drum start")
+        }
+        .onDisappear{
+            print("drum end")
+        }
         
 
     }

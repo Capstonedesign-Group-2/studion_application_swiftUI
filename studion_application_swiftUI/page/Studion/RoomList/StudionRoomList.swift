@@ -177,7 +177,6 @@ final class RoomSocket: ObservableObject {
                         print("error")
                     }
                 }
-        
     }
     
     func getRoomList() {

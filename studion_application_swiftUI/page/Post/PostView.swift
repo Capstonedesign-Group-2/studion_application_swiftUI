@@ -24,9 +24,10 @@ struct PostView: View {
 ////                print(response)
 //                let posts = response["posts"] as! Dictionary<String, Any>
 //                let p = posts["data"] as! Array<Dictionary<String, Any>?>
+//                let p = posts["data"] as! Array<Any?>
 //
 //                for post in p {
-//
+//                      post2 = post as! Dictionary<String, Any>
 //                    print("------------------------------------------------------")
 //                    if(post != nil) {
 //                        let user = post!["user"] as! Dictionary<String, Any>

@@ -534,25 +534,22 @@ extension WebRTCClient: RTCDataChannelDelegate {
   func dataChannel(_ dataChannel: RTCDataChannel, didReceiveMessageWith buffer: RTCDataBuffer) {
 
       
-      print("data channel ?? : \(buffer.data)")
-      print("------------------------------------")
-      print("data channel : \(dataChannel)")
-      print("------------------------------------")
+      print("data channel ?? : \(String.init(data: buffer.data, encoding: .utf8))")
+      
+      
       let decoder = JSONDecoder()
 
       do {
+          
+          print(type(of: buffer.data))
           let json = try decoder.decode(DataChannelCodableStruct.dataChannel.self, from: buffer.data)
+       
           
-          print("----------------------------------------")
-          print(self.dcDic)
-          print("----------------------------------------")
+        instrumentController.instrumentController(instrument: json)
           
-          if((self.dcDic[json.socketId]) != nil) {
-              instrumentController.instrumentController(instrument: json)
-          }
 //
       } catch {
-          print("error")
+          print(error.localizedDescription)
       }
 //      self.delegate?.webRTCClient(self, didReceiveData: buffer.data)
   }

@@ -255,8 +255,6 @@ struct LeftBarView: View {
                     
                     
                     
-                    
-                    
                 } // HStack
                 
             
