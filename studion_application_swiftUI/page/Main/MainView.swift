@@ -24,6 +24,9 @@ struct MainView: View {
             TabView(selection: $mainRouter) {
                 PostView()
                     .tag("/")
+                    .transition(.move(edge: .top))
+                    .animation(.easeIn)
+
                 
                 ChatRoomList()
                     .tag("/chat")

@@ -19,7 +19,7 @@ struct NavigationBar: View {
         ZStack {
             Color.clear
                 .background(.ultraThinMaterial)
-//                    .blur(radius: 10) // bottom line (on: soft, off: hard)
+                    .blur(radius: 10) // bottom line (on: soft, off: hard)
 //                .opacity(hasScrolled ? 1 : 0)
             
             Text(title)
@@ -57,6 +57,6 @@ struct NavigationBar: View {
 
 struct NavigationBar_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationBar()
+        NavigationBar(title: "NavBar")
     }
 }

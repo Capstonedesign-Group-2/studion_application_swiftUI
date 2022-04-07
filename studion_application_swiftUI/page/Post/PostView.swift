@@ -9,8 +9,6 @@ import SwiftUI
 import UIKit
 
 struct PostView: View {
-        
-//    @State var posts = [PostsData]()
     
     @State var p: [Dictionary<String, Any>?] = []
         
@@ -22,13 +20,19 @@ struct PostView: View {
                         ForEach(0..<self.p.count, id: \.self) { index in
                             VStack{
 //                                Text(self.p[index]!["title"] as! String)
-                                PostCard(title: self.p[index]!["title"] as! String, content: self.p[index]!["content"] as! String)
+                                PostCard(
+                                    title: self.p[index]!["title"] as! String, // Dict type on View
+                                    content: self.p[index]!["content"] as! String,
+                                    image: "Studion-original"
+//                                    image: self.p[index]?["image"] as! Link<String>
+                                )
                             }
                         }
                     }
-                    
+                    .overlay(
+                        NavigationBar(title: "Posts")
+                    )
                 }
-                NavigationBar(title: "Posts")
             }
            
             .task {
@@ -40,6 +44,8 @@ struct PostView: View {
                         let posts = response["posts"] as! Dictionary<String, Any>
                     
                         p = posts["data"] as! [Dictionary<String, Any>?]
+                    
+//                        print("Posts Datas : \(p)")
             }
         }
     }
@@ -48,11 +54,11 @@ struct PostView: View {
 
 
 
-//struct PostView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PostView()
-//    }
-//}
+struct PostView_Previews: PreviewProvider {
+    static var previews: some View {
+        PostView()
+    }
+}
 
 //          NavigationView{
 //               List(0 ..< 30) { item in

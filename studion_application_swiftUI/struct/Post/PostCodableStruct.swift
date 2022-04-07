@@ -143,9 +143,9 @@ public class PostCodableStruct {
     
 
     // Create
-    public struct createJson: Codable {
+    public struct create: Codable {
         var content: String!
-//        var image: String?
+        var image: String?
 //        var audio: String?
         var user_id: Int!
     }
