@@ -67,7 +67,7 @@ struct PostCard: View {
 
 struct PostCard_Previews: PreviewProvider {
     static var previews: some View {
-        PostCard(title: "title 2222", content: "content", image: "Studion-original")
+        PostCard(title: "title", content: "content", image: "Studion-original")
     }
 }
 

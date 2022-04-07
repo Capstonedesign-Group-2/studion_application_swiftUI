@@ -14,6 +14,7 @@ class RecordController {
     func startRecording(enableMicorphone: Bool = false, completion: @escaping (Error?) -> ()) {
         let recorder = RPScreenRecorder.shared()
         
+        
         recorder.isMicrophoneEnabled = false
         
         recorder.startRecording(handler: completion)
@@ -35,6 +36,7 @@ class RecordController {
     func play(url: URL) {
         do {
             player = try AVAudioPlayer(contentsOf: url)
+            
             player?.play()
             print("play")
         } catch {

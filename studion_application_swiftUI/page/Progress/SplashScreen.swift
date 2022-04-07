@@ -13,7 +13,7 @@ struct SplashScreen: View {
     @Binding var pageStatus: String
     
     var body: some View {
-        Image("Logo")
+        Image("Logo-1")
             .resizable()
             .aspectRatio(contentMode: .fit)
             .onAppear{ initSetting() }
