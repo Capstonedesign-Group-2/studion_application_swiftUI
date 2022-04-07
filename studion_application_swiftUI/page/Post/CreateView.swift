@@ -15,12 +15,8 @@ struct CreateView: View {
     @State var showDocPicker = false
     
     
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
-
-    
     var body: some View {
-        VStack {
-            CreateTitle()
+        NavigationView() {
             Form {
                 Section(header: Text("New Post")){
                     ZStack{
@@ -36,31 +32,32 @@ struct CreateView: View {
                     Button("Pick Image or Audio"){
                         showDocPicker = true
                     }
-//                    .sheet(isPresented: self.$showDocPicker) {
+                    .sheet(isPresented: self.$showDocPicker) {
 //                        DocumentPicker(image: $image)
-//                    }
-                            
+                    }
                     
-                    
-                    Button(action: {
-                        create(content: content, user_id: 1)
-                    }) {
+                        Button(action: {
+                            create(content: content)
+                            content = ""
+                        })
+                        {
                         Text ("Submit")
                     }
+
                 }
                 
             }
-            .onAppear{
-                UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
-                AppDelegate.orientationLock = .portrait
-            }
-//            .navigationTitle("Create")
+            .navigationTitle("Create")
+            .navigationBarTitleDisplayMode(.inline)
+//            .background(NavigationBar(title: "Create"))
+            
         }
+        .navigationViewStyle(.stack)
     }
 }
 
-func create(content: String, user_id: Int) {
-    PostController.sharedInstance.create(content: content, user_id: user_id) {data in
+func create(content: String) {
+    PostController.sharedInstance.create(content: content) {data in
         var response = data as! Dictionary<String, Any>
         
         if(response["status"] as! Int == 200) {
@@ -72,6 +69,7 @@ func create(content: String, user_id: Int) {
         print(response)
      }
 }
+
 
 struct CreateTitle: View {
     var body: some View{

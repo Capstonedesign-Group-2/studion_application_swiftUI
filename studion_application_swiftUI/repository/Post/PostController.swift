@@ -17,23 +17,11 @@ public class PostController {
         self.api = api
     }
     
-    
-//    public struct post: Codable {
-//        var created_at: String!
-//        var updated_at: String!
-//        var title: String!
-//        var id: Int!
-//        var user_id: Int!
-//        var content: String!
-//        var image: String!
-//        var audio: String!
-//    }
-    
 //****************************************************************************************************************
 //    Create
 //****************************************************************************************************************
     
-    public func create(content: String, user_id: Int, handler: @escaping (Any) -> Void) {
+    public func create(content: String, handler: @escaping (Any) -> Void) {
         
         let tokenController = JWTToken()
         let TOKEN:String? = tokenController.getToken()
@@ -46,7 +34,7 @@ public class PostController {
 
         let parameter : [String: Any] = [
             "content": content,
-            "user_id": user_id,
+            "user_id": UserInfo.userInfo.user?.id,
 //            "image": image,
 //            "audio": audio,
         ]
@@ -86,62 +74,46 @@ public class PostController {
 //****************************************************************************************************************
     
     public func show(handler: @escaping (Any) -> Void){
-        let url = api + "api/posts"
-        
-//        let JWTTOKEN = "stadium_jwt_token"
-//        let TOKEN = UserDefaults.standard.string(forKey: JWTTOKEN)
-//
-//        let headers: HTTPHeaders = [
-//            "Authorization" : "Bearer \(TOKEN!)",
-//            "Content-Type":"application/json",
-//            "Accept":"application/json",
-//        ]
-        
-        AF.request(url, method: .get).responseJSON{ response in
-            
-            var status = response.response?.statusCode ?? 500
-            
-//            if let JSON = response.result.value {
-//                print(JSON)
-//            }
-            
-            switch response.result {
-            case .success(let data):
-                if(status == 401) {
-                    let response_data: [String: Any] = [
-                        "status" : 401,
-                        "data" : data
-                    ]
-                    
-                    handler(response_data)
-                } else if (status == 200) {
-                    
-                    let decoder = JSONDecoder()
-                    do{
-//                        let json = try decoder.decode(PostCodableStruct.Show.self, from: data)
-                        handler(data)
-                    } catch {
-                        print("error")
+          let url = api + "api/posts"
+          
+          AF.request(url, method: .get).responseJSON{ response in
+              
+              var status = response.response?.statusCode ?? 500
+              
+              switch response.result {
+              case .success(let data):
+                  if(status == 401) {
+                      let response_data: [String: Any] = [
+                          "status" : 401,
+                          "data" : data
+                      ]
+                      
+                      handler(response_data)
+                  } else if (status == 200) {
+                      let response_data: [String: Any] = [
+                          "status" : "Success",
+                          "data" : data
+                      ]
+                      do{
+                          handler(data)
+                      } catch (let error) {
+                          print(error)
+                      }
+                      
                     }
-                    
-                    
-                                   }
-                
-                
-//                print(status)
-//
-//                print("Xcode Data: \(data)")
-                
-            case .failure(let error):
-                let response_data: [String: Any] = [
-                    "status" : 500,
-                    "error" : error
-                ]
-                print(error)
-                
-                handler(response_data)
-            }
+                  
+//                  print("Xcode Data: \(data)")
+                  
+              case .failure(let error):
+                  let response_data: [String: Any] = [
+                      "status" : 500,
+                      "error" : error
+                  ]
+                  print(error)
+                  
+                  handler(response_data)
+              }
 
-        }
+          }
     }
 }
