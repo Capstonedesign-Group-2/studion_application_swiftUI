@@ -51,13 +51,6 @@ class AudioEngineController {
     
     
     func record() {
-//        self.mainMixer.installTap(onBus: 0, bufferSize: 4096, format: nil) { (buffer, time) -> Void in
-//            try! self.audioFile?.write(from: buffer)
-//            print("recording...")
-//            print(buffer)
-//            print(self.audioFile)
-//        }
-        
         
         let format = self.mainMixer.outputFormat(forBus: 0)
         let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -73,9 +66,6 @@ class AudioEngineController {
         self.mainMixer.installTap(onBus: 0, bufferSize: 4096, format: format, block: { (buffer, time) in
             
             try? self.audioFile?.write(from: buffer)
-            
-            print(self.audioFile)
-            
         })
         
         print("record start")

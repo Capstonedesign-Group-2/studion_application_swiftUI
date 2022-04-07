@@ -36,6 +36,7 @@ class RecordController {
     func play(url: URL) {
         do {
             player = try AVAudioPlayer(contentsOf: url)
+            
             player?.play()
             print("play")
         } catch {
