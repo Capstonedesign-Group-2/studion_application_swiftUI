@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-
+import AVFoundation
 
 
 var instrument = ["drum", "piano_button", "guitar", "rec"]
@@ -128,27 +128,40 @@ struct InstrumentControllerView: View {
                                 
                                 if isRecording {
                                     
-                                    Task {
-                                        do {
-                                            let url = try await self.recordController.stopRecording()
-                                            self.recordFiles.append(url)
-                                            isRecording = false
-                                            
-                                            
-                                        } catch {
-                                            print(error.localizedDescription)
-                                        }
+//                                    Task {
+//                                        do {
+//                                            let url = try await self.recordController.stopRecording()
+//                                            self.recordFiles.append(url)
+//                                            isRecording = false
+//
+//
+//                                        } catch {
+//                                            print(error.localizedDescription)
+//                                        }
+//                                    }
+                                    let url: URL? = AudioEngineController.sharedInstance.stop()
+                                    
+                                    if(url != nil) {
+                                        self.recordFiles.append(url!)
                                     }
                                     
+                                    
+                                    isRecording = false
+                                    
                                 } else {
-                                    self.recordController.startRecording{ error in
-                                        if let error = error {
-                                            print(error.localizedDescription)
-                                            return
-                                        }
-                                        
-                                        isRecording = true
-                                    }
+//                                    self.recordController.startRecording{ error in
+//                                        if let error = error {
+//                                            print(error.localizedDescription)
+//                                            return
+//                                        }
+//
+//                                        isRecording = true
+//                                    }
+                                    
+                                    
+                                    AudioEngineController.sharedInstance.record()
+                                    
+                                    isRecording = true
 
                                 }
                             }) {
