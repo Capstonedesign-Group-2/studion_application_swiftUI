@@ -17,6 +17,8 @@
 		55420D2E27F188CF001A9AB4 /* DrumsController_other.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55420D2D27F188CF001A9AB4 /* DrumsController_other.swift */; };
 		555E647527FD67F900C449BC /* RecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647427FD67F900C449BC /* RecordController.swift */; };
 		555E647727FD69A400C449BC /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647627FD69A400C449BC /* RecordView.swift */; };
+		555E647927FE8E8B00C449BC /* DrumController_test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647827FE8E8B00C449BC /* DrumController_test.swift */; };
+		555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647A27FE910900C449BC /* AudioEngineController.swift */; };
 		55B98BF027E83E1D0057F168 /* studion_application_swiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */; };
 		55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BF127E83E1D0057F168 /* ContentView.swift */; };
 		55B98BF427E83E1D0057F168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B98BF327E83E1D0057F168 /* Assets.xcassets */; };
@@ -145,6 +147,8 @@
 		55420D2D27F188CF001A9AB4 /* DrumsController_other.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsController_other.swift; sourceTree = "<group>"; };
 		555E647427FD67F900C449BC /* RecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordController.swift; sourceTree = "<group>"; };
 		555E647627FD69A400C449BC /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
+		555E647827FE8E8B00C449BC /* DrumController_test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumController_test.swift; sourceTree = "<group>"; };
+		555E647A27FE910900C449BC /* AudioEngineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngineController.swift; sourceTree = "<group>"; };
 		55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studion_application_swiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studion_application_swiftUIApp.swift; sourceTree = "<group>"; };
 		55B98BF127E83E1D0057F168 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -550,6 +554,7 @@
 				55B98C6B27EBFD9A0057F168 /* Drum */,
 				55B98C4F27EBF5350057F168 /* InstrumentController.swift */,
 				55C648FD27F86F42005603A2 /* VolumeController.swift */,
+				555E647A27FE910900C449BC /* AudioEngineController.swift */,
 			);
 			path = Instrument;
 			sourceTree = "<group>";
@@ -573,6 +578,7 @@
 				55B98C6E27EBFDB70057F168 /* tom3.wav */,
 				55420D2B27ED8A5F001A9AB4 /* DrumsController.swift */,
 				55420D2D27F188CF001A9AB4 /* DrumsController_other.swift */,
+				555E647827FE8E8B00C449BC /* DrumController_test.swift */,
 			);
 			path = Drum;
 			sourceTree = "<group>";
@@ -893,6 +899,7 @@
 				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
 				29C4C03327EDDE0A0048D405 /* PostController.swift in Sources */,
 				55B98C9127EC782D0057F168 /* LeftBarView.swift in Sources */,
+				555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */,
 				55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */,
 				55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */,
 				55B98C8727EC08070057F168 /* InstrumentControllerView.swift in Sources */,
@@ -919,6 +926,7 @@
 				55B98C1627E885D60057F168 /* ProgressViewBar.swift in Sources */,
 				55B98C8E27EC09A20057F168 /* GuitarView.swift in Sources */,
 				55420D2C27ED8A5F001A9AB4 /* DrumsController.swift in Sources */,
+				555E647927FE8E8B00C449BC /* DrumController_test.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -10,14 +10,14 @@ import AVFoundation
 
 class InstrumentController {
     
+    let drumsController = DrumsController()
+    
     func instrumentController(instrument: DataChannelCodableStruct.dataChannel) {
         
         print(instrument.type)
         switch instrument.type {
         case "drum":
-           let drumsController_other = DrumsController_other()
-            drumsController_other.setting(key: instrument.key, socketId: instrument.socketId)
-            drumsController_other.playOrPause()
+            self.drumsController.settings_other(key: instrument.key, socketID: instrument.socketId)
             
         case "onPiano" :
             let pianoController_other = PianoController_other()

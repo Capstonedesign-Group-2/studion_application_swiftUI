@@ -18,7 +18,8 @@ struct DrumView: View {
 
     let instrumentController = InstrumentController()
 //    let drumsController = DrumsControllerAudioKit()
-    
+//    let drumController_test = DrumController_test()
+    let drumsController = DrumsController()
     
     
     let items = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
@@ -40,7 +41,7 @@ struct DrumView: View {
                 Button(action: {
                     print("Q")
                     self.buttonClick(key: "Q")
-                    
+//                    drumController_test.start(key: "cr")
                     
                 }) {
                     Image("ride")
@@ -54,6 +55,7 @@ struct DrumView: View {
                 Button(action: {
                     print("W")
                     self.buttonClick(key: "W")
+//                    drumController_test.start(key: "tom3")
 
 
                 }) {
@@ -197,14 +199,8 @@ struct DrumView: View {
             print("error")
         }
 
-        
-        let drumsController = DrumsController()
-        drumsController.setting(key: key)
-        drumsController.playOrPause()
-        
-//        drumsControllerAudioKit.playPad(padNumber: 0)
-        
-//        self.drumsController.play()
+        self.drumsController.settings(key: key)
+
         
     }
 }

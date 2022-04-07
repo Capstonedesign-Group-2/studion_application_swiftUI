@@ -14,6 +14,7 @@ class RecordController {
     func startRecording(enableMicorphone: Bool = false, completion: @escaping (Error?) -> ()) {
         let recorder = RPScreenRecorder.shared()
         
+        
         recorder.isMicrophoneEnabled = false
         
         recorder.startRecording(handler: completion)
