@@ -63,7 +63,7 @@ class AudioEngineController {
             print(error.localizedDescription)
         }
         
-        self.mainMixer.installTap(onBus: 0, bufferSize: 4096, format: format, block: { (buffer, time) in
+        self.mainMixer.installTap(onBus: 0, bufferSize: 1024, format: format, block: { (buffer, time) in
             
             try? self.audioFile?.write(from: buffer)
         })

@@ -120,8 +120,9 @@ final class WebRTCClient: NSObject {
 
     func createPeerConnection(name: String, socketID: String) -> RTCPeerConnection{
 
+        print("createPeerConnection")
         let iceServers:[RTCIceServer]
-        iceServers = [RTCIceServer.init( urlStrings: ["stun:stun.l.google.com:19302"])]
+        iceServers = [RTCIceServer.init( urlStrings: ["stun:stun.l.google.com:19302", "turn:35.77.186.121:3478"], username: "turn", credential: "dls980728")]
 
         let config = RTCConfiguration()
         config.iceServers = iceServers
@@ -162,6 +163,8 @@ final class WebRTCClient: NSObject {
 
 
     func createMediaSenders(peerConnection: RTCPeerConnection, name: String, socketID: String) {
+        
+        print("createMediaSenders")
         let streamId = "stream"
 
         // Audio
@@ -173,7 +176,7 @@ final class WebRTCClient: NSObject {
         // Data
         if let dataChannel = createDataChannel(peerConnection: peerConnection, name: name, socketID: socketID) {
           dataChannel.delegate = self
-          self.localDataChannel = dataChannel
+//          self.localDataChannel = dataChannel
         }
 
 
@@ -183,7 +186,7 @@ final class WebRTCClient: NSObject {
 
     func createDataChannel(peerConnection: RTCPeerConnection, name: String, socketID: String) -> RTCDataChannel?{
         let config = RTCDataChannelConfiguration()
-//        print("create data channel")
+        
         guard let dataChannel = peerConnection.dataChannel(forLabel: socket.sid, configuration: config) else {
           debugPrint("Warning: Couldn't create data channel.")
           return nil
@@ -356,11 +359,14 @@ final class WebRTCClient: NSObject {
             let response = data[0] as! Dictionary<String, Any>
             let candidateData = response["candidate"] as! Dictionary<String, Any>
 
+            print(candidateData)
+            
             let peerConnection: RTCPeerConnection = self.pcDic[response["candidateSendID"] as! String]!
 
             let candidate = RTCIceCandidate(sdp: candidateData["candidate"] as! String, sdpMLineIndex: Int32(candidateData["sdpMLineIndex"] as! Int), sdpMid: candidateData["sdpMid"] as! String)
 
             peerConnection.add( candidate )
+            
             
             let dic: [String: Any] = [
                 "pcDic" : self.pcDic,
@@ -451,7 +457,6 @@ final class WebRTCClient: NSObject {
         
     }
 
-
 }
 
 
@@ -521,7 +526,9 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didOpen dataChannel: RTCDataChannel) {
     debugPrint("peerConnection did open data channel")
-    self.remoteDataChannel = dataChannel
+      print(dataChannel.label)
+      self.dcDic[dataChannel.label] = dataChannel
+//    self.remoteDataChannel = dataChannel
 
   }
 }

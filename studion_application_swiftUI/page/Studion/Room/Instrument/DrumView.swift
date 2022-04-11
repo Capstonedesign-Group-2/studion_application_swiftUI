@@ -182,17 +182,19 @@ struct DrumView: View {
             "key" : key,
             "socketId" : SocketIO.sharedInstance.getSocketIOId()
         ]
-
         let encorder = JSONEncoder()
+        
+//        print(self.dcDic)
+        
         do {
             let jsonData = try? encorder.encode(data)
 
             for key in self.dcDic!.keys {
                 let dataChannel: RTCDataChannel = self.dcDic![key] as! RTCDataChannel
                 let buffer = RTCDataBuffer(data: jsonData!, isBinary: true)
-
+//
                 dataChannel.sendData(buffer)
-                print("send data channel")
+                
             }
             
         } catch {
