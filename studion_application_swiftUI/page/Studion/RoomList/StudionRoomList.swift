@@ -42,12 +42,6 @@ struct StudionRoomList: View {
                         .padding(.top, isHide ? 0:top!-10)
                         .padding(.top,1)
                     
-                    Button( action: {
-                            self.roomNumber = 1
-                            self.pageStatus = "/room"
-                        } ) {
-                            Text("room 1")
-                        }
                                     
                     if roomSocket.roomsInfo?.rooms?.count != 0 {
                         

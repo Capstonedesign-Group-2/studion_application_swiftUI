@@ -37,6 +37,8 @@ class RecordController {
         do {
             player = try AVAudioPlayer(contentsOf: url)
             
+            
+            print(player?.duration)
             player?.play()
             print("play")
         } catch {

@@ -45,8 +45,9 @@ struct InstrumentControllerView: View {
                                     .tag("drum")
 
 
-                                PianoView(pcDic: pcDic)
-                                    .tag("piano_button")
+
+                            PianoView(pcDic: pcDic, dcDic: dcDic)
+                                .tag("piano_button")
 
                                 GuitarView()
                                     .tag("guitar")
@@ -252,7 +253,7 @@ struct InstrumentControllerView: View {
                                     .tag("drum")
 
 
-                                PianoView(pcDic: pcDic)
+                                PianoView(pcDic: pcDic, dcDic: dcDic)
                                     .tag("piano_button")
 
                                 GuitarView()

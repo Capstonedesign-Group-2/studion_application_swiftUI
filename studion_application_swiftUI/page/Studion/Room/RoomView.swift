@@ -72,6 +72,7 @@ final class WebRTCConnect: ObservableObject {
     
     init() {
         
+        
         webRTCClient!.allUsers() {data in
             let response = data as! Dictionary<String, Any>
             
