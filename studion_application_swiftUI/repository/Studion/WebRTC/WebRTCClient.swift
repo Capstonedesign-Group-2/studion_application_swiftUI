@@ -411,7 +411,7 @@ final class WebRTCClient: NSObject {
                 num = num + 1
             }
             
-            self.userArray.remove(at: num_check)
+             self.userArray.remove(at: num_check)
             
             
             let dic: [String: Any] = [

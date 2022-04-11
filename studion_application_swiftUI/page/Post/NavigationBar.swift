@@ -19,7 +19,7 @@ struct NavigationBar: View {
         ZStack {
             Color.clear
                 .background(.ultraThinMaterial)
-                    .blur(radius: 10) // bottom line (on: soft, off: hard)
+//                    .blur(radius: 10) // bottom line (on: soft, off: hard)
 //                .opacity(hasScrolled ? 1 : 0)
             
             Text(title)
@@ -42,7 +42,7 @@ struct NavigationBar: View {
                 .sheet(isPresented: $showSearch) {
                     SearchView()
                 }
-            }
+            }.ignoresSafeArea()
             .frame(maxWidth: .infinity, alignment: .trailing)
             .padding(.trailing, 20)
             .padding(.top, 20)

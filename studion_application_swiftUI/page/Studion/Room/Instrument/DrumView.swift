@@ -10,6 +10,23 @@ import WebRTC
 import Combine
 import AVFoundation
 
+
+//extension UIDevice {
+//  static var idiom: UIUserInterfaceIdiom {
+//    UIDevice.current.userInterfaceIdiom
+//  }
+//}
+//
+//extension UIDevice {
+//static var isIpad: Bool {
+//    idiom == .pad
+//  }
+//  
+//  static var isiPhone: Bool {
+//    idiom == .phone
+//  }
+//}
+
 struct DrumView: View {
     
     
@@ -29,149 +46,291 @@ struct DrumView: View {
     
 
     var body: some View {
-        VStack (spacing: 20){
-            
-            
-                
-            
-//            Spacer()
-//                .frame(height: 20)
-            HStack (spacing: 20){
-
-                Button(action: {
-                    print("Q")
-                    self.buttonClick(key: "Q")
-//                    drumController_test.start(key: "cr")
-                    
-                }) {
-                    Image("ride")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .aspectRatio(contentMode: .fit)
-                }
-                .buttonStyle(MyButtonStyle())
-                
-
-                Button(action: {
-                    print("W")
-                    self.buttonClick(key: "W")
-//                    drumController_test.start(key: "tom3")
-
-
-                }) {
-                    Image("hi-hat")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .aspectRatio(contentMode: .fit)
-
-                }
-                .buttonStyle(MyButtonStyle())
-
-                Button(action: {
-                    print("E")
-                    self.buttonClick(key: "E")
-                }) {
-                    Image("snap")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .aspectRatio(contentMode: .fit)
-                }
-                .buttonStyle(MyButtonStyle())
-
-            } // HStack
-
-            HStack (spacing: 20){
-
-                Button(action: {
-                    print("A")
-                    self.buttonClick(key: "A")
-//                    self.conductor.playPad(padNumber: 3)
-                }) {
-                    Image("tom")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .aspectRatio(contentMode: .fit)
-                }
-                .buttonStyle(MyButtonStyle())
-
-                Button(action: {
-                    print("S")
-                    self.buttonClick(key: "S")
-//                    self.conductor.playPad(padNumber: 4)
-                }) {
-                    Image("tom")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .aspectRatio(contentMode: .fit)
-                }
-                .buttonStyle(MyButtonStyle())
-
-                Button(action: {
-                    print("D")
-                    self.buttonClick(key: "D")
-//                    self.conductor.playPad(padNumber: 5)
-                }) {
-                    Image("tom")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .aspectRatio(contentMode: .fit)
-                }
-                .buttonStyle(MyButtonStyle())
-
-
-            } // HStack
-
-            HStack (spacing: 20){
-
-                Button(action: {
-                    print("Z")
-                    self.buttonClick(key: "Z")
-//                    self.conductor.playPad(padNumber: 6)
-                }) {
-                    Image("snap")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .aspectRatio(contentMode: .fit)
-                }
-                .buttonStyle(MyButtonStyle())
-
-                Button(action: {
-                    print("X")
-                    self.buttonClick(key: "X")
-//                    self.conductor.playPad(padNumber: 7)
-                }) {
-                    Image("bass-drum")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .aspectRatio(contentMode: .fit)
-                }
-                .buttonStyle(MyButtonStyle())
-
-                Button(action: {
-                    print("C")
-                    self.buttonClick(key: "C")
-//                    self.conductor.playPad(padNumber: 8)
-                }) {
-                    Image("snap")
-                        .resizable()
-                        .frame(width: 60, height: 60)
-                        .aspectRatio(contentMode: .fit)
-                }
-                .buttonStyle(MyButtonStyle())
-
-            } // HStack
-
-            Spacer()
-
-        } // Vstack
-        .onAppear{
-            print("drum start")
-        }
-        .onDisappear{
-            print("drum end")
-        }
         
+        
+        if UIDevice.isIpad {
+            
+            VStack (spacing: 40){
 
+    //            Spacer()
+    //                .frame(height: 20)
+                HStack (spacing: 40){
+
+                    Button(action: {
+                        print("Q")
+                        self.buttonClick(key: "Q")
+    //                    drumController_test.start(key: "cr")
+                        
+                    }) {
+                        Image("ride")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+                    
+
+                    Button(action: {
+                        print("W")
+                        self.buttonClick(key: "W")
+    //                    drumController_test.start(key: "tom3")
+
+
+                    }) {
+                        Image("hi-hat")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("E")
+                        self.buttonClick(key: "E")
+                    }) {
+                        Image("snap")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                } // HStack
+
+                HStack (spacing: 40){
+
+                    Button(action: {
+                        print("A")
+                        self.buttonClick(key: "A")
+    //                    self.conductor.playPad(padNumber: 3)
+                    }) {
+                        Image("tom")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("S")
+                        self.buttonClick(key: "S")
+    //                    self.conductor.playPad(padNumber: 4)
+                    }) {
+                        Image("tom")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("D")
+                        self.buttonClick(key: "D")
+    //                    self.conductor.playPad(padNumber: 5)
+                    }) {
+                        Image("tom")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+
+                } // HStack
+
+                HStack (spacing: 40){
+
+                    Button(action: {
+                        print("Z")
+                        self.buttonClick(key: "Z")
+    //                    self.conductor.playPad(padNumber: 6)
+                    }) {
+                        Image("snap")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("X")
+                        self.buttonClick(key: "X")
+    //                    self.conductor.playPad(padNumber: 7)
+                    }) {
+                        Image("bass-drum")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("C")
+                        self.buttonClick(key: "C")
+    //                    self.conductor.playPad(padNumber: 8)
+                    }) {
+                        Image("snap")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                } // HStack
+
+                Spacer()
+
+            } // Vstack
+            .onAppear{
+                print("drum start")
+            }
+            .onDisappear{
+                print("drum end")
+            }
+            
+        } else { // iPhone View
+            
+            VStack (spacing: 20){
+
+    //            Spacer()
+    //                .frame(height: 20)
+                HStack (spacing: 20){
+
+                    Button(action: {
+                        print("Q")
+                        self.buttonClick(key: "Q")
+    //                    drumController_test.start(key: "cr")
+                        
+                    }) {
+                        Image("ride")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+                    
+
+                    Button(action: {
+                        print("W")
+                        self.buttonClick(key: "W")
+    //                    drumController_test.start(key: "tom3")
+
+
+                    }) {
+                        Image("hi-hat")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("E")
+                        self.buttonClick(key: "E")
+                    }) {
+                        Image("snap")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                } // HStack
+
+                HStack (spacing: 20){
+
+                    Button(action: {
+                        print("A")
+                        self.buttonClick(key: "A")
+    //                    self.conductor.playPad(padNumber: 3)
+                    }) {
+                        Image("tom")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("S")
+                        self.buttonClick(key: "S")
+    //                    self.conductor.playPad(padNumber: 4)
+                    }) {
+                        Image("tom")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("D")
+                        self.buttonClick(key: "D")
+    //                    self.conductor.playPad(padNumber: 5)
+                    }) {
+                        Image("tom")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+
+                } // HStack
+
+                HStack (spacing: 20){
+
+                    Button(action: {
+                        print("Z")
+                        self.buttonClick(key: "Z")
+    //                    self.conductor.playPad(padNumber: 6)
+                    }) {
+                        Image("snap")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("X")
+                        self.buttonClick(key: "X")
+    //                    self.conductor.playPad(padNumber: 7)
+                    }) {
+                        Image("bass-drum")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                    Button(action: {
+                        print("C")
+                        self.buttonClick(key: "C")
+    //                    self.conductor.playPad(padNumber: 8)
+                    }) {
+                        Image("snap")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+
+                } // HStack
+
+                Spacer()
+
+            } // Vstack
+            .onAppear{
+                print("drum start")
+            }
+            .onDisappear{
+                print("drum end")
+            }
+            
+        }
     }
 
     func buttonClick(key: String) {

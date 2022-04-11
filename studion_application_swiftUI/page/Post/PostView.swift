@@ -14,40 +14,107 @@ struct PostView: View {
         
        var body: some View {
            
-            ZStack{
-                VStack {
-                    List {
-                        ForEach(0..<self.p.count, id: \.self) { index in
-                            VStack{
-//                                Text(self.p[index]!["title"] as! String)
-                                PostCard(
-                                    title: self.p[index]!["title"] as! String, // Dict type on View
-                                    content: self.p[index]!["content"] as! String,
-                                    image: "Studion-original"
-//                                    image: self.p[index]?["image"] as! Link<String>
-                                )
+           if UIDevice.isIpad { // iPad
+               ZStack() {
+//                   NavigationView{
+                   SearchView()
+                    VStack {
+                        List {
+                            ForEach(0..<self.p.count, id: \.self) { index in
+                                VStack{
+//                                   Text(self.p[index]?["audio"] as! String)
+                                        PostCard(
+                                            title: self.p[index]!["title"] as! String, // Dict type on View
+                                            content: self.p[index]!["content"] as! String,
+                                            image: "Studion-original"
+    //                                    image: self.p[index]?["image"] as! Link<String>
+                                        )
+                                    }
+                                }
+                            }
+                            Spacer()
+                        } // vS
+                   
+                        
+                       
+//                    .navigationTitle(SearchView())
+//                    .navigationBarTitleDisplayMode(.inline)
+//                   }.navigationViewStyle(StackNavigationViewStyle())
+                   
+                   
+                   //                    NavigationBar(title: "Posts")
+                                  
+                                  
+                                   .task {
+                                       PostController.sharedInstance.show() { data in
+                                           
+                       //                          print(data)
+                                           let response = data as! Dictionary<String, Any>
+                       //                          print(response)
+                                           let posts = response["posts"] as! Dictionary<String, Any>
+                                           
+                                           p = posts["data"] as! [Dictionary<String, Any>?]
+                                           
+//                                           let audio = p["audios"] as! String
+                                           
+//                                           print("Posts Datas : \(p)")
+                                           
+//                                           print(audio)
+                                   }
+                               }
+                           }
+
+           } else { // iPhone
+               ZStack {
+//                   NavigationView{
+                    VStack {
+                        List {
+                            ForEach(0..<self.p.count, id: \.self) { index in
+                                VStack{
+    //                               Text(self.p[index]!["title"] as! String)
+                                        PostCard(
+                                            title: self.p[index]!["title"] as! String, // Dict type on View
+                                            content: self.p[index]!["content"] as! String,
+                                            image: "Studion-original"
+    //                                    image: self.p[index]?["image"] as! Link<String>
+                                        )
+                                    }
+                                }
                             }
                         }
-                    }
-                    .overlay(
-                        NavigationBar(title: "Posts")
-                    )
-                }
-            }
-           
-            .task {
-                PostController.sharedInstance.show() { data in
-                    
-//                          print(data)
-                        let response = data as! Dictionary<String, Any>
-//                          print(response)
-                        let posts = response["posts"] as! Dictionary<String, Any>
-                    
-                        p = posts["data"] as! [Dictionary<String, Any>?]
-                    
-//                        print("Posts Datas : \(p)")
-            }
-        }
+                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                                Color.clear
+                                    .frame(height: 50)
+ //                                 .background(Material.bar)
+                            }
+                            NavigationBar(title: "Posts")
+                       
+//                    .navigationTitle("Posts")
+//                    .navigationBarTitleDisplayMode(.automatic)
+//                   }.navigationViewStyle(StackNavigationViewStyle())
+                                  
+                                   .task {
+                                       PostController.sharedInstance.show() { data in
+                                           
+                       //                          print(data)
+                                               let response = data as! Dictionary<String, Any>
+                       //                          print(response)
+                                               let posts = response["posts"] as! Dictionary<String, Any>
+                                           
+                                               p = posts["data"] as! [Dictionary<String, Any>?]
+                                           
+                                               print("Posts Datas : \(p)")
+                            
+                                   }
+                               }
+                           }
+               .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
+                   Color.clear
+                       .frame(height: 50)
+//                       .background(Material.bar)
+               }
+
+           } //else
     }
 }
 

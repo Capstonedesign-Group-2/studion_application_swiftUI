@@ -29,10 +29,9 @@ struct StudionRoomList: View {
             ZStack {
                 VStack {
                     
-                    
-                        HStack(spacing: 12) {
+                    HStack(spacing: 12) {
                             Spacer()
-                                .frame(width:20)
+                                .frame(width:25)
                             Text("Studion")
                                 .font(.largeTitle)
                                 .fontWeight(.heavy)
@@ -43,7 +42,12 @@ struct StudionRoomList: View {
                         .padding(.top, isHide ? 0:top!-10)
                         .padding(.top,1)
                     
-                    
+                    Button( action: {
+                            self.roomNumber = 1
+                            self.pageStatus = "/room"
+                        } ) {
+                            Text("room 1")
+                        }
                                     
                     if roomSocket.roomsInfo?.rooms?.count != 0 {
                         
@@ -92,7 +96,6 @@ struct StudionRoomList: View {
 
                                 
                             }
-//                            .navigationTitle("Studion")
                         }
 
                         
@@ -114,7 +117,13 @@ struct StudionRoomList: View {
                 
             
             } // ZStack
-//        }
+            
+//            .navigationTitle("Studion")
+//            .navigationBarTitleDisplayMode(.inline)
+            
+//        } // NavigationView
+//        .navigationViewStyle(StackNavigationViewStyle())
+        
         .onAppear{
             roomSocket.getRoomList()
             
