@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+extension UIDevice { // Check iPad or iPhone
+  static var idiom: UIUserInterfaceIdiom {
+    UIDevice.current.userInterfaceIdiom
+  }
+}
+extension UIDevice {
+static var isIpad: Bool {
+    idiom == .pad
+  }
+  
+  static var isiPhone: Bool {
+    idiom == .phone
+  }
+}
+
+
 struct MainView: View {
     @Binding var pageStatus: String
     @Binding var roomNumber: Int
@@ -19,55 +35,150 @@ struct MainView: View {
     
     var body: some View {
         
-        ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
-            
-            TabView(selection: $mainRouter) {
-                PostView()
-                    .tag("/")
-                    .transition(.move(edge: .top))
-                    .animation(.easeIn)
+        if UIDevice.isIpad {
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+                
+                TabView(selection: $mainRouter) {
+                    PostView()
+                        .tag("/")
+                        .transition(.move(edge: .top))
+                        .animation(.easeIn)
 
-                
-                ChatRoomList()
-                    .tag("/chat")
-              
-                CreateView()
-                    .tag("/post/create")
-                
-                StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
-                    .tag("/studion")
-                
-                SettingView(pageStatus: $pageStatus)
-                    .tag("/setting")
-                
-            }
-            .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-            .ignoresSafeArea(.all, edges: .bottom)
-            
-            HStack(spacing: 0) {
-//                ForEach(tabBarImageNames, id: \.self) { image in
-                ForEach(0..<tabBarImageNames.count) { index in
-                    TabButton(index: index, tabBarImageNames: tabBarImageNames, mainRouter: $mainRouter, currentPage: $currentPage)
                     
-                    if tabBarImageNames[index] != tabBarImageNames.last {
-                        Spacer(minLength: 0)
+                    ChatRoomList()
+                        .tag("/chat")
+                  
+                    CreateView()
+                        .tag("/post/create")
+                    
+                    StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
+                        .tag("/studion")
+                    
+                    SettingView(pageStatus: $pageStatus)
+                        .tag("/setting")
+                    
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    //            .ignoresSafeArea(.all, edges: .bottom)
+                
+                HStack(spacing: 0) {
+    //                ForEach(tabBarImageNames, id: \.self) { image in
+                    ForEach(0..<tabBarImageNames.count) { index in
+                        TabButton(index: index, tabBarImageNames: tabBarImageNames, mainRouter: $mainRouter, currentPage: $currentPage)
+                        
+                        if tabBarImageNames[index] != tabBarImageNames.last {
+                            Spacer(minLength: 0)
+                        }
                     }
                 }
+                .padding(.horizontal, 25)
+                .padding(.vertical, 5)
+                .background(Color.white)
+                .clipShape(Capsule())
+                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
+                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
+                .padding(.horizontal)
+                .padding(.bottom, edge!.bottom == 0 ? 20: 0)
+                
             }
-            .padding(.horizontal, 25)
-            .padding(.vertical, 5)
-            .background(Color.white)
-            .clipShape(Capsule())
-            .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
-            .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
-            .padding(.horizontal)
-            .padding(.bottom, edge!.bottom == 0 ? 20: 0)
-            
+            .ignoresSafeArea(.keyboard, edges: .bottom)
+            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
+        
+        } else {
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+                
+                TabView(selection: $mainRouter) {
+                    PostView()
+                        .tag("/")
+                        .transition(.move(edge: .top))
+                        .animation(.easeIn)
+
+                    
+                    ChatRoomList()
+                        .tag("/chat")
+                  
+                    CreateView()
+                        .tag("/post/create")
+                    
+                    StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
+                        .tag("/studion")
+                    
+                    SettingView(pageStatus: $pageStatus)
+                        .tag("/setting")
+                    
+                }
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+    //            .ignoresSafeArea(.all, edges: .bottom)
+                
+                HStack(spacing: 0) {
+    //                ForEach(tabBarImageNames, id: \.self) { image in
+                    ForEach(0..<tabBarImageNames.count) { index in
+                        TabButton(index: index, tabBarImageNames: tabBarImageNames, mainRouter: $mainRouter, currentPage: $currentPage)
+                        
+                        if tabBarImageNames[index] != tabBarImageNames.last {
+                            Spacer(minLength: 0)
+                        }
+                    }
+                }
+                .padding(.horizontal, 25)
+                .padding(.vertical, 5)
+                .background(Color.white)
+                .clipShape(Capsule())
+                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
+                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
+                .padding(.horizontal)
+                .padding(.bottom, edge!.bottom == 0 ? 20: 0)
+                
+            } //zS
+            .ignoresSafeArea(.keyboard, edges: .bottom)
+            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
         }
-        .ignoresSafeArea(.keyboard, edges: .bottom)
-        .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
-        
-        
+    
+}
+}
+
+struct TabButton: View {
+    var index: Int
+    var tabBarImageNames: [String]
+    
+    @Binding var mainRouter: String
+    @Binding var currentPage: Int
+    
+    var body: some View {
+        Button(action: {
+            print(index)
+            switch tabBarImageNames[index] {
+            case "house" :
+                self.mainRouter = "/"
+                self.currentPage = 0
+            case "message" :
+                self.mainRouter = "/chat"
+                self.currentPage = 1
+            case "plus" :
+                self.mainRouter = "/post/create"
+                self.currentPage = 2
+            case "rectangle.righthalf.inset.filled.arrow.right" :
+                self.mainRouter = "/studion"
+                self.currentPage = 3
+            case "gearshape" :
+                self.mainRouter = "/setting"
+                self.currentPage = 4
+            default:
+                self.mainRouter = "/"
+                self.currentPage = 0
+            }
+        }) {
+            
+            Image(systemName: "\(tabBarImageNames[index])")
+                .foregroundColor(currentPage == index ? Color.green : Color.gray)
+                .padding()
+                
+        }
+    }
+}
+
+
+
 //        VStack {
 //
 //            HStack (spacing: 12){
@@ -147,49 +258,7 @@ struct MainView: View {
 //                })
 //            }
 //        }
-        
-    }
-}
 
-struct TabButton: View {
-    var index: Int
-    var tabBarImageNames: [String]
-    
-    @Binding var mainRouter: String
-    @Binding var currentPage: Int
-    
-    var body: some View {
-        Button(action: {
-            print(index)
-            switch tabBarImageNames[index] {
-            case "house" :
-                self.mainRouter = "/"
-                self.currentPage = 0
-            case "message" :
-                self.mainRouter = "/chat"
-                self.currentPage = 1
-            case "plus" :
-                self.mainRouter = "/post/create"
-                self.currentPage = 2
-            case "rectangle.righthalf.inset.filled.arrow.right" :
-                self.mainRouter = "/studion"
-                self.currentPage = 3
-            case "gearshape" :
-                self.mainRouter = "/setting"
-                self.currentPage = 4
-            default:
-                self.mainRouter = "/"
-                self.currentPage = 0
-            }
-        }) {
-            
-            Image(systemName: "\(tabBarImageNames[index])")
-                .foregroundColor(currentPage == index ? Color.green : Color.gray)
-                .padding()
-                
-        }
-    }
-}
 
 //struct MainView_Previews: PreviewProvider {
 //    static var previews: some View {
