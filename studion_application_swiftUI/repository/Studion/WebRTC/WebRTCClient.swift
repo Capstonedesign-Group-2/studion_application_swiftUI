@@ -53,6 +53,7 @@ final class WebRTCClient: NSObject {
 
     let socket:SocketIOClient = SocketIO.sharedInstance.getSocket()
 
+    
     func joinRoom(room: Int) {
         do {
             let userInfo = UserInfo()
@@ -96,7 +97,7 @@ final class WebRTCClient: NSObject {
                 let socketID = userDictionary["id"] as! String
 
                 self.socketID = socketID
-                let peerConnection = self.createPeerConnection(name: name, socketID: socketID) as! RTCPeerConnection
+                let peerConnection = self.createPeerConnection(name: name, socketID: socketID, late: true) as! RTCPeerConnection
                 
                 let userInfo = UserInfo.userInfo.getUserInfo()
                 
@@ -108,7 +109,7 @@ final class WebRTCClient: NSObject {
                         "dcDic" : self.dcDic,
 //                        "volumeDic" : self.volumeDic
                         "userArray" : self.userArray,
-                        "nameDic" : self.nameDic
+                        "nameDic" : self.nameDic,
                     ]
                     
                     handler(dic)
@@ -118,7 +119,7 @@ final class WebRTCClient: NSObject {
         }
     }
 
-    func createPeerConnection(name: String, socketID: String) -> RTCPeerConnection{
+    func createPeerConnection(name: String, socketID: String, late: Bool) -> RTCPeerConnection{
 
         print("createPeerConnection")
         let iceServers:[RTCIceServer]
@@ -147,7 +148,7 @@ final class WebRTCClient: NSObject {
             userArray.append(socketID)
         }
 
-        self.createMediaSenders(peerConnection: peerConnection, name: name, socketID: socketID)
+        self.createMediaSenders(peerConnection: peerConnection, name: name, socketID: socketID, late: late)
         self.configureAudioSession()
         print("createPeerConnection end \(peerConnection)")
 
@@ -162,7 +163,7 @@ final class WebRTCClient: NSObject {
 //  ************************************************************************************
 
 
-    func createMediaSenders(peerConnection: RTCPeerConnection, name: String, socketID: String) {
+    func createMediaSenders(peerConnection: RTCPeerConnection, name: String, socketID: String, late: Bool) {
         
         print("createMediaSenders")
         let streamId = "stream"
@@ -174,10 +175,15 @@ final class WebRTCClient: NSObject {
         
         
         // Data
-        if let dataChannel = createDataChannel(peerConnection: peerConnection, name: name, socketID: socketID) {
-          dataChannel.delegate = self
-//          self.localDataChannel = dataChannel
-        }
+//        if (late == true) {
+            if let dataChannel = createDataChannel(peerConnection: peerConnection, name: name, socketID: socketID) {
+              dataChannel.delegate = self
+    //          self.localDataChannel = dataChannel
+            
+                
+            }
+//        }
+        
 
 
 
@@ -185,6 +191,9 @@ final class WebRTCClient: NSObject {
     }
 
     func createDataChannel(peerConnection: RTCPeerConnection, name: String, socketID: String) -> RTCDataChannel?{
+        
+        // 나중에 들어갔을 때
+        
         let config = RTCDataChannelConfiguration()
         
         guard let dataChannel = peerConnection.dataChannel(forLabel: socket.sid, configuration: config) else {
@@ -193,6 +202,16 @@ final class WebRTCClient: NSObject {
         }
 
         self.dcDic[socketID] = dataChannel
+        
+        print("***************************")
+        for key in dcDic.keys {
+            
+            print(key)
+            print(dcDic[key]!.label)
+            
+        }
+        
+        print("***************************")
         return dataChannel
     }
 
@@ -276,7 +295,7 @@ final class WebRTCClient: NSObject {
                     "dcDic" : self.dcDic,
 //                    "volumeDic" : self.volumeDic
                     "userArray" : self.userArray,
-                    "nameDic" : self.nameDic
+                    "nameDic" : self.nameDic,
                 ]
                 
                 handler(dic)
@@ -296,7 +315,7 @@ final class WebRTCClient: NSObject {
 
 //            let peerConnection: RTCPeerConnection = self.pcDic[response["offerSendID"] as! String] as! RTCPeerConnection
 
-            let peerConnection: RTCPeerConnection = self.createPeerConnection(name: response["offerSendName"] as! String, socketID: response["offerSendID"] as! String)
+            let peerConnection: RTCPeerConnection = self.createPeerConnection(name: response["offerSendName"] as! String, socketID: response["offerSendID"] as! String, late: false)
             print("core?")
             
             let createSdp: RTCSessionDescription = RTCSessionDescription(type: RTCSdpType.offer, sdp: sdp["sdp"] as! String)
@@ -310,7 +329,7 @@ final class WebRTCClient: NSObject {
                         "dcDic" : self.dcDic,
 //                        "volumeDic" : self.volumeDic
                         "userArray" : self.userArray,
-                        "nameDic" : self.nameDic
+                        "nameDic" : self.nameDic,
                     ]
                     
                     handler(dic)
@@ -359,24 +378,30 @@ final class WebRTCClient: NSObject {
             let response = data[0] as! Dictionary<String, Any>
             let candidateData = response["candidate"] as! Dictionary<String, Any>
 
-            print(candidateData)
             
-            let peerConnection: RTCPeerConnection = self.pcDic[response["candidateSendID"] as! String]!
+//            print("-----------------------------")
+//            print((candidateData["candidate"] as! String).count != 0)
+//            print("-----------------------------")
+            if((candidateData["candidate"] as! String).count != 0) {
+                print(candidateData)
+                let peerConnection: RTCPeerConnection = self.pcDic[response["candidateSendID"] as! String]!
 
-            let candidate = RTCIceCandidate(sdp: candidateData["candidate"] as! String, sdpMLineIndex: Int32(candidateData["sdpMLineIndex"] as! Int), sdpMid: candidateData["sdpMid"] as! String)
+                let candidate = RTCIceCandidate(sdp: candidateData["candidate"] as! String, sdpMLineIndex: Int32(candidateData["sdpMLineIndex"] as! Int), sdpMid: candidateData["sdpMid"] as! String)
 
-            peerConnection.add( candidate )
+                peerConnection.add( candidate )
+                
+                
+                let dic: [String: Any] = [
+                    "pcDic" : self.pcDic,
+                    "dcDic" : self.dcDic,
+    //                "volumeDic" : self.volumeDic
+                    "userArray" : self.userArray,
+                    "nameDic" : self.nameDic,
+                ]
+                
+                handler(dic)
+            }
             
-            
-            let dic: [String: Any] = [
-                "pcDic" : self.pcDic,
-                "dcDic" : self.dcDic,
-//                "volumeDic" : self.volumeDic
-                "userArray" : self.userArray,
-                "nameDic" : self.nameDic
-            ]
-            
-            handler(dic)
 
         }
     }
@@ -425,7 +450,7 @@ final class WebRTCClient: NSObject {
                 "dcDic" : self.dcDic,
 //                "volumeDic" : self.volumeDic
                 "userArray" : self.userArray,
-                "nameDic" : self.nameDic
+                "nameDic" : self.nameDic,
             ]
             
             handler(dic)
@@ -436,17 +461,17 @@ final class WebRTCClient: NSObject {
         
         for key in self.pcDic.keys {
             self.pcDic[key]?.close()
-            print("---------------------------------")
-            print("exit pcDic : \(self.pcDic[key])")
-            print("---------------------------------")
+//            print("---------------------------------")
+//            print("exit pcDic : \(self.pcDic[key])")
+//            print("---------------------------------")
         }
         
         self.pcDic = [:]
         for key in self.dcDic.keys {
             self.dcDic[key]?.close()
-            print("---------------------------------")
-            print("exit dcDic : \(self.dcDic[key])")
-            print("---------------------------------")
+//            print("---------------------------------")
+//            print("exit dcDic : \(self.dcDic[key])")
+//            print("---------------------------------")
             
         }
         self.dcDic = [:]
@@ -463,11 +488,11 @@ final class WebRTCClient: NSObject {
 extension WebRTCClient: RTCPeerConnectionDelegate {
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didChange stateChanged: RTCSignalingState) {
-//    debugPrint("peerConnection new signaling state: \(stateChanged)")
+    debugPrint("peerConnection new signaling state: \(stateChanged)")
   }
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didAdd stream: RTCMediaStream) {
-//    debugPrint("peerConnection did add stream")
+    debugPrint("peerConnection did add stream")
 //      print("-----------------------------------")
 //      print(peerConnection)
 //      print(stream.audioTracks[0].source)
@@ -479,7 +504,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
   func peerConnection(_ peerConnection: RTCPeerConnection, didRemove stream: RTCMediaStream) {
 //    debugPrint("peerConnection did remove stream")
       print("peerConnection remove stream")
-      peerConnection.remove(stream)
+//      peerConnection.remove(stream)
   }
 
   func peerConnectionShouldNegotiate(_ peerConnection: RTCPeerConnection) {
@@ -519,8 +544,8 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
   }
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didRemove candidates: [RTCIceCandidate]) {
-      print("peerConnection remove candidate")
-      peerConnection.remove(candidates)
+//      print("peerConnection remove candidate")
+//      peerConnection.remove(candidates)
 //    debugPrint("peerConnection did remove candidate(s)")
   }
 
@@ -528,8 +553,15 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
     debugPrint("peerConnection did open data channel")
       print(dataChannel.label)
       self.dcDic[dataChannel.label] = dataChannel
-//    self.remoteDataChannel = dataChannel
-
+      
+      print("----------------------")
+      for key in dcDic.keys {
+          print(key)
+          print(dcDic[key]!.label)
+      }
+      print("----------------------")
+      
+      
   }
 }
 

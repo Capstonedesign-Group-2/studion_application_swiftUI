@@ -124,7 +124,7 @@ struct StudionRoomList: View {
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
             AppDelegate.orientationLock = .portrait
             
-            print(roomSocket.roomsInfo?.rooms)
+//            print(roomSocket.roomsInfo?.rooms)
         }
         
         
@@ -157,8 +157,7 @@ final class RoomSocket: ObservableObject {
                         self.roomsInfo = try decoder.decode(RoomCodableStruct.roomsInfo.self, from: responseData)
                         
                         print("room list update")
-        //                print(self.roo
-                        print(response)
+
                     } catch {
                         print("error")
                     }
@@ -173,9 +172,7 @@ final class RoomSocket: ObservableObject {
                         let responseData = try JSONSerialization.data(withJSONObject: response, options: [.fragmentsAllowed])
 
                         self.roomsInfo = try decoder.decode(RoomCodableStruct.roomsInfo.self, from: responseData)
-        //                print(self.roomsInfo)
                         print("get room list on")
-                        print(response)
                     } catch {
                         print("error")
                     }
@@ -188,7 +185,6 @@ final class RoomSocket: ObservableObject {
                 
                 let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
         
-//        let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
     }
     
    

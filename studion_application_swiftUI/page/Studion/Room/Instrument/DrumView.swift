@@ -336,8 +336,14 @@ struct DrumView: View {
                 let buffer = RTCDataBuffer(data: jsonData!, isBinary: true)
 //
                 dataChannel.sendData(buffer)
-                
+
             }
+//            for dc in dcArray {
+//                let dataChannel = dc as! RTCDataChannel
+//
+//                let buffer = RTCDataBuffer(data: jsonData!, isBinary: true)
+//                dataChannel.sendData(buffer)
+//            }
             
         } catch {
             print("error")

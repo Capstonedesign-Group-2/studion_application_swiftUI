@@ -46,9 +46,7 @@ struct RoomView: View {
         .onDisappear{
             AppDelegate.orientationLock = .portrait
             print("room end")
-            webRTCConnect.exitRoom()
-            
-            
+            webRTCConnect.exitRoom()            
             
         }
         
