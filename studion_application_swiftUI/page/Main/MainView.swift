@@ -61,7 +61,7 @@ struct MainView: View {
                 }
                 
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-                .ignoresSafeArea(.all, edges: .bottom)
+//                .ignoresSafeArea(.all, edges: .bottom)
                 
                 HStack(spacing: 0) {
     //                ForEach(tabBarImageNames, id: \.self) { image in
@@ -105,8 +105,8 @@ struct MainView: View {
                         .tag("/setting")
                     
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-    //            .ignoresSafeArea(.all, edges: .bottom)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // swipe
+                .ignoresSafeArea(.all, edges: .bottom)
                 
                 HStack(spacing: 0) {
     //                ForEach(tabBarImageNames, id: \.self) { image in

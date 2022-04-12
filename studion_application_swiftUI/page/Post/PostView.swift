@@ -84,8 +84,14 @@ struct PostView: View {
                                     }
                                 }
                             }
+                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                                Color.clear
+                                    .frame(height: 50)
+                                  .background(Material.bar)
+                            }
                         }
                             NavigationBar(title: "Posts")
+
                        
 //                    .navigationTitle("Posts")
 //                    .navigationBarTitleDisplayMode(.automatic)
