@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import URLImage
 
 struct PostCard: View {
     
@@ -15,7 +16,7 @@ struct PostCard: View {
     
     @State var title = ""
     @State var content = ""
-    @State var image = ""
+    @State var image: String = ""
     
     var body: some View {
         ZStack{
@@ -28,11 +29,28 @@ struct PostCard: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                     
-                    Image(image)
-                        .matchedGeometryEffect(id: "image", in: namespace)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .shadow(color: .gray, radius: 5)
-                        .padding()
+                    
+                    if(image != ""){
+                        URLImage(url: URL(string: image)!,
+                                 content: { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .matchedGeometryEffect(id: "image", in: namespace)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding()
+                                .shadow(color: .gray, radius: 5)
+                        }
+                        )
+
+                    } else {
+                        Image("Studion_original")
+                            .matchedGeometryEffect(id: "image", in: namespace)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .shadow(color: .gray, radius: 5)
+                            .padding()
+                    }
+
                 }
             } else {
                 VStack {
@@ -42,13 +60,29 @@ struct PostCard: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
                     
-                    Image(image)
-                        .matchedGeometryEffect(id: "image", in: namespace)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding()
-                        .shadow(color: .gray, radius: 5)
+                    if(image != ""){
+                        URLImage(url: URL(string: image)!,
+                                 content: { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .matchedGeometryEffect(id: "image", in: namespace)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding()
+                                .shadow(color: .gray, radius: 5)
+                        }
+                        )
+
+                    } else {
+                        Image("Studion_original")
+                            .matchedGeometryEffect(id: "image", in: namespace)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                            .shadow(color: .gray, radius: 5)
+                            .padding()
+                    }
                     
                     Text(content)
+                        .fontWeight(.bold)
                         .matchedGeometryEffect(id: "content", in: namespace)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
@@ -67,7 +101,7 @@ struct PostCard: View {
 
 struct PostCard_Previews: PreviewProvider {
     static var previews: some View {
-        PostCard(title: "title", content: "content", image: "Studion-original")
+        PostCard(title: "title", content: "content", image: "")
     }
 }
 

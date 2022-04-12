@@ -67,10 +67,10 @@ public class PostController {
             handler(response_data)
     }
             
-}
+} // create
     
 //****************************************************************************************************************
-//    Read
+//    Show
 //****************************************************************************************************************
     
     public func show(handler: @escaping (Any) -> Void){
@@ -93,7 +93,6 @@ public class PostController {
                       let response_data: [String: Any] = [
                           "status" : "Success",
                           "data" : data,
-                          "current_page": 1
                       ]
                       do{
                           handler(data)
@@ -103,7 +102,7 @@ public class PostController {
                       
                     }
                   
-                  print("Xcode Data: \(data)")
+//                  print("Xcode Data: \(data)")
                   
               case .failure(let error):
                   let response_data: [String: Any] = [
@@ -114,7 +113,7 @@ public class PostController {
                   
                   handler(response_data)
               }
-
           }
-    }
+    } // show
+        
 }

@@ -11,41 +11,40 @@ import UIKit
 struct PostView: View {
     
     @State var p: [Dictionary<String, Any>?] = []
+    
+    init() {
+        if UIDevice.isIpad {
+            // Disable Scrollbar
+            UITableView.appearance().showsVerticalScrollIndicator = false
+        }
+    }
+
         
        var body: some View {
            
            if UIDevice.isIpad { // iPad
+                              
                ZStack() {
-//                   NavigationView{
-                   SearchView()
                     VStack {
                         List {
                             ForEach(0..<self.p.count, id: \.self) { index in
+                                
+                                var images = self.p[index]!["images"] as! [Dictionary<String, Any>?]
+                                
                                 VStack{
-//                                   Text(self.p[index]?["audio"] as! String)
-                                        PostCard(
-                                            title: self.p[index]!["title"] as! String, // Dict type on View
-                                            content: self.p[index]!["content"] as! String,
-                                            image: "Studion-original"
-    //                                    image: self.p[index]?["image"] as! Link<String>
+                                    PostCard(
+                                        title: self.p[index]!["title"] as! String, // Dict type on View
+                                        content: self.p[index]!["content"] as! String,
+                                        image: images[0]?["link"] as! String
                                         )
                                     }
                                 }
-                            }
-                            Spacer()
+                            } // list
+                            .padding(.horizontal, 150)
+
                         } // vS
-                   
-                        
-                       
-//                    .navigationTitle(SearchView())
-//                    .navigationBarTitleDisplayMode(.inline)
-//                   }.navigationViewStyle(StackNavigationViewStyle())
-                   
-                   
-                   //                    NavigationBar(title: "Posts")
-                                  
-                                  
-                                   .task {
+     
+                                   .onAppear {
                                        PostController.sharedInstance.show() { data in
                                            
                        //                          print(data)
@@ -55,45 +54,44 @@ struct PostView: View {
                                            
                                            p = posts["data"] as! [Dictionary<String, Any>?]
                                            
-//                                           let audio = p["audios"] as! String
-                                           
-//                                           print("Posts Datas : \(p)")
-                                           
-//                                           print(audio)
+                                       }
+                                   }.onDisappear(){
+                                       print("PostView end")
                                    }
-                               }
+                   
+                                   .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
+                                       Color.clear
+                                           .background(.ultraThinMaterial)
+                                           .frame(height: 50)
+                                   }
+                                  
                            }
 
            } else { // iPhone
+               
                ZStack {
 //                   NavigationView{
                     VStack {
                         List {
                             ForEach(0..<self.p.count, id: \.self) { index in
                                 VStack{
-    //                               Text(self.p[index]!["title"] as! String)
+                                    var images = self.p[index]!["images"] as! [Dictionary<String, Any>?]
                                         PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
-                                            image: "Studion-original"
-    //                                    image: self.p[index]?["image"] as! Link<String>
+                                            image: images[0]?["link"] as! String
                                         )
                                     }
                                 }
                             }
                         }
-                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
-                                Color.clear
-                                    .frame(height: 50)
- //                                 .background(Material.bar)
-                            }
                             NavigationBar(title: "Posts")
                        
 //                    .navigationTitle("Posts")
 //                    .navigationBarTitleDisplayMode(.automatic)
 //                   }.navigationViewStyle(StackNavigationViewStyle())
                                   
-                                   .task {
+                                   .onAppear {
                                        PostController.sharedInstance.show() { data in
                                            
                        //                          print(data)
@@ -107,6 +105,10 @@ struct PostView: View {
                             
                                    }
                                }
+                                   .onDisappear{
+                                       print("PostView end")
+                                   }
+                   
                            }
                .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
                    Color.clear
@@ -119,13 +121,11 @@ struct PostView: View {
 }
 
 
-
-
-struct PostView_Previews: PreviewProvider {
-    static var previews: some View {
-        PostView()
-    }
-}
+//struct PostView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        PostView()
+//    }
+//}
 
 //          NavigationView{
 //               List(0 ..< 30) { item in
