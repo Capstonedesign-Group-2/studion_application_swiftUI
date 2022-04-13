@@ -10,8 +10,8 @@ import AVFoundation
 
 var instrument = ["drum", "piano_button", "guitar", "rec"]
 struct InstrumentControllerView: View {
-    @Binding var mainRouter: String
-    @Binding var pageStatus: String
+//    @Binding var mainRouter: String
+//    @Binding var pageStatus: String
     
     var dcDic:[String: Any]
     var pcDic:[String: Any]
@@ -197,8 +197,8 @@ struct InstrumentControllerView: View {
                                 self.showRightMenu.toggle()
                             } else {
                                 print("socket connected")
-                                self.mainRouter = "/studion"
-                                self.pageStatus = "/"
+//                                self.mainRouter = "/studion"
+//                                self.pageStatus = "/"
                             }
                         }) {
                             if showLeftMenu == false {
@@ -404,8 +404,8 @@ struct InstrumentControllerView: View {
                                 self.showRightMenu.toggle()
                             } else {
                                 print("socket connected")
-                                self.mainRouter = "/studion"
-                                self.pageStatus = "/"
+//                                self.mainRouter = "/studion"
+//                                self.pageStatus = "/"
                             }
                         }) {
                             if showLeftMenu == false {
@@ -455,9 +455,9 @@ struct InstrumentControllerView: View {
 
 struct InstrumentButton: View {
     var image: String
-    
+
     @Binding var selectedTab: String
-    
+
     var body: some View {
         Button(action: {
             selectedTab = image
@@ -469,7 +469,7 @@ struct InstrumentButton: View {
                 .frame(width: 24, height: 24)
                 .foregroundColor(selectedTab == image ? Color.gray: Color.black)
                 .padding()
-            
+
         }
     }
 }

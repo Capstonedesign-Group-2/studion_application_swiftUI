@@ -20,6 +20,8 @@ struct StudionRoomList: View {
     
     @State var roomInfo: RoomCodableStruct.roomInfo?
     
+    @State var selectRoomCheck = false
+    @State var selectRoomNumber = -1
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
@@ -28,19 +30,6 @@ struct StudionRoomList: View {
 //        NavigationView {
             ZStack {
                 VStack {
-                    
-                    HStack(spacing: 12) {
-                            Spacer()
-                                .frame(width:25)
-                            Text("Studion")
-                                .font(.largeTitle)
-                                .fontWeight(.heavy)
-                                .foregroundColor(.black)
-                            Spacer(minLength: 0)
-                        }
-                        .padding(.horizontal)
-                        .padding(.top, isHide ? 0:top!-10)
-                        .padding(.top,1)
                     
                                     
                     if roomSocket.roomsInfo?.rooms?.count != 0 {
@@ -89,7 +78,16 @@ struct StudionRoomList: View {
                                 
 
                                 
+                            }   // ScrollView
+//                            .navigationTitle("Studion")
+//                            .navigationBarTitleDisplayMode(.inline)
+                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                                Color.clear
+                                    .frame(height: 50)
+                                             .background(Material.bar)
                             }
+                            .navigationTitle("room")
+
                         }
 
                         
@@ -98,15 +96,30 @@ struct StudionRoomList: View {
                             Spacer()
                             Text("방이 읎어")
 //                                .navigationTitle("Studion")
+                                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                                    Color.clear
+                                        .frame(height: 50)
+                                                 .background(Material.bar)
+                                }
+                                .navigationTitle("room")
+
                             Spacer()
 
                         }
                     
 
                         
-                    }
+                    }   // VStack
                 
-                RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo)
+                                
+                
+//                NavigationBar(title: "Studion")
+                
+                RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo, selectRoomCheck: $selectRoomCheck, selectRoomNumber: $selectRoomNumber)
+                
+                
+                
+                NavigationLink(destination: RoomView(roomNumber: selectRoomNumber), isActive: $selectRoomCheck , label: {})
                 
                 
             
@@ -115,8 +128,9 @@ struct StudionRoomList: View {
 //            .navigationTitle("Studion")
 //            .navigationBarTitleDisplayMode(.inline)
             
+            
 //        } // NavigationView
-//        .navigationViewStyle(StackNavigationViewStyle())
+//        .navigationViewStyle(.stack)
         
         .onAppear{
             roomSocket.getRoomList()

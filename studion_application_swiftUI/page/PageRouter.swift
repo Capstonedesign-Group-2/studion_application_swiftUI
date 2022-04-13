@@ -13,7 +13,7 @@ struct PageRouter: View {
     @State var mainRouter: String = "/"
     
     var body: some View {
-//        NavigationView {
+        NavigationView {
             VStack {
                 switch pageStatus {
                 case "/splashScreen":
@@ -37,15 +37,16 @@ struct PageRouter: View {
                         .onAppear{ print("/ start") }
                         .onDisappear{ print("/ end") }
 
-                case "/room":
-                    RoomView(pageStatus: $pageStatus, mainRouter: $mainRouter, roomNumber: roomNumber)
+//                case "/room":
+//                    RoomView(pageStatus: $pageStatus, mainRouter: $mainRouter, roomNumber: roomNumber)
 
                 default :
                     SplashScreen(pageStatus: $pageStatus)
                 }
 
             
-//        } // NavigationView
+        } // NavigationView
+            .navigationViewStyle(.stack)
         
         
     }

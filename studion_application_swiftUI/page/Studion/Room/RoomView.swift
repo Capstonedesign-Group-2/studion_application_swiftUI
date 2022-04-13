@@ -12,8 +12,8 @@ import CoreAudioTypes
 import AVFoundation
 
 struct RoomView: View {
-    @Binding var pageStatus: String
-    @Binding var mainRouter: String
+//    @Binding var pageStatus: String
+//    @Binding var mainRouter: String
     var roomNumber: Int
         
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -24,7 +24,9 @@ struct RoomView: View {
     @ObservedObject var webRTCConnect = WebRTCConnect()
     
     var body: some View {
-        InstrumentControllerView(mainRouter: $mainRouter, pageStatus: $pageStatus, dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic, userArray: webRTCConnect.userArray, nameDic: webRTCConnect.nameDic)
+        InstrumentControllerView(dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic, userArray: webRTCConnect.userArray, nameDic: webRTCConnect.nameDic)
+        
+//        Text(WebRTCDictionaryController.sharedInstance.dcDic.description)
         .onAppear{
                 getRoomNumber = roomNumber
                 
@@ -39,16 +41,17 @@ struct RoomView: View {
 //            }
             
                 
-                UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation") // Forcing the rotation to portrait
-                AppDelegate.orientationLock = .landscapeRight
+//                UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation") // Forcing the rotation to portrait
+//                AppDelegate.orientationLock = .landscapeRight
             }
         
         .onDisappear{
-            AppDelegate.orientationLock = .portrait
             print("room end")
-            webRTCConnect.exitRoom()            
+            webRTCConnect.exitRoom()
             
         }
+        .navigationBarBackButtonHidden(false)
+        .navigationBarItems(leading: Text("asdf"), trailing: Text("123123"))
         
     }
 }
@@ -106,13 +109,18 @@ final class WebRTCConnect: ObservableObject {
         }
         webRTCClient!.userExit() { data in
             let response = data as! Dictionary<String, Any>
+            
+            
             DispatchQueue.main.async {
                 self.pcDic = response["pcDic"] as! [String : Any]
                 self.dcDic = response["dcDic"] as! [String : Any]
-//                self.volumeDic = response["volumeDic"] as! [String: Any]
                 self.userArray = response["userArray"] as! [String]
                 self.nameDic = response["nameDic"] as! [String: String]
             }
+            
+            WebRTCDictionaryController.sharedInstance.hennkou = true
+            
+            
         }
         webRTCClient!.getCandidate() {data in
             let response = data as! Dictionary<String, Any>
@@ -137,8 +145,9 @@ final class WebRTCConnect: ObservableObject {
         webRTCClient!.exit()
         print("socket connected")
         socket.emit("exit_room")
+        VolumeController.sharedInstance.setEixtState()
         
-        webRTCClient = nil
+//        webRTCClient = nil
         print("room exit")
     }
 }

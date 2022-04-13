@@ -21,12 +21,10 @@ protocol WebRTCClientDelegate: AnyObject {
 final class WebRTCClient: NSObject {
     
 
-    var pcDic: [String: RTCPeerConnection] = [:]
-    var dcDic: [String: RTCDataChannel] = [:]
-    var nameDic: [String: String] = [:]
-    var userArray: [String] = []
-
-
+//    var pcDic: [String: RTCPeerConnection] = [:]
+//    var dcDic: [String: RTCDataChannel] = [:]
+//    var nameDic: [String: String] = [:]
+//    var userArray: [String] = []
 
     private static let factory: RTCPeerConnectionFactory = {
       RTCInitializeSSL()
@@ -55,66 +53,81 @@ final class WebRTCClient: NSObject {
 
     
     func joinRoom(room: Int) {
-        do {
-            let userInfo = UserInfo()
-            let user = UserInfo.userInfo.getUserInfo()!
-            
-            
+        
+            do {
+                let userInfo = UserInfo()
+                let user = UserInfo.userInfo.getUserInfo()!
+                
+                
 
-            let userData : [String: Any] = [
-                "id" : user.id as Any,
-                "name" : user.name as Any,
-                "email" : user.email as Any,
-                "image" : user.image as Any,
-                "created_at" : user.created_at as Any,
-                "updated_at" : user.updated_at as Any,
-            ]
-            let data : [String: Any] = [
-                "room_id" : room,
-                "user" : userData,
-            ]
-            print(2)
-            socket.emit("join_room", data)
-        } catch {
-            print("user info error")
-        }
+                let userData : [String: Any] = [
+                    "id" : user.id as Any,
+                    "name" : user.name as Any,
+                    "email" : user.email as Any,
+                    "image" : user.image as Any,
+                    "created_at" : user.created_at as Any,
+                    "updated_at" : user.updated_at as Any,
+                ]
+                let data : [String: Any] = [
+                    "room_id" : room,
+                    "user" : userData,
+                ]
+                print("2222222222222222222222222222222222222222222222")
+                socket.emit("join_room", data)
+            } catch {
+                print("user info error")
+            }
+            
+        
+        
 
     }
 
     func allUsers(handler: @escaping (Any) -> Void) {
         socket.on("all_users") {data, ack in
-            print("[room] allUsers")
-            let users: [Any] = data[0] as! [NSDictionary]
-            print(data)
+            print("[room] allUsers :\(VolumeController.sharedInstance.getEnterState())")
+            if(VolumeController.sharedInstance.getEnterState() == false) {
+                VolumeController.sharedInstance.setEnterState()
+                let users: [Any] = data[0] as! [NSDictionary]
+                print(users)
 
+                for user in users {
 
-            for user in users {
+                    print("for user in users")
+                    let userDictionary = user as! Dictionary<String, Any>
 
-                print("for user in users")
-                let userDictionary = user as! Dictionary<String, Any>
+                    let name = userDictionary["name"] as! String
+                    let socketID = userDictionary["id"] as! String
 
-                let name = userDictionary["name"] as! String
-                let socketID = userDictionary["id"] as! String
-
-                self.socketID = socketID
-                let peerConnection = self.createPeerConnection(name: name, socketID: socketID, late: true) as! RTCPeerConnection
-                
-                let userInfo = UserInfo.userInfo.getUserInfo()
-                
-                self.offer(peerConnection: peerConnection, name: (userInfo?.name)!, socketID: socketID) { data in
-                    print("offer end")
+                    self.socketID = socketID
+                    let peerConnection = self.createPeerConnection(name: name, socketID: socketID, late: true) as! RTCPeerConnection
                     
-                    let dic: [String: Any] = [
-                        "pcDic" : self.pcDic,
-                        "dcDic" : self.dcDic,
-//                        "volumeDic" : self.volumeDic
-                        "userArray" : self.userArray,
-                        "nameDic" : self.nameDic,
-                    ]
+                    let userInfo = UserInfo.userInfo.getUserInfo()
                     
-                    handler(dic)
+                    self.offer(peerConnection: peerConnection, name: (userInfo?.name)!, socketID: socketID) { data in
+                        print("offer end")
+                        
+                        let dic: [String: Any] = [
+//                            "pcDic" : self.pcDic,
+//                            "dcDic" : self.dcDic,
+//    //                        "volumeDic" : self.volumeDic
+//                            "userArray" : self.userArray,
+//                            "nameDic" : self.nameDic,
+                            "pcDic" : WebRTCDictionaryController.sharedInstance.pcDic,
+                            "dcDic" : WebRTCDictionaryController.sharedInstance.dcDic,
+    //                        "volumeDic" : self.volumeDic
+                            "userArray" : WebRTCDictionaryController.sharedInstance.userArray,
+                            "nameDic" : WebRTCDictionaryController.sharedInstance.nameDic
+                        ]
+                        
+                        handler(dic)
+                    }
                 }
+                
+                
             }
+            
+            
 
         }
     }
@@ -123,7 +136,8 @@ final class WebRTCClient: NSObject {
 
         print("createPeerConnection")
         let iceServers:[RTCIceServer]
-        iceServers = [RTCIceServer.init( urlStrings: ["stun:stun.l.google.com:19302", "turn:35.77.186.121:3478"], username: "turn", credential: "dls980728")]
+//        iceServers = [RTCIceServer.init( urlStrings: ["stun:stun.l.google.com:19302", "turn:35.77.186.121:3478"], username: "turn", credential: "dls980728")]
+        iceServers = [RTCIceServer.init( urlStrings: ["stun:stun.l.google.com:19302"])]
 
         let config = RTCConfiguration()
         config.iceServers = iceServers
@@ -140,12 +154,20 @@ final class WebRTCClient: NSObject {
 
         peerConnection = WebRTCClient.factory.peerConnection(with: config, constraints: constraints, delegate: self)
 
-        self.pcDic[socketID] = peerConnection
+//        self.pcDic[socketID] = peerConnection
+        WebRTCDictionaryController.sharedInstance.pcDic[socketID] = peerConnection
+        
 //        self.volumeDic[socketID] = UserVolumeStruct.volume(socketId: socketID, volume: 0.8, masterVolume: 0.8)
-        self.nameDic[socketID] = name
+//        self.nameDic[socketID] = name
+        WebRTCDictionaryController.sharedInstance.nameDic[socketID] = name
+        
         VolumeController.sharedInstance.setVolumeDic(socketID: socketID)
-        if(userArray.contains(socketID) == false) {
-            userArray.append(socketID)
+//        if(userArray.contains(socketID) == false) {
+//            userArray.append(socketID)
+//        }
+        
+        if(WebRTCDictionaryController.sharedInstance.userArray.contains(socketID) == false) {
+            WebRTCDictionaryController.sharedInstance.userArray.append(socketID)
         }
 
         self.createMediaSenders(peerConnection: peerConnection, name: name, socketID: socketID, late: late)
@@ -175,14 +197,14 @@ final class WebRTCClient: NSObject {
         
         
         // Data
-//        if (late == true) {
+        if (late == true) {
             if let dataChannel = createDataChannel(peerConnection: peerConnection, name: name, socketID: socketID) {
               dataChannel.delegate = self
     //          self.localDataChannel = dataChannel
             
                 
             }
-//        }
+        }
         
 
 
@@ -201,17 +223,18 @@ final class WebRTCClient: NSObject {
           return nil
         }
 
-        self.dcDic[socketID] = dataChannel
+//        self.dcDic[socketID] = dataChannel
+        WebRTCDictionaryController.sharedInstance.dcDic[socketID] = dataChannel
         
-        print("***************************")
-        for key in dcDic.keys {
-            
-            print(key)
-            print(dcDic[key]!.label)
-            
-        }
-        
-        print("***************************")
+//        print("***************************")
+//        for key in dcDic.keys {
+//
+//            print(key)
+//            print(dcDic[key]!.label)
+//
+//        }
+//
+//        print("***************************")
         return dataChannel
     }
 
@@ -263,6 +286,7 @@ final class WebRTCClient: NSObject {
                 "offerReceiveID" : socketID
             ]
 
+            print("sendOffer")
             self.socket.emit("offer", offer as! SocketData)
 
             completion(sdp)
@@ -284,22 +308,32 @@ final class WebRTCClient: NSObject {
 
             let sdp: RTCSessionDescription = RTCSessionDescription(type: RTCSdpType.answer, sdp: answerSDP["sdp"] as! String)
 
-//            print(answer)
-            let peerConnection = self.pcDic[answer["answerSendID"] as! String]! as RTCPeerConnection
-//
-            peerConnection.setRemoteDescription(sdp) {data in
-                print("daas")
-                
-                let dic: [String: Any] = [
-                    "pcDic" : self.pcDic,
-                    "dcDic" : self.dcDic,
-//                    "volumeDic" : self.volumeDic
-                    "userArray" : self.userArray,
-                    "nameDic" : self.nameDic,
-                ]
-                
-                handler(dic)
-            }
+//            print(answer["answerSendID"] as! String)
+//            print(pcDic)
+//            if(self.pcDic[answer["answerSendID"] as! String] != nil) {
+//                let peerConnection = self.pcDic[answer["answerSendID"] as! String]! as RTCPeerConnection
+                let peerConnection = WebRTCDictionaryController.sharedInstance.pcDic[answer["answerSendID"] as! String]! as RTCPeerConnection
+    //
+                peerConnection.setRemoteDescription(sdp) {data in
+    //                print("daas")
+                    
+                    let dic: [String: Any] = [
+//                        "pcDic" : self.pcDic,
+//                        "dcDic" : self.dcDic,
+//    //                    "volumeDic" : self.volumeDic
+//                        "userArray" : self.userArray,
+//                        "nameDic" : self.nameDic,
+                        "pcDic" : WebRTCDictionaryController.sharedInstance.pcDic,
+                        "dcDic" : WebRTCDictionaryController.sharedInstance.dcDic,
+//                        "volumeDic" : self.volumeDic
+                        "userArray" : WebRTCDictionaryController.sharedInstance.userArray,
+                        "nameDic" : WebRTCDictionaryController.sharedInstance.nameDic
+                    ]
+                    
+                    handler(dic)
+                }
+//            }
+            
         }
     }
 
@@ -309,7 +343,9 @@ final class WebRTCClient: NSObject {
             let response = data[0] as! Dictionary<String, Any>
             let sdp = response["sdp"] as! Dictionary<String, Any>
 
-            self.nameDic[response["offerSendID"] as! String] = response["offerSendName"] as! String
+//            self.nameDic[response["offerSendID"] as! String] = response["offerSendName"] as! String
+            WebRTCDictionaryController.sharedInstance.nameDic[response["offerSendID"] as! String] = response["offerSendName"] as! String
+            
             self.socketID = response["offerSendID"] as! String
 //            self.createPeerConnection(name: response["offerSendName"] as! String, socketID: response["offerSendID"] as! String)
 
@@ -325,11 +361,16 @@ final class WebRTCClient: NSObject {
                     print("end")
                     
                     let dic: [String: Any] = [
-                        "pcDic" : self.pcDic,
-                        "dcDic" : self.dcDic,
+//                        "pcDic" : self.pcDic,
+//                        "dcDic" : self.dcDic,
+////                        "volumeDic" : self.volumeDic
+//                        "userArray" : self.userArray,
+//                        "nameDic" : self.nameDic,
+                        "pcDic" : WebRTCDictionaryController.sharedInstance.pcDic,
+                        "dcDic" : WebRTCDictionaryController.sharedInstance.dcDic,
 //                        "volumeDic" : self.volumeDic
-                        "userArray" : self.userArray,
-                        "nameDic" : self.nameDic,
+                        "userArray" : WebRTCDictionaryController.sharedInstance.userArray,
+                        "nameDic" : WebRTCDictionaryController.sharedInstance.nameDic
                     ]
                     
                     handler(dic)
@@ -379,28 +420,31 @@ final class WebRTCClient: NSObject {
             let candidateData = response["candidate"] as! Dictionary<String, Any>
 
             
-//            print("-----------------------------")
-//            print((candidateData["candidate"] as! String).count != 0)
-//            print("-----------------------------")
-            if((candidateData["candidate"] as! String).count != 0) {
-                print(candidateData)
-                let peerConnection: RTCPeerConnection = self.pcDic[response["candidateSendID"] as! String]!
-
+//            if(self.pcDic[response["candidateSendID"] as! String] != nil) {
+//                let peerConnection: RTCPeerConnection = self.pcDic[response["candidateSendID"] as! String]!
+                let peerConnection: RTCPeerConnection = WebRTCDictionaryController.sharedInstance.pcDic[response["candidateSendID"] as! String]!
+                
                 let candidate = RTCIceCandidate(sdp: candidateData["candidate"] as! String, sdpMLineIndex: Int32(candidateData["sdpMLineIndex"] as! Int), sdpMid: candidateData["sdpMid"] as! String)
 
                 peerConnection.add( candidate )
                 
                 
                 let dic: [String: Any] = [
-                    "pcDic" : self.pcDic,
-                    "dcDic" : self.dcDic,
-    //                "volumeDic" : self.volumeDic
-                    "userArray" : self.userArray,
-                    "nameDic" : self.nameDic,
+//                    "pcDic" : self.pcDic,
+//                    "dcDic" : self.dcDic,
+//    //                "volumeDic" : self.volumeDic
+//                    "userArray" : self.userArray,
+//                    "nameDic" : self.nameDic,
+                    "pcDic" : WebRTCDictionaryController.sharedInstance.pcDic,
+                    "dcDic" : WebRTCDictionaryController.sharedInstance.dcDic,
+//                        "volumeDic" : self.volumeDic
+                    "userArray" : WebRTCDictionaryController.sharedInstance.userArray,
+                    "nameDic" : WebRTCDictionaryController.sharedInstance.nameDic
                 ]
                 
                 handler(dic)
-            }
+//            }
+                
             
 
         }
@@ -412,45 +456,47 @@ final class WebRTCClient: NSObject {
             print("user_exit")
             let response = data[0] as! Dictionary<String, String>
 
-            let peerConnection = self.pcDic[response["id"]!]
+//            let peerConnection = self.pcDic[response["id"]!]
+            let peerConnection = WebRTCDictionaryController.sharedInstance.pcDic[response["id"]!]
             if(peerConnection != nil) {
                 peerConnection!.close()
+                WebRTCDictionaryController.sharedInstance.pcDic.removeValue(forKey: response["id"]!)
             }
-            let dcConnection = self.dcDic[response["id"]!]
+            
+            print(response["id"])
+//            let dcConnection = self.dcDic[response["id"]!]
+            let dcConnection = WebRTCDictionaryController.sharedInstance.dcDic[response["id"]!]
             if(dcConnection != nil) {
                 dcConnection!.close()
+                WebRTCDictionaryController.sharedInstance.dcDic.removeValue(forKey: response["id"]!)
             }
-            self.pcDic.removeValue(forKey: response["id"]!)
-            self.dcDic.removeValue(forKey: response["id"]!)
-            self.nameDic.removeValue(forKey: response["id"]!)
+//            self.pcDic.removeValue(forKey: response["id"]!)
+//            self.dcDic.removeValue(forKey: response["id"]!)
+//            self.nameDic.removeValue(forKey: response["id"]!)
+
 //            self.volumeDic.removeValue(forKey: response["id"]!)
             VolumeController.sharedInstance.removeVolumeSetting(socketID: response["id"]!)
-            
-//            if(self.userArray.count >= 1) {
-//                for i in 0...self.userArray.count-1 {
-//                    if(self.userArray[i] == response["id"]) {
-//                        self.userArray.remove(at: i)
-//                    }
-//                }
-//            }
             var num = 0
             var num_check = 0
-            self.userArray.forEach {
+            var num_find = false
+            WebRTCDictionaryController.sharedInstance.userArray.forEach {
                 if($0 == response["id"]){
                     num_check = num
+                    num_find = true
                 }
                 num = num + 1
             }
-            
-             self.userArray.remove(at: num_check)
-            
+                        
+            if(num_find) {
+                WebRTCDictionaryController.sharedInstance.userArray.remove(at: num_check)
+            }
             
             let dic: [String: Any] = [
-                "pcDic" : self.pcDic,
-                "dcDic" : self.dcDic,
-//                "volumeDic" : self.volumeDic
-                "userArray" : self.userArray,
-                "nameDic" : self.nameDic,
+                "pcDic" : WebRTCDictionaryController.sharedInstance.pcDic,
+                "dcDic" : WebRTCDictionaryController.sharedInstance.dcDic,
+//                        "volumeDic" : self.volumeDic
+                "userArray" : WebRTCDictionaryController.sharedInstance.userArray,
+                "nameDic" : WebRTCDictionaryController.sharedInstance.nameDic
             ]
             
             handler(dic)
@@ -459,24 +505,38 @@ final class WebRTCClient: NSObject {
     
     func exit() {
         
-        for key in self.pcDic.keys {
-            self.pcDic[key]?.close()
-//            print("---------------------------------")
-//            print("exit pcDic : \(self.pcDic[key])")
-//            print("---------------------------------")
-        }
+//        for key in self.pcDic.keys {
+//            self.pcDic[key]?.close()
+////            print("---------------------------------")
+////            print("exit pcDic : \(self.pcDic[key])")
+////            print("---------------------------------")
+//        }
+//
+//        self.pcDic = [:]
+//        for key in self.dcDic.keys {
+//            self.dcDic[key]?.close()
+////            print("---------------------------------")
+////            print("exit dcDic : \(self.dcDic[key])")
+////            print("---------------------------------")
+//
+//        }
+//        self.dcDic = [:]
+//        self.nameDic = [:]
+//        self.userArray = []
         
-        self.pcDic = [:]
-        for key in self.dcDic.keys {
-            self.dcDic[key]?.close()
-//            print("---------------------------------")
-//            print("exit dcDic : \(self.dcDic[key])")
-//            print("---------------------------------")
-            
-        }
-        self.dcDic = [:]
-        self.nameDic = [:]
-        self.userArray = []
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        
+        
+        WebRTCDictionaryController.sharedInstance.pcDic = [:]
+        WebRTCDictionaryController.sharedInstance.dcDic = [:]
+        WebRTCDictionaryController.sharedInstance.nameDic = [:]
+        WebRTCDictionaryController.sharedInstance.userArray = []
         
         VolumeController.sharedInstance.exitRoom()
         
@@ -488,7 +548,22 @@ final class WebRTCClient: NSObject {
 extension WebRTCClient: RTCPeerConnectionDelegate {
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didChange stateChanged: RTCSignalingState) {
-    debugPrint("peerConnection new signaling state: \(stateChanged)")
+//    debugPrint("peerConnection new signaling state: \(stateChanged)")
+      
+      switch stateChanged {
+      case .closed:
+          print("peerConnection new signaling state: .closed")
+      case .haveLocalOffer:
+          print("peerConnection new signaling state: .haveLocalOffer")
+      case .haveLocalPrAnswer:
+          print("peerConnection new signaling state: .haveLocalPrAnswer")
+      case .haveRemoteOffer:
+          print("peerConnection new signaling state: .haveRemoteOffer")
+      case .stable:
+          print("peerConnection new signaling state: .stable")
+      default:
+          print("peerConnection new signaling state: ??")
+      }
   }
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didAdd stream: RTCMediaStream) {
@@ -512,7 +587,32 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
   }
 
   func peerConnection(_ peerConnection: RTCPeerConnection, didChange newState: RTCIceConnectionState) {
-    debugPrint("peerConnection new connection state: \(newState)")
+//    debugPrint("peerConnection new connection state: \(newState)")
+      
+      switch newState {
+      case .new:
+          print("peerConnection new connection state: .new")
+      case .closed:
+          print("peerConnection new connection state: .closed")
+      case .failed:
+          print("peerConnection new connection state: .failed")
+      case .disconnected:
+          print("peerConnection new connection state: .disconnected")
+      case .connected:
+          print("peerConnection new connection state: .connected")
+      case .count:
+          print("peerConnection new connection state: .count")
+      case .checking:
+          print("peerConnection new connection state: .checking")
+      case .completed:
+          print("peerConnection new connection state: .completed")
+      default:
+          print("peerConnection new connection state: ??")
+      }
+      
+      
+      
+      
     self.delegate?.webRTCClient(self, didChangeConnectionState: newState)
   }
 
@@ -528,8 +628,20 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
         "sdpMid" : candidate.sdpMid,
         "sdpMLineIndex" : candidate.sdpMLineIndex
       ]
-        for key in self.pcDic.keys {
-            if(self.pcDic[key] == peerConnection) {
+//        for key in self.pcDic.keys {
+//            if(self.pcDic[key] == peerConnection) {
+//                let data: [String: Any] = [
+//                  "candidate" : sendCandidate,
+//                  "candidateSendID" : socket.sid,
+//                  "candidateReceiveID" : key
+//                ]
+//                self.socket.emit("candidate", data)
+//                break
+//            }
+//        }
+        
+        for key in WebRTCDictionaryController.sharedInstance.pcDic.keys {
+            if(WebRTCDictionaryController.sharedInstance.pcDic[key] == peerConnection) {
                 let data: [String: Any] = [
                   "candidate" : sendCandidate,
                   "candidateSendID" : socket.sid,
@@ -552,16 +664,15 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
   func peerConnection(_ peerConnection: RTCPeerConnection, didOpen dataChannel: RTCDataChannel) {
     debugPrint("peerConnection did open data channel")
       print(dataChannel.label)
-      self.dcDic[dataChannel.label] = dataChannel
+//      self.dcDic[dataChannel.label] = dataChannel
+      WebRTCDictionaryController.sharedInstance.dcDic[dataChannel.label] = dataChannel
       
-      print("----------------------")
-      for key in dcDic.keys {
-          print(key)
-          print(dcDic[key]!.label)
-      }
-      print("----------------------")
-      
-      
+//      print("----------------------")
+//      for key in dcDic.keys {
+//          print(key)
+//          print(dcDic[key]!.label)
+//      }
+//      print("----------------------")
   }
 }
 

@@ -12,6 +12,8 @@ class VolumeController {
     
     var volumeDic: [String: UserVolumeStruct.volume] = ["me" : UserVolumeStruct.volume(socketId: "me", volume: 0.8, masterVolume: 0.8)]
     
+    var enterState: Bool = false
+    
     func setVolumeDic(socketID: String) {
         volumeDic[socketID] = UserVolumeStruct.volume(socketId: socketID, volume: 0.8, masterVolume: 0.8)
     }
@@ -51,6 +53,18 @@ class VolumeController {
     
     func exitRoom() {
         volumeDic = ["me" : UserVolumeStruct.volume(socketId: "me", volume: 0.8, masterVolume: 0.8)]
+    }
+    
+    func setEnterState() {
+        self.enterState = true
+    }
+    
+    func setEixtState() {
+        self.enterState = false
+    }
+    
+    func getEnterState() -> Bool{
+        return enterState
     }
     
 }
