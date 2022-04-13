@@ -17,6 +17,7 @@
 		555E647527FD67F900C449BC /* RecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647427FD67F900C449BC /* RecordController.swift */; };
 		555E647727FD69A400C449BC /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647627FD69A400C449BC /* RecordView.swift */; };
 		555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647A27FE910900C449BC /* AudioEngineController.swift */; };
+		555E647F280664B100C449BC /* WebRTCDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647E280664B100C449BC /* WebRTCDictionaryController.swift */; };
 		55B98BF027E83E1D0057F168 /* studion_application_swiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */; };
 		55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BF127E83E1D0057F168 /* ContentView.swift */; };
 		55B98BF427E83E1D0057F168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B98BF327E83E1D0057F168 /* Assets.xcassets */; };
@@ -41,7 +42,6 @@
 		55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3527EA98E40057F168 /* RoomCardView.swift */; };
 		55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3727EA9C6B0057F168 /* ServerAdress.swift */; };
 		55B98C3B27EAA1530057F168 /* RoomListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3A27EAA1530057F168 /* RoomListController.swift */; };
-		55B98C3D27EAAB7B0057F168 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3C27EAAB7B0057F168 /* Test.swift */; };
 		55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */; };
 		55B98C4227EAEDB80057F168 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4127EAEDB80057F168 /* WebRTCClient.swift */; };
 		55B98C4427EAEE490057F168 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4327EAEE490057F168 /* RoomView.swift */; };
@@ -145,6 +145,7 @@
 		555E647427FD67F900C449BC /* RecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordController.swift; sourceTree = "<group>"; };
 		555E647627FD69A400C449BC /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		555E647A27FE910900C449BC /* AudioEngineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngineController.swift; sourceTree = "<group>"; };
+		555E647E280664B100C449BC /* WebRTCDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCDictionaryController.swift; sourceTree = "<group>"; };
 		55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studion_application_swiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studion_application_swiftUIApp.swift; sourceTree = "<group>"; };
 		55B98BF127E83E1D0057F168 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -170,7 +171,6 @@
 		55B98C3527EA98E40057F168 /* RoomCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCardView.swift; sourceTree = "<group>"; };
 		55B98C3727EA9C6B0057F168 /* ServerAdress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAdress.swift; sourceTree = "<group>"; };
 		55B98C3A27EAA1530057F168 /* RoomListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListController.swift; sourceTree = "<group>"; };
-		55B98C3C27EAAB7B0057F168 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCardModalView.swift; sourceTree = "<group>"; };
 		55B98C4127EAEDB80057F168 /* WebRTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
 		55B98C4327EAEE490057F168 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
@@ -352,7 +352,6 @@
 				55B98C1127E8859C0057F168 /* Progress */,
 				55B98BFE27E83F0E0057F168 /* Auth */,
 				55B98C1B27E8BCD20057F168 /* PageRouter.swift */,
-				55B98C3C27EAAB7B0057F168 /* Test.swift */,
 			);
 			path = page;
 			sourceTree = "<group>";
@@ -528,6 +527,7 @@
 			children = (
 				55B98C4E27EBF5170057F168 /* Instrument */,
 				55B98C4127EAEDB80057F168 /* WebRTCClient.swift */,
+				555E647E280664B100C449BC /* WebRTCDictionaryController.swift */,
 			);
 			path = WebRTC;
 			sourceTree = "<group>";
@@ -880,6 +880,7 @@
 				2992C4E427FDB465008EFFCA /* NavigationBar.swift in Sources */,
 				55B98C2127E965DA0057F168 /* MainView.swift in Sources */,
 				55B98C4D27EBF3750057F168 /* DataChannelCodableStruct.swift in Sources */,
+				555E647F280664B100C449BC /* WebRTCDictionaryController.swift in Sources */,
 				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
 				55C6497B27FBBC24005603A2 /* PianoController.swift in Sources */,
 				55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */,
@@ -902,7 +903,6 @@
 				555E647727FD69A400C449BC /* RecordView.swift in Sources */,
 				55B98C3027E96FA40057F168 /* StudionRoomList.swift in Sources */,
 				55B98C1027E85B950057F168 /* UserInfo.swift in Sources */,
-				55B98C3D27EAAB7B0057F168 /* Test.swift in Sources */,
 				2992C4E827FDB4B4008EFFCA /* PostCard.swift in Sources */,
 				55B98C0E27E85B090057F168 /* AuthCodableStruct.swift in Sources */,
 				55B98C8A27EC09890057F168 /* DrumView.swift in Sources */,

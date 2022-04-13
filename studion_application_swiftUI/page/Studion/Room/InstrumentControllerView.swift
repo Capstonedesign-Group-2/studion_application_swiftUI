@@ -10,8 +10,9 @@ import AVFoundation
 
 var instrument = ["drum", "piano_button", "guitar", "rec"]
 struct InstrumentControllerView: View {
-    @Binding var mainRouter: String
-    @Binding var pageStatus: String
+//    @Binding var mainRouter: String
+//    @Binding var pageStatus: String
+    @Binding var selectRoomCheck: Bool
     
     var dcDic:[String: Any]
     var pcDic:[String: Any]
@@ -24,7 +25,7 @@ struct InstrumentControllerView: View {
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets
     @State var showLeftMenu: Bool = false
     @State var showRightMenu: Bool = false
-    @State var width = UIScreen.main.bounds.height * 2
+    @State var width = UIScreen.main.bounds.height
     
     
     @State var isRecording = false
@@ -197,8 +198,8 @@ struct InstrumentControllerView: View {
                                 self.showRightMenu.toggle()
                             } else {
                                 print("socket connected")
-                                self.mainRouter = "/studion"
-                                self.pageStatus = "/"
+//                                self.mainRouter = "/studion"
+//                                self.pageStatus = "/"
                             }
                         }) {
                             if showLeftMenu == false {
@@ -243,24 +244,28 @@ struct InstrumentControllerView: View {
             
             
         } else { // iPhone View
-            NavigationView {
+//            NavigationView {
                 ZStack {
                     VStack{
                         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+                            
                             TabView(selection: $selectedTab) {
-
                                 DrumView(dcDic: dcDic)
                                     .tag("drum")
+                                    .offset(y:-40)
 
 
                                 PianoView(pcDic: pcDic, dcDic: dcDic)
                                     .tag("piano_button")
+                                    .offset(y:-40)
 
                                 GuitarView()
                                     .tag("guitar")
-                                
+                                    .offset(y:-40)
+
                                 RecordView(recordFiles: $recordFiles)
                                     .tag("rec")
+                                    .offset(y:-40)
 
                             }
                             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -291,6 +296,7 @@ struct InstrumentControllerView: View {
                             
                             
                         }  // ZStack
+                        
                         Spacer()
                         
                         
@@ -304,15 +310,16 @@ struct InstrumentControllerView: View {
                     
                     
                 } // ZStack
+            
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
-                        
-                        
+
+
                         Button( action: {
                             print("left button")
                             withAnimation(.spring()){self.showLeftMenu.toggle()}
                             
-                            
+
                         }) {
                             HStack {
                                 if showRightMenu == false {
@@ -332,12 +339,12 @@ struct InstrumentControllerView: View {
                                             .offset(y: 20)
                                     }
                                 }
-                                
+
                                 Button( action: {
                                     print("record")
-                                    
+
                                     if isRecording {
-                                        
+
     //                                    Task {
     //                                        do {
     //                                            let url = try await self.recordController.stopRecording()
@@ -350,14 +357,14 @@ struct InstrumentControllerView: View {
     //                                        }
     //                                    }
                                         let url: URL? = AudioEngineController.sharedInstance.stop()
-                                        
+
                                         if(url != nil) {
                                             self.recordFiles.append(url!)
                                         }
-                                        
-                                        
+
+
                                         isRecording = false
-                                        
+
                                     } else {
     //                                    self.recordController.startRecording{ error in
     //                                        if let error = error {
@@ -367,15 +374,15 @@ struct InstrumentControllerView: View {
     //
     //                                        isRecording = true
     //                                    }
-                                        
-                                        
+
+
                                         AudioEngineController.sharedInstance.record()
-                                        
+
                                         isRecording = true
 
                                     }
                                 }) {
-                                    
+
                                     Image(systemName: isRecording ? "record.circle.fill" : "record.circle")
                                         .resizable()
                                         .scaledToFit()
@@ -384,17 +391,18 @@ struct InstrumentControllerView: View {
                                         .offset(y: 20)
                                         .padding(.leading, 10)
                                         .foregroundColor(isRecording ? .red : .blue)
-                                    
-                                    
-                                    
+
+
+
                                 }
                             }
-                            
-                            
-                            
+
+
+
                         }
-                    
+
                     } // ToolbarItem
+                
                     
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
@@ -404,8 +412,8 @@ struct InstrumentControllerView: View {
                                 self.showRightMenu.toggle()
                             } else {
                                 print("socket connected")
-                                self.mainRouter = "/studion"
-                                self.pageStatus = "/"
+
+                                self.selectRoomCheck = false
                             }
                         }) {
                             if showLeftMenu == false {
@@ -424,7 +432,7 @@ struct InstrumentControllerView: View {
                                         .font(.title)
                                         .offset(y: 20)
                                 }
-                                
+
                             } else {
                                 Image(systemName: "arrowshape.turn.up.backward.2.circle.fill")
                                     .resizable()
@@ -433,31 +441,30 @@ struct InstrumentControllerView: View {
                                     .font(.title)
                                     .offset(y: 20)
                             }
-                            
+
                         }
 
                     } // ToolbarItem
-                    
+
                 } // toolbar
                 
                 
 
                 
-            } // NavigationView
-            .ignoresSafeArea(.keyboard, edges: .bottom)
-            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
-            
+//            } // NavigationView
+//            .ignoresSafeArea(.keyboard, edges: .bottom)
+//            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
+            }
         }
         
-    }
-}
+
 
 
 struct InstrumentButton: View {
     var image: String
-    
+
     @Binding var selectedTab: String
-    
+
     var body: some View {
         Button(action: {
             selectedTab = image
@@ -469,9 +476,8 @@ struct InstrumentButton: View {
                 .frame(width: 24, height: 24)
                 .foregroundColor(selectedTab == image ? Color.gray: Color.black)
                 .padding()
-            
+
         }
     }
 }
-
-
+}

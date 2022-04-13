@@ -13,6 +13,9 @@ struct RoomCardModalView: View {
     
     @Binding var isShowing: Bool
     var roomInfo: RoomCodableStruct.roomInfo?
+    @Binding var selectRoomCheck: Bool
+    @Binding var selectRoomNumber: Int
+    
     @State var roomPassword: String = ""
     
     @State private var isDragging = false
@@ -23,29 +26,31 @@ struct RoomCardModalView: View {
     let startOpacity: Double = 0.4
     let endOpacity: Double = 0.8
     
+    
     var dragPercentage: Double {
         let res = Double((curHeight - minHeight) / (maxHeight - minHeight))
         return max(0, min(1, res))
     }
     
     var body: some View {
-        ZStack (alignment: .bottom){
-            if isShowing {
-                Color.black
-                    .opacity(startOpacity + (endOpacity - startOpacity) * dragPercentage)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        isShowing = false
-                    }
-                
-                roomCardModalTextView
-                    .transition(.move(edge: .bottom))
+            ZStack (alignment: .bottom){
+                if isShowing {
+                    Color.black
+                        .opacity(startOpacity + (endOpacity - startOpacity) * dragPercentage)
+                        .ignoresSafeArea()
+                        .onTapGesture {
+                            isShowing = false
+                        }
                     
+                    roomCardModalTextView
+                        .transition(.move(edge: .bottom))
+                        
+                }
             }
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-        .ignoresSafeArea()
-        .animation(.easeInOut)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            .ignoresSafeArea()
+            .animation(.easeInOut)
+        
     }
     
     var roomCardModalTextView: some View {
@@ -61,44 +66,46 @@ struct RoomCardModalView: View {
             
             
             ZStack {
-                VStack {
-                    Text(roomInfo!.title)
-                        .font(.largeTitle)
-                        .padding(.bottom, 15)
-                    
-                    Text(roomInfo!.content)
-                        .font(.body)
-                        .padding(.bottom, 15)
-                    
-                    Text(String(roomInfo!.users.count))
-                        .font(.body)
-                        .padding(.bottom, 15)
-                    
-                    if roomInfo!.locked == 1 {
-                        SecureField("Password", text: $roomPassword)
-                            .padding()
-                            .background(lightGreyColor)
-                            .cornerRadius(5.0)
-                            .padding(.bottom, 20)
-                    }
-                    
-//                    NavigationLink(destination: RoomView(pageStatus: $pageStatus, roomNumber: roomInfo!.id), label: {
-//                        Text("enter")
-//                    })
-//                    .padding(.horizontal, 30)
-//                    .padding(.bottom, 100)
-                    
-                    Button( action: {
-                        self.roomNumber = roomInfo!.id
-                        self.pageStatus = "/room"
-                    } ) {
-                        Text("enter")
-                    }
+                NavigationView {
+                    VStack {
+                        Text(roomInfo!.title)
+                            .font(.largeTitle)
+                            .padding(.bottom, 15)
+                        
+                        Text(roomInfo!.content)
+                            .font(.body)
+                            .padding(.bottom, 15)
+                        
+                        Text(String(roomInfo!.users.count))
+                            .font(.body)
+                            .padding(.bottom, 15)
+                        
+                        if roomInfo!.locked == 1 {
+                            SecureField("Password", text: $roomPassword)
+                                .padding()
+                                .background(lightGreyColor)
+                                .cornerRadius(5.0)
+                                .padding(.bottom, 20)
+                        }
+                                                
+                        Button( action: {
+//                            self.roomNumber = roomInfo!.id
+//                            self.pageStatus = "/room"
+                            self.selectRoomNumber = roomInfo!.id
+                            self.selectRoomCheck = true
+                        } ) {
+                            Text("enter")
+                        }
+                        .padding(.horizontal, 30)
+                        .padding(.bottom, 100)
+                        
+                        
+                    }   // VStack
                     .padding(.horizontal, 30)
-                    .padding(.bottom, 100)
-                }
-                .padding(.horizontal, 30)
-                
+
+                }   // NavigationView
+                .navigationViewStyle(.stack)
+                                
                 
             }
             .frame(maxHeight: .infinity)

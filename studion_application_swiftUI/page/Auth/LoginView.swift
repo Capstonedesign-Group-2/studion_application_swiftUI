@@ -11,8 +11,10 @@ import SwiftUI
 let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0)
 
 struct LoginView: View {
-    @Binding var pageStatus: String
+//    @Binding var pageStatus: String
     
+    @State var registerStatus: Bool = false
+    @State var isLogin: Bool = false
     
     @State var email: String = ""
     @State var password: String = ""
@@ -20,20 +22,30 @@ struct LoginView: View {
     
     var body: some View {
         
-        VStack {
-            Title()
-            BannerImage()
-            loginForm(pageStatus: $pageStatus, email: $email, password: $password)
-            Spacer()
-            HStack {
-                Button(action : {
-                    self.pageStatus = "/register"
-                }) {
-                    Text("회원가입")
+        ZStack {
+            VStack {
+                Title()
+                BannerImage()
+                loginForm(email: $email, password: $password, isLogin: $isLogin)
+                Spacer()
+                HStack {
+                    Button(action : {
+                        self.registerStatus = true
+                    }) {
+                        Text("회원가입")
+                    }
+                    Text("하러가기")
                 }
-                Text("하러가기")
             }
+            
+            NavigationLink(destination: RegisterView(registerStatus: $registerStatus), isActive: $registerStatus, label: {})
+                .isDetailLink(false)
+            NavigationLink(destination: MainView(), isActive: $isLogin ,label: {})
+                .isDetailLink(false)
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+        .navigationViewStyle(.stack)
         .padding()
         
     }
@@ -66,9 +78,9 @@ struct BannerImage: View {
 }
 
 struct loginForm: View {
-    @Binding var pageStatus: String
     @Binding var email: String
     @Binding var password: String
+    @Binding var isLogin: Bool
     
     @State var loginFail: Bool = false
     
@@ -80,7 +92,7 @@ struct loginForm: View {
             .offset(y: -10)
             .foregroundColor(.red)
             .font(.system(size:15))
-        loginButton(pageStatus: $pageStatus, email: $email, password: $password, loginFail: $loginFail)
+        loginButton(email: $email, password: $password, loginFail: $loginFail, isLogin: $isLogin)
         
     }
 }
@@ -111,10 +123,10 @@ struct passwordForm: View {
 }
 
 struct loginButton: View {
-    @Binding var pageStatus: String
     @Binding var email: String
     @Binding var password: String
     @Binding var loginFail: Bool
+    @Binding var isLogin: Bool
     
     var body: some View {
         Button(action: {
@@ -124,7 +136,10 @@ struct loginButton: View {
             print("loginFail: \(loginFail)")
             self.login(email: self.email, password: self.password) {data in
                 if(data as! Bool == true) {
-                    self.pageStatus = "/"
+//                    self.pageStatus = "/"
+                    
+                    self.isLogin = true
+                    
                 } else {
                     self.loginFail = true
                 }

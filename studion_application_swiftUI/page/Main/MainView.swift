@@ -24,10 +24,14 @@ static var isIpad: Bool {
 
 
 struct MainView: View {
-    @Binding var pageStatus: String
-    @Binding var roomNumber: Int
+//    @Binding var pageStatus: String
+//    @Binding var roomNumber: Int
+//    
+//    @Binding var mainRouter: String
     
-    @Binding var mainRouter: String
+    @State var pageStatus = "/"
+    @State var roomNumber = 1
+    @State var mainRouter = "/"
     
     let tabBarImageNames = ["house", "message", "plus", "rectangle.righthalf.inset.filled.arrow.right", "gearshape"]
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets
@@ -83,6 +87,10 @@ struct MainView: View {
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
+            
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationViewStyle(.stack)
         
         } else {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
@@ -132,6 +140,11 @@ struct MainView: View {
             } //zS
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
+            
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationViewStyle(.stack)
+            
         }
     
 }

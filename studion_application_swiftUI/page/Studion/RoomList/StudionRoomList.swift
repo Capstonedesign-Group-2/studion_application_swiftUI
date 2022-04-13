@@ -20,6 +20,8 @@ struct StudionRoomList: View {
     
     @State var roomInfo: RoomCodableStruct.roomInfo?
     
+    @State var selectRoomCheck = false
+    @State var selectRoomNumber = -1
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
@@ -28,19 +30,6 @@ struct StudionRoomList: View {
 //        NavigationView {
             ZStack {
                 VStack {
-                    
-                    HStack(spacing: 12) {
-                            Spacer()
-                                .frame(width:25)
-                            Text("Studion")
-                                .font(.largeTitle)
-                                .fontWeight(.heavy)
-                                .foregroundColor(.black)
-                            Spacer(minLength: 0)
-                        }
-                        .padding(.horizontal)
-                        .padding(.top, isHide ? 0:top!-10)
-                        .padding(.top,1)
                     
                                     
                     if roomSocket.roomsInfo?.rooms?.count != 0 {
@@ -89,7 +78,11 @@ struct StudionRoomList: View {
                                 
 
                                 
-                            }
+                            }   // ScrollView
+//                            .navigationTitle("Studion")
+//                            .navigationBarTitleDisplayMode(.inline)
+                            
+
                         }
 
                         
@@ -97,16 +90,30 @@ struct StudionRoomList: View {
                         }else {
                             Spacer()
                             Text("방이 읎어")
-//                                .navigationTitle("Studion")
+                               
                             Spacer()
 
                         }
                     
 
                         
-                    }
+                    }   // VStack
+                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                    Color.clear
+                        .frame(height: 50)
+                                 .background(Material.bar)
+                }
+
                 
-                RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo)
+                                
+                
+                NavigationBar(title: "Studion")
+                
+                RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo, selectRoomCheck: $selectRoomCheck, selectRoomNumber: $selectRoomNumber)
+                
+                
+                
+                NavigationLink(destination: RoomView(selectRoomCheck: $selectRoomCheck, roomNumber: selectRoomNumber), isActive: $selectRoomCheck , label: {})
                 
                 
             
@@ -115,8 +122,9 @@ struct StudionRoomList: View {
 //            .navigationTitle("Studion")
 //            .navigationBarTitleDisplayMode(.inline)
             
+            
 //        } // NavigationView
-//        .navigationViewStyle(StackNavigationViewStyle())
+//        .navigationViewStyle(.stack)
         
         .onAppear{
             roomSocket.getRoomList()
@@ -124,7 +132,7 @@ struct StudionRoomList: View {
             UIDevice.current.setValue(UIInterfaceOrientation.portrait.rawValue, forKey: "orientation") // Forcing the rotation to portrait
             AppDelegate.orientationLock = .portrait
             
-            print(roomSocket.roomsInfo?.rooms)
+//            print(roomSocket.roomsInfo?.rooms)
         }
         
         
@@ -157,8 +165,7 @@ final class RoomSocket: ObservableObject {
                         self.roomsInfo = try decoder.decode(RoomCodableStruct.roomsInfo.self, from: responseData)
                         
                         print("room list update")
-        //                print(self.roo
-                        print(response)
+
                     } catch {
                         print("error")
                     }
@@ -173,9 +180,7 @@ final class RoomSocket: ObservableObject {
                         let responseData = try JSONSerialization.data(withJSONObject: response, options: [.fragmentsAllowed])
 
                         self.roomsInfo = try decoder.decode(RoomCodableStruct.roomsInfo.self, from: responseData)
-        //                print(self.roomsInfo)
                         print("get room list on")
-                        print(response)
                     } catch {
                         print("error")
                     }
@@ -188,7 +193,6 @@ final class RoomSocket: ObservableObject {
                 
                 let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
         
-//        let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
     }
     
    

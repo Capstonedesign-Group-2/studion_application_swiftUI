@@ -42,11 +42,11 @@ struct LeftBarView: View {
                     
                     VStack {
                         
-                        if userArray.count >= 4 {
+                        if WebRTCDictionaryController.sharedInstance.userArray.count >= 4 {
                             Spacer()
                                 .frame(height: 20)
                             
-                            Text(nameDic[userArray[3]]!)
+                            Text(WebRTCDictionaryController.sharedInstance.nameDic[WebRTCDictionaryController.sharedInstance.userArray[3]]!)
                                 .padding(.trailing, 30)
                             GeometryReader { geo in
 
@@ -56,7 +56,7 @@ struct LeftBarView: View {
                                     step: 1
                                 )
                                     .onChange(of: volume4, perform: {newVolume in
-                                        VolumeController.sharedInstance.setVolume(socketID: userArray[3], volume: newVolume / 100)
+                                        VolumeController.sharedInstance.setVolume(socketID: WebRTCDictionaryController.sharedInstance.userArray[3], volume: newVolume / 100)
                                     })
                                     .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                     .frame(width: geo.size.height * 3/4)
@@ -80,11 +80,11 @@ struct LeftBarView: View {
                     
                     VStack {
                         
-                        if userArray.count >= 3 {
+                        if WebRTCDictionaryController.sharedInstance.userArray.count >= 3 {
                             Spacer()
                                 .frame(height: 20)
                             
-                            Text(nameDic[userArray[2]]!)
+                            Text(WebRTCDictionaryController.sharedInstance.nameDic[WebRTCDictionaryController.sharedInstance.userArray[2]]!)
                                 .padding(.trailing, 30)
                             GeometryReader { geo in
 
@@ -94,7 +94,7 @@ struct LeftBarView: View {
                                     step: 1
                                 )
                                     .onChange(of: volume3, perform: {newVolume in
-                                        VolumeController.sharedInstance.setVolume(socketID: userArray[2], volume: newVolume / 100)
+                                        VolumeController.sharedInstance.setVolume(socketID: WebRTCDictionaryController.sharedInstance.userArray[2], volume: newVolume / 100)
                                     })
                                     .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                     .frame(width: geo.size.height * 3/4)
@@ -117,11 +117,11 @@ struct LeftBarView: View {
                     } // VStack
                     VStack {
                         
-                        if userArray.count >= 2 {
+                        if WebRTCDictionaryController.sharedInstance.userArray.count >= 2 {
                             Spacer()
                                 .frame(height: 20)
                             
-                            Text(nameDic[userArray[1]]!)
+                            Text(WebRTCDictionaryController.sharedInstance.nameDic[WebRTCDictionaryController.sharedInstance.userArray[1]]!)
                                 .padding(.trailing, 30)
                             GeometryReader { geo in
 
@@ -131,8 +131,8 @@ struct LeftBarView: View {
                                     step: 1
                                 )
                                     .onChange(of: volume2, perform: {newVolume in
-                                        VolumeController.sharedInstance.setVolume(socketID: userArray[1], volume: newVolume / 100)
-                                        print(userArray[1])
+                                        VolumeController.sharedInstance.setVolume(socketID: WebRTCDictionaryController.sharedInstance.userArray[1], volume: newVolume / 100)
+//                                        print(WebRTCDictionaryController.sharedInstance.userArray[1])
                                     })
                                     .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                     .frame(width: geo.size.height * 3/4)
@@ -157,11 +157,11 @@ struct LeftBarView: View {
                     
                     VStack {
                         
-                        if userArray.count >= 1 {
+                        if WebRTCDictionaryController.sharedInstance.userArray.count >= 1 {
                             Spacer()
                                 .frame(height: 20)
                             
-                            Text(nameDic[userArray[0]]!)
+                            Text(WebRTCDictionaryController.sharedInstance.nameDic[WebRTCDictionaryController.sharedInstance.userArray[0]]!)
                                 .padding(.trailing, 30)
                             GeometryReader { geo in
 
@@ -171,7 +171,7 @@ struct LeftBarView: View {
                                     step: 1
                                 )
                                     .onChange(of: volume1, perform: {newVolume in
-                                        VolumeController.sharedInstance.setVolume(socketID: userArray[0], volume: newVolume / 100)
+                                        VolumeController.sharedInstance.setVolume(socketID: WebRTCDictionaryController.sharedInstance.userArray[0], volume: newVolume / 100)
                                     })
                                     .rotationEffect(.degrees(-90.0), anchor: .topLeading)
                                     .frame(width: geo.size.height * 3/4)
@@ -271,7 +271,7 @@ struct LeftBarView: View {
         } // HStack
         .onAppear{
             print("leftbar")
-            print(userArray)
+            print(WebRTCDictionaryController.sharedInstance.userArray)
         }
         
         

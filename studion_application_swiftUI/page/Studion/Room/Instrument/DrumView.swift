@@ -176,7 +176,7 @@ struct DrumView: View {
             
             VStack (spacing: 20){
 
-    //            Spacer()
+//                Spacer()
     //                .frame(height: 20)
                 HStack (spacing: 20){
 
@@ -303,7 +303,7 @@ struct DrumView: View {
 
                 } // HStack
 
-                Spacer()
+//                Spacer()
 
             } // Vstack
             .onAppear{
@@ -331,13 +331,19 @@ struct DrumView: View {
         do {
             let jsonData = try? encorder.encode(data)
 
-            for key in self.dcDic!.keys {
-                let dataChannel: RTCDataChannel = self.dcDic![key] as! RTCDataChannel
+            for key in WebRTCDictionaryController.sharedInstance.dcDic.keys {
+                let dataChannel: RTCDataChannel = WebRTCDictionaryController.sharedInstance.dcDic[key] as! RTCDataChannel
                 let buffer = RTCDataBuffer(data: jsonData!, isBinary: true)
 //
                 dataChannel.sendData(buffer)
-                
+
             }
+//            for dc in dcArray {
+//                let dataChannel = dc as! RTCDataChannel
+//
+//                let buffer = RTCDataBuffer(data: jsonData!, isBinary: true)
+//                dataChannel.sendData(buffer)
+//            }
             
         } catch {
             print("error")

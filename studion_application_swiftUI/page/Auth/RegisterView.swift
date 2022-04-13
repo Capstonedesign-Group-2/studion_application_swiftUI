@@ -10,31 +10,47 @@ import SwiftUI
 let registerLightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0)
 
 struct RegisterView: View {
-    @Binding var pageStatus: String
     
     @State var name: String = ""
     @State var email: String = ""
     @State var password: String = ""
     @State var passwordConfrim: String = ""
     
+    @State var loginStatus: Bool = false
+    @State var isRegister: Bool = false
+    
+    @Binding var registerStatus: Bool
+    
+//    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     
     var body: some View {
         
-        VStack {
-            registerTitle()
-            registerForm(pageStatus: $pageStatus, name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim)
-            Spacer()
-            HStack {
-                Button(action : {
-                    self.pageStatus = "/login"
-                }) {
-                    Text("로그인")
+        ZStack {
+            VStack {
+                registerTitle()
+                registerForm(name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, isRegister: $isRegister)
+                Spacer()
+                HStack {
+                    Button(action : {
+                        self.registerStatus = false
+                    }) {
+                        Text("로그인")
+                    }
+                    Text("하러가기")
                 }
-                Text("하러가기")
             }
+            
+            NavigationLink(destination: MainView(), isActive: $isRegister ,label: {})
+                .isDetailLink(false)
+            
         }
+        .navigationBarBackButtonHidden(true)
+        .navigationBarHidden(true)
+        .navigationViewStyle(.stack)
         .padding()
+
+        
         
     }
 }
@@ -50,12 +66,12 @@ struct registerTitle: View {
 }
 
 struct registerForm: View {
-    @Binding var pageStatus: String
     
     @Binding var name: String
     @Binding var email: String
     @Binding var password: String
     @Binding var passwordConfrim: String
+    @Binding var isRegister: Bool
     
     @State var registerFail: Bool = false
     
@@ -65,7 +81,7 @@ struct registerForm: View {
         registerPasswordForm(password: $password)
         registerPasswordConfrimForm(passwordConfirm: $passwordConfrim)
         
-        registerButton(pageStatus: $pageStatus, name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, registerFail: $registerFail)
+        registerButton(name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, registerFail: $registerFail, isRegister: $isRegister)
         
     }
 }
@@ -120,13 +136,13 @@ struct registerPasswordConfrimForm: View {
 }
 
 struct registerButton: View {
-    @Binding var pageStatus: String
     
     @Binding var name: String
     @Binding var email: String
     @Binding var password: String
     @Binding var passwordConfrim: String
     @Binding var registerFail: Bool
+    @Binding var isRegister: Bool
     
     @State var registerErrorStatus: Bool = false
     @State var registerErrorTitle: String = ""
@@ -161,7 +177,7 @@ struct registerButton: View {
                     return
                 } else if(register["status"] as! Int == 200) {
                     
-                    self.pageStatus = "/"
+                    self.isRegister = true
                     return
                 }
                 
