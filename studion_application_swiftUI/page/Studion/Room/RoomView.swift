@@ -14,6 +14,7 @@ import AVFoundation
 struct RoomView: View {
 //    @Binding var pageStatus: String
 //    @Binding var mainRouter: String
+    @Binding var selectRoomCheck: Bool
     var roomNumber: Int
         
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
@@ -24,7 +25,7 @@ struct RoomView: View {
     @ObservedObject var webRTCConnect = WebRTCConnect()
     
     var body: some View {
-        InstrumentControllerView(dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic, userArray: webRTCConnect.userArray, nameDic: webRTCConnect.nameDic)
+        InstrumentControllerView(selectRoomCheck: $selectRoomCheck, dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic, userArray: webRTCConnect.userArray, nameDic: webRTCConnect.nameDic)
         
 //        Text(WebRTCDictionaryController.sharedInstance.dcDic.description)
         .onAppear{

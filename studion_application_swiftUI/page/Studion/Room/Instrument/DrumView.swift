@@ -176,7 +176,7 @@ struct DrumView: View {
             
             VStack (spacing: 20){
 
-    //            Spacer()
+//                Spacer()
     //                .frame(height: 20)
                 HStack (spacing: 20){
 
@@ -303,7 +303,7 @@ struct DrumView: View {
 
                 } // HStack
 
-                Spacer()
+//                Spacer()
 
             } // Vstack
             .onAppear{

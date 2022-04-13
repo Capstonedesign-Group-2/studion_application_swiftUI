@@ -33,6 +33,7 @@ struct SplashScreen: View {
             
             
         }   // NavigationView
+        .navigationBarBackButtonHidden(true)
         .navigationBarHidden(true)
         .navigationViewStyle(.stack)
         .onAppear{ initSetting() }

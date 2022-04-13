@@ -113,7 +113,7 @@ struct StudionRoomList: View {
                 
                 
                 
-                NavigationLink(destination: RoomView(roomNumber: selectRoomNumber), isActive: $selectRoomCheck , label: {})
+                NavigationLink(destination: RoomView(selectRoomCheck: $selectRoomCheck, roomNumber: selectRoomNumber), isActive: $selectRoomCheck , label: {})
                 
                 
             
