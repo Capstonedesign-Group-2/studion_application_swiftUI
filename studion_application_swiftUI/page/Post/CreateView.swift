@@ -17,46 +17,108 @@ struct CreateView: View {
     
     
     var body: some View {
-        NavigationView() {
-            Form {
-                Section(header: Text("New Post")){
-                    ZStack{
-                        if content.isEmpty {
-                            Text(hintText)
-                                .foregroundColor(Color(UIColor.placeholderText))
-                                .padding(.horizontal, 8)
-                                .padding(.vertical, 12)
-                        }
-                        TextEditor(text: $content)
-                    }
+        
+        if UIDevice.isIpad {
+            NavigationView() {
+                
+                
+                ZStack {
+//                    Color.black
+//                        .opacity(0.05)
+//                        .ignoresSafeArea()
                     
-                    Button("Pick Image or Audio"){
-                        showDocPicker = true
-                    }
-                    .sheet(isPresented: self.$showDocPicker) {
-//                        DocumentPicker(image: $image)
-                    }
-                    
-                        Button(action: {
-                            if(checkText(content: content)){
-                                self.hintText = "무언가를 입력해주세요....."
-                            }
-                            create(content: content)
-                            content = ""
-                        })
-                        {
-                        Text("Submit")
-                    }
+                    VStack {
+                        Form {
+                            Section(header: Text("New Post")){
+                                ZStack{
+                                    if content.isEmpty {
+                                        Text(hintText)
+                                            .foregroundColor(Color(UIColor.placeholderText))
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 12)
+                                    }
+                                    TextEditor(text: $content)
+                                }
+                                
+                                Button("Pick Image or Audio"){
+                                    showDocPicker = true
+                                }
+                                .sheet(isPresented: self.$showDocPicker) {
+            //                        DocumentPicker(image: $image)
+                                }
+                                
+                                    Button(action: {
+                                        if(checkText(content: content)){
+                                            self.hintText = "무언가를 입력해주세요....."
+                                        }
+                                        create(content: content)
+                                        content = ""
+                                    })
+                                    {
+                                        Text("Submit")
+                                    }
 
+                            }
+                            
+                        }
+                        .padding(.horizontal, 150)
+                        
+    //                    NavigationBar(title: "Create")
+
+                    } // vS
+                    .background(Color.clear)
+                    .navigationTitle("Create")
+                .navigationBarTitleDisplayMode(.inline)
                 }
                 
             }
-            .navigationTitle("Create")
-            .navigationBarTitleDisplayMode(.inline)
-//            .background(NavigationBar(title: "Create"))
+            .navigationViewStyle(.stack)
+
             
+        } else { //iPhone
+            NavigationView() {
+                Form {
+                    Section(header: Text("New Post")){
+                        ZStack{
+                            if content.isEmpty {
+                                Text(hintText)
+                                    .foregroundColor(Color(UIColor.placeholderText))
+                                    .padding(.horizontal, 8)
+                                    .padding(.vertical, 12)
+                            }
+                            TextEditor(text: $content)
+                        }
+                        
+                        Button("Pick Image or Audio"){
+                            showDocPicker = true
+                        }
+                        .sheet(isPresented: self.$showDocPicker) {
+    //                        DocumentPicker(image: $image)
+                        }
+                        
+                            Button(action: {
+                                if(checkText(content: content)){
+                                    self.hintText = "무언가를 입력해주세요....."
+                                }
+                                create(content: content)
+                                content = ""
+                            })
+                            {
+                            Text("Submit")
+                        }
+
+                    }
+                    
+                }
+                .navigationTitle("Create")
+                .navigationBarTitleDisplayMode(.inline)
+    //            .background(NavigationBar(title: "Create"))
+                
+            }
+            .navigationViewStyle(.stack)
         }
-        .navigationViewStyle(.stack)
+        
+        
     }
 }
 

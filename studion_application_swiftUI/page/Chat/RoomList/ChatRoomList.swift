@@ -9,6 +9,20 @@ import SwiftUI
 
 struct ChatRoomList: View {
     var body: some View {
-        Text("Chat room list")
+        
+        if UIDevice.isIpad {
+            
+            VStack {
+                Text("Chat Room for iPad")
+            }
+            .padding(.horizontal, 150)
+            
+        } else {
+            VStack {
+                Text("Chat room list")
+            }
+            .padding(.horizontal, 1)
+        }
+    
     }
 }

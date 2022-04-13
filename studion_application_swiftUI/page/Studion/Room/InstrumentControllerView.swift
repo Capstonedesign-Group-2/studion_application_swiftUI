@@ -198,8 +198,7 @@ struct InstrumentControllerView: View {
                                 self.showRightMenu.toggle()
                             } else {
                                 print("socket connected")
-//                                self.mainRouter = "/studion"
-//                                self.pageStatus = "/"
+                                self.selectRoomCheck = false
                             }
                         }) {
                             if showLeftMenu == false {

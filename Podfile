@@ -10,5 +10,6 @@ target 'studion_application_swiftUI' do
   pod 'Socket.IO-Client-Swift', '~> 15.2.0'
   pod 'GoogleWebRTC'
   pod 'AudioKit'
+  pod 'URLImage'
 
 end

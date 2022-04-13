@@ -33,6 +33,7 @@ struct MainView: View {
     @State var roomNumber = 1
     @State var mainRouter = "/"
     
+    
     let tabBarImageNames = ["house", "message", "plus", "rectangle.righthalf.inset.filled.arrow.right", "gearshape"]
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets
     @State var currentPage: Int = 0
@@ -48,7 +49,6 @@ struct MainView: View {
                         .transition(.move(edge: .top))
                         .animation(.easeIn)
 
-                    
                     ChatRoomList()
                         .tag("/chat")
                   
@@ -57,32 +57,29 @@ struct MainView: View {
                     
                     StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
                         .tag("/studion")
+                        .transition(.move(edge: .top))
+                        .animation(.easeIn)
                     
                     SettingView(pageStatus: $pageStatus)
                         .tag("/setting")
-                    
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-    //            .ignoresSafeArea(.all, edges: .bottom)
+                
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
+//                .ignoresSafeArea(.all, edges: .bottom)
                 
                 HStack(spacing: 0) {
     //                ForEach(tabBarImageNames, id: \.self) { image in
                     ForEach(0..<tabBarImageNames.count) { index in
                         TabButton(index: index, tabBarImageNames: tabBarImageNames, mainRouter: $mainRouter, currentPage: $currentPage)
-                        
                         if tabBarImageNames[index] != tabBarImageNames.last {
                             Spacer(minLength: 0)
+                            
                         }
                     }
                 }
-                .padding(.horizontal, 25)
+                .padding(.horizontal, 250)
                 .padding(.vertical, 5)
                 .background(Color.white)
-                .clipShape(Capsule())
-                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
-                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
-                .padding(.horizontal)
-                .padding(.bottom, edge!.bottom == 0 ? 20: 0)
                 
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -92,7 +89,8 @@ struct MainView: View {
             .navigationBarHidden(true)
             .navigationViewStyle(.stack)
         
-        } else {
+        } else { // iPhone UI
+            
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                 
                 TabView(selection: $mainRouter) {
@@ -115,8 +113,8 @@ struct MainView: View {
                         .tag("/setting")
                     
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-    //            .ignoresSafeArea(.all, edges: .bottom)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // swipe
+                .ignoresSafeArea(.all, edges: .bottom)
                 
                 HStack(spacing: 0) {
     //                ForEach(tabBarImageNames, id: \.self) { image in
@@ -147,7 +145,7 @@ struct MainView: View {
             
         }
     
-}
+    }
 }
 
 struct TabButton: View {

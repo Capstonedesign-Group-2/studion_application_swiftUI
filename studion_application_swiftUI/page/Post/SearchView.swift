@@ -12,17 +12,33 @@ struct SearchView: View {
     @State var text = ""
     
     var body: some View {
-        NavigationView {
-            List {
-//                ForEach(courses.filter { $0.title.contains(text) }) { item in
-//                    Text(item.title)
-//                }
+        
+        if UIDevice.isIpad {
+            
+            HStack{
+                //
             }
             .searchable(text: $text, placement:
-                    .navigationBarDrawer(displayMode: .always), prompt: Text("Search Anything"))
-            .navigationBarTitle("Search", displayMode: .automatic)
-            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarDrawer(displayMode: .always), prompt: Text("Search Anything"))
+            
+        } else {
+            
+            NavigationView {
+                List {
+    //                ForEach(courses.filter { $0.title.contains(text) }) { item in
+    //                    Text(item.title)
+    //                }
+                }
+                .searchable(text: $text, placement:
+                        .navigationBarDrawer(displayMode: .always), prompt: Text("Search Anything"))
+                .navigationBarTitle("Search", displayMode: .automatic)
+                .navigationBarTitleDisplayMode(.inline)
+            }
+
+            
         }
+        
+        
     }
 }
 
