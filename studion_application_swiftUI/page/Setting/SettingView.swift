@@ -12,30 +12,38 @@ struct SettingView: View {
     
     @State var logoutToggle: Bool = false
     @State var logoutStatus: Bool = false
+    @State var isLogout: Bool = false
     
     var body: some View {
-        VStack {
-            Button(action: {
-                self.logoutToggle = true
-            }) {Text("Logout")}
-        }
-        .alert(isPresented: $logoutToggle) {
-            Alert(title: Text("로그아웃?"), primaryButton: .destructive(Text("응!")){
-                self.logout() {data in
-                    if(data as! Bool == true) {
-                        print("zz")
-                        self.pageStatus = "/login"
-                    } else {
-                        self.logoutStatus = true
+        
+        ZStack {
+            VStack {
+                Button(action: {
+                    self.logoutToggle = true
+                }) {Text("Logout")}
+            }
+            .alert(isPresented: $logoutToggle) {
+                Alert(title: Text("로그아웃?"), primaryButton: .destructive(Text("응!")){
+                    self.logout() {data in
+                        if(data as! Bool == true) {
+                            print("zz")
+    //                        self.pageStatus = "/login"
+                            self.isLogout = true
+                        } else {
+                            self.logoutStatus = true
+                        }
                     }
-                }
-            }, secondaryButton: .cancel(Text("아뇨?")) {})
-        }
-        .alert("로그아웃 오류!", isPresented: $logoutStatus) {
-            Button("응") {}
-        } message : {
-            Text("조금 있다 다시")
-        }
+                }, secondaryButton: .cancel(Text("아뇨?")) {})
+            }
+            .alert("로그아웃 오류!", isPresented: $logoutStatus) {
+                Button("응") {}
+            } message : {
+                Text("조금 있다 다시")
+            }
+            
+            NavigationLink(destination: LoginView(), isActive: $isLogout, label: {})
+        }   //  ZStack
+        
             
     }
     

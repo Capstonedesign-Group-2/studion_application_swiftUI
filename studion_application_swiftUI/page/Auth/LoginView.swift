@@ -13,8 +13,10 @@ let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255
 struct LoginView: View {
 //    @Binding var pageStatus: String
     
+    
     @State var registerStatus: Bool = false
     @State var isLogin: Bool = false
+    @State var isRegister: Bool = false
     
     @State var email: String = ""
     @State var password: String = ""
@@ -38,7 +40,7 @@ struct LoginView: View {
                 }
             }
             
-            NavigationLink(destination: RegisterView(registerStatus: $registerStatus), isActive: $registerStatus, label: {})
+            NavigationLink(destination: RegisterView(registerStatus: $registerStatus, isRegister: $isRegister, isLogin: $isLogin), isActive: $registerStatus, label: {})
                 .isDetailLink(false)
             NavigationLink(destination: MainView(), isActive: $isLogin ,label: {})
                 .isDetailLink(false)

@@ -17,9 +17,11 @@ struct RegisterView: View {
     @State var passwordConfrim: String = ""
     
     @State var loginStatus: Bool = false
-    @State var isRegister: Bool = false
+//    @State var isRegister: Bool = false
     
     @Binding var registerStatus: Bool
+    @Binding var isRegister: Bool
+    @Binding var isLogin: Bool
     
 //    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
@@ -29,7 +31,7 @@ struct RegisterView: View {
         ZStack {
             VStack {
                 registerTitle()
-                registerForm(name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, isRegister: $isRegister)
+                registerForm(name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, isRegister: $isRegister, registerStatus: $registerStatus, isLogin: $isLogin)
                 Spacer()
                 HStack {
                     Button(action : {
@@ -41,8 +43,8 @@ struct RegisterView: View {
                 }
             }
             
-            NavigationLink(destination: MainView(), isActive: $isRegister ,label: {})
-                .isDetailLink(false)
+//            NavigationLink(destination: MainView(), isActive: $isRegister ,label: {})
+//                .isDetailLink(false)
             
         }
         .navigationBarBackButtonHidden(true)
@@ -72,8 +74,11 @@ struct registerForm: View {
     @Binding var password: String
     @Binding var passwordConfrim: String
     @Binding var isRegister: Bool
+    @Binding var registerStatus: Bool
+    @Binding var isLogin: Bool
     
     @State var registerFail: Bool = false
+    
     
     var body: some View{
         registerNameForm(name: $name)
@@ -81,7 +86,7 @@ struct registerForm: View {
         registerPasswordForm(password: $password)
         registerPasswordConfrimForm(passwordConfirm: $passwordConfrim)
         
-        registerButton(name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, registerFail: $registerFail, isRegister: $isRegister)
+        registerButton(name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, registerFail: $registerFail, isRegister: $isRegister, regsterStatus: $registerStatus, isLogin: $isLogin)
         
     }
 }
@@ -143,6 +148,8 @@ struct registerButton: View {
     @Binding var passwordConfrim: String
     @Binding var registerFail: Bool
     @Binding var isRegister: Bool
+    @Binding var regsterStatus: Bool
+    @Binding var isLogin: Bool
     
     @State var registerErrorStatus: Bool = false
     @State var registerErrorTitle: String = ""
@@ -177,7 +184,10 @@ struct registerButton: View {
                     return
                 } else if(register["status"] as! Int == 200) {
                     
-                    self.isRegister = true
+//                    self.isRegister = true
+                    self.regsterStatus = false
+                    self.isLogin = true
+                    
                     return
                 }
                 

@@ -11,9 +11,12 @@ struct CreateView: View {
     
     @State var hintText: String = "This is input form"
     @State var content: String = ""
-    @State var image: String = ""
+    @State var image: Image?
     @State var audio: String = ""
     @State var showDocPicker = false
+    
+    @State var showingImagePicker = false
+    @State var showingAudioPicker = false
     
     
     var body: some View {
@@ -40,12 +43,34 @@ struct CreateView: View {
                                     TextEditor(text: $content)
                                 }
                                 
-                                Button("Pick Image or Audio"){
-                                    showDocPicker = true
+                                Button("Pick Image"){
+//                                    showDocPicker = true
+                                    showingImagePicker.toggle()
                                 }
-                                .sheet(isPresented: self.$showDocPicker) {
+                                .sheet(isPresented: self.$showingImagePicker) {
             //                        DocumentPicker(image: $image)
+                                    SUImagePicker(sourceType: .photoLibrary) { (image) in
+                                        self.image = Image(uiImage: image)
+                                        print(self.image)
+                                    }
                                 }
+                                
+                                Button("Pick Audio"){
+//                                    showDocPicker = true
+                                    showingImagePicker.toggle()
+                                }
+                                .fileImporter(isPresented: $showingAudioPicker, allowedContentTypes: [.audio], allowsMultipleSelection: false) {
+                                    result in
+                                    if case .success = result {
+                                        do {
+                                            print(try result.get().first)
+                                            print(type(of: try result.get().first))
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
+                                    }
+                                }
+                                                                
                                 
                                     Button(action: {
                                         if(checkText(content: content)){
@@ -89,12 +114,24 @@ struct CreateView: View {
                             TextEditor(text: $content)
                         }
                         
-                        Button("Pick Image or Audio"){
-                            showDocPicker = true
+                        Button("Pick Image"){
+//                                    showDocPicker = true
+                            showingImagePicker.toggle()
                         }
-                        .sheet(isPresented: self.$showDocPicker) {
+                        .sheet(isPresented: self.$showingImagePicker) {
     //                        DocumentPicker(image: $image)
+                            SUImagePicker(sourceType: .photoLibrary) { (image) in
+                                self.image = Image(uiImage: image)
+                                print(self.image)
+                            }
                         }
+                        
+                        Button("Pick Audio"){
+//                                    showDocPicker = true
+                            showingAudioPicker.toggle()
+                            print(showingAudioPicker)
+                        }
+                        
                         
                             Button(action: {
                                 if(checkText(content: content)){
@@ -112,7 +149,18 @@ struct CreateView: View {
                 }
                 .navigationTitle("Create")
                 .navigationBarTitleDisplayMode(.inline)
-    //            .background(NavigationBar(title: "Create"))
+                //            .background(NavigationBar(title: "Create"))
+                .fileImporter(isPresented: $showingAudioPicker, allowedContentTypes: [.audio], allowsMultipleSelection: false) {
+                    result in
+                    if case .success = result {
+                        do {
+                            print(try result.get().first)
+                            print(type(of: try result.get().first))
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
                 
             }
             .navigationViewStyle(.stack)

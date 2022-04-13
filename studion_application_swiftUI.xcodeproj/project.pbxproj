@@ -18,6 +18,7 @@
 		555E647727FD69A400C449BC /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647627FD69A400C449BC /* RecordView.swift */; };
 		555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647A27FE910900C449BC /* AudioEngineController.swift */; };
 		555E647F280664B100C449BC /* WebRTCDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647E280664B100C449BC /* WebRTCDictionaryController.swift */; };
+		555E64812806A6DC00C449BC /* SUImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E64802806A6DC00C449BC /* SUImagePicker.swift */; };
 		55B98BF027E83E1D0057F168 /* studion_application_swiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */; };
 		55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BF127E83E1D0057F168 /* ContentView.swift */; };
 		55B98BF427E83E1D0057F168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B98BF327E83E1D0057F168 /* Assets.xcassets */; };
@@ -146,6 +147,7 @@
 		555E647627FD69A400C449BC /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		555E647A27FE910900C449BC /* AudioEngineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngineController.swift; sourceTree = "<group>"; };
 		555E647E280664B100C449BC /* WebRTCDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCDictionaryController.swift; sourceTree = "<group>"; };
+		555E64802806A6DC00C449BC /* SUImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUImagePicker.swift; sourceTree = "<group>"; };
 		55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studion_application_swiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studion_application_swiftUIApp.swift; sourceTree = "<group>"; };
 		55B98BF127E83E1D0057F168 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 			isa = PBXGroup;
 			children = (
 				29C4C03227EDDE0A0048D405 /* PostController.swift */,
+				555E64802806A6DC00C449BC /* SUImagePicker.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -895,6 +898,7 @@
 				29C4C03327EDDE0A0048D405 /* PostController.swift in Sources */,
 				55B98C9127EC782D0057F168 /* LeftBarView.swift in Sources */,
 				555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */,
+				555E64812806A6DC00C449BC /* SUImagePicker.swift in Sources */,
 				55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */,
 				55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */,
 				55B98C8727EC08070057F168 /* InstrumentControllerView.swift in Sources */,
@@ -1050,12 +1054,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = SU7RQ4J4BY;
+				DEVELOPMENT_TEAM = 49C98WAKUL;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "studion-application-swiftUI-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "일단 허용해";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사잔이 필요해용";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1085,12 +1090,13 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = SU7RQ4J4BY;
+				DEVELOPMENT_TEAM = 49C98WAKUL;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "studion-application-swiftUI-Info.plist";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "일단 허용해";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사잔이 필요해용";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

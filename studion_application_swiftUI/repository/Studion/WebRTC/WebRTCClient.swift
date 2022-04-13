@@ -136,8 +136,8 @@ final class WebRTCClient: NSObject {
 
         print("createPeerConnection")
         let iceServers:[RTCIceServer]
-//        iceServers = [RTCIceServer.init( urlStrings: ["stun:stun.l.google.com:19302", "turn:35.77.186.121:3478"], username: "turn", credential: "dls980728")]
-        iceServers = [RTCIceServer.init( urlStrings: ["stun:stun.l.google.com:19302"])]
+        iceServers = [RTCIceServer.init( urlStrings: ["stun:stun.l.google.com:19302", "turn:35.77.186.121:3478"], username: "turn", credential: "dls980728")]
+//        iceServers = [RTCIceServer.init( urlStrings: ["stun:stun.l.google.com:19302"])]
 
         let config = RTCConfiguration()
         config.iceServers = iceServers
@@ -524,13 +524,7 @@ final class WebRTCClient: NSObject {
 //        self.nameDic = [:]
 //        self.userArray = []
         
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-        print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+        
         
         
         WebRTCDictionaryController.sharedInstance.pcDic = [:]

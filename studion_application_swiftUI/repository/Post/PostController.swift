@@ -29,35 +29,54 @@ public class PostController {
         if (TOKEN != nil) {
             let url = api + "api/posts"
             let headers: HTTPHeaders = [
-                "Authorization" : "Bearer \(TOKEN!)"
+                "Authorization" : "Bearer \(TOKEN!)",
+                
             ]
 
         let parameter : [String: Any] = [
             "content": content,
             "user_id": UserInfo.userInfo.user?.id,
-//            "image": image,
-//            "audio": audio,
+////            "image": image,
+////            "audio": audio,
         ]
+//
+//         print("This is swift File \(parameter)")
+//
+//        AF.request(url, method: .post, parameters: parameter, headers: headers).responseData { response in
+//            var status = response.response?.statusCode ?? 500
+//            switch response.result{
+//
+//                //통신성공
+//                case .success(let data):
+//                if(status == 200){
+//                    print("value: \(data) 통신 성공!!!!! Success!!")
+//                }else {
+//                    print(status)
+//                }
+//
+//                //통신실패
+//                case .failure(let error):
+//                print("error: \(error)")
+//            }
+//        }
             
-         print("This is swift File \(parameter)")
-        
-        AF.request(url, method: .post, parameters: parameter, headers: headers).responseData { response in
-            var status = response.response?.statusCode ?? 500
-            switch response.result{
-            
-                //통신성공
-                case .success(let data):
-                if(status == 200){
-                    print("value: \(data) 통신 성공!!!!! Success!!")
-                }else {
-                    print(status)
-                }
-                    
-                //통신실패
-                case .failure(let error):
-                print("error: \(error)")
+            AF.upload(multipartFormData: { (multipartFormData) in
+                for (key, value) in parameter {
+                                if let temp = value as? String {
+                                    multipartFormData.append(Data(temp.utf8), withName: key)
+                                }
+                                if let temp = value as? Int {
+                                    multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
+                                }
+                            
+                            }
+            }, to: url, headers: headers).responseJSON { (response) in
+                print("upload")
+                print(response)
             }
-        }
+            
+            
+            
     } else {
             print("AA")
                 

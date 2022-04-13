@@ -16,8 +16,8 @@ struct PianoView: View {
         
         VStack {
             Button("peerConnection") {
-                for key in pcDic.keys {
-                    let peerConnection = pcDic[key] as! RTCPeerConnection
+                for key in WebRTCDictionaryController.sharedInstance.pcDic.keys {
+                    let peerConnection = WebRTCDictionaryController.sharedInstance.pcDic[key] as! RTCPeerConnection
                     print(key)
                     switch peerConnection.connectionState {
                     case .connected:
@@ -39,8 +39,8 @@ struct PianoView: View {
             }
             
             Button("datachannel") {
-                for key in dcDic.keys {
-                    let dataChannel = dcDic[key] as! RTCDataChannel
+                for key in WebRTCDictionaryController.sharedInstance.dcDic.keys {
+                    let dataChannel = WebRTCDictionaryController.sharedInstance.dcDic[key] as! RTCDataChannel
                     print(key)
                     switch dataChannel.readyState {
                     case .open:

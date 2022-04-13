@@ -90,12 +90,12 @@ struct PostView: View {
                         List {
                             ForEach(0..<self.p.count, id: \.self) { index in
                                 VStack{
-                                    var images = self.p[index]!["images"] as! [Dictionary<String, Any>?]
-                                        PostCard(
-                                            title: self.p[index]!["title"] as! String, // Dict type on View
-                                            content: self.p[index]!["content"] as! String,
-                                            image: images[0]?["link"] as! String
-                                        )
+                                    let images = self.p[index]!["images"] as! [Dictionary<String, Any>?]
+//                                        PostCard(
+//                                            title: self.p[index]!["title"] as! String, // Dict type on View
+//                                            content: self.p[index]!["content"] as! String,
+//                                            image: images[0]?["link"] as! String
+//                                        )
                                     }
                                 }
                             }
@@ -121,7 +121,9 @@ struct PostView: View {
                                                let posts = response["posts"] as! Dictionary<String, Any>
 
                                                p = posts["data"] as! [Dictionary<String, Any>?]
-                                           
+                                            
+                                           print(p)
+//                                                print(self.p[]!["images"] as! [Dictionary<String, Any>?])
 
                                    }
                                }
