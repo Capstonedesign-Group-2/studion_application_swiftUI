@@ -73,8 +73,9 @@ public class PostController {
 //    Show
 //****************************************************************************************************************
     
-    public func show(handler: @escaping (Any) -> Void){
-          let url = api + "api/posts"
+    
+    public func show(page: Int, handler: @escaping (Any) -> Void){
+          let url = api + "api/posts?page=\(page)"
           
           AF.request(url, method: .get).responseJSON{ response in
               

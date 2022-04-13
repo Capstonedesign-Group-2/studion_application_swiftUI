@@ -11,61 +11,76 @@ import UIKit
 struct PostView: View {
     
     @State var p: [Dictionary<String, Any>?] = []
+    @State var currentPage: Int
     
     init() {
         if UIDevice.isIpad {
             // Disable Scrollbar
             UITableView.appearance().showsVerticalScrollIndicator = false
         }
+        currentPage = 1
     }
-
-        
+    
        var body: some View {
            
            if UIDevice.isIpad { // iPad
                               
                ZStack() {
+                   
                     VStack {
+                        
                         List {
                             ForEach(0..<self.p.count, id: \.self) { index in
-                                
+
                                 var images = self.p[index]!["images"] as! [Dictionary<String, Any>?]
                                 
-                                VStack{
-                                    PostCard(
-                                        title: self.p[index]!["title"] as! String, // Dict type on View
-                                        content: self.p[index]!["content"] as! String,
-                                        image: images[0]?["link"] as! String
+                                    VStack{
+                                        PostCard(
+                                            title: self.p[index]!["title"] as! String, // Dict type on View
+                                            content: self.p[index]!["content"] as! String,
+                                            image: images[0]?["link"] as! String
                                         )
-                                    }
+                                    Text("\(index)")
+                                        .task(){
+                                            print(index)
+                                            if index % 8 == 7 {
+                                                currentPage += 1
+                                                print("currentPage : \(currentPage)")
+                                            }
+                                        }
+
+                                }
                                 }
                             } // list
-                            .padding(.horizontal, 150)
+                                    .padding(.horizontal, 150)
+                        
+                            } // vS
+                            .onAppear {
+                                PostController.sharedInstance.show(page: currentPage) { data in
+//                                      print(data)
+                                    let response = data as! Dictionary<String, Any>
+//                                      print(response)
+                                    let posts = response["posts"] as! Dictionary<String, Any>
+                                    
+//                                    var cpg = posts["current_page"] as! Int
+//                                    cpg = page
+                                           
+                                    p = posts["data"] as! [Dictionary<String, Any>?]
+                                    
+                                    print("Posts Datas : \(p)")
+//                                    print("current_page : \(page)")
+                                }
+                                
+                            }.onDisappear() {
+                                print("PostView end")
+                            }
+                            .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
+                                Color.clear
+                                    .background(.ultraThinMaterial)
+                                    .frame(height: 50)
+                            }
 
-                        } // vS
-     
-                                   .onAppear {
-                                       PostController.sharedInstance.show() { data in
-                                           
-                       //                          print(data)
-                                           let response = data as! Dictionary<String, Any>
-                       //                          print(response)
-                                           let posts = response["posts"] as! Dictionary<String, Any>
-                                           
-                                           p = posts["data"] as! [Dictionary<String, Any>?]
-                                           
-                                       }
-                                   }.onDisappear(){
-                                       print("PostView end")
-                                   }
-                   
-                                   .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
-                                       Color.clear
-                                           .background(.ultraThinMaterial)
-                                           .frame(height: 50)
-                                   }
-                                  
-                           }
+                        }
 
            } else { // iPhone
                
@@ -92,29 +107,30 @@ struct PostView: View {
                         }
                             NavigationBar(title: "Posts")
 
-                       
+
 //                    .navigationTitle("Posts")
 //                    .navigationBarTitleDisplayMode(.automatic)
 //                   }.navigationViewStyle(StackNavigationViewStyle())
-                                  
+
                                    .onAppear {
-                                       PostController.sharedInstance.show() { data in
-                                           
+                                       PostController.sharedInstance.show(page: currentPage) { data in
+
                        //                          print(data)
                                                let response = data as! Dictionary<String, Any>
                        //                          print(response)
                                                let posts = response["posts"] as! Dictionary<String, Any>
-                                           
+
                                                p = posts["data"] as! [Dictionary<String, Any>?]
-                                           
+
                                                print("Posts Datas : \(p)")
-                            
+//                                            print("current_page : \(page)")
+
                                    }
                                }
                                    .onDisappear{
                                        print("PostView end")
                                    }
-                   
+
                            }
                .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
                    Color.clear
