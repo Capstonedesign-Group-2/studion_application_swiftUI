@@ -81,12 +81,7 @@ struct StudionRoomList: View {
                             }   // ScrollView
 //                            .navigationTitle("Studion")
 //                            .navigationBarTitleDisplayMode(.inline)
-                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
-                                Color.clear
-                                    .frame(height: 50)
-                                             .background(Material.bar)
-                            }
-                            .navigationTitle("room")
+                            
 
                         }
 
@@ -95,14 +90,7 @@ struct StudionRoomList: View {
                         }else {
                             Spacer()
                             Text("방이 읎어")
-//                                .navigationTitle("Studion")
-                                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
-                                    Color.clear
-                                        .frame(height: 50)
-                                                 .background(Material.bar)
-                                }
-                                .navigationTitle("room")
-
+                               
                             Spacer()
 
                         }
@@ -110,10 +98,16 @@ struct StudionRoomList: View {
 
                         
                     }   // VStack
+                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                    Color.clear
+                        .frame(height: 50)
+                                 .background(Material.bar)
+                }
+
                 
                                 
                 
-//                NavigationBar(title: "Studion")
+                NavigationBar(title: "Studion")
                 
                 RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo, selectRoomCheck: $selectRoomCheck, selectRoomNumber: $selectRoomNumber)
                 

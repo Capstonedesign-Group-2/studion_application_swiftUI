@@ -41,8 +41,8 @@ struct RoomView: View {
 //            }
             
                 
-//                UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation") // Forcing the rotation to portrait
-//                AppDelegate.orientationLock = .landscapeRight
+                UIDevice.current.setValue(UIInterfaceOrientation.landscapeRight.rawValue, forKey: "orientation") // Forcing the rotation to portrait
+                AppDelegate.orientationLock = .landscapeRight
             }
         
         .onDisappear{
@@ -50,8 +50,9 @@ struct RoomView: View {
             webRTCConnect.exitRoom()
             
         }
-        .navigationBarBackButtonHidden(false)
-        .navigationBarItems(leading: Text("asdf"), trailing: Text("123123"))
+        .navigationBarBackButtonHidden(true)
+//        .navigationBarHidden(true)
+        .navigationViewStyle(.stack)
         
     }
 }
