@@ -13,7 +13,7 @@ struct studion_application_swiftUIApp: App {
     
     var body: some Scene {
         WindowGroup {
-            PageRouter()
+            SplashScreen()
         }
     }
 }

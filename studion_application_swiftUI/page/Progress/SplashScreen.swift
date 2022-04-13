@@ -10,13 +10,32 @@ import SocketIO
 import WebRTC
 
 struct SplashScreen: View {
-    @Binding var pageStatus: String
+    
+//    @State var status: Bool = false
+    @State var loginStatus: Bool = false
+    @State var mainStatus: Bool = false
     
     var body: some View {
-        Image("Logo-1")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
-            .onAppear{ initSetting() }
+        
+        NavigationView {
+            
+            ZStack {
+                Image("Logo-1")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                
+                    NavigationLink(destination: LoginView(), isActive: $loginStatus ,label: {} )
+                    .isDetailLink(false)
+                    NavigationLink(destination: MainView(), isActive: $mainStatus ,label: {} )
+                    .isDetailLink(false)
+            }
+            
+            
+            
+        }   // NavigationView
+        .navigationBarHidden(true)
+        .navigationViewStyle(.stack)
+        .onAppear{ initSetting() }
     }
     
     func initSetting() {
@@ -39,13 +58,14 @@ struct SplashScreen: View {
         AuthController.sharedInstance.loginCheck() { data in
             print("logincheck")
             let response = data as! Dictionary<String, Any>
-            print(response)
+            
             if(response["status"] as! Int == 401) {
                 print("satus : logout")
-                self.pageStatus = "/login"
+                self.loginStatus = true
             } else if(response["status"] as! Int == 200) {
                 print("status : login")
-                self.pageStatus = "/"
+                print("22")
+                self.mainStatus = true
             }
         
         }

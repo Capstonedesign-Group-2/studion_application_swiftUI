@@ -42,7 +42,6 @@
 		55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3527EA98E40057F168 /* RoomCardView.swift */; };
 		55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3727EA9C6B0057F168 /* ServerAdress.swift */; };
 		55B98C3B27EAA1530057F168 /* RoomListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3A27EAA1530057F168 /* RoomListController.swift */; };
-		55B98C3D27EAAB7B0057F168 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3C27EAAB7B0057F168 /* Test.swift */; };
 		55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */; };
 		55B98C4227EAEDB80057F168 /* WebRTCClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4127EAEDB80057F168 /* WebRTCClient.swift */; };
 		55B98C4427EAEE490057F168 /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98C4327EAEE490057F168 /* RoomView.swift */; };
@@ -172,7 +171,6 @@
 		55B98C3527EA98E40057F168 /* RoomCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCardView.swift; sourceTree = "<group>"; };
 		55B98C3727EA9C6B0057F168 /* ServerAdress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerAdress.swift; sourceTree = "<group>"; };
 		55B98C3A27EAA1530057F168 /* RoomListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomListController.swift; sourceTree = "<group>"; };
-		55B98C3C27EAAB7B0057F168 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
 		55B98C3E27EABC9B0057F168 /* RoomCardModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCardModalView.swift; sourceTree = "<group>"; };
 		55B98C4127EAEDB80057F168 /* WebRTCClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCClient.swift; sourceTree = "<group>"; };
 		55B98C4327EAEE490057F168 /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
@@ -354,7 +352,6 @@
 				55B98C1127E8859C0057F168 /* Progress */,
 				55B98BFE27E83F0E0057F168 /* Auth */,
 				55B98C1B27E8BCD20057F168 /* PageRouter.swift */,
-				55B98C3C27EAAB7B0057F168 /* Test.swift */,
 			);
 			path = page;
 			sourceTree = "<group>";
@@ -906,7 +903,6 @@
 				555E647727FD69A400C449BC /* RecordView.swift in Sources */,
 				55B98C3027E96FA40057F168 /* StudionRoomList.swift in Sources */,
 				55B98C1027E85B950057F168 /* UserInfo.swift in Sources */,
-				55B98C3D27EAAB7B0057F168 /* Test.swift in Sources */,
 				2992C4E827FDB4B4008EFFCA /* PostCard.swift in Sources */,
 				55B98C0E27E85B090057F168 /* AuthCodableStruct.swift in Sources */,
 				55B98C8A27EC09890057F168 /* DrumView.swift in Sources */,
