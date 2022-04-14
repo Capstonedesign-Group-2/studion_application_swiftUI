@@ -36,7 +36,7 @@ struct InstrumentControllerView: View {
         
         if UIDevice.isIpad{
             
-            NavigationView {
+//            NavigationView {
                 ZStack {
                     VStack{
                         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
@@ -236,13 +236,14 @@ struct InstrumentControllerView: View {
                 
 
                 
-            } // NavigationView
-            .navigationViewStyle(StackNavigationViewStyle())
-            .ignoresSafeArea(.keyboard, edges: .bottom)
-            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
+//            } // NavigationView
+//            .navigationViewStyle(StackNavigationViewStyle())
+//            .ignoresSafeArea(.keyboard, edges: .bottom)
+//            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
             
             
         } else { // iPhone View
+            
 //            NavigationView {
                 ZStack {
                     VStack{

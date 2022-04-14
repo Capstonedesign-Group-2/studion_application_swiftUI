@@ -41,7 +41,9 @@ struct DrumView: View {
 
                     Button(action: {
                         print("Q")
+                        print("X")
                         self.buttonClick(key: "Q")
+                        self.buttonClick(key: "X")
     //                    drumController_test.start(key: "cr")
                         
                     }) {
@@ -182,7 +184,9 @@ struct DrumView: View {
 
                     Button(action: {
                         print("Q")
+                        print("X")
                         self.buttonClick(key: "Q")
+                        self.buttonClick(key: "X")
     //                    drumController_test.start(key: "cr")
                         
                     }) {
