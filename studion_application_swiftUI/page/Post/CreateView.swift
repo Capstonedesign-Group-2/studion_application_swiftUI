@@ -12,7 +12,7 @@ struct CreateView: View {
     
     @State var hintText: String = "This is input form"
     @State var content: String = ""
-    @State var image: Image?
+    @State var image: Data?
     @State var audio: Data?
     @State var audioURL: URL?
     @State var showDocPicker = false
@@ -52,8 +52,9 @@ struct CreateView: View {
                                 .sheet(isPresented: self.$showingImagePicker) {
             //                        DocumentPicker(image: $image)
                                     SUImagePicker(sourceType: .photoLibrary) { (image) in
-                                        self.image = Image(uiImage: image)
+//                                        self.image = Image(uiImage: image)
                                         print(self.image)
+                                        
                                     }
                                 }
                                 
@@ -130,9 +131,13 @@ struct CreateView: View {
                         .sheet(isPresented: self.$showingImagePicker) {
     //                        DocumentPicker(image: $image)
                             SUImagePicker(sourceType: .photoLibrary) { (image) in
-                                self.image = Image(uiImage: image)
+//                                self.image = Image(uiImage: image)
                                 print(image)
                                 print(type(of: image))
+                                self.image = image.jpegData(compressionQuality: 0.2)
+                                
+                                
+                                
                             }
                         }
                         

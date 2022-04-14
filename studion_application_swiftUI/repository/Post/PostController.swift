@@ -94,8 +94,12 @@ public class PostController {
                 
                 
                 if(data["image"] != nil) {
-                    print("AAA")
-//                    let imageData = (data["image"] as! Image).jpegData(compressionQuality: 0.2)!
+                    let date:Date = Date()
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                    let dateString:String = dateFormatter.string(from: date)
+                    
+                    multipartFormData.append(data["image"] as! Data, withName: "image", fileName: dateString, mimeType: "image/jpg")
                 }
                 
                 
