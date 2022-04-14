@@ -35,6 +35,10 @@ struct StudionRoomList: View {
                     if roomSocket.roomsInfo?.rooms?.count != 0 {
                         
                         if roomSocket.roomsInfo != nil {
+                            
+                            Spacer()
+                                .frame(height: 30)
+                            
                             ScrollView(showsIndicators: false) {
                                 
                                 VStack(spacing: 0) {
@@ -79,6 +83,7 @@ struct StudionRoomList: View {
 
                                 
                             }   // ScrollView
+//                            .padding(.top, 30)
 //                            .navigationTitle("Studion")
 //                            .navigationBarTitleDisplayMode(.inline)
                             
