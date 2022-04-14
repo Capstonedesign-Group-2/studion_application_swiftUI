@@ -43,8 +43,8 @@ struct PostView: View {
                                 
                                 VStack {
                                     
-                                    Text(self.p[index]!["title"] as! String)
-                                        
+//                                    Text(self.p[index]!["title"] as! String)
+//
 //                                    Button(action: {print(images)}, label: {Text("img")})
                                     
                                     PostCard(
@@ -98,60 +98,61 @@ struct PostView: View {
 
            } else { // iPhone
                
-//               ZStack {
-////                   NavigationView{
-//                    VStack {
-//                        List {
-//                            ForEach(0..<self.p.count, id: \.self) { index in
-//
-////                                let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
-//
-//                                VStack {
-//
-//                                    PostCard(
-//                                        title: self.p[index]!["title"] as! String, // Dict type on View
-//                                        content: self.p[index]!["content"] as! String
-////                                        image: (images[0]!["link"] as! String) ?? ""
-//                                    )
-//                                    }
-//                                }
-//                            }
-//                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
-//                                Color.clear
-//                                    .frame(height: 50)
-//                                  .background(Material.bar)
-//                            }
-//                        }
-//                            NavigationBar(title: "Posts")
-//
-//
-////                    .navigationTitle("Posts")
-////                    .navigationBarTitleDisplayMode(.automatic)
-////                   }.navigationViewStyle(StackNavigationViewStyle())
-//
-//                                   .onAppear {
-//                                       PostController.sharedInstance.show(page: currentPage) { data in
-//
-//                       //                          print(data)
-//                                               let response = data as! Dictionary<String, Any>
-//                       //                          print(response)
-//                                               let posts = response["posts"] as! Dictionary<String, Any>
-//
-//                                               p = posts["data"] as! [Dictionary<String, Any>?]
-//
-//
-//                                   }
-//                               }
-//                                   .onDisappear{
-//                                       print("PostView end")
-//                                   }
-//
-//                           }
-//               .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
-//                   Color.clear
-//                       .frame(height: 50)
-////                       .background(Material.bar)
-//               }
+               ZStack {
+//                   NavigationView{
+                    VStack {
+                        List {
+                            ForEach(0..<self.p.count, id: \.self) { index in
+
+                                let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
+
+                                VStack {
+
+                                    PostCard(
+                                        title: self.p[index]!["title"] as! String, // Dict type on View
+                                        content: self.p[index]!["content"] as! String,
+                                                                                    
+                                        image: images.count == 0 ? nil : images[0]?["link"] as? String
+                                    )
+                                    }
+                                }
+                            }
+                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                                Color.clear
+                                    .frame(height: 50)
+                                  .background(Material.bar)
+                            }
+                        }
+                            NavigationBar(title: "Posts")
+
+
+//                    .navigationTitle("Posts")
+//                    .navigationBarTitleDisplayMode(.automatic)
+//                   }.navigationViewStyle(StackNavigationViewStyle())
+
+                                   .onAppear {
+                                       PostController.sharedInstance.show(page: currentPage) { data in
+
+                       //                          print(data)
+                                               let response = data as! Dictionary<String, Any>
+                       //                          print(response)
+                                               let posts = response["posts"] as! Dictionary<String, Any>
+
+                                               p = posts["data"] as! [Dictionary<String, Any>?]
+
+
+                                   }
+                               }
+                                   .onDisappear{
+                                       print("PostView end")
+                                   }
+
+                           }
+               .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
+                   Color.clear
+                       .frame(height: 50)
+//                       .background(Material.bar)
+               }
 
            } //else
     }
