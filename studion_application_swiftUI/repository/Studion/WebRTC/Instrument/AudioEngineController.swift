@@ -15,9 +15,9 @@ class AudioEngineController {
     let mainMixer: AVAudioNode
     var audioFile: AVAudioFile?
     
+    
     init() {
         self.mainMixer = audioEngine.mainMixerNode
-        
         
     }
     
@@ -52,33 +52,48 @@ class AudioEngineController {
     
     func record() {
         
+        
         let format = self.mainMixer.outputFormat(forBus: 0)
         let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        
+//
         do {
-            
+//
             self.audioFile = try AVAudioFile(forWriting: documentURL.appendingPathComponent("record.wav"), settings: format.settings)
-            
+//
         } catch {
             print(error.localizedDescription)
         }
+//
+//        self.mainMixer.installTap(onBus: 0, bufferSize: 1024, format: format, block: { (buffer, time) in
+//
+//            try? self.audioFile?.write(from: buffer)
+//        })
+//
+//        print("record start")
         
-        self.mainMixer.installTap(onBus: 0, bufferSize: 1024, format: format, block: { (buffer, time) in
-            
-            try? self.audioFile?.write(from: buffer)
-        })
+//        self.audioFile = AVAudioFile(forWriting: URLFor("my_file.caf")!, settings: audioEngine.inputNode.inputFormatForBus(0).settings, error: nil)
         
-        print("record start")
         
+        print("----------------------------------------------------")
+        audioEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, time) -> Void in
+                try! self.audioFile?.write(from: buffer)
+                return
+            }
+                
         
     }
     
+
+    
     func stop() -> URL?{
-        self.mainMixer.removeTap(onBus: 0)
+//        self.mainMixer.removeTap(onBus: 0)
+//        print("record end")
+//        print(self.audioFile!.url)
+//        return self.audioFile?.url
+        audioEngine.inputNode.removeTap(onBus: 0)
         print("record end")
         print(self.audioFile!.url)
         return self.audioFile?.url
-        
     }
     
 }

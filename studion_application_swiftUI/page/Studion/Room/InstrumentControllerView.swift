@@ -143,12 +143,12 @@ struct InstrumentControllerView: View {
     //                                            print(error.localizedDescription)
     //                                        }
     //                                    }
-                                        let url: URL? = AudioEngineController.sharedInstance.stop()
+//                                        let url: URL? = AudioEngineController.sharedInstance.stop()
                                         
-                                        if(url != nil) {
-                                            self.recordFiles.append(url!)
-                                        }
-                                        
+//                                        if(url != nil) {
+//                                            self.recordFiles.append(url!)
+//                                        }
+//
                                         
                                         isRecording = false
                                         
@@ -163,7 +163,7 @@ struct InstrumentControllerView: View {
     //                                    }
                                         
                                         
-                                        AudioEngineController.sharedInstance.record()
+//                                        AudioEngineController.sharedInstance.record()
                                         
                                         isRecording = true
 
@@ -340,8 +340,6 @@ struct InstrumentControllerView: View {
                                 }
 
                                 Button( action: {
-                                    print("record")
-
                                     if isRecording {
 
     //                                    Task {
@@ -355,13 +353,13 @@ struct InstrumentControllerView: View {
     //                                            print(error.localizedDescription)
     //                                        }
     //                                    }
-                                        let url: URL? = AudioEngineController.sharedInstance.stop()
-
-                                        if(url != nil) {
-                                            self.recordFiles.append(url!)
-                                        }
-
-
+//                                        let url: URL? = AudioEngineController.sharedInstance.stop()
+//
+//                                        if(url != nil) {
+//                                            self.recordFiles.append(url!)
+//                                        }
+//                                        self.recordController.stop()
+                                        AudioEngineController.sharedInstance.stop()
                                         isRecording = false
 
                                     } else {
@@ -375,8 +373,9 @@ struct InstrumentControllerView: View {
     //                                    }
 
 
+//                                        AudioEngineController.sharedInstance.record()
+                                        
                                         AudioEngineController.sharedInstance.record()
-
                                         isRecording = true
 
                                     }

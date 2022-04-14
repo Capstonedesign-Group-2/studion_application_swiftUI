@@ -24,14 +24,14 @@ struct RecordView: View {
                 Text("아직 파일이 읎어")
                 
             } else {
-                ForEach(0..<recordFiles.count , id: \.self) {index in
-                    Button( action : {
-                        print(recordFiles[index])
-                        recordController.play(url: recordFiles[index])
-                    }) {
-                        Text("record \(index)")
-                    }
-                }
+//                ForEach(0..<recordFiles.count , id: \.self) {index in
+//                    Button( action : {
+//                        print(recordFiles[index])
+//                        recordController.play(url: recordFiles[index])
+//                    }) {
+//                        Text("record \(index)")
+//                    }
+//                }
             }
             
             
