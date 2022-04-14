@@ -33,7 +33,7 @@ struct DrumView: View {
         
         if UIDevice.isIpad {
             
-            VStack (spacing: 40){
+            VStack (spacing: 40) {
 
     //            Spacer()
     //                .frame(height: 20)
@@ -167,6 +167,11 @@ struct DrumView: View {
                 Spacer()
 
             } // Vstack
+            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                Color.clear
+                    .frame(height: 50)
+                  .background(Material.bar)
+            }
             .onAppear{
                 print("drum start")
             }
