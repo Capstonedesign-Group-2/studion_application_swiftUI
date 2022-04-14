@@ -6,6 +6,7 @@
 //
 import Foundation
 import Alamofire
+import SwiftUI
 
 public class PostController {
     
@@ -21,7 +22,7 @@ public class PostController {
 //    Create
 //****************************************************************************************************************
     
-    public func create(content: String, handler: @escaping (Any) -> Void) {
+    public func create(data: Dictionary<String, Any>, handler: @escaping (Any) -> Void) {
         
         let tokenController = JWTToken()
         let TOKEN:String? = tokenController.getToken()
@@ -34,11 +35,25 @@ public class PostController {
             ]
 
         let parameter : [String: Any] = [
-            "content": content,
+            "content": data["content"]!,
             "user_id": UserInfo.userInfo.user?.id,
-////            "image": image,
-////            "audio": audio,
         ]
+            
+            if(data["image"] != nil) {
+                print("image type")
+                print(type(of: data["image"]!))
+
+            }
+//
+//            if(data["audio"] != nil) {
+//                print("audio type")
+//                print(URL.mimeType(data["audio"]! as! URL)())
+//
+//                let exname:String = ((data["audio"] as AnyObject).deletingPathExtension?.lastPathComponent)!
+//                print(exname)
+//            }
+            
+        
 //
 //         print("This is swift File \(parameter)")
 //
@@ -68,8 +83,25 @@ public class PostController {
                                 if let temp = value as? Int {
                                     multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
                                 }
-                            
+
                             }
+
+                if(data["audio"] != nil) {
+
+                    multipartFormData.append(data["audio"] as! Data, withName: "audio", fileName: (data["audioURL"]! as! URL).lastPathComponent, mimeType: URL.mimeType(data["audioURL"] as! URL)())
+                }
+                
+                
+                
+                if(data["image"] != nil) {
+                    print("AAA")
+//                    let imageData = (data["image"] as! Image).jpegData(compressionQuality: 0.2)!
+                }
+                
+                
+                
+                
+
             }, to: url, headers: headers).responseJSON { (response) in
                 print("upload")
                 print(response)
@@ -136,4 +168,51 @@ public class PostController {
           }
     } // show
         
+}
+
+
+// ********************************************************************************
+// 파일 url에서 타입 뽑기
+// ********************************************************************************
+
+import UniformTypeIdentifiers
+
+extension NSURL {
+    public func mimeType() -> String {
+        if let pathExt = self.pathExtension,
+            let mimeType = UTType(filenameExtension: pathExt)?.preferredMIMEType {
+            return mimeType
+        }
+        else {
+            return "application/octet-stream"
+        }
+    }
+}
+
+extension URL {
+    public func mimeType() -> String {
+        if let mimeType = UTType(filenameExtension: self.pathExtension)?.preferredMIMEType {
+            return mimeType
+        }
+        else {
+            return "application/octet-stream"
+        }
+    }
+}
+
+extension NSString {
+    public func mimeType() -> String {
+        if let mimeType = UTType(filenameExtension: self.pathExtension)?.preferredMIMEType {
+            return mimeType
+        }
+        else {
+            return "application/octet-stream"
+        }
+    }
+}
+
+extension String {
+    public func mimeType() -> String {
+        return (self as NSString).mimeType()
+    }
 }

@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct CreateView: View {
     
     @State var hintText: String = "This is input form"
     @State var content: String = ""
     @State var image: Image?
-    @State var audio: String = ""
+    @State var audio: Data?
+    @State var audioURL: URL?
     @State var showDocPicker = false
     
     @State var showingImagePicker = false
@@ -63,8 +65,15 @@ struct CreateView: View {
                                     result in
                                     if case .success = result {
                                         do {
-                                            print(try result.get().first)
-                                            print(type(of: try result.get().first))
+                                            print(result)
+                                            
+                                            if self.audioURL!.startAccessingSecurityScopedResource() {
+                                                self.audio = try Data(contentsOf: self.audioURL!)
+                                                defer { self.audioURL!.stopAccessingSecurityScopedResource() }
+                                            } else {
+                                                // Handle denied access
+                                            }
+                                            
                                         } catch {
                                             print(error.localizedDescription)
                                         }
@@ -76,7 +85,7 @@ struct CreateView: View {
                                         if(checkText(content: content)){
                                             self.hintText = "무언가를 입력해주세요....."
                                         }
-                                        create(content: content)
+                                        create()
                                         content = ""
                                     })
                                     {
@@ -122,7 +131,8 @@ struct CreateView: View {
     //                        DocumentPicker(image: $image)
                             SUImagePicker(sourceType: .photoLibrary) { (image) in
                                 self.image = Image(uiImage: image)
-                                print(self.image)
+                                print(image)
+                                print(type(of: image))
                             }
                         }
                         
@@ -137,7 +147,7 @@ struct CreateView: View {
                                 if(checkText(content: content)){
                                     self.hintText = "무언가를 입력해주세요....."
                                 }
-                                create(content: content)
+                                create()
                                 content = ""
                             })
                             {
@@ -154,8 +164,18 @@ struct CreateView: View {
                     result in
                     if case .success = result {
                         do {
-                            print(try result.get().first)
-                            print(type(of: try result.get().first))
+                            self.audioURL = try result.get().first!
+                            print(result)
+                            
+                            if self.audioURL!.startAccessingSecurityScopedResource() {
+                                self.audio = try Data(contentsOf: self.audioURL!)
+                                defer { self.audioURL!.stopAccessingSecurityScopedResource() }
+                            } else {
+                                // Handle denied access
+                            }
+                            
+                            
+                            
                         } catch {
                             print(error.localizedDescription)
                         }
@@ -168,38 +188,57 @@ struct CreateView: View {
         
         
     }
-}
-
-func create(content: String) {
-    PostController.sharedInstance.create(content: content) {data in
-        var response = data as! Dictionary<String, Any>
+    
+    
+    
+    func create() {
         
-        if(response["status"] as! Int == 200) {
-            print(response)
-        } else {
-            print("error")
+        var data: [String: Any] = [
+            "content" : self.content,
+        ]
+        
+        if(self.image != nil) {
+            data["image"] = self.image
         }
         
-        print(response)
-     }
-}
+        if(self.audio != nil) {
+            data["audio"] = self.audio
+            data["audioURL"] = self.audioURL
+        }
+        
+        
+        PostController.sharedInstance.create(data: data) {data in
+            var response = data as! Dictionary<String, Any>
+            
+            if(response["status"] as! Int == 200) {
+                print(response)
+            } else {
+                print("error")
+            }
+            
+            print(response)
+         }
+    }
 
-func checkText(content: String) -> Bool {
-    if(content == " " || content == ""){
-        return true
-    } else {
-        return false
+    func checkText(content: String) -> Bool {
+        if(content == " " || content == ""){
+            return true
+        } else {
+            return false
+        }
+    }
+
+    struct CreateTitle: View {
+        var body: some View{
+            Text("Create")
+                .font(.title)
+                .fontWeight(.bold)
+    //            .padding(.bottom, 20)
+        }
     }
 }
 
-struct CreateTitle: View {
-    var body: some View{
-        Text("Create")
-            .font(.title)
-            .fontWeight(.bold)
-//            .padding(.bottom, 20)
-    }
-}
+
 
 //struct DocummentPicker : UIViewControllerRepresentable {
 //    func makeUIViewController(context: UIViewControllerRepresentableContext<DocummentPicker>) ->
