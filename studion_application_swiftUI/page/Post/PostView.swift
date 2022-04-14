@@ -1,4 +1,3 @@
-//
 //  PostView.swift
 //  studion_application_swiftUI
 //
@@ -12,6 +11,7 @@ struct PostView: View {
     
     @State var p: [Dictionary<String, Any>?] = []
     @State var currentPage: Int
+//    @State var image: [Dictionary<String, Any>?] = []
     
     init() {
         if UIDevice.isIpad {
@@ -21,35 +21,52 @@ struct PostView: View {
         currentPage = 1
     }
     
+//    @State var images: [Dictionary<String, Any>?] = []
+    @State var imageName: String = ""
+    var isEmptyImg = false
+    
        var body: some View {
            
            if UIDevice.isIpad { // iPad
                               
-               ZStack() {
+               ZStack {
                    
                     VStack {
                         
                         List {
-                            ForEach(0..<self.p.count, id: \.self) { index in
-
-                                var images = self.p[index]!["images"] as! [Dictionary<String, Any>?]
+                            
+                            ForEach(0..<p.count, id: \.self) { index in
                                 
-                                    VStack{
-                                        PostCard(
+                                let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
+//                                let image = images.map{ $0 }
+                                
+                                
+                                VStack {
+                                    
+                                    Text(self.p[index]!["title"] as! String)
+                                        
+//                                    Button(action: {print(images)}, label: {Text("img")})
+                                    
+                                    PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
-                                            image: images[0]?["link"] as! String
+                                            image: images.count == 0 ? nil : images[0]?["link"] as? String
                                         )
-                                    Text("\(index)")
-                                        .task(){
-                                            print(index)
-                                            if index % 8 == 7 {
-                                                currentPage += 1
-                                                print("currentPage : \(currentPage)")
-                                            }
-                                        }
+//                                        Text(images.description)
+//                                        Text(self.p.description)
 
-                                }
+                                    
+//                                    Text("\(index)")
+                                        
+//                                        .task(){
+//                                            print(index)
+//                                            if index % 8 == 7 {
+//                                                currentPage += 1
+//                                                print("currentPage : \(currentPage)")
+//                                            }
+//                                        }
+
+                                    }
                                 }
                             } // list
                                     .padding(.horizontal, 150)
@@ -62,13 +79,10 @@ struct PostView: View {
 //                                      print(response)
                                     let posts = response["posts"] as! Dictionary<String, Any>
                                     
-//                                    var cpg = posts["current_page"] as! Int
-//                                    cpg = page
-                                           
                                     p = posts["data"] as! [Dictionary<String, Any>?]
-                                    
+                                                                      
                                     print("Posts Datas : \(p)")
-//                                    print("current_page : \(page)")
+                                    
                                 }
                                 
                             }.onDisappear() {
@@ -84,63 +98,68 @@ struct PostView: View {
 
            } else { // iPhone
                
-               ZStack {
-//                   NavigationView{
-                    VStack {
-                        List {
-                            ForEach(0..<self.p.count, id: \.self) { index in
-                                VStack{
-                                    let images = self.p[index]!["images"] as! [Dictionary<String, Any>?]
-//                                        PostCard(
-//                                            title: self.p[index]!["title"] as! String, // Dict type on View
-//                                            content: self.p[index]!["content"] as! String,
-//                                            image: images[0]?["link"] as! String
-//                                        )
-                                    }
-                                }
-                            }
-                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
-                                Color.clear
-                                    .frame(height: 50)
-                                  .background(Material.bar)
-                            }
-                        }
-                            NavigationBar(title: "Posts")
-
-
-//                    .navigationTitle("Posts")
-//                    .navigationBarTitleDisplayMode(.automatic)
-//                   }.navigationViewStyle(StackNavigationViewStyle())
-
-                                   .onAppear {
-                                       PostController.sharedInstance.show(page: currentPage) { data in
-
-                       //                          print(data)
-                                               let response = data as! Dictionary<String, Any>
-                       //                          print(response)
-                                               let posts = response["posts"] as! Dictionary<String, Any>
-
-                                               p = posts["data"] as! [Dictionary<String, Any>?]
-                                            
-                                           print(p)
-//                                                print(self.p[]!["images"] as! [Dictionary<String, Any>?])
-
-                                   }
-                               }
-                                   .onDisappear{
-                                       print("PostView end")
-                                   }
-
-                           }
-               .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
-                   Color.clear
-                       .frame(height: 50)
-//                       .background(Material.bar)
-               }
+//               ZStack {
+////                   NavigationView{
+//                    VStack {
+//                        List {
+//                            ForEach(0..<self.p.count, id: \.self) { index in
+//
+////                                let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
+//
+//                                VStack {
+//
+//                                    PostCard(
+//                                        title: self.p[index]!["title"] as! String, // Dict type on View
+//                                        content: self.p[index]!["content"] as! String
+////                                        image: (images[0]!["link"] as! String) ?? ""
+//                                    )
+//                                    }
+//                                }
+//                            }
+//                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+//                                Color.clear
+//                                    .frame(height: 50)
+//                                  .background(Material.bar)
+//                            }
+//                        }
+//                            NavigationBar(title: "Posts")
+//
+//
+////                    .navigationTitle("Posts")
+////                    .navigationBarTitleDisplayMode(.automatic)
+////                   }.navigationViewStyle(StackNavigationViewStyle())
+//
+//                                   .onAppear {
+//                                       PostController.sharedInstance.show(page: currentPage) { data in
+//
+//                       //                          print(data)
+//                                               let response = data as! Dictionary<String, Any>
+//                       //                          print(response)
+//                                               let posts = response["posts"] as! Dictionary<String, Any>
+//
+//                                               p = posts["data"] as! [Dictionary<String, Any>?]
+//
+//
+//                                   }
+//                               }
+//                                   .onDisappear{
+//                                       print("PostView end")
+//                                   }
+//
+//                           }
+//               .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
+//                   Color.clear
+//                       .frame(height: 50)
+////                       .background(Material.bar)
+//               }
 
            } //else
     }
-}
+} // view
+
+//private func fetchData() {
+//    PostController.sharedInstance.show(page: currentPage, handler: <#T##(Any) -> Void#>)
+//}
 
 
 //struct PostView_Previews: PreviewProvider {
