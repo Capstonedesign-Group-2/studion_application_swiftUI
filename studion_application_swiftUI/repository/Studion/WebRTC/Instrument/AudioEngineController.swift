@@ -52,6 +52,13 @@ class AudioEngineController {
     
     func record() {
         
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playAndRecord)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
         
         let format = self.mainMixer.outputFormat(forBus: 0)
         let documentURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
@@ -75,11 +82,17 @@ class AudioEngineController {
         
         
         print("----------------------------------------------------")
-        audioEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, time) -> Void in
-                try! self.audioFile?.write(from: buffer)
-                return
-            }
-                
+//        audioEngine.inputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, time) in
+//                try! self.audioFile?.write(from: buffer)
+//                print(buffer)
+//            print(self.audioFile)
+//            }
+             
+        self.audioEngine.outputNode.installTap(onBus: 0, bufferSize: 1024, format: format) { (buffer, time)  in
+            try! self.audioFile?.write(from: buffer)
+            print(buffer)
+            print(self.audioFile)
+        }
         
     }
     
