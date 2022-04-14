@@ -38,24 +38,24 @@ struct PostView: View {
                             ForEach(0..<p.count, id: \.self) { index in
                                 
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
+                                let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
 //                                let image = images.map{ $0 }
+                                
+//                                Button(action: {
+//                                    print(audios)
+//                                }, label: {
+//                                    Text("button1")
+//                                })
                                 
                                 
                                 VStack {
-                                    
-//                                    Text(self.p[index]!["title"] as! String)
-//
-//                                    Button(action: {print(images)}, label: {Text("img")})
-                                    
                                     PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
-                                            image: images.count == 0 ? nil : images[0]?["link"] as? String
+                                            image: images.count == 0 ? nil : images[0]?["link"] as? String,
+                                            audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
                                         )
-//                                        Text(images.description)
-//                                        Text(self.p.description)
-
-                                    
+                        
 //                                    Text("\(index)")
                                         
 //                                        .task(){
@@ -100,7 +100,7 @@ struct PostView: View {
                
                ZStack {
 //                   NavigationView{
-                    VStack {
+                   VStack {
                         List {
                             ForEach(0..<self.p.count, id: \.self) { index in
 
@@ -111,7 +111,6 @@ struct PostView: View {
                                     PostCard(
                                         title: self.p[index]!["title"] as! String, // Dict type on View
                                         content: self.p[index]!["content"] as! String,
-                                                                                    
                                         image: images.count == 0 ? nil : images[0]?["link"] as? String
                                     )
                                     }
