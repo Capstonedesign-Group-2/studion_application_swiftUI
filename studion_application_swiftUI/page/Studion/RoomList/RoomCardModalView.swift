@@ -26,6 +26,11 @@ struct RoomCardModalView: View {
     let startOpacity: Double = 0.4
     let endOpacity: Double = 0.8
     
+    let width:CGFloat = 300
+    var height: CGFloat = 20
+    var color3 = Color(red: 252/255, green: 246/255, blue: 245/255)
+    var color4 = Color(red: 44/255, green:95/255, blue: 45/255)
+    
     
     var dragPercentage: Double {
         let res = Double((curHeight - minHeight) / (maxHeight - minHeight))
@@ -44,6 +49,7 @@ struct RoomCardModalView: View {
                     
                     roomCardModalTextView
                         .transition(.move(edge: .bottom))
+                    
                         
                 }
             }
@@ -54,7 +60,10 @@ struct RoomCardModalView: View {
     }
     
     var roomCardModalTextView: some View {
+        
+        
         VStack {
+            
             ZStack {
                 Capsule()
                     .frame(width: 40, height: 6)
@@ -67,51 +76,120 @@ struct RoomCardModalView: View {
             
             ZStack {
                 NavigationView {
-                    VStack {
-                        Text(roomInfo!.title)
-                            .font(.largeTitle)
-                            .padding(.bottom, 15)
-                        
-                        Text(roomInfo!.content)
-                            .font(.body)
-                            .padding(.bottom, 15)
-                        
-                        Text(String(roomInfo!.users.count))
-                            .font(.body)
-                            .padding(.bottom, 15)
-                        
-                        if roomInfo!.locked == 1 {
-                            SecureField("Password", text: $roomPassword)
-                                .padding()
-                                .background(lightGreyColor)
-                                .cornerRadius(5.0)
-                                .padding(.bottom, 20)
-                        }
-                                                
-                        Button( action: {
-//                            self.roomNumber = roomInfo!.id
-//                            self.pageStatus = "/room"
-                            self.selectRoomNumber = roomInfo!.id
-                            self.selectRoomCheck = true
-                        } ) {
-                            Text("enter")
-                        }
+                    ZStack {
+                        VStack {
+                            
+                            VStack {
+                                Text(roomInfo!.title)
+                                    .font(.system(size: 40))
+                                    .fontWeight(.bold)
+                                    .padding(.bottom, 15)
+                                    .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
+                                
+                                Text(roomInfo!.content)
+                                    .font(.body)
+                                    .padding(.bottom, 15)
+                                    .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
+                                
+        //                        Text(String(roomInfo!.users.count))
+        //                            .font(.body)
+        //                            .padding(.bottom, 15)
+        //                            .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
+                                
+                                if roomInfo!.locked == 1 {
+                                    SecureField("Password", text: $roomPassword)
+                                        .padding()
+                                        .background(lightGreyColor)
+                                        .cornerRadius(5.0)
+                                        .padding(.bottom, 20)
+                                }
+                                
+                                ZStack(alignment: .leading) {
+                                    let multiplier = width / 4
+                                    var percent: CGFloat = CGFloat(roomInfo!.users.count)
+                                    
+                                    RoundedRectangle(cornerRadius: height, style: .continuous)
+                                        .frame(width: width, height: height)
+                                        .foregroundColor(Color.black.opacity(0.1))
+                                    
+                                    RoundedRectangle(cornerRadius: height, style: .continuous)
+                                        .frame(width: percent * multiplier, height: height)
+                                        .background(LinearGradient(gradient: Gradient(colors: [color3, color4]), startPoint: .leading, endPoint: .trailing)
+                                                        .clipShape(RoundedRectangle(cornerRadius: height, style: .continuous))
+                                        )
+                                        .foregroundColor(.clear)
+                                }
+
+                                
+                                
+                                                        
+//                                Button( action: {
+//        //                            self.roomNumber = roomInfo!.id
+//        //                            self.pageStatus = "/room"
+//                                    self.selectRoomNumber = roomInfo!.id
+//                                    self.selectRoomCheck = true
+//                                } ) {
+//                                    Text("enter")
+//                                }
+//                                .padding(.horizontal, 30)
+//                                .padding(.bottom, 100)
+                                
+                                Button( action: {
+                                    self.selectRoomNumber = roomInfo!.id
+                                    self.selectRoomCheck = true
+                                }) {
+                                    Text("Enter")
+                                        .bold()
+                                        .frame(width: 200, height: 50)
+                                        .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
+                                        .background(LinearGradient(gradient: Gradient(colors: [color3, color4]), startPoint: .leading, endPoint: .trailing))
+                                        .clipShape(Capsule())
+                                    
+                                }
+                                
+                                
+                            }   // VStack
+                            .padding()
+                            
+                            
+                            
+                            
+                            
+                        }   // VStack
+                        .frame(width: UIScreen.main.bounds.width, height: curHeight)
+                        .background(Color(red: 151/255, green: 188/255, blue:98/255))
                         .padding(.horizontal, 30)
-                        .padding(.bottom, 100)
+                        .zIndex(1)
                         
                         
-                    }   // VStack
-                    .padding(.horizontal, 30)
+//                        Spacer()
+//                            .frame(width: UIScreen.main.bounds.width, height: curHeight)
+//                            .background(.white).opacity(0.3)
+//                            .padding(.horizontal, 30)
+                        
+                    }   // ZStack
+                    
+                    
+                    
+                    
+                    
 
                 }   // NavigationView
+                
                 .navigationViewStyle(.stack)
+                
+                
                                 
                 
-            }
+            }   // ZStack
+            
             .frame(maxHeight: .infinity)
             .padding(.bottom, 35)
             
-        }
+            
+            
+            
+        }   // VStack
         .frame(height: curHeight)
         .frame(maxWidth: .infinity)
         .background(
@@ -120,7 +198,7 @@ struct RoomCardModalView: View {
                 Rectangle()
                     .frame(height: curHeight / 2)
             }
-            .foregroundColor(.white)
+            .foregroundColor(Color(red: 151/255, green: 188/255, blue:98/255))
         )
         .animation(isDragging ? nil : .easeInOut(duration: 0.45))
     }
