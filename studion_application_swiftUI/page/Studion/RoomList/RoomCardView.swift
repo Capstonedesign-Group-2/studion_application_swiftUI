@@ -11,10 +11,10 @@ struct RoomCardView: View {
     
     var roomInfo: RoomCodableStruct.roomInfo
     
-//    var color1 = Color(#colorLiteral(red: 0, green: 0.5452187657, blue: 0, alpha: 0.8470588235))
+    var color2 = Color(#colorLiteral(red: 0, green: 0.5452187657, blue: 0, alpha: 0.8470588235))
 //    var color2 = Color(#colorLiteral(red: 0.5897991657, green: 1, blue: 0.7255712152, alpha: 0.8470588235))
     var color1 = Color(red: 7/255, green: 85/255, blue: 59/255)
-    var color2 = Color(red: 7/255, green: 85/255, blue: 59/255)
+//    var color2 = Color(red: 7/255, green: 85/255, blue: 59/255)
     
     
     var width: CGFloat = 250
