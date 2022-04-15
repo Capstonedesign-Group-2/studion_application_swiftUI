@@ -43,43 +43,30 @@ struct CreateView: View {
                                             .padding(.vertical, 12)
                                     }
                                     TextEditor(text: $content)
+                                        .frame(height: 600, alignment: .center)
                                 }
                                 
                                 Button("Pick Image"){
-//                                    showDocPicker = true
+        //                                    showDocPicker = true
                                     showingImagePicker.toggle()
                                 }
                                 .sheet(isPresented: self.$showingImagePicker) {
             //                        DocumentPicker(image: $image)
                                     SUImagePicker(sourceType: .photoLibrary) { (image) in
-//                                        self.image = Image(uiImage: image)
-                                        print(self.image)
-                                        
+        //                                self.image = Image(uiImage: image)
+                                        print(image)
+                                        print(type(of: image))
+                                        self.image = image.jpegData(compressionQuality: 0.2)
                                     }
                                 }
                                 
+                                
                                 Button("Pick Audio"){
 //                                    showDocPicker = true
-                                    showingImagePicker.toggle()
+                                    showingAudioPicker.toggle()
+                                    print(showingAudioPicker)
                                 }
-                                .fileImporter(isPresented: $showingAudioPicker, allowedContentTypes: [.audio], allowsMultipleSelection: false) {
-                                    result in
-                                    if case .success = result {
-                                        do {
-                                            print(result)
-                                            
-                                            if self.audioURL!.startAccessingSecurityScopedResource() {
-                                                self.audio = try Data(contentsOf: self.audioURL!)
-                                                defer { self.audioURL!.stopAccessingSecurityScopedResource() }
-                                            } else {
-                                                // Handle denied access
-                                            }
-                                            
-                                        } catch {
-                                            print(error.localizedDescription)
-                                        }
-                                    }
-                                }
+                                
                                                                 
                                 
                                     Button(action: {
@@ -96,18 +83,57 @@ struct CreateView: View {
                             }
                             
                         }
-                        .padding(.horizontal, 150)
-                        
-    //                    NavigationBar(title: "Create")
+                        .padding(.horizontal, 130)
 
                     } // vS
-                    .background(Color.clear)
-                    .navigationTitle("Create")
-                .navigationBarTitleDisplayMode(.inline)
-                }
+                    
+                    .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                        Color.clear
+                            .frame(height: 45)
+//                          .background(Material.bar)
+                    }
+                    
+                    
+//                    NavigationBar(title: "Create")
+                    CreateTitle()
+                        .ignoresSafeArea(edges: .all)
+                    
+                } // zS
                 
-            }
-            .navigationViewStyle(.stack)
+                .navigationTitle("")
+                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarHidden(true)
+                .navigationBarBackButtonHidden(true)
+//                .background(Color.clear)
+//                .navigationBarTitleDisplayMode(.inline)
+                
+        
+                .fileImporter(isPresented: $showingAudioPicker, allowedContentTypes: [.audio], allowsMultipleSelection: false) {
+                    result in
+                    if case .success = result {
+                        do {
+                            self.audioURL = try result.get().first!
+                            print(result)
+                            
+                            if self.audioURL!.startAccessingSecurityScopedResource() {
+                                self.audio = try Data(contentsOf: self.audioURL!)
+                                defer { self.audioURL!.stopAccessingSecurityScopedResource() }
+                            } else {
+                                // Handle denied access
+                                print("File Import Failed")
+                            }
+                            
+                            
+                            
+                        } catch {
+                            print(error.localizedDescription)
+                        }
+                    }
+                } //fileImporter
+                                
+
+            } //nav
+            .navigationViewStyle(StackNavigationViewStyle())
 
             
         } else { //iPhone
@@ -135,9 +161,6 @@ struct CreateView: View {
                                 print(image)
                                 print(type(of: image))
                                 self.image = image.jpegData(compressionQuality: 0.2)
-                                
-                                
-                                
                             }
                         }
                         
@@ -164,7 +187,15 @@ struct CreateView: View {
                 }
                 .navigationTitle("Create")
                 .navigationBarTitleDisplayMode(.inline)
+                
+                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                    Color.clear
+                        .frame(height: 50)
+                      .background(Material.bar)
+                }
                 //            .background(NavigationBar(title: "Create"))
+                
+                
                 .fileImporter(isPresented: $showingAudioPicker, allowedContentTypes: [.audio], allowsMultipleSelection: false) {
                     result in
                     if case .success = result {
@@ -186,6 +217,7 @@ struct CreateView: View {
                         }
                     }
                 }
+                
                 
             }
             .navigationViewStyle(.stack)
@@ -217,6 +249,7 @@ struct CreateView: View {
             
             if(response["status"] as! Int == 200) {
                 print(response)
+                
             } else {
                 print("error")
             }
@@ -232,17 +265,28 @@ struct CreateView: View {
             return false
         }
     }
-
-    struct CreateTitle: View {
-        var body: some View{
-            Text("Create")
-                .font(.title)
-                .fontWeight(.bold)
-    //            .padding(.bottom, 20)
-        }
-    }
 }
 
+
+struct CreateTitle: View {
+    var body: some View{
+        ZStack {
+            Color.clear
+                .background(.ultraThinMaterial)
+            
+            Text("Create")
+                .font(.largeTitle.weight(.bold))
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.leading, 20)
+                .padding(.top, 20)
+        }
+        .ignoresSafeArea(edges: .all)
+        
+        
+        .frame(height: 70)
+        .frame(maxHeight: .infinity, alignment: .top)
+    }
+}
 
 
 //struct DocummentPicker : UIViewControllerRepresentable {

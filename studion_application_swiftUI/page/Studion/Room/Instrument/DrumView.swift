@@ -33,12 +33,13 @@ struct DrumView: View {
         
         if UIDevice.isIpad {
             
-            VStack (spacing: 40){
+            VStack (spacing: 40) {
 
     //            Spacer()
     //                .frame(height: 20)
                 HStack (spacing: 40){
 
+<<<<<<< HEAD
 //                    Button(action: {
 //                        print("Q")
 //                        self.buttonClick(key: "Q")
@@ -52,6 +53,22 @@ struct DrumView: View {
 //                    }
 //                    .buttonStyle(MyButtonStyle())
                     PayButton(key: "Q", imageName: "ride")
+=======
+                    Button(action: {
+                        print("Q")
+                        print("X")
+                        self.buttonClick(key: "Q")
+                        self.buttonClick(key: "X")
+    //                    drumController_test.start(key: "cr")
+                        
+                    }) {
+                        Image("ride")
+                            .resizable()
+                            .frame(width: 120, height: 120)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+>>>>>>> jinho
                     
 
                     Button(action: {
@@ -166,6 +183,11 @@ struct DrumView: View {
                 Spacer()
 
             } // Vstack
+            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                Color.clear
+                    .frame(height: 50)
+                  .background(Material.bar)
+            }
             .onAppear{
                 print("drum start")
             }
@@ -181,6 +203,7 @@ struct DrumView: View {
     //                .frame(height: 20)
                 HStack (spacing: 20){
 
+<<<<<<< HEAD
 //                    Button(action: {
 //                        print("Q")
 //                        self.buttonClick(key: "Q")
@@ -194,6 +217,22 @@ struct DrumView: View {
 //                    }
 //                    .buttonStyle(MyButtonStyle())
                     PayButton(key: "Q", imageName: "ride")
+=======
+                    Button(action: {
+                        print("Q")
+                        print("X")
+                        self.buttonClick(key: "Q")
+                        self.buttonClick(key: "X")
+    //                    drumController_test.start(key: "cr")
+                        
+                    }) {
+                        Image("ride")
+                            .resizable()
+                            .frame(width: 60, height: 60)
+                            .aspectRatio(contentMode: .fit)
+                    }
+                    .buttonStyle(MyButtonStyle())
+>>>>>>> jinho
                     
 
 //                    Button(action: {
