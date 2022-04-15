@@ -30,12 +30,16 @@ struct PostCard: View {
             
             if !show {
                 
-                VStack {
+                VStack(spacing: 20) {
                     Text(title)
                         .font(.largeTitle.weight(.bold))
                         .matchedGeometryEffect(id: "title", in: namespace)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding()
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 0)
+                                .stroke(Color.gray, lineWidth: 0.5)
+                        )
                     
                     
                     if((image) != nil){
@@ -60,17 +64,26 @@ struct PostCard: View {
                     }
                     
                     Text(content)
-                        .font(.body.weight(.bold))
+                        .font(.title.weight(.bold))
                         .matchedGeometryEffect(id: "content", in: namespace)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.bottom, 30)
-                        .padding(.leading, 30)
+                        .padding(.all, 30)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 0)
+                                .stroke(Color.gray, lineWidth: 0.5)
+                        )
+                    
                     
                     if (audioURL != nil) {
-                        Text(audioURL!)
+//                        Text(audioURL!)
+                        AudioView(audioURL: audioURL, isPlaying: false)
+                            .matchedGeometryEffect(id: "audio", in: namespace)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding()
                     } else {
                         Text("No Audios...")
                     }
+                    Spacer()
 
 
                 }
@@ -115,22 +128,33 @@ struct PostCard: View {
                         .padding(.bottom, 30)
                         .padding(.leading, 30)
                     
-//                    AudioView(audioURL: audioURL, playing: false)
-//                        .matchedGeometryEffect(id: "audio", in: namespace)
-//                        .frame(maxWidth: .infinity, alignment: .leading)
-//                        .padding()
+                    AudioView(audioURL: audioURL, isPlaying: false)
+                        .matchedGeometryEffect(id: "audio", in: namespace)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding()
 
 
                 }
             }
         }
+        .background(Color.white)
+        .overlay(
+            RoundedRectangle(cornerRadius: 16)
+                .stroke(Color.white, lineWidth: 0.1)
+//                .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
+        )
+        .cornerRadius(16.0)
+        .shadow(color: .gray, radius: 2)
+        Spacer()
         
-        .onTapGesture {
-            withAnimation {
-                show.toggle()
-            }
-        }.transition(.slide)
-    }
+//        .onTapGesture {
+//            withAnimation {
+//                show.toggle()
+//            }
+//        }.transition(.slide)
+        
+        
+    } //zS
 }
 
 
