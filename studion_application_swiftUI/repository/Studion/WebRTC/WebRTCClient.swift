@@ -167,6 +167,12 @@ final class WebRTCClient: NSObject {
 //        }
         
         if(WebRTCDictionaryController.sharedInstance.userArray.contains(socketID) == false) {
+            print("--------------------------123123")
+            print("--------------------------123123")
+            print("--------------------------123123")
+            print("--------------------------123123")
+            print("--------------------------123123")
+            
             WebRTCDictionaryController.sharedInstance.userArray.append(socketID)
         }
 

@@ -25,6 +25,8 @@ struct StudionRoomList: View {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    @State var degressDic: [Int: Double] = [:]
+    
     var body: some View {
         
 //        NavigationView {
@@ -35,6 +37,10 @@ struct StudionRoomList: View {
                     if roomSocket.roomsInfo?.rooms?.count != 0 {
                         
                         if roomSocket.roomsInfo != nil {
+                            
+                            Spacer()
+                                .frame(height: 30)
+                            
                             ScrollView(showsIndicators: false) {
                                 
                                 VStack(spacing: 0) {
@@ -65,13 +71,26 @@ struct StudionRoomList: View {
                                     
                                     
                                     ForEach(0..<(roomSocket.roomsInfo?.rooms?.count)!, id: \.self) { index in
+                                        
+                                        
 
                                         Button( action: {
                                             self.roomInfo = (roomSocket.roomsInfo?.rooms![index])!
+                                            
+                                            withAnimation{
+                                                roomSocket.degressDic[index]! += 360
+                                            }
+                                            print(showModal)
+                                            
                                             self.showModal = true
+                                            
+                                            
+                                            
                                         }) {
-                                            RoomCardView(roomInfo: roomSocket.roomsInfo?.rooms![index] as! RoomCodableStruct.roomInfo )
+                                            RoomCardView(roomInfo: (roomSocket.roomsInfo?.rooms![index])! )
+                                                .rotation3DEffect(.degrees(roomSocket.degressDic[index]!), axis: (x: 0, y: 1, z: 0))
                                         }
+                                        
                                     }
                                 }
                                 
@@ -79,6 +98,7 @@ struct StudionRoomList: View {
 
                                 
                             }   // ScrollView
+//                            .padding(.top, 30)
 //                            .navigationTitle("Studion")
 //                            .navigationBarTitleDisplayMode(.inline)
                             
@@ -110,6 +130,7 @@ struct StudionRoomList: View {
                 NavigationBar(title: "Studion")
                 
                 RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo, selectRoomCheck: $selectRoomCheck, selectRoomNumber: $selectRoomNumber)
+                    
                 
                 
                 
@@ -133,6 +154,8 @@ struct StudionRoomList: View {
             AppDelegate.orientationLock = .portrait
             
 //            print(roomSocket.roomsInfo?.rooms)
+            
+            
         }
         
         
@@ -147,6 +170,7 @@ struct StudionRoomList: View {
 final class RoomSocket: ObservableObject {
     
     @Published var roomsInfo: RoomCodableStruct.roomsInfo?
+    @Published var degressDic: [Int: Double] = [:]
     
     init() {
         let socket: SocketIOClient = SocketIO.sharedInstance.getSocket()
@@ -155,6 +179,7 @@ final class RoomSocket: ObservableObject {
         socket.emit("get_room_list")
                 
                 socket.on("update_room_list_on") {data, ack in
+                    self.degressDic = [:]
 //                    print(data)
                     let response: [String: Any] = data[0] as! Dictionary<String, Any>
                     let decoder = JSONDecoder()
@@ -164,25 +189,43 @@ final class RoomSocket: ObservableObject {
                         
                         self.roomsInfo = try decoder.decode(RoomCodableStruct.roomsInfo.self, from: responseData)
                         
+                        var count = 0
+                        
+                        self.roomsInfo?.rooms?.forEach {_ in
+                            self.degressDic[count] = 0.0
+                            count += 1
+                        }
+                        
                         print("room list update")
 
                     } catch {
-                        print("error")
+                        print("room list error")
+                        print(error.localizedDescription)
                     }
+                    
                     
                 }
                 
                 socket.on("get_room_list_on") {data, ack in
+                    self.degressDic = [:]
                     let response: [String: Any] = data[0] as! Dictionary<String, Any>
-        //            print(response)
+//                    print(response)
                     let decoder = JSONDecoder()
                     do {
                         let responseData = try JSONSerialization.data(withJSONObject: response, options: [.fragmentsAllowed])
 
                         self.roomsInfo = try decoder.decode(RoomCodableStruct.roomsInfo.self, from: responseData)
+                        
+                        var count = 0
+                        
+                        self.roomsInfo?.rooms?.forEach {_ in
+                            self.degressDic[count] = 0.0
+                            count += 1
+                        }
                         print("get room list on")
                     } catch {
-                        print("error")
+                        print("room list error2")
+                        print(error.localizedDescription)
                     }
                 }
     }

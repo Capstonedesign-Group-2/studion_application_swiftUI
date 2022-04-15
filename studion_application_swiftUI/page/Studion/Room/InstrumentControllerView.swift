@@ -359,7 +359,7 @@ struct InstrumentControllerView: View {
 //                                            self.recordFiles.append(url!)
 //                                        }
 //                                        self.recordController.stop()
-                                        AudioEngineController.sharedInstance.stop()
+//                                        AudioEngineController.sharedInstance.stop()
                                         isRecording = false
 
                                     } else {
@@ -375,7 +375,7 @@ struct InstrumentControllerView: View {
 
 //                                        AudioEngineController.sharedInstance.record()
                                         
-                                        AudioEngineController.sharedInstance.record()
+//                                        AudioEngineController.sharedInstance.record()
                                         isRecording = true
 
                                     }

@@ -13,6 +13,8 @@
 		29C4C03327EDDE0A0048D405 /* PostController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4C03227EDDE0A0048D405 /* PostController.swift */; };
 		29C4C03527EDE2150048D405 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4C03427EDE2150048D405 /* CreateView.swift */; };
 		29C4C03827EF61460048D405 /* PostCodableStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4C03727EF61450048D405 /* PostCodableStruct.swift */; };
+		550D5F6E2809577D0059BF85 /* NobodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6D2809577D0059BF85 /* NobodyView.swift */; };
+		550D5F70280957880059BF85 /* Player1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6F280957880059BF85 /* Player1View.swift */; };
 		55420D2C27ED8A5F001A9AB4 /* DrumsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55420D2B27ED8A5F001A9AB4 /* DrumsController.swift */; };
 		555E647527FD67F900C449BC /* RecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647427FD67F900C449BC /* RecordController.swift */; };
 		555E647727FD69A400C449BC /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647627FD69A400C449BC /* RecordView.swift */; };
@@ -142,6 +144,8 @@
 		29C4C03227EDDE0A0048D405 /* PostController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostController.swift; sourceTree = "<group>"; };
 		29C4C03427EDE2150048D405 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		29C4C03727EF61450048D405 /* PostCodableStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCodableStruct.swift; sourceTree = "<group>"; };
+		550D5F6D2809577D0059BF85 /* NobodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobodyView.swift; sourceTree = "<group>"; };
+		550D5F6F280957880059BF85 /* Player1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player1View.swift; sourceTree = "<group>"; };
 		55420D2B27ED8A5F001A9AB4 /* DrumsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsController.swift; sourceTree = "<group>"; };
 		555E647427FD67F900C449BC /* RecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordController.swift; sourceTree = "<group>"; };
 		555E647627FD69A400C449BC /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
@@ -294,6 +298,15 @@
 				29C4C03727EF61450048D405 /* PostCodableStruct.swift */,
 			);
 			path = Post;
+			sourceTree = "<group>";
+		};
+		550D5F6C280957640059BF85 /* VolumeControllSlider */ = {
+			isa = PBXGroup;
+			children = (
+				550D5F6D2809577D0059BF85 /* NobodyView.swift */,
+				550D5F6F280957880059BF85 /* Player1View.swift */,
+			);
+			path = VolumeControllSlider;
 			sourceTree = "<group>";
 		};
 		555E647327FD67E700C449BC /* Record */ = {
@@ -594,6 +607,7 @@
 		55B98C8F27EC78150057F168 /* SideBar */ = {
 			isa = PBXGroup;
 			children = (
+				550D5F6C280957640059BF85 /* VolumeControllSlider */,
 				55B98C9027EC782D0057F168 /* LeftBarView.swift */,
 				55B98C9227EC78970057F168 /* CustomTabView.swift */,
 			);
@@ -878,6 +892,7 @@
 				55B98C3B27EAA1530057F168 /* RoomListController.swift in Sources */,
 				555E647527FD67F900C449BC /* RecordController.swift in Sources */,
 				55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */,
+				550D5F70280957880059BF85 /* Player1View.swift in Sources */,
 				55B98C0127E83F260057F168 /* LoginView.swift in Sources */,
 				55B98C9327EC78970057F168 /* CustomTabView.swift in Sources */,
 				2992C4E427FDB465008EFFCA /* NavigationBar.swift in Sources */,
@@ -923,6 +938,7 @@
 				55B98C1627E885D60057F168 /* ProgressViewBar.swift in Sources */,
 				55B98C8E27EC09A20057F168 /* GuitarView.swift in Sources */,
 				55420D2C27ED8A5F001A9AB4 /* DrumsController.swift in Sources */,
+				550D5F6E2809577D0059BF85 /* NobodyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1054,7 +1070,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = SU7RQ4J4BY;
+				DEVELOPMENT_TEAM = 49C98WAKUL;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1090,7 +1106,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = SU7RQ4J4BY;
+				DEVELOPMENT_TEAM = 49C98WAKUL;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
