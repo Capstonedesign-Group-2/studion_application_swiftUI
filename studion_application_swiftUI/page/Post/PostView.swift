@@ -38,6 +38,8 @@ struct PostView: View {
                                 
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
+                                
+                                
 //                                let image = images.map{ $0 }
                                 
 //                                Button(action: {
