@@ -22,7 +22,7 @@ struct AudioView : View {
 
             ZStack(alignment: .leading) {
                 
-                Text(audioURL!)
+//                Text(audioURL!)
                 
                 Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
                 Capsule().fill(Color.green).frame(width: self.width, height: 8)
