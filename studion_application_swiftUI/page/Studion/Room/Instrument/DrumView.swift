@@ -33,144 +33,60 @@ struct DrumView: View {
         
         if UIDevice.isIpad {
             
-            VStack (spacing: 40){
+            
+            
+            ZStack {
+                
+                VStack (spacing: 20){
 
-    //            Spacer()
-    //                .frame(height: 20)
-                HStack (spacing: 40){
+    //                Spacer()
+        //                .frame(height: 20)
+                    HStack (spacing: 100){
+                        
+                        PayButton(key: "Q", imageName: "ride")
 
-//                    Button(action: {
-//                        print("Q")
-//                        self.buttonClick(key: "Q")
-//    //                    drumController_test.start(key: "cr")
-//
-//                    }) {
-//                        Image("ride")
-//                            .resizable()
-//                            .frame(width: 120, height: 120)
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    .buttonStyle(MyButtonStyle())
-                    PayButton(key: "Q", imageName: "ride")
-                    
+                        PayButton(key: "W", imageName: "hi-hat")
 
-                    Button(action: {
-                        print("W")
-                        self.buttonClick(key: "W")
-    //                    drumController_test.start(key: "tom3")
+                        PayButton(key: "E", imageName: "ride")
 
+                    } // HStack
 
-                    }) {
-                        Image("hi-hat")
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fit)
+                    HStack (spacing: 100){
+                        
+                        PayButton(key: "A", imageName: "tom")
 
-                    }
-                    .buttonStyle(MyButtonStyle())
+                        PayButton(key: "S", imageName: "tom")
+                        
+                        PayButton(key: "D", imageName: "tom")
 
-                    Button(action: {
-                        print("E")
-                        self.buttonClick(key: "E")
-                    }) {
-                        Image("snap")
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    .buttonStyle(MyButtonStyle())
+                    } // HStack
 
-                } // HStack
+                    HStack (spacing: 100){
+                        
+                        PayButton(key: "Z", imageName: "snap")
 
-                HStack (spacing: 40){
+                        PayButton(key: "X", imageName: "bass-drum")
 
-                    Button(action: {
-                        print("A")
-                        self.buttonClick(key: "A")
-    //                    self.conductor.playPad(padNumber: 3)
-                    }) {
-                        Image("tom")
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    .buttonStyle(MyButtonStyle())
+                        PayButton(key: "C", imageName: "snap")
 
-                    Button(action: {
-                        print("S")
-                        self.buttonClick(key: "S")
-    //                    self.conductor.playPad(padNumber: 4)
-                    }) {
-                        Image("tom")
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    .buttonStyle(MyButtonStyle())
+                    } // HStack
 
-                    Button(action: {
-                        print("D")
-                        self.buttonClick(key: "D")
-    //                    self.conductor.playPad(padNumber: 5)
-                    }) {
-                        Image("tom")
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    .buttonStyle(MyButtonStyle())
+    //                Spacer()
 
-
-                } // HStack
-
-                HStack (spacing: 40){
-
-                    Button(action: {
-                        print("Z")
-                        self.buttonClick(key: "Z")
-    //                    self.conductor.playPad(padNumber: 6)
-                    }) {
-                        Image("snap")
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    .buttonStyle(MyButtonStyle())
-
-                    Button(action: {
-                        print("X")
-                        self.buttonClick(key: "X")
-    //                    self.conductor.playPad(padNumber: 7)
-                    }) {
-                        Image("bass-drum")
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    .buttonStyle(MyButtonStyle())
-
-                    Button(action: {
-                        print("C")
-                        self.buttonClick(key: "C")
-    //                    self.conductor.playPad(padNumber: 8)
-                    }) {
-                        Image("snap")
-                            .resizable()
-                            .frame(width: 120, height: 120)
-                            .aspectRatio(contentMode: .fit)
-                    }
-                    .buttonStyle(MyButtonStyle())
-
-                } // HStack
-
-                Spacer()
-
-            } // Vstack
-            .onAppear{
-                print("drum start")
-            }
-            .onDisappear{
-                print("drum end")
+                } // Vstack
+                
+                
+                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                    Color.clear
+                        .frame(height: 50)
+    //                  .background(Material.bar)
+                }
+                .onAppear{
+                    print("drum start")
+                }
+                .onDisappear{
+                    print("drum end")
+                }
             }
             
         } else { // iPhone View
@@ -180,138 +96,31 @@ struct DrumView: View {
 //                Spacer()
     //                .frame(height: 20)
                 HStack (spacing: 20){
-
-//                    Button(action: {
-//                        print("Q")
-//                        self.buttonClick(key: "Q")
-//    //                    drumController_test.start(key: "cr")
-//
-//                    }) {
-//                        Image("ride")
-//                            .resizable()
-//                            .frame(width: 60, height: 60)
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    .buttonStyle(MyButtonStyle())
-                    PayButton(key: "Q", imageName: "ride")
                     
+                    PayButton(key: "Q", imageName: "ride")
 
-//                    Button(action: {
-//                        print("W")
-//                        self.buttonClick(key: "W")
-//    //                    drumController_test.start(key: "tom3")
-//
-//
-//                    }) {
-//                        Image("hi-hat")
-//                            .resizable()
-//                            .frame(width: 60, height: 60)
-//                            .aspectRatio(contentMode: .fit)
-//
-//                    }
-//                    .buttonStyle(MyButtonStyle())
                     PayButton(key: "W", imageName: "hi-hat")
 
-//                    Button(action: {
-//                        print("E")
-//                        self.buttonClick(key: "E")
-//                    }) {
-//                        Image("snap")
-//                            .resizable()
-//                            .frame(width: 60, height: 60)
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    .buttonStyle(MyButtonStyle())
-                    PayButton(key: "E", imageName: "snap")
+                    PayButton(key: "E", imageName: "ride")
 
                 } // HStack
 
                 HStack (spacing: 20){
-
-//                    Button(action: {
-//                        print("A")
-//                        self.buttonClick(key: "A")
-//    //                    self.conductor.playPad(padNumber: 3)
-//                    }) {
-//                        Image("tom")
-//                            .resizable()
-//                            .frame(width: 60, height: 60)
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    .buttonStyle(MyButtonStyle())
                     
                     PayButton(key: "A", imageName: "tom")
 
-//                    Button(action: {
-//                        print("S")
-//                        self.buttonClick(key: "S")
-//    //                    self.conductor.playPad(padNumber: 4)
-//                    }) {
-//                        Image("tom")
-//                            .resizable()
-//                            .frame(width: 60, height: 60)
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    .buttonStyle(MyButtonStyle())
                     PayButton(key: "S", imageName: "tom")
-
-//                    Button(action: {
-//                        print("D")
-//                        self.buttonClick(key: "D")
-//    //                    self.conductor.playPad(padNumber: 5)
-//                    }) {
-//                        Image("tom")
-//                            .resizable()
-//                            .frame(width: 60, height: 60)
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    .buttonStyle(MyButtonStyle())
                     
                     PayButton(key: "D", imageName: "tom")
-
 
                 } // HStack
 
                 HStack (spacing: 20){
-
-//                    Button(action: {
-//                        print("Z")
-//                        self.buttonClick(key: "Z")
-//    //                    self.conductor.playPad(padNumber: 6)
-//                    }) {
-//                        Image("snap")
-//                            .resizable()
-//                            .frame(width: 60, height: 60)
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    .buttonStyle(MyButtonStyle())
                     
                     PayButton(key: "Z", imageName: "snap")
 
-//                    Button(action: {
-//                        print("X")
-//                        self.buttonClick(key: "X")
-//    //                    self.conductor.playPad(padNumber: 7)
-//                    }) {
-//                        Image("bass-drum")
-//                            .resizable()
-//                            .frame(width: 60, height: 60)
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    .buttonStyle(MyButtonStyle())
                     PayButton(key: "X", imageName: "bass-drum")
 
-//                    Button(action: {
-//                        print("C")
-//                        self.buttonClick(key: "C")
-//    //                    self.conductor.playPad(padNumber: 8)
-//                    }) {
-//                        Image("snap")
-//                            .resizable()
-//                            .frame(width: 60, height: 60)
-//                            .aspectRatio(contentMode: .fit)
-//                    }
-//                    .buttonStyle(MyButtonStyle())
                     PayButton(key: "C", imageName: "snap")
 
                 } // HStack
@@ -390,55 +199,116 @@ struct PayButton: View {
 
     
     var body: some View {
-        VStack {
-            Image(imageName)
-                .resizable()
-                .frame(width: 70, height: 70)
-                .aspectRatio(contentMode: .fit)
-                    .font(.system(size: 20, weight: .semibold, design: .rounded))
-//                    .frame(width: 200, height: 60)
-                    .background(
-                        ZStack {
-                                Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
+        
+        if UIDevice.isIpad {
+            
+            
+            VStack {
+                Image(imageName)
+                    .resizable()
+                    .frame(width: 150, height: 150) //btn size
+                    .aspectRatio(contentMode: .fit)
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+    //                    .frame(width: 200, height: 60)
+                        .background(
+                            ZStack {
+                                    Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
 
-//                                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            Circle()
-                                    .foregroundColor(.white)
-                                    .blur(radius: 4)
-                                    .offset(x: -8, y: -8)
+    //                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                Circle()
+                                        .foregroundColor(.white)
+                                        .blur(radius: 4)
+                                        .offset(x: -8, y: -8)
 
-//                                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                            Circle()
-                                    .fill(
-                                        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9019607843, green: 0.9294117647, blue: 0.9882352941, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                                        )
-                                    .padding(2)
-                                    .blur(radius: 2)
+    //                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                Circle()
+                                        .fill(
+                                            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9019607843, green: 0.9294117647, blue: 0.9882352941, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                                            )
+                                        .padding(2)
+                                        .blur(radius: 2)
+                                }
+                        )
+                        .clipShape(Circle())
+                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 20, y: 20)
+                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 20, x: -20, y: -20)
+            }
+    //        .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(width: 150, height: 160) // Size (all)
+            .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 0)))
+            .edgesIgnoringSafeArea(.all)
+            .scaleEffect(tap ? 1.2 : 1)
+                    .gesture(
+                        LongPressGesture().onChanged { value in
+                            self.tap = true
+            
+                            buttonClick(key: self.key)
+            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                self.tap = false
+                            }
+                        }
+                            .onEnded{ value in
+                                self.press.toggle()
                             }
                     )
-                    .clipShape(Circle())
-                    .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 20, y: 20)
-                    .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 20, x: -20, y: -20)
+            
+            
+        } else {
+            
+            VStack {
+                Image(imageName)
+                    .resizable()
+                    .frame(width: 70, height: 70) //btn size
+                    .aspectRatio(contentMode: .fit)
+                        .font(.system(size: 20, weight: .semibold, design: .rounded))
+    //                    .frame(width: 200, height: 60)
+                        .background(
+                            ZStack {
+                                    Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1))
+
+    //                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                Circle()
+                                        .foregroundColor(.white)
+                                        .blur(radius: 4)
+                                        .offset(x: -8, y: -8)
+
+    //                                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                Circle()
+                                        .fill(
+                                            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9019607843, green: 0.9294117647, blue: 0.9882352941, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                                            )
+                                        .padding(2)
+                                        .blur(radius: 2)
+                                }
+                        )
+                        .clipShape(Circle())
+                        .shadow(color: Color(#colorLiteral(red: 0.7608050108, green: 0.8164883852, blue: 0.9259157777, alpha: 1)), radius: 20, x: 20, y: 20)
+                        .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 20, x: -20, y: -20)
+            }
+    //        .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .frame(width: 70, height: 60) // Size (all)
+            .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 0)))
+            .edgesIgnoringSafeArea(.all)
+            .scaleEffect(tap ? 1.2 : 1)
+                    .gesture(
+                        LongPressGesture().onChanged { value in
+                            self.tap = true
+            
+                            buttonClick(key: self.key)
+            
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                                self.tap = false
+                            }
+                        }
+                            .onEnded{ value in
+                                self.press.toggle()
+                            }
+                    )
+            
+            
         }
-//        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .frame(width: 70, height: 60)
-        .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 0)))
-        .edgesIgnoringSafeArea(.all)
-        .scaleEffect(tap ? 1.2 : 1)
-                .gesture(
-                    LongPressGesture().onChanged { value in
-                        self.tap = true
         
-                        buttonClick(key: self.key)
-        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                            self.tap = false
-                        }
-                    }
-                        .onEnded{ value in
-                            self.press.toggle()
-                        }
-                )
     }
         
     

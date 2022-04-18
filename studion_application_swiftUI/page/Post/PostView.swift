@@ -32,30 +32,31 @@ struct PostView: View {
                ZStack {
                    
                     VStack {
-                        
+                                                
                         List {
-                            
                             ForEach(0..<p.count, id: \.self) { index in
                                 
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
+                                let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
+                                
+                                
 //                                let image = images.map{ $0 }
+                                
+//                                Button(action: {
+//                                    print(audios)
+//                                }, label: {
+//                                    Text("button1")
+//                                })
                                 
                                 
                                 VStack {
-                                    
-//                                    Text(self.p[index]!["title"] as! String)
-//
-//                                    Button(action: {print(images)}, label: {Text("img")})
-                                    
                                     PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
-                                            image: images.count == 0 ? nil : images[0]?["link"] as? String
+                                            image: images.count == 0 ? nil : images[0]?["link"] as? String,
+                                            audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
                                         )
-//                                        Text(images.description)
-//                                        Text(self.p.description)
-
-                                    
+                        
 //                                    Text("\(index)")
                                         
 //                                        .task(){
@@ -65,11 +66,14 @@ struct PostView: View {
 //                                                print("currentPage : \(currentPage)")
 //                                            }
 //                                        }
-
+                                    
                                     }
                                 }
+                                .listRowBackground(Color.clear)
+                                .listRowSeparator(.hidden)
+                                .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
                             } // list
-                                    .padding(.horizontal, 150)
+                                .padding(.horizontal, 150)
                         
                             } // vS
                             .onAppear {
@@ -100,29 +104,31 @@ struct PostView: View {
                
                ZStack {
 //                   NavigationView{
-                    VStack {
+                   VStack {
                         List {
                             ForEach(0..<self.p.count, id: \.self) { index in
 
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
-
+                                let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
+                                    
                                 VStack {
-
-                                    PostCard(
-                                        title: self.p[index]!["title"] as! String, // Dict type on View
-                                        content: self.p[index]!["content"] as! String,
-                                                                                    
-                                        image: images.count == 0 ? nil : images[0]?["link"] as? String
-                                    )
-                                    }
-                                }
-                            }
+                                    
+                                        PostCard(
+                                            title: self.p[index]!["title"] as! String, // Dict type on View
+                                            content: self.p[index]!["content"] as! String,
+                                            image: images.count == 0 ? nil : images[0]?["link"] as? String,
+                                            audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
+                                        )
+                                    } //h1
+                                }// foreach
+                            }// list
+                            .listStyle(GroupedListStyle())
                             .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
                                 Color.clear
                                     .frame(height: 50)
                                   .background(Material.bar)
                             }
-                        }
+                        } // vS
                             NavigationBar(title: "Posts")
 
 

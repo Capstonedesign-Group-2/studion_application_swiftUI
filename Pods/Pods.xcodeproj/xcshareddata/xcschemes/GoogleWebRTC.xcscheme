@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1240"
+   LastUpgradeVersion = "1330"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CA091CFF5F45F9955A6BF2DEF6E4428D"
-               BuildableName = "Pods_studion_application_swiftUI.framework"
-               BlueprintName = "Pods-studion_application_swiftUI"
+               BlueprintIdentifier = "EC23BFCFC44D9224C054485B54824B8E"
+               BuildableName = "GoogleWebRTC"
+               BlueprintName = "GoogleWebRTC"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
