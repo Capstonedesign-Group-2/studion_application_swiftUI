@@ -37,7 +37,7 @@ struct DrumView: View {
             
             ZStack {
                 
-                VStack(spacing: 20) {
+                VStack(spacing: 70) {
 
     //                Spacer()
         //                .frame(height: 20)
@@ -78,7 +78,7 @@ struct DrumView: View {
                 
                 .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
                     Color.clear
-                        .frame(height: 50)
+                        .frame(height: 30)
     //                  .background(Material.bar)
                 }
                 .onAppear{

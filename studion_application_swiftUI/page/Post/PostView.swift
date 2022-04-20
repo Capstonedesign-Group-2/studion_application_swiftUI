@@ -25,14 +25,17 @@ struct PostView: View {
     @State var imageName: String = ""
     var isEmptyImg = false
     
+    
+    
        var body: some View {
+           
            
            if UIDevice.isIpad { // iPad
                               
                ZStack {
                    
                     VStack {
-                                                
+                        
                         List {
                             ForEach(0..<p.count, id: \.self) { index in
                                 
@@ -40,13 +43,13 @@ struct PostView: View {
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
                                 
                                 
-//                                let image = images.map{ $0 }
+                //                                let image = images.map{ $0 }
                                 
-//                                Button(action: {
-//                                    print(audios)
-//                                }, label: {
-//                                    Text("button1")
-//                                })
+                //                                Button(action: {
+                //                                    print(audios)
+                //                                }, label: {
+                //                                    Text("button1")
+                //                                })
                                 
                                 
                                 VStack {
@@ -57,23 +60,28 @@ struct PostView: View {
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
                                         )
                         
-//                                    Text("\(index)")
+                //                                    Text("\(index)")
                                         
-//                                        .task(){
-//                                            print(index)
-//                                            if index % 8 == 7 {
-//                                                currentPage += 1
-//                                                print("currentPage : \(currentPage)")
-//                                            }
-//                                        }
+                //                                        .task(){
+                //                                            print(index)
+                //                                            if index % 8 == 7 {
+                //                                                currentPage += 1
+                //                                                print("currentPage : \(currentPage)")
+                //                                            }
+                //                                        }
                                     
-                                    }
-                                }
+                                    } //vS
+                                } // ForEach
+                            
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
                             } // list
                                 .padding(.horizontal, 150)
+                        
+                                .refreshable {
+                                    self.p.reversed()
+                                }
                         
                             } // vS
                             .onAppear {
@@ -92,6 +100,7 @@ struct PostView: View {
                             }.onDisappear() {
                                 print("PostView end")
                             }
+                   
                             .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
                                 Color.clear
                                     .background(.ultraThinMaterial)
@@ -99,6 +108,7 @@ struct PostView: View {
                             }
 
                         }
+               
 
            } else { // iPhone
                
@@ -122,7 +132,9 @@ struct PostView: View {
                                     } //h1
                                 }// foreach
                             }// list
-                            .listStyle(GroupedListStyle())
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
                             .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
                                 Color.clear
                                     .frame(height: 50)
@@ -164,6 +176,8 @@ struct PostView: View {
     }
 } // view
 
+
+
 //private func fetchData() {
 //    PostController.sharedInstance.show(page: currentPage, handler: <#T##(Any) -> Void#>)
 //}
@@ -174,6 +188,10 @@ struct PostView: View {
 //        PostView()
 //    }
 //}
+
+
+
+
 
 //          NavigationView{
 //               List(0 ..< 30) { item in
