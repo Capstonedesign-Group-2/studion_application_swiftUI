@@ -167,11 +167,6 @@ final class WebRTCClient: NSObject {
 //        }
         
         if(WebRTCDictionaryController.sharedInstance.userArray.contains(socketID) == false) {
-            print("--------------------------123123")
-            print("--------------------------123123")
-            print("--------------------------123123")
-            print("--------------------------123123")
-            print("--------------------------123123")
             
             WebRTCDictionaryController.sharedInstance.userArray.append(socketID)
         }
@@ -232,15 +227,6 @@ final class WebRTCClient: NSObject {
 //        self.dcDic[socketID] = dataChannel
         WebRTCDictionaryController.sharedInstance.dcDic[socketID] = dataChannel
         
-//        print("***************************")
-//        for key in dcDic.keys {
-//
-//            print(key)
-//            print(dcDic[key]!.label)
-//
-//        }
-//
-//        print("***************************")
         return dataChannel
     }
 
@@ -256,7 +242,7 @@ final class WebRTCClient: NSObject {
         self.rtcAudioSession.lockForConfiguration()
         do {
             try self.rtcAudioSession.setCategory(AVAudioSession.Category.playAndRecord.rawValue)
-
+            
         
         } catch let error {
           debugPrint("Error changeing AVAudioSession category: \(error)")
@@ -573,6 +559,7 @@ extension WebRTCClient: RTCPeerConnectionDelegate {
 //      print(stream.audioTracks[0].source)
 //      stream.audioTracks[0].source.volume = -1
 //      print("-----------------------------------")
+      
       
   }
 

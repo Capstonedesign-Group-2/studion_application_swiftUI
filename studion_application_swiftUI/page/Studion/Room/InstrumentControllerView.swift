@@ -410,7 +410,6 @@ struct InstrumentControllerView: View {
                             if(showLeftMenu == false) {
                                 self.showRightMenu.toggle()
                             } else {
-                                print("socket connected")
 
                                 self.selectRoomCheck = false
                             }

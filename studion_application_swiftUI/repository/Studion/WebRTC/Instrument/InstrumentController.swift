@@ -18,7 +18,9 @@ class InstrumentController {
         print(instrument.type)
         switch instrument.type {
         case "drum":
-            self.drumsController.settings_other(key: instrument.key, socketID: instrument.socketId)
+            print("AA")
+            AudioEngineController.sharedInstance.drumsPlay(socketID: instrument.socketId, key: instrument.key)
+//            self.drumsController.settings_other(key: instrument.key, socketID: instrument.socketId)
             
         case "onPiano" :
             self.pianoController.settings_other(key: instrument.key, socketID: instrument.socketId)

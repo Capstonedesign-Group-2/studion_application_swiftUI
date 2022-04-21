@@ -381,7 +381,7 @@ class PianoController {
         do {
             let audioFile = try AVAudioFile(forReading: fileURL!)
             
-            AudioEngineController.sharedInstance.play(audioFile: audioFile, socketID: "me", format: audioFile.processingFormat)
+//            AudioEngineController.sharedInstance.play(audioFile: audioFile, socketID: "me", format: audioFile.processingFormat)
             
         } catch {
             print(error.localizedDescription)
@@ -462,7 +462,7 @@ class PianoController {
         do {
             let audioFile = try AVAudioFile(forReading: fileURL!)
             
-            AudioEngineController.sharedInstance.play(audioFile: audioFile, socketID: socketID, format: audioFile.processingFormat)
+//            AudioEngineController.sharedInstance.play(audioFile: audioFile, socketID: socketID, format: audioFile.processingFormat)
             
         } catch {
             print(error.localizedDescription)
