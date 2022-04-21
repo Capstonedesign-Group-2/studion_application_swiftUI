@@ -67,36 +67,29 @@ class AudioEngineController{
         if !engine.avEngine.isRunning {
             settings()
         }
+        let volume = VolumeController.sharedInstance.getVolume(socketID: socketID)
+        mixer.volume = Float(20 * volume.volume * volume.masterVolume)
         
         
         switch key {
         case "Q":
-            print("drumQ")
-            
-            print(AVAudioSession.sharedInstance().availableModes)
-            print(AVAudioSession.sharedInstance().currentRoute)
-//            do {
-//                try AVAudioSession.sharedInstance().setInputGain(1)
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-            
             drums[key]!.play(noteNumber: MIDINoteNumber(drumsSamples[key]!.midiNote), velocity: MIDIVelocity(velocity * 127.0), channel: 0)
-//            guard let url = Bundle.main.url(forResource: "cr", withExtension: "wav") else {
-//                return
-//            }
-//            do {
-//                try test.loadAudioFiles(at: [url])
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//
-//            engine2.attach(test)
-//            engine2.connect(test, to: engine2.outputNode, format: nil)
-            
-            
-        
-            
+        case "W":
+            drums[key]!.play(noteNumber: MIDINoteNumber(drumsSamples[key]!.midiNote), velocity: MIDIVelocity(velocity * 127.0), channel: 0)
+        case "E":
+            drums[key]!.play(noteNumber: MIDINoteNumber(drumsSamples[key]!.midiNote), velocity: MIDIVelocity(velocity * 127.0), channel: 0)
+        case "A":
+            drums[key]!.play(noteNumber: MIDINoteNumber(drumsSamples[key]!.midiNote), velocity: MIDIVelocity(velocity * 127.0), channel: 0)
+        case "S":
+            drums[key]!.play(noteNumber: MIDINoteNumber(drumsSamples[key]!.midiNote), velocity: MIDIVelocity(velocity * 127.0), channel: 0)
+        case "D":
+            drums[key]!.play(noteNumber: MIDINoteNumber(drumsSamples[key]!.midiNote), velocity: MIDIVelocity(velocity * 127.0), channel: 0)
+        case "Z":
+            drums[key]!.play(noteNumber: MIDINoteNumber(drumsSamples[key]!.midiNote), velocity: MIDIVelocity(velocity * 127.0), channel: 0)
+        case "X":
+            drums[key]!.play(noteNumber: MIDINoteNumber(drumsSamples[key]!.midiNote), velocity: MIDIVelocity(velocity * 127.0), channel: 0)
+        case "C":
+            drums[key]!.play(noteNumber: MIDINoteNumber(drumsSamples[key]!.midiNote), velocity: MIDIVelocity(velocity * 127.0), channel: 0)
         default:
             return
         }
