@@ -19,7 +19,6 @@ struct DrumView: View {
     let instrumentController = InstrumentController()
 //    let drumsController = DrumsControllerAudioKit()
 //    let drumController_test = DrumController_test()
-    let drumsController = DrumsController()
     
     
     let items = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
@@ -193,7 +192,6 @@ struct PayButton: View {
     var key: String
     var imageName: String
     
-    let drumsController = DrumsController()
     let instrumentController = InstrumentController()
     
     @State var tap = false
