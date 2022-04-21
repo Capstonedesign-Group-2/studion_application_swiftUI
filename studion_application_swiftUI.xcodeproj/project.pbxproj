@@ -16,7 +16,6 @@
 		29E94CE22808BAFE000008F4 /* AudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E94CE12808BAFE000008F4 /* AudioView.swift */; };
 		550D5F6E2809577D0059BF85 /* NobodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6D2809577D0059BF85 /* NobodyView.swift */; };
 		550D5F70280957880059BF85 /* Player1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6F280957880059BF85 /* Player1View.swift */; };
-		55420D2C27ED8A5F001A9AB4 /* DrumsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55420D2B27ED8A5F001A9AB4 /* DrumsController.swift */; };
 		555E647527FD67F900C449BC /* RecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647427FD67F900C449BC /* RecordController.swift */; };
 		555E647727FD69A400C449BC /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647627FD69A400C449BC /* RecordView.swift */; };
 		555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647A27FE910900C449BC /* AudioEngineController.swift */; };
@@ -134,7 +133,6 @@
 		55C6497727FBBC05005603A2 /* piano-ff-015.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55C6493A27FBBC05005603A2 /* piano-ff-015.wav */; };
 		55C6497827FBBC05005603A2 /* piano-ff-005.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55C6493B27FBBC05005603A2 /* piano-ff-005.wav */; };
 		55C6497927FBBC05005603A2 /* piano-ff-037.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55C6493C27FBBC05005603A2 /* piano-ff-037.wav */; };
-		55C6497B27FBBC24005603A2 /* PianoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55C6497A27FBBC24005603A2 /* PianoController.swift */; };
 		7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */; };
 /* End PBXBuildFile section */
 
@@ -148,7 +146,6 @@
 		29E94CE12808BAFE000008F4 /* AudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioView.swift; sourceTree = "<group>"; };
 		550D5F6D2809577D0059BF85 /* NobodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobodyView.swift; sourceTree = "<group>"; };
 		550D5F6F280957880059BF85 /* Player1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player1View.swift; sourceTree = "<group>"; };
-		55420D2B27ED8A5F001A9AB4 /* DrumsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumsController.swift; sourceTree = "<group>"; };
 		555E647427FD67F900C449BC /* RecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordController.swift; sourceTree = "<group>"; };
 		555E647627FD69A400C449BC /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		555E647A27FE910900C449BC /* AudioEngineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngineController.swift; sourceTree = "<group>"; };
@@ -267,7 +264,6 @@
 		55C6493A27FBBC05005603A2 /* piano-ff-015.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "piano-ff-015.wav"; path = "audios/piano/piano-ff-015.wav"; sourceTree = SOURCE_ROOT; };
 		55C6493B27FBBC05005603A2 /* piano-ff-005.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "piano-ff-005.wav"; path = "audios/piano/piano-ff-005.wav"; sourceTree = SOURCE_ROOT; };
 		55C6493C27FBBC05005603A2 /* piano-ff-037.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = "piano-ff-037.wav"; path = "audios/piano/piano-ff-037.wav"; sourceTree = SOURCE_ROOT; };
-		55C6497A27FBBC24005603A2 /* PianoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PianoController.swift; sourceTree = "<group>"; };
 		577E222D83B2644BB78C7F1E /* Pods_studion_application_swiftUI.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_studion_application_swiftUI.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E8C3731F8D5A9843C908CC7 /* Pods-studion_application_swiftUI.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.debug.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.debug.xcconfig"; sourceTree = "<group>"; };
 		F764A19F6476AACD3B6CA653 /* Pods-studion_application_swiftUI.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-studion_application_swiftUI.release.xcconfig"; path = "Target Support Files/Pods-studion_application_swiftUI/Pods-studion_application_swiftUI.release.xcconfig"; sourceTree = "<group>"; };
@@ -591,7 +587,6 @@
 				55B98C7527EBFDB70057F168 /* tom1.wav */,
 				55B98C6D27EBFDB70057F168 /* tom2.wav */,
 				55B98C6E27EBFDB70057F168 /* tom3.wav */,
-				55420D2B27ED8A5F001A9AB4 /* DrumsController.swift */,
 			);
 			path = Drum;
 			sourceTree = "<group>";
@@ -681,7 +676,6 @@
 				55C6492327FBBC04005603A2 /* piano-ff-059.wav */,
 				55C6490727FBBC04005603A2 /* piano-ff-060.wav */,
 				55C6492927FBBC05005603A2 /* piano-ff-061.wav */,
-				55C6497A27FBBC24005603A2 /* PianoController.swift */,
 			);
 			path = Piano;
 			sourceTree = "<group>";
@@ -903,7 +897,6 @@
 				55B98C4D27EBF3750057F168 /* DataChannelCodableStruct.swift in Sources */,
 				555E647F280664B100C449BC /* WebRTCDictionaryController.swift in Sources */,
 				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
-				55C6497B27FBBC24005603A2 /* PianoController.swift in Sources */,
 				55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */,
 				55B98C1E27E8BF4C0057F168 /* RegisterView.swift in Sources */,
 				55C648FC27F57B02005603A2 /* UserVolumeStruct.swift in Sources */,
@@ -940,7 +933,6 @@
 				55B98C2427E96A0A0057F168 /* PostView.swift in Sources */,
 				55B98C1627E885D60057F168 /* ProgressViewBar.swift in Sources */,
 				55B98C8E27EC09A20057F168 /* GuitarView.swift in Sources */,
-				55420D2C27ED8A5F001A9AB4 /* DrumsController.swift in Sources */,
 				550D5F6E2809577D0059BF85 /* NobodyView.swift in Sources */,
 				29E94CE22808BAFE000008F4 /* AudioView.swift in Sources */,
 			);
