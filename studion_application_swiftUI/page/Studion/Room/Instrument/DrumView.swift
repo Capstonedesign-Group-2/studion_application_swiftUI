@@ -37,7 +37,7 @@ struct DrumView: View {
             
             ZStack {
                 
-                VStack (spacing: 20){
+                VStack(spacing: 70) {
 
     //                Spacer()
         //                .frame(height: 20)
@@ -71,14 +71,14 @@ struct DrumView: View {
 
                     } // HStack
 
-    //                Spacer()
 
                 } // Vstack
                 
+                Spacer()
                 
                 .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
                     Color.clear
-                        .frame(height: 50)
+                        .frame(height: 30)
     //                  .background(Material.bar)
                 }
                 .onAppear{
@@ -206,7 +206,7 @@ struct PayButton: View {
             VStack {
                 Image(imageName)
                     .resizable()
-                    .frame(width: 150, height: 150) //btn size
+                    .frame(width: 175, height: 175) //btn size
                     .aspectRatio(contentMode: .fit)
                         .font(.system(size: 20, weight: .semibold, design: .rounded))
     //                    .frame(width: 200, height: 60)
@@ -234,7 +234,7 @@ struct PayButton: View {
                         .shadow(color: Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)), radius: 20, x: -20, y: -20)
             }
     //        .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .frame(width: 150, height: 160) // Size (all)
+            .frame(width: 200, height: 200) // Size (all)
             .background(Color(#colorLiteral(red: 0.8980392157, green: 0.9333333333, blue: 1, alpha: 0)))
             .edgesIgnoringSafeArea(.all)
             .scaleEffect(tap ? 1.2 : 1)

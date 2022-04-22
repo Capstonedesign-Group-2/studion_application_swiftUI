@@ -25,14 +25,19 @@ struct PostView: View {
     @State var imageName: String = ""
     var isEmptyImg = false
     
+    @State var maxNum: Int = 8
+    
+    
+    
        var body: some View {
+           
            
            if UIDevice.isIpad { // iPad
                               
                ZStack {
                    
                     VStack {
-                                                
+                        
                         List {
                             ForEach(0..<p.count, id: \.self) { index in
                                 
@@ -40,16 +45,16 @@ struct PostView: View {
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
                                 
                                 
-//                                let image = images.map{ $0 }
+                //                                let image = images.map{ $0 }
                                 
-//                                Button(action: {
-//                                    print(audios)
-//                                }, label: {
-//                                    Text("button1")
-//                                })
+                //                                Button(action: {
+                //                                    print(audios)
+                //                                }, label: {
+                //                                    Text("button1")
+                //                                })
                                 
                                 
-                                VStack {
+                                LazyVStack {
                                     PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
@@ -57,25 +62,48 @@ struct PostView: View {
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
                                         )
                         
-//                                    Text("\(index)")
+                //                                    Text("\(index)")
                                         
-//                                        .task(){
-//                                            print(index)
-//                                            if index % 8 == 7 {
-//                                                currentPage += 1
-//                                                print("currentPage : \(currentPage)")
-//                                            }
-//                                        }
+                                                        .onAppear() {
+                                                            print(index)
+                                                            if index % 8 == 7 {
+                                                                currentPage += 1
+                                                                print("currentPage : \(currentPage)")
+                                                            } else if index % 8 == 0 {
+                                                                currentPage -= 1
+                                                            }
+                                                            
+                                                            
+                                                            PostController.sharedInstance.show(page: currentPage) { data in
+                            //                                      print(data)
+                                                                let response = data as! Dictionary<String, Any>
+                            //                                      print(response)
+                                                                let posts = response["posts"] as! Dictionary<String, Any>
+                                                                
+                                                                p = posts["data"] as! [Dictionary<String, Any>?]
+                                                                                                  
+                                                                print("Posts Datas : \(p)")
+                                                            } // post
+                                                            
+                                                        }
                                     
-                                    }
-                                }
+                                    } //vS
+                                } // ForEach
+                            
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
                             } // list
                                 .padding(.horizontal, 150)
                         
+//                                .refreshable {
+//                                    self.p.reversed().first
+//                                }
+                        
                             } // vS
+                   
+                   
+                   
                             .onAppear {
                                 PostController.sharedInstance.show(page: currentPage) { data in
 //                                      print(data)
@@ -92,6 +120,7 @@ struct PostView: View {
                             }.onDisappear() {
                                 print("PostView end")
                             }
+                   
                             .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
                                 Color.clear
                                     .background(.ultraThinMaterial)
@@ -99,6 +128,7 @@ struct PostView: View {
                             }
 
                         }
+               
 
            } else { // iPhone
                
@@ -122,7 +152,9 @@ struct PostView: View {
                                     } //h1
                                 }// foreach
                             }// list
-                            .listStyle(GroupedListStyle())
+                            .listRowBackground(Color.clear)
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
                             .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
                                 Color.clear
                                     .frame(height: 50)
@@ -164,6 +196,8 @@ struct PostView: View {
     }
 } // view
 
+
+
 //private func fetchData() {
 //    PostController.sharedInstance.show(page: currentPage, handler: <#T##(Any) -> Void#>)
 //}
@@ -174,6 +208,10 @@ struct PostView: View {
 //        PostView()
 //    }
 //}
+
+
+
+
 
 //          NavigationView{
 //               List(0 ..< 30) { item in
