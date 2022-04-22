@@ -65,9 +65,9 @@ struct StudionRoomList: View {
                                             Text("").frame(width:0, height:0))
                                     }
                                     
-    //                                NavigationLink(destination: RoomView(pageStatus: $pageStatus, roomNumber: 1), label: {
-    //                                    Text("enter")
-    //                                })
+                                    NavigationLink(destination: RoomView(selectRoomCheck: $selectRoomCheck, roomNumber: 1), label: {
+                                        Text("enter")
+                                    })
                                     
                                     
                                     ForEach(0..<(roomSocket.roomsInfo?.rooms?.count)!, id: \.self) { index in

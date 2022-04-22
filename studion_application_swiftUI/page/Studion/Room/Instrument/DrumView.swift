@@ -19,7 +19,6 @@ struct DrumView: View {
     let instrumentController = InstrumentController()
 //    let drumsController = DrumsControllerAudioKit()
 //    let drumController_test = DrumController_test()
-    let drumsController = DrumsController()
     
     
     let items = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"]
@@ -166,7 +165,8 @@ struct DrumView: View {
             print("error")
         }
 
-        self.drumsController.settings(key: key)
+//        self.drumsController.settings(key: key)
+        
 
         
     }
@@ -192,7 +192,7 @@ struct PayButton: View {
     var key: String
     var imageName: String
     
-    let drumsController = DrumsController()
+    let instrumentController = InstrumentController()
     
     @State var tap = false
     @State var press = false
@@ -339,8 +339,10 @@ struct PayButton: View {
             print("error")
         }
 
-        self.drumsController.settings(key: key)
-
+//        self.drumsController.settings(key: key)
+        let selfDataChannel: DataChannelCodableStruct.dataChannel = DataChannelCodableStruct.dataChannel(type: "drum", key: key, socketId: "me")
+        
+        instrumentController.instrumentController(instrument: selfDataChannel)
         
     }
 }
