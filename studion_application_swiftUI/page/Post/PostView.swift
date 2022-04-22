@@ -25,6 +25,8 @@ struct PostView: View {
     @State var imageName: String = ""
     var isEmptyImg = false
     
+    @State var maxNum: Int = 8
+    
     
     
        var body: some View {
@@ -52,7 +54,7 @@ struct PostView: View {
                 //                                })
                                 
                                 
-                                VStack {
+                                LazyVStack {
                                     PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
@@ -62,13 +64,28 @@ struct PostView: View {
                         
                 //                                    Text("\(index)")
                                         
-                //                                        .task(){
-                //                                            print(index)
-                //                                            if index % 8 == 7 {
-                //                                                currentPage += 1
-                //                                                print("currentPage : \(currentPage)")
-                //                                            }
-                //                                        }
+                                                        .onAppear() {
+                                                            print(index)
+                                                            if index % 8 == 7 {
+                                                                currentPage += 1
+                                                                print("currentPage : \(currentPage)")
+                                                            } else if index % 8 == 0 {
+                                                                currentPage -= 1
+                                                            }
+                                                            
+                                                            
+                                                            PostController.sharedInstance.show(page: currentPage) { data in
+                            //                                      print(data)
+                                                                let response = data as! Dictionary<String, Any>
+                            //                                      print(response)
+                                                                let posts = response["posts"] as! Dictionary<String, Any>
+                                                                
+                                                                p = posts["data"] as! [Dictionary<String, Any>?]
+                                                                                                  
+                                                                print("Posts Datas : \(p)")
+                                                            } // post
+                                                            
+                                                        }
                                     
                                     } //vS
                                 } // ForEach
@@ -79,11 +96,14 @@ struct PostView: View {
                             } // list
                                 .padding(.horizontal, 150)
                         
-                                .refreshable {
-                                    self.p.reversed()
-                                }
+//                                .refreshable {
+//                                    self.p.reversed().first
+//                                }
                         
                             } // vS
+                   
+                   
+                   
                             .onAppear {
                                 PostController.sharedInstance.show(page: currentPage) { data in
 //                                      print(data)
