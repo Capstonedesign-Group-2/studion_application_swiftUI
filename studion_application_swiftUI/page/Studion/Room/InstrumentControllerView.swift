@@ -30,7 +30,7 @@ struct InstrumentControllerView: View {
     
     @State var isRecording = false
     let recordController = RecordController()
-    @State var recordFiles: [URL] = []
+    @State var recordFiles: [AVAudioFile?] = []
     
     var body: some View {
         
@@ -361,6 +361,9 @@ struct InstrumentControllerView: View {
 //                                        }
 //                                        self.recordController.stop()
 //                                        AudioEngineController.sharedInstance.stop()
+                                        let file = AudioEngineController.sharedInstance.stopRecord()
+                                        self.recordFiles.append(file)
+                                        
                                         isRecording = false
 
                                     } else {
@@ -372,11 +375,15 @@ struct InstrumentControllerView: View {
     //
     //                                        isRecording = true
     //                                    }
-
-
-//                                        AudioEngineController.sharedInstance.record()
+                                        do {
+                                            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .mixWithOthers)
+                                            try AVAudioSession.sharedInstance().setActive(true)
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
                                         
-//                                        AudioEngineController.sharedInstance.record()
+                                        AudioEngineController.sharedInstance.startRecord()
+
                                         isRecording = true
 
                                     }

@@ -12,33 +12,31 @@ struct RecordView: View {
     
     let recordController = RecordController()
     
-    @Binding var recordFiles:[URL]
+    @Binding var recordFiles:[AVAudioFile?]
     
     
     var body: some View {
         
         VStack {
             
-            if recordFiles.count == 0 {
+                if recordFiles.count == 0 {
+                    
+                    Text("아직 파일이 읎어")
+                    
+                } else {
+                    ForEach(0..<recordFiles.count , id: \.self) {index in
+                        Button( action : {
+                            AudioEngineController.sharedInstance.recordingPlayer(file: recordFiles[index]!)
+                        }) {
+                            Text("record \(index)")
+                        }
+                }
                 
-                Text("아직 파일이 읎어")
                 
-            } else {
-//                ForEach(0..<recordFiles.count , id: \.self) {index in
-//                    Button( action : {
-//                        print(recordFiles[index])
-//                        recordController.play(url: recordFiles[index])
-//                    }) {
-//                        Text("record \(index)")
-//                    }
-//                }
             }
-            
-            
-        }
         
+        }   // VStack
+    
+    
     }
-    
-    
 }
-

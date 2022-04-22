@@ -31,7 +31,11 @@ class AudioEngineController{
     var piano: [String: MIDISampler] = [:]
     var pianoSamples: [String: PianoSample] = [:]
     
-    
+//  ********************************************************************************
+//  record
+//  ********************************************************************************
+    let player = AudioPlayer()
+    var record :AVAudioFile?
     
     func settings() {
         
@@ -107,7 +111,8 @@ class AudioEngineController{
             print(error.localizedDescription)
         }
         
-        print("audioEngine setting")
+        
+        
     }
     
     func drumsPlay(socketID: String, key: String, velocity: Float = 1.0) {
@@ -190,6 +195,46 @@ class AudioEngineController{
         default:
             return
         }
+    }
+    
+    func startRecord() {
+        
+        
+        do {
+            mixer.avAudioNode.installTap(onBus: 0, bufferSize: 1024, format: nil) { (buffer, when) in
+                do {
+                    try self.record?.write(from: buffer)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+            
+            print("recording start")
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func stopRecord() -> AVAudioFile? {
+        
+        mixer.avAudioNode.removeTap(onBus: 0)
+        print("recording stop")
+        print(record)
+        return record
+    }
+    
+    func recordingPlayer(file: AVAudioFile) {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+        print(file)
+        
+        player.file = file
+        player.play()
     }
     
 }
