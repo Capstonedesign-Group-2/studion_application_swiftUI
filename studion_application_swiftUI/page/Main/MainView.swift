@@ -24,11 +24,6 @@ static var isIpad: Bool {
 
 
 struct MainView: View {
-//    @Binding var pageStatus: String
-//    @Binding var roomNumber: Int
-//    
-//    @Binding var mainRouter: String
-    
     @State var pageStatus = "/"
     @State var roomNumber = 1
     @State var mainRouter = "/"
