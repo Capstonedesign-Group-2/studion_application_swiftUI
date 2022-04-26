@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		295DC7C2281793F1006A1BB7 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C1281793F1006A1BB7 /* CommentController.swift */; };
+		295DC7C42817B753006A1BB7 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C32817B753006A1BB7 /* CommentView.swift */; };
 		2992C4E427FDB465008EFFCA /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992C4E327FDB465008EFFCA /* NavigationBar.swift */; };
 		2992C4E627FDB489008EFFCA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992C4E527FDB489008EFFCA /* SearchView.swift */; };
 		2992C4E827FDB4B4008EFFCA /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992C4E727FDB4B4008EFFCA /* PostCard.swift */; };
@@ -137,6 +139,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		295DC7C1281793F1006A1BB7 /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
+		295DC7C32817B753006A1BB7 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		2992C4E327FDB465008EFFCA /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		2992C4E527FDB489008EFFCA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		2992C4E727FDB4B4008EFFCA /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 			children = (
 				29C4C03227EDDE0A0048D405 /* PostController.swift */,
 				555E64802806A6DC00C449BC /* SUImagePicker.swift */,
+				295DC7C1281793F1006A1BB7 /* CommentController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -454,6 +459,7 @@
 				2992C4E527FDB489008EFFCA /* SearchView.swift */,
 				2992C4E727FDB4B4008EFFCA /* PostCard.swift */,
 				29E94CE12808BAFE000008F4 /* AudioView.swift */,
+				295DC7C32817B753006A1BB7 /* CommentView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -897,12 +903,14 @@
 				55B98C4D27EBF3750057F168 /* DataChannelCodableStruct.swift in Sources */,
 				555E647F280664B100C449BC /* WebRTCDictionaryController.swift in Sources */,
 				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
+				295DC7C2281793F1006A1BB7 /* CommentController.swift in Sources */,
 				55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */,
 				55B98C1E27E8BF4C0057F168 /* RegisterView.swift in Sources */,
 				55C648FC27F57B02005603A2 /* UserVolumeStruct.swift in Sources */,
 				55B98C0A27E85A6C0057F168 /* SocketIO.swift in Sources */,
 				55C648FE27F86F42005603A2 /* VolumeController.swift in Sources */,
 				55B98C2727E96F340057F168 /* SettingView.swift in Sources */,
+				295DC7C42817B753006A1BB7 /* CommentView.swift in Sources */,
 				55B98C5027EBF5350057F168 /* InstrumentController.swift in Sources */,
 				55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */,
 				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
