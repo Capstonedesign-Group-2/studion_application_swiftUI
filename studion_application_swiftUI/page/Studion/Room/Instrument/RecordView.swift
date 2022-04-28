@@ -12,7 +12,7 @@ struct RecordView: View {
     
     let recordController = RecordController()
     
-    @Binding var recordFiles:[AVAudioFile?]
+    @Binding var recordFiles:[URL?]
     
     
     var body: some View {
@@ -26,7 +26,7 @@ struct RecordView: View {
                 } else {
                     ForEach(0..<recordFiles.count , id: \.self) {index in
                         Button( action : {
-                            AudioEngineController.sharedInstance.recordingPlayer(file: recordFiles[index]!)
+                            AudioEngineController.sharedInstance.recordingPlayer(url: recordFiles[index]!)
                         }) {
                             Text("record \(index)")
                         }

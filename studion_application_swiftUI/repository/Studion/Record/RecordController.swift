@@ -31,51 +31,18 @@ class RecordController {
 
         return url
     }
-
-
-
+    
     func play(url: URL) {
         do {
             player = try AVAudioPlayer(contentsOf: url)
-
-
             print(player?.duration)
             player?.play()
             print("play")
         } catch {
             print(error.localizedDescription)
         }
-    }
     
-//    var recorder: NodeRecorder?
-//
-//    func recording() {
-//
-//        do {
-//
-//            NodeRecorder.removeTempFiles()
-//            try recorder?.record()
-//
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//
-//    }
-//
-//    func stop() {
-//
-//        recorder?.stop()
-//        print("record stop")
-//        do {
-//            let file = recorder?.audioFile
-//            print(file)
-//            print(type(of: file))
-//        } catch {
-//            print(error.localizedDescription)
-//        }
-//
-//    }
-
+    }
     
     
 }

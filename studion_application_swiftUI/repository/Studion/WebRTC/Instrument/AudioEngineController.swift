@@ -8,6 +8,7 @@
 import Foundation
 import AVFoundation
 import AudioKit
+import ReplayKit
 
 class AudioEngineController{
     static let sharedInstance = AudioEngineController()
@@ -34,8 +35,7 @@ class AudioEngineController{
 //  ********************************************************************************
 //  record
 //  ********************************************************************************
-    let player = AudioPlayer()
-    var record :AVAudioFile?
+    var player: AVAudioPlayer?
     
     func settings() {
         
@@ -197,45 +197,38 @@ class AudioEngineController{
         }
     }
     
-    func startRecord() {
+    func startRecord(completion: @escaping (Error?) -> ()) {
+        let recorder = RPScreenRecorder.shared()
         
+        recorder.isMicrophoneEnabled = false
         
+        recorder.startRecording(handler: completion)
+        
+    }
+    
+    func stopRecord() async throws -> URL {
+        let name = UUID().uuidString + ".wav"
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
+        
+        let recorder = RPScreenRecorder.shared()
+        
+        try await recorder.stopRecording(withOutput: url)
+        
+        return url
+    }
+    
+    func recordingPlayer(url: URL) {
         do {
-            mixer.avAudioNode.installTap(onBus: 0, bufferSize: 1024, format: nil) { (buffer, when) in
-                do {
-                    try self.record?.write(from: buffer)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
             
-            print("recording start")
+            player = try AVAudioPlayer(contentsOf: url)
+            player!.play()
+            
         } catch {
             print(error.localizedDescription)
         }
     }
     
-    func stopRecord() -> AVAudioFile? {
-        
-        mixer.avAudioNode.removeTap(onBus: 0)
-        print("recording stop")
-        print(record)
-        return record
-    }
     
-    func recordingPlayer(file: AVAudioFile) {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        print(file)
-        
-        player.file = file
-        player.play()
-    }
     
 }
 
