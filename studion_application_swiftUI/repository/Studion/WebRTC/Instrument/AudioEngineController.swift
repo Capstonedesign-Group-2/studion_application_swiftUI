@@ -36,6 +36,9 @@ class AudioEngineController{
 //  record
 //  ********************************************************************************
     var player: AVAudioPlayer?
+    var playerNumber = -1
+    
+    
     
     func settings() {
         

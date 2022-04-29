@@ -31,6 +31,8 @@ struct InstrumentControllerView: View {
     @State var isRecording = false
     let recordController = RecordController()
     @State var recordFiles: [URL?] = []
+    @State var recordFilesPlayCheck: [Bool?] = []
+    @State var recordFilesCurrentTime: [Double?] = []
     
     var body: some View {
         
@@ -53,7 +55,7 @@ struct InstrumentControllerView: View {
                                 GuitarView()
                                     .tag("guitar")
                                 
-                                RecordView(recordFiles: $recordFiles)
+                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime)
                                     .tag("rec")
 
                             }
@@ -228,7 +230,7 @@ struct InstrumentControllerView: View {
                                     .tag("guitar")
                                     .offset(y:-40)
 
-                                RecordView(recordFiles: $recordFiles)
+                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime)
                                     .tag("rec")
                                     .offset(y:-40)
 
@@ -311,6 +313,9 @@ struct InstrumentControllerView: View {
                                             do {
                                                 let file = try await AudioEngineController.sharedInstance.stopRecord()
                                                 self.recordFiles.append(file)
+                                                self.recordFilesPlayCheck.append(false)
+                                                self.recordFilesCurrentTime.append(0)
+                                                
                                             } catch {
                                                 print(error.localizedDescription)
                                             }
