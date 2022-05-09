@@ -27,12 +27,10 @@ struct PostCard: View {
     
     
     var body: some View {
-        ZStack{
             
-                
+        if UIDevice.isIpad {
+            ZStack{
                 VStack(spacing: 20) {
-                    
-                    
                     HStack {
                         ZStack {
                             Text(title)
@@ -72,11 +70,6 @@ struct PostCard: View {
                                 .padding()
                         }
                     }
-                    .onTapGesture {
-                        withAnimation {
-                            show.toggle()
-                        }
-                    }.transition(.slide)
                     
                     VStack {
                     Text(content)
@@ -87,49 +80,148 @@ struct PostCard: View {
                         .overlay(
                             RoundedRectangle(cornerRadius: 0)
                                 .stroke(Color.gray, lineWidth: 0.5)
-                        )
-                    }
+                            )
+                        }
                     
-                    VStack{
-                        if (audioURL != nil) {
-    //                        Text(audioURL!)
-                            AudioView(audioURL: audioURL, isPlaying: false)
-                                .matchedGeometryEffect(id: "audio", in: namespace)
+                        VStack{
+                            if (audioURL != nil) {
+    //                          Text(audioURL!)
+                                AudioView(audioURL: audioURL, isPlaying: false)
+                                    .matchedGeometryEffect(id: "audio", in: namespace)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding()
+                            } else {
+                                Text("No Audios...")
+                            }
+                        }
+                        .onTapGesture {
+                                play.toggle()
+                        }
+                        Spacer()
+                        Text("Comments")
+                    
+
+                    } //vS
+                    
+//              if !show {
+//
+//              } else { // tap one
+//
+//              } // else
+//
+//
+//          }
+//          .onTapGesture {
+//              withAnimation {
+//                  show.toggle()
+//              }
+//          }.transition(.slide)
+        
+                .background(Color.white)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.white, lineWidth: 0.1)
+//                .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
+            )
+            .cornerRadius(16.0)
+            .shadow(color: .gray, radius: 2)
+                Spacer()
+        
+            } //zS
+
+        } else {
+            
+            ZStack{
+                VStack(spacing: 20) {
+                    HStack {
+                        ZStack {
+                            Text(title)
+                                .font(.largeTitle.weight(.bold))
+                                .matchedGeometryEffect(id: "title", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
-                        } else {
-                            Text("No Audios...")
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 0)
+                                        .stroke(Color.gray, lineWidth: 0.5)
+                            )
+                            
+                            MenuView()
+                            
                         }
                     }
-                    .onTapGesture {
-                        withAnimation {
-                            play.toggle()
-                        }
-                    }
-                    Spacer()
-
-                } //vS
                     
-            if !show {
-            //
-                
-            } else { // tap one
-                
-            } // else
-        }
-        .background(Color.white)
-        .overlay(
-            RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.white, lineWidth: 0.1)
-//                .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
-        )
-        .cornerRadius(16.0)
-        .shadow(color: .gray, radius: 2)
-        Spacer()
+                VStack {
+                    if((image) != nil){
+                        URLImage(url: URL(string: image!)!,
+                                 content: { image in
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .matchedGeometryEffect(id: "image", in: namespace)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .padding()
+                                .shadow(color: .gray, radius: 5)
+                            }
+                        )
+
+                        } else {
+                            Image("Studion-original")
+                                .matchedGeometryEffect(id: "image", in: namespace)
+                                .frame(maxWidth: .infinity, alignment: .center)
+                                .shadow(color: .gray, radius: 5)
+                                .padding()
+                        }
+                    }
+                    
+                    VStack {
+                    Text(content)
+                        .font(.title.weight(.bold))
+                        .matchedGeometryEffect(id: "content", in: namespace)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.all, 30)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 0)
+                                .stroke(Color.gray, lineWidth: 0.5)
+                            )
+                        }
+                    
+                        VStack{
+                            if (audioURL != nil) {
+    //                          Text(audioURL!)
+                                AudioView(audioURL: audioURL, isPlaying: false)
+                                    .matchedGeometryEffect(id: "audio", in: namespace)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding()
+                            } else {
+                                Text("No Audios...")
+                            }
+                        }
+                        .onTapGesture {
+                                play.toggle()
+                        }
+                        Spacer()
+                        Text("Comments")
+                    
+
+                    } //vS
         
+                .background(Color.white)
+            .overlay(
+                RoundedRectangle(cornerRadius: 0)
+                    .stroke(Color.white, lineWidth: 0.1)
+                .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
+            )
+            .cornerRadius(0)
+            .shadow(color: .gray, radius: 2)
+                Spacer()
         
-    } //zS
+            } //zS
+
+        }// else
+        
+    }
 }
+    
 
 
 struct MenuView: View {

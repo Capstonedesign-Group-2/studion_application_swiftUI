@@ -9,11 +9,16 @@ import SwiftUI
 
 struct CommentView: View {
     
-    @State var hintText: String = "This is input form"
+    @State var hintText: String = "Comments"
     @State var content: String = ""
     
     var body: some View {
         ZStack{
+            
+            VStack{
+                Text("This is Commentory system")
+            }
+            
             if content.isEmpty {
                 Text(hintText)
                     .foregroundColor(Color(UIColor.placeholderText))
@@ -21,7 +26,11 @@ struct CommentView: View {
                     .padding(.vertical, 12)
             }
             TextEditor(text: $content)
-                .frame(height: 600, alignment: .center)
+                .frame(height: 30, alignment: .leading                      )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                )
         }
         
     }

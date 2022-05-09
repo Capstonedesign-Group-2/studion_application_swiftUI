@@ -17,6 +17,8 @@ struct PostView: View {
         if UIDevice.isIpad {
             // Disable Scrollbar
             UITableView.appearance().showsVerticalScrollIndicator = false
+        } else {
+            UITableView.appearance().showsVerticalScrollIndicator = false
         }
     }
     
@@ -83,7 +85,7 @@ struct PostView: View {
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
                             } // list
-                                .padding(.horizontal, 150)
+                                .padding(.horizontal, 100)
                         
                         
                                 .refreshable {
@@ -156,7 +158,8 @@ struct PostView: View {
                                         )
                                     } //vS
                                     
-                                .task {
+                                .onAppear() {
+//                                    print("index : \(index % 8)")
                                     if index % 8 == 7 {
                                         if currentPage == lastPage {
                                             currentPage = lastPage
@@ -184,7 +187,7 @@ struct PostView: View {
                         }// list
                             .listRowBackground(Color.clear)
                             .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
+                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
                        
                             .refreshable {
                                 currentPage = 1

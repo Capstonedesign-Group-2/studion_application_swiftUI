@@ -108,8 +108,8 @@ struct MainView: View {
                         .tag("/setting")
                     
                 }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // swipe
-                .ignoresSafeArea(.all, edges: .bottom)
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always)) // swipe
+//                .ignoresSafeArea(.all, edges: .bottom)
                 
                 HStack(spacing: 0) {
     //                ForEach(tabBarImageNames, id: \.self) { image in
@@ -124,11 +124,11 @@ struct MainView: View {
                 .padding(.horizontal, 25)
                 .padding(.vertical, 5)
                 .background(Color.white)
-                .clipShape(Capsule())
-                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
-                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
-                .padding(.horizontal)
-                .padding(.bottom, edge!.bottom == 0 ? 20: 0)
+//                .clipShape(Capsule())
+//                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
+//                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
+//                .padding(.horizontal)
+//                .padding(.bottom, edge!.bottom == 0 ? 20: 0)
                 
             } //zS
             .ignoresSafeArea(.keyboard, edges: .bottom)
