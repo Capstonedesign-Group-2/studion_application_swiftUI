@@ -15,36 +15,25 @@ struct AudioView : View {
     @State var player = AVPlayer()
     @State var playerItem: AVPlayerItem?
     @State var isPlaying: Bool = false
+    @State var isEnded: Bool = false
     
     var body: some View {
             
-        VStack(spacing: 20) {
+        GeometryReader { geometry in
+        
+            VStack(spacing: 20) {
+                    
+                ZStack(alignment: .leading) {
+                    
+    //                Text(audioURL!)
+                    
+                    Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
+                    Capsule().fill(Color.green).frame(width: self.width, height: 8)
 
-            ZStack(alignment: .leading) {
-                
-//                Text(audioURL!)
-                
-                Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
-                Capsule().fill(Color.green).frame(width: self.width, height: 8)
-
-            }.padding(.top)
+                }
             
-            
-            HStack(spacing: UIScreen.main.bounds.width / 5 - 30) {
+                HStack(spacing: geometry.size.width / 5 - 30) {
                 
-//                Button(action: {
-//
-//                    let increase = self.player.currentTime + 15
-//
-//                    if increase < self.player.duration {
-//                        self.player.currentTime = increase
-//                    }
-//
-//
-//                    }, label: {
-//                        Image(systemName: "goward.15.fill").font(.title)
-//                    }
-//                )
                 
                 Button(action: {
                     if self.isPlaying {
@@ -52,67 +41,77 @@ struct AudioView : View {
                         player.pause()
                         self.isPlaying = false
                         
-                    } else {
-                        
+                    } else if isEnded {
+                        isEnded = false
                         player.play()
                         self.isPlaying = true
 
+                    } else {
+                        player.play()
+                        self.isPlaying = true
                     }
+                    
                     }, label: {
                         Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
                     }
                 )
-                .onAppear() {
-                        guard let url = URL(string: (audioURL)!) else {
-                            print("wrong url")
-                            return
-                        }
-                    
-                            playerItem = AVPlayerItem(url: url)
-                            player.replaceCurrentItem(with: playerItem)
-                    
-//                        var time = CMTimeGetSeconds(player.currentTime())
-                    
-//                            guard let duration = player.currentItem?.duration else { return }
-//
-//                            print("duration : \(duration)")
-                    
-                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                            
-                            var time = CMTimeGetSeconds(player.currentTime())
-                            guard let duration = player.currentItem?.duration else { return }
-                    
-//                            print("duration : \(duration)")
-                            
-                            if isPlaying == true {
-//                              print(self.player.currentTime) // time
-                                            
-//                                let screen = UIScreen.main.bounds.width - 30
-//                                let value = CMTime(value: duration, timescale: CMTimeScale(time))
-//                                print(type(of: duration))
-//                                self.width = screen * CGFloat(value)
-                       
-                            }
-                        }
-                }
-
-                
-//                Button(action: {
-//
-//                    self.player.currentTime -= 15
-//
-//                    }, label: {
-//                        Image(systemName: "backward.15.fill").font(.title)
-//                    }
-//                )
                 
             } // hS
-            .padding(.top, 25)
+            .padding(.top)
             .foregroundColor(Color.black)
+            .task() {
+                    guard let url = URL(string: (audioURL)!) else {
+                        print("wrong url")
+                        return
+                    }
+                    if isEnded {
+                        playerItem = nil
+                        player.replaceCurrentItem(with: playerItem)
+                    } else {
+                        playerItem = AVPlayerItem(url: url)
+                        player.replaceCurrentItem(with: playerItem)
+                    }
                 
-        } // zS
-    } // vS
-} // view
+                
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+//                            print(audioURL)
+                        
+                        if isPlaying == true {
+        
+                            let time = CMTimeGetSeconds(player.currentTime())
+                            let duration = CMTimeGetSeconds(player.currentItem!.duration)
+                            let floatDuration = Float64(duration)
+                            
+                            let screen = geometry.size.width - 30
+                            let value = time / floatDuration
+                            
+                            
+                            print(screen)
+                            
+                                if value < 1 {
+                                    self.width = screen * CGFloat(value)
+                                } else {
+                                    self.width = screen + 30
+                                    isEnded = true
+                                    isPlaying = false
+                                }
+                            
+                            print("Value!!!!! : \(value)")
+                            print("Time!!!!!!! : \(time)")
+                            print("Duration!!!!!!! : \(duration)")
+
+                    }
+                }
+                
+                }// task
+        
+            } // vs
+            
+        }.frame(width: .infinity, height: 30, alignment: .center) // geometry
+            .padding(.bottom, 10)
+        
+    }// view
+}
 
 
 
