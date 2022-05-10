@@ -30,7 +30,7 @@ struct PostCard: View {
             
         if UIDevice.isIpad {
             ZStack{
-                VStack(spacing: 20) {
+                VStack {
                     HStack {
                         ZStack {
                             Text(title)
@@ -54,19 +54,16 @@ struct PostCard: View {
                                  content: { image in
                             image
                                 .resizable()
-                                .aspectRatio(contentMode: .fit)
+                                .aspectRatio(contentMode: .fill)
                                 .matchedGeometryEffect(id: "image", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .center)
-                                .padding()
-                                .shadow(color: .gray, radius: 5)
                             }
                         )
 
                         } else {
                             Image("Studion-original")
                                 .matchedGeometryEffect(id: "image", in: namespace)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .shadow(color: .gray, radius: 5)
+                                .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height - 800, alignment: .center)
                                 .padding()
                         }
                     }
@@ -94,15 +91,26 @@ struct PostCard: View {
                                 Text("No Audios...")
                             }
                         }
-                        .onTapGesture {
-                                play.toggle()
-                        }
-                        Spacer()
-                        Text("Comments")
+                        .padding(.bottom, 50)
                     
-
-                    } //vS
+//                    VStack {
+//                        NavigationLink(destination: CommentView()) {
+//                            Text("comments...")
+//                                .font(.body.weight(.semibold))
+//                                .matchedGeometryEffect(id: "comments", in: namespace)
+//                                .frame(maxWidth: .infinity, alignment: .leading)
+//                                .padding(.all, 30)
+//                                .overlay(
+//                                    RoundedRectangle(cornerRadius: 0)
+//                                        .stroke(Color.gray, lineWidth: 0.5)
+//                                )
+//                        }
+//                    }//comments
                     
+                } //vS
+                
+                
+                
 //              if !show {
 //
 //              } else { // tap one
@@ -118,28 +126,28 @@ struct PostCard: View {
 //          }.transition(.slide)
         
                 .background(Color.white)
-            .overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.white, lineWidth: 0.1)
-//                .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
-            )
-            .cornerRadius(16.0)
-            .shadow(color: .gray, radius: 2)
-                Spacer()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                    .stroke(Color.white, lineWidth: 1)
+                )
+                .cornerRadius(16.0)
+                .shadow(color: .gray, radius: 2)
         
             } //zS
+            
+            Spacer()
 
         } else {
             
             ZStack{
-                VStack(spacing: 20) {
+                VStack() {
                     HStack {
                         ZStack {
                             Text(title)
                                 .font(.largeTitle.weight(.bold))
                                 .matchedGeometryEffect(id: "title", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
+//                                .padding()
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 0)
                                         .stroke(Color.gray, lineWidth: 0.5)
@@ -159,7 +167,7 @@ struct PostCard: View {
                                 .aspectRatio(contentMode: .fit)
                                 .matchedGeometryEffect(id: "image", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .center)
-                                .padding()
+//                                .padding()
                                 .shadow(color: .gray, radius: 5)
                             }
                         )
@@ -167,18 +175,18 @@ struct PostCard: View {
                         } else {
                             Image("Studion-original")
                                 .matchedGeometryEffect(id: "image", in: namespace)
-                                .frame(maxWidth: .infinity, alignment: .center)
-                                .shadow(color: .gray, radius: 5)
+                                .frame(maxWidth: .infinity, minHeight: UIScreen.main.bounds.height - 700, maxHeight: .infinity, alignment: .center)
+//                                .shadow(color: .gray, radius: 5)
                                 .padding()
                         }
                     }
                     
                     VStack {
                     Text(content)
-                        .font(.title.weight(.bold))
+                            .font(.title2.weight(.bold))
                         .matchedGeometryEffect(id: "content", in: namespace)
                         .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.all, 30)
+                        .padding(.all, 15)
                         .overlay(
                             RoundedRectangle(cornerRadius: 0)
                                 .stroke(Color.gray, lineWidth: 0.5)
@@ -196,24 +204,34 @@ struct PostCard: View {
                                 Text("No Audios...")
                             }
                         }
-                        .onTapGesture {
-                                play.toggle()
-                        }
                         Spacer()
-                        Text("Comments")
+                        VStack {
+                            
+                            NavigationLink(destination: CommentView()) {
+                                Text("comments...")
+                                    .font(.body.weight(.semibold))
+                                    .matchedGeometryEffect(id: "comments", in: namespace)
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .padding(.all, 10)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 0)
+                                            .stroke(Color.gray, lineWidth: 0.5)
+                                    )
+                            }
+                        }
                     
 
                     } //vS
         
                 .background(Color.white)
-            .overlay(
-                RoundedRectangle(cornerRadius: 0)
-                    .stroke(Color.white, lineWidth: 0.1)
-                .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
-            )
-            .cornerRadius(0)
-            .shadow(color: .gray, radius: 2)
-                Spacer()
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.white, lineWidth: 0.1)
+                        .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
+                )
+                .cornerRadius(0)
+                .shadow(color: .gray, radius: 2)
+//                Spacer()
         
             } //zS
 

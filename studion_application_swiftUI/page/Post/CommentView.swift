@@ -13,26 +13,29 @@ struct CommentView: View {
     @State var content: String = ""
     
     var body: some View {
-        ZStack{
-            
-            VStack{
-                Text("This is Commentory system")
-            }
-            
-            if content.isEmpty {
-                Text(hintText)
-                    .foregroundColor(Color(UIColor.placeholderText))
-                    .padding(.horizontal, 8)
-                    .padding(.vertical, 12)
-            }
-            TextEditor(text: $content)
-                .frame(height: 30, alignment: .leading                      )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.gray, lineWidth: 0.5)
-                )
-        }
         
+        NavigationView {
+            ZStack{
+                ZStack{
+                    if content.isEmpty {
+                        Text(hintText)
+                            .foregroundColor(Color(UIColor.placeholderText))
+                            .padding(.horizontal, 8)
+                            .padding(.vertical, 12)
+                    }
+                    TextEditor(text: $content)
+                        .frame(height: 50, alignment: .topLeading)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 0)
+                                .stroke(Color.gray, lineWidth: 0.5)
+                        )
+                }
+//                    .frame(width: .infinity, height: 50, alignment: .topLeading)
+                    .navigationBarTitle("Comments")
+                    .navigationBarTitleDisplayMode(.inline)
+            }// zS
+            .navigationViewStyle(DoubleColumnNavigationViewStyle())
+        }
     }
 }
 

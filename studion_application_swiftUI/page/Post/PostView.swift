@@ -123,7 +123,8 @@ struct PostView: View {
                                     
                                 }
                                 
-                            }.onDisappear() {
+                            }
+                            .onDisappear() {
                                 print("PostView end")
                                 currentPage = 1
                                 p = []
