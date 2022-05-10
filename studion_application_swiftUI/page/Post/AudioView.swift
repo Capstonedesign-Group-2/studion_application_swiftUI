@@ -35,26 +35,24 @@ struct AudioView : View {
                 HStack(spacing: geometry.size.width / 5 - 30) {
                 
                 
-                Button(action: {
-                    if self.isPlaying {
-                        
-                        player.pause()
-                        self.isPlaying = false
-                        
-                    } else if isEnded {
-                        isEnded = false
-                        player.play()
-                        self.isPlaying = true
-
-                    } else {
-                        player.play()
-                        self.isPlaying = true
-                    }
-                    
-                    }, label: {
+                    Button(action: {}, label: {
                         Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
-                    }
-                )
+                    }).onTapGesture {
+                        if self.isPlaying {
+                            
+                            player.pause()
+                            self.isPlaying = false
+                            
+                        } else if isEnded {
+                            isEnded = false
+                            player.play()
+                            self.isPlaying = true
+
+                        } else {
+                            player.play()
+                            self.isPlaying = true
+                        }
+                    }// onTab (touch event for button)
                 
             } // hS
             .padding(.top)
@@ -100,14 +98,14 @@ struct AudioView : View {
                             print("Time!!!!!!! : \(time)")
                             print("Duration!!!!!!! : \(duration)")
 
+                        }
                     }
-                }
                 
                 }// task
         
             } // vs
             
-        }.frame(width: .infinity, height: 30, alignment: .center) // geometry
+        }.frame(maxWidth: .infinity, maxHeight: 30, alignment: .center) // geometry
             .padding(.bottom, 10)
         
     }// view
