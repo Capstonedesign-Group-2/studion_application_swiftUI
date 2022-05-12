@@ -16,12 +16,16 @@
 		29E94CE22808BAFE000008F4 /* AudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E94CE12808BAFE000008F4 /* AudioView.swift */; };
 		550D5F6E2809577D0059BF85 /* NobodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6D2809577D0059BF85 /* NobodyView.swift */; };
 		550D5F70280957880059BF85 /* Player1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6F280957880059BF85 /* Player1View.swift */; };
+		5556BFB72824A0DA007EF57D /* Waveform in Frameworks */ = {isa = PBXBuildFile; productRef = 5556BFB62824A0DA007EF57D /* Waveform */; };
+		5556BFB92824A123007EF57D /* WaveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5556BFB82824A123007EF57D /* WaveView.swift */; };
+		5556BFBC2824A4A7007EF57D /* AudioKitUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5556BFBB2824A4A7007EF57D /* AudioKitUI */; };
+		5556BFC02824C04F007EF57D /* WaveView2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5556BFBF2824C04F007EF57D /* WaveView2.swift */; };
+		5556BFCA2828EB32007EF57D /* AssetWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5556BFC92828EB32007EF57D /* AssetWriter.swift */; };
 		555E647527FD67F900C449BC /* RecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647427FD67F900C449BC /* RecordController.swift */; };
 		555E647727FD69A400C449BC /* RecordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647627FD69A400C449BC /* RecordView.swift */; };
 		555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647A27FE910900C449BC /* AudioEngineController.swift */; };
 		555E647F280664B100C449BC /* WebRTCDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647E280664B100C449BC /* WebRTCDictionaryController.swift */; };
 		555E64812806A6DC00C449BC /* SUImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E64802806A6DC00C449BC /* SUImagePicker.swift */; };
-		5562F617281BA80B00F10C66 /* SwiftUIX in Frameworks */ = {isa = PBXBuildFile; productRef = 5562F616281BA80B00F10C66 /* SwiftUIX */; };
 		55B98BF027E83E1D0057F168 /* studion_application_swiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */; };
 		55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BF127E83E1D0057F168 /* ContentView.swift */; };
 		55B98BF427E83E1D0057F168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B98BF327E83E1D0057F168 /* Assets.xcassets */; };
@@ -147,6 +151,9 @@
 		29E94CE12808BAFE000008F4 /* AudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioView.swift; sourceTree = "<group>"; };
 		550D5F6D2809577D0059BF85 /* NobodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobodyView.swift; sourceTree = "<group>"; };
 		550D5F6F280957880059BF85 /* Player1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player1View.swift; sourceTree = "<group>"; };
+		5556BFB82824A123007EF57D /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
+		5556BFBF2824C04F007EF57D /* WaveView2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView2.swift; sourceTree = "<group>"; };
+		5556BFC92828EB32007EF57D /* AssetWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssetWriter.swift; sourceTree = "<group>"; };
 		555E647427FD67F900C449BC /* RecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordController.swift; sourceTree = "<group>"; };
 		555E647627FD69A400C449BC /* RecordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordView.swift; sourceTree = "<group>"; };
 		555E647A27FE910900C449BC /* AudioEngineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngineController.swift; sourceTree = "<group>"; };
@@ -276,7 +283,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */,
-				5562F617281BA80B00F10C66 /* SwiftUIX in Frameworks */,
+				5556BFBC2824A4A7007EF57D /* AudioKitUI in Frameworks */,
+				5556BFB72824A0DA007EF57D /* Waveform in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,8 +321,19 @@
 			isa = PBXGroup;
 			children = (
 				555E647427FD67F900C449BC /* RecordController.swift */,
+				5556BFC92828EB32007EF57D /* AssetWriter.swift */,
 			);
 			path = Record;
+			sourceTree = "<group>";
+		};
+		5562F61C281F7C4C00F10C66 /* RecordView */ = {
+			isa = PBXGroup;
+			children = (
+				555E647627FD69A400C449BC /* RecordView.swift */,
+				5556BFB82824A123007EF57D /* WaveView.swift */,
+				5556BFBF2824C04F007EF57D /* WaveView2.swift */,
+			);
+			path = RecordView;
 			sourceTree = "<group>";
 		};
 		55B98BE327E83E1D0057F168 = {
@@ -596,10 +615,10 @@
 		55B98C8827EC097A0057F168 /* Instrument */ = {
 			isa = PBXGroup;
 			children = (
+				5562F61C281F7C4C00F10C66 /* RecordView */,
 				55B98C8927EC09890057F168 /* DrumView.swift */,
 				55B98C8B27EC09950057F168 /* PianoView.swift */,
 				55B98C8D27EC09A20057F168 /* GuitarView.swift */,
-				555E647627FD69A400C449BC /* RecordView.swift */,
 			);
 			path = Instrument;
 			sourceTree = "<group>";
@@ -718,7 +737,8 @@
 			);
 			name = studion_application_swiftUI;
 			packageProductDependencies = (
-				5562F616281BA80B00F10C66 /* SwiftUIX */,
+				5556BFB62824A0DA007EF57D /* Waveform */,
+				5556BFBB2824A4A7007EF57D /* AudioKitUI */,
 			);
 			productName = studion_application_swiftUI;
 			productReference = 55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */;
@@ -749,7 +769,8 @@
 			);
 			mainGroup = 55B98BE327E83E1D0057F168;
 			packageReferences = (
-				5562F615281BA80B00F10C66 /* XCRemoteSwiftPackageReference "SwiftUIX" */,
+				5556BFB52824A0DA007EF57D /* XCRemoteSwiftPackageReference "Waveform" */,
+				5556BFBA2824A4A7007EF57D /* XCRemoteSwiftPackageReference "AudioKitUI" */,
 			);
 			productRefGroup = 55B98BED27E83E1D0057F168 /* Products */;
 			projectDirPath = "";
@@ -903,6 +924,7 @@
 				2992C4E427FDB465008EFFCA /* NavigationBar.swift in Sources */,
 				55B98C2127E965DA0057F168 /* MainView.swift in Sources */,
 				55B98C4D27EBF3750057F168 /* DataChannelCodableStruct.swift in Sources */,
+				5556BFCA2828EB32007EF57D /* AssetWriter.swift in Sources */,
 				555E647F280664B100C449BC /* WebRTCDictionaryController.swift in Sources */,
 				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
 				55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */,
@@ -915,10 +937,12 @@
 				55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */,
 				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
 				29C4C03327EDDE0A0048D405 /* PostController.swift in Sources */,
+				5556BFB92824A123007EF57D /* WaveView.swift in Sources */,
 				55B98C9127EC782D0057F168 /* LeftBarView.swift in Sources */,
 				555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */,
 				555E64812806A6DC00C449BC /* SUImagePicker.swift in Sources */,
 				55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */,
+				5556BFC02824C04F007EF57D /* WaveView2.swift in Sources */,
 				55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */,
 				55B98C8727EC08070057F168 /* InstrumentControllerView.swift in Sources */,
 				55B98C4227EAEDB80057F168 /* WebRTCClient.swift in Sources */,
@@ -1165,21 +1189,34 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		5562F615281BA80B00F10C66 /* XCRemoteSwiftPackageReference "SwiftUIX" */ = {
+		5556BFB52824A0DA007EF57D /* XCRemoteSwiftPackageReference "Waveform" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SwiftUIX/SwiftUIX";
+			repositoryURL = "https://github.com/pixlwave/Waveform";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		5556BFBA2824A4A7007EF57D /* XCRemoteSwiftPackageReference "AudioKitUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AudioKit/AudioKitUI";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.2;
+				minimumVersion = 0.1.5;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5562F616281BA80B00F10C66 /* SwiftUIX */ = {
+		5556BFB62824A0DA007EF57D /* Waveform */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 5562F615281BA80B00F10C66 /* XCRemoteSwiftPackageReference "SwiftUIX" */;
-			productName = SwiftUIX;
+			package = 5556BFB52824A0DA007EF57D /* XCRemoteSwiftPackageReference "Waveform" */;
+			productName = Waveform;
+		};
+		5556BFBB2824A4A7007EF57D /* AudioKitUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5556BFBA2824A4A7007EF57D /* XCRemoteSwiftPackageReference "AudioKitUI" */;
+			productName = AudioKitUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

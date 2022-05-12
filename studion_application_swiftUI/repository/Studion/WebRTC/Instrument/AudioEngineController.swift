@@ -9,6 +9,8 @@ import Foundation
 import AVFoundation
 import AudioKit
 import ReplayKit
+import SwiftUI
+import mobileffmpeg
 
 class AudioEngineController{
     static let sharedInstance = AudioEngineController()
@@ -35,9 +37,8 @@ class AudioEngineController{
 //  ********************************************************************************
 //  record
 //  ********************************************************************************
-    var player: AVAudioPlayer?
-    var playerNumber = -1
-    
+    let assetWriter = AssetWriter(fileName: "test.wav")
+    @State var file: AVAudioFile?
     
     
     func settings() {
@@ -202,35 +203,33 @@ class AudioEngineController{
     
     func startRecord(completion: @escaping (Error?) -> ()) {
         let recorder = RPScreenRecorder.shared()
-        
+
         recorder.isMicrophoneEnabled = false
         
-        recorder.startRecording(handler: completion)
-        
+        recorder.startRecording()
+
     }
     
     func stopRecord() async throws -> URL {
-        let name = UUID().uuidString + ".wav"
+        let name = UUID().uuidString + ".mov"
         let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
+        
+        let name2 = UUID().uuidString + ".wav"
+        let url2 = FileManager.default.temporaryDirectory.appendingPathComponent(name2)
         
         let recorder = RPScreenRecorder.shared()
         
         try await recorder.stopRecording(withOutput: url)
         
-        return url
+        MobileFFmpeg.execute("-i " + url.absoluteString + " -map 0:a -y " + url2.absoluteString)
+        
+        
+        return url2
     }
     
-    func recordingPlayer(url: URL) {
-        do {
-            
-            player = try AVAudioPlayer(contentsOf: url)
-            player!.play()
-            
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
     
+    
+   
     
     
 }
@@ -287,3 +286,5 @@ struct PianoSample {
         }
     }
 }
+
+

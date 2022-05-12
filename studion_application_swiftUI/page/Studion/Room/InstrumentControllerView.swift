@@ -33,7 +33,7 @@ struct InstrumentControllerView: View {
     @State var recordFiles: [URL?] = []
     @State var recordFilesPlayCheck: [Bool?] = []
     @State var recordFilesCurrentTime: [Double?] = []
-    
+        
     var body: some View {
         
         if UIDevice.isIpad{
@@ -312,9 +312,16 @@ struct InstrumentControllerView: View {
                                         Task {
                                             do {
                                                 let file = try await AudioEngineController.sharedInstance.stopRecord()
+                                                
+                                                
+                                                
+                                                
+                                                
                                                 self.recordFiles.append(file)
                                                 self.recordFilesPlayCheck.append(false)
                                                 self.recordFilesCurrentTime.append(0)
+                                                
+                                                
                                                 
                                             } catch {
                                                 print(error.localizedDescription)
@@ -405,12 +412,6 @@ struct InstrumentControllerView: View {
 
                 } // toolbar
                 
-                
-
-                
-//            } // NavigationView
-//            .ignoresSafeArea(.keyboard, edges: .bottom)
-//            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
             }
         }
         
@@ -438,3 +439,5 @@ struct InstrumentButton: View {
     }
 }
 }
+
+

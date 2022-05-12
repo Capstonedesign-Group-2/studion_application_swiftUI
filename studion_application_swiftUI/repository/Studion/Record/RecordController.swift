@@ -7,20 +7,35 @@
 
 import Foundation
 import AVFoundation
+import SwiftUI
 
 class RecordController {
-    var player: AVAudioPlayer?
+    static let sharedInstance = RecordController()
     
-    func play(url: URL) {
-        do {
-            
-            player = try AVAudioPlayer(contentsOf: url)
-            player!.play()
-            
-        } catch {
-            print(error.localizedDescription)
-        }
+    
+    var url: URL?
+    
+    func setUrl(url: URL) {
+        self.url = url
     }
     
+    func getUrl() -> URL {
+        return self.url!
+    }
     
+}
+
+struct ShareSheet: UIViewControllerRepresentable {
+    
+    
+    var items: [Any]
+    
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let view = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        return view
+    }
+    
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {
+        
+    }
 }

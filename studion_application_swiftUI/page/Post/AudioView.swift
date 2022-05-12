@@ -61,6 +61,9 @@ struct AudioView : View {
                     }, label: {
                         Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
                     }
+                       
+                       
+                       
                 )
                 .onAppear() {
                         guard let url = URL(string: (audioURL)!) else {
@@ -94,6 +97,9 @@ struct AudioView : View {
                        
                             }
                         }
+                    
+                    
+                    
                 }
 
                 
@@ -106,9 +112,13 @@ struct AudioView : View {
 //                    }
 //                )
                 
+                
+                
             } // hS
             .padding(.top, 25)
             .foregroundColor(Color.black)
+            
+            
                 
         } // zS
     } // vS
