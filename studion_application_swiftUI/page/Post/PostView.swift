@@ -28,9 +28,7 @@ struct PostView: View {
            if UIDevice.isIpad { // iPad
                               
                ZStack {
-                   
                     VStack {
-                        
                         List {
                             ForEach(0..<p.count, id: \.self) { index in
                                 
@@ -50,6 +48,7 @@ struct PostView: View {
                                     PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
+                                            id: self.p[index]?["id"] as? Int,
                                             image: images.count == 0 ? nil : images[0]?["link"] as? String,
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
                                         )
@@ -154,6 +153,7 @@ struct PostView: View {
                                     PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
+                                            id: self.p[index]?["id"] as? Int,
                                             image: images.count == 0 ? nil : images[0]?["link"] as? String,
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
                                         )
@@ -184,11 +184,11 @@ struct PostView: View {
                                 } // onAppear
                                 
                             }// foreach
-                            
-                        }// list
-                            .listRowBackground(Color.clear)
+                            .listRowBackground(Color.white)
                             .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets(top: 0, leading: 0, bottom: 20, trailing: 0))
+//                            .listRowInsets(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                        }// list
+   
                        
                             .refreshable {
                                 currentPage = 1
@@ -216,26 +216,33 @@ struct PostView: View {
 //                    .navigationBarTitleDisplayMode(.automatic)
 //                   }.navigationViewStyle(StackNavigationViewStyle())
 
-                                   .onAppear {
-                                       PostController.sharedInstance.show(page: currentPage) { data in
+                                
+                       .onAppear {
+                                       
+                           PostController.sharedInstance.show(page: currentPage) { data in
 
-                       //                          print(data)
-                                               let response = data as! Dictionary<String, Any>
-                       //                          print(response)
-                                               let posts = response["posts"] as! Dictionary<String, Any>
+//                          print(data)
+                               let response = data as! Dictionary<String, Any>
+//                          print(response)
+                               let posts = response["posts"] as! Dictionary<String, Any>
+                                        
+                               currentPage = posts["current_page"] as! Int
+                               lastPage = posts["last_page"] as! Int
+                                        
+                               p = posts["data"] as! [Dictionary<String, Any>?]
 
-                                               p = posts["data"] as! [Dictionary<String, Any>?]
-
-
-                                   }
-                               }
-                                   .onDisappear{
-                                       print("PostView end")
-                                       currentPage = 1
-                                       p = []
-                                   }
-
-                           } // zS
+                           }
+                               
+                       }
+                                   
+                       .onDisappear{
+                           print("PostView end")
+                           currentPage = 1
+                           p = []
+                     
+                       }
+        
+               } // zS
                
                         .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
                             Color.clear

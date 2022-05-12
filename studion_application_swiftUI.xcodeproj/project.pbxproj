@@ -16,6 +16,8 @@
 		29C4C03527EDE2150048D405 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4C03427EDE2150048D405 /* CreateView.swift */; };
 		29C4C03827EF61460048D405 /* PostCodableStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4C03727EF61450048D405 /* PostCodableStruct.swift */; };
 		29E94CE22808BAFE000008F4 /* AudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E94CE12808BAFE000008F4 /* AudioView.swift */; };
+		29FCF91F282C8C6B001FE79E /* CommentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FCF91E282C8C6B001FE79E /* CommentCard.swift */; };
+		29FCF921282CA386001FE79E /* CommentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FCF920282CA386001FE79E /* CommentForm.swift */; };
 		550D5F6E2809577D0059BF85 /* NobodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6D2809577D0059BF85 /* NobodyView.swift */; };
 		550D5F70280957880059BF85 /* Player1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6F280957880059BF85 /* Player1View.swift */; };
 		555E647527FD67F900C449BC /* RecordController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647427FD67F900C449BC /* RecordController.swift */; };
@@ -148,6 +150,8 @@
 		29C4C03427EDE2150048D405 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		29C4C03727EF61450048D405 /* PostCodableStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCodableStruct.swift; sourceTree = "<group>"; };
 		29E94CE12808BAFE000008F4 /* AudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioView.swift; sourceTree = "<group>"; };
+		29FCF91E282C8C6B001FE79E /* CommentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCard.swift; sourceTree = "<group>"; };
+		29FCF920282CA386001FE79E /* CommentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentForm.swift; sourceTree = "<group>"; };
 		550D5F6D2809577D0059BF85 /* NobodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobodyView.swift; sourceTree = "<group>"; };
 		550D5F6F280957880059BF85 /* Player1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player1View.swift; sourceTree = "<group>"; };
 		555E647427FD67F900C449BC /* RecordController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordController.swift; sourceTree = "<group>"; };
@@ -303,6 +307,16 @@
 			path = Post;
 			sourceTree = "<group>";
 		};
+		29FCF91D282C8B5A001FE79E /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				295DC7C32817B753006A1BB7 /* CommentView.swift */,
+				29FCF91E282C8C6B001FE79E /* CommentCard.swift */,
+				29FCF920282CA386001FE79E /* CommentForm.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
 		550D5F6C280957640059BF85 /* VolumeControllSlider */ = {
 			isa = PBXGroup;
 			children = (
@@ -453,13 +467,13 @@
 		55B98C2227E969FA0057F168 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				29FCF91D282C8B5A001FE79E /* Comment */,
 				55B98C2327E96A0A0057F168 /* PostView.swift */,
 				29C4C03427EDE2150048D405 /* CreateView.swift */,
 				2992C4E327FDB465008EFFCA /* NavigationBar.swift */,
 				2992C4E527FDB489008EFFCA /* SearchView.swift */,
 				2992C4E727FDB4B4008EFFCA /* PostCard.swift */,
 				29E94CE12808BAFE000008F4 /* AudioView.swift */,
-				295DC7C32817B753006A1BB7 /* CommentView.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -905,6 +919,7 @@
 				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
 				295DC7C2281793F1006A1BB7 /* CommentController.swift in Sources */,
 				55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */,
+				29FCF91F282C8C6B001FE79E /* CommentCard.swift in Sources */,
 				55B98C1E27E8BF4C0057F168 /* RegisterView.swift in Sources */,
 				55C648FC27F57B02005603A2 /* UserVolumeStruct.swift in Sources */,
 				55B98C0A27E85A6C0057F168 /* SocketIO.swift in Sources */,
@@ -928,6 +943,7 @@
 				55B98C1027E85B950057F168 /* UserInfo.swift in Sources */,
 				2992C4E827FDB4B4008EFFCA /* PostCard.swift in Sources */,
 				55B98C0E27E85B090057F168 /* AuthCodableStruct.swift in Sources */,
+				29FCF921282CA386001FE79E /* CommentForm.swift in Sources */,
 				55B98C8A27EC09890057F168 /* DrumView.swift in Sources */,
 				55B98C8C27EC09950057F168 /* PianoView.swift in Sources */,
 				29C4C03827EF61460048D405 /* PostCodableStruct.swift in Sources */,

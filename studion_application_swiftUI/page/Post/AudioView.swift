@@ -21,7 +21,7 @@ struct AudioView : View {
             
         GeometryReader { geometry in
         
-            VStack(spacing: 20) {
+            VStack(spacing: 10) {
                     
                 ZStack(alignment: .leading) {
                     

@@ -15,9 +15,12 @@ struct PostCard: View {
     @Namespace var namespace
     @State var show: Bool = false
     @State var play: Bool = false
+    @State var comment: Bool = false
     
     @State var title = ""
     @State var content = ""
+    
+    @State var id: Int?
     
     //image
     @State var image: String?
@@ -91,21 +94,25 @@ struct PostCard: View {
                                 Text("No Audios...")
                             }
                         }
-                        .padding(.bottom, 50)
+                        .padding(.bottom, 30)
                     
-//                    VStack {
-//                        NavigationLink(destination: CommentView()) {
-//                            Text("comments...")
-//                                .font(.body.weight(.semibold))
-//                                .matchedGeometryEffect(id: "comments", in: namespace)
-//                                .frame(maxWidth: .infinity, alignment: .leading)
-//                                .padding(.all, 30)
-//                                .overlay(
-//                                    RoundedRectangle(cornerRadius: 0)
-//                                        .stroke(Color.gray, lineWidth: 0.5)
-//                                )
-//                        }
-//                    }//comments
+                    VStack {
+                        Text("comments...")
+                            .font(.body.weight(.semibold))
+                            .matchedGeometryEffect(id: "comments", in: namespace)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.all, 30)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 0)
+                                    .stroke(Color.gray, lineWidth: 0.5)
+                            ).onTapGesture {
+                               comment = true
+                            }
+                                                
+                    }//comments
+                    .sheet(isPresented: $comment) {
+                        CommentView(postId: id!)
+                    }
                     
                 } //vS
                 
@@ -144,10 +151,10 @@ struct PostCard: View {
                     HStack {
                         ZStack {
                             Text(title)
-                                .font(.largeTitle.weight(.bold))
+                                .font(.title.weight(.bold))
                                 .matchedGeometryEffect(id: "title", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-//                                .padding()
+                                .padding()
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 0)
                                         .stroke(Color.gray, lineWidth: 0.5)
@@ -168,7 +175,7 @@ struct PostCard: View {
                                 .matchedGeometryEffect(id: "image", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .center)
 //                                .padding()
-                                .shadow(color: .gray, radius: 5)
+//                                .shadow(color: .gray, radius: 5)
                             }
                         )
 
@@ -198,7 +205,7 @@ struct PostCard: View {
     //                          Text(audioURL!)
                                 AudioView(audioURL: audioURL, isPlaying: false)
                                     .matchedGeometryEffect(id: "audio", in: namespace)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .frame(maxWidth: .infinity,minHeight: 50, alignment: .leading)
                                     .padding()
                             } else {
                                 Text("No Audios...")
@@ -206,28 +213,29 @@ struct PostCard: View {
                         }
                         Spacer()
                         VStack {
-                            
-                            NavigationLink(destination: CommentView()) {
-                                Text("comments...")
-                                    .font(.body.weight(.semibold))
-                                    .matchedGeometryEffect(id: "comments", in: namespace)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .padding(.all, 10)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 0)
-                                            .stroke(Color.gray, lineWidth: 0.5)
-                                    )
+                            Text("comments...")
+                                .font(.body.weight(.semibold))
+                                .matchedGeometryEffect(id: "comments", in: namespace)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding(.all, 20)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 0)
+                                        .stroke(Color.gray, lineWidth: 0.5)
+                                ).onTapGesture {
+                                    comment = true
+                                }
+                                                
+                        }//comments
+                            .sheet(isPresented: $comment) {
+                                CommentView(postId: id!)
                             }
-                        }
-                    
-
                     } //vS
         
                 .background(Color.white)
                 .overlay(
                     RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.white, lineWidth: 0.1)
-                        .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
+                        .stroke(Color.black, lineWidth: 1)
+//                        .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
                 )
                 .cornerRadius(0)
                 .shadow(color: .gray, radius: 2)

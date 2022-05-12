@@ -35,7 +35,7 @@ public class CommentController {
             let parameter : [String: Any] = [
                 "content": data["content"]!,
                 "user_id": UserInfo.userInfo.user?.id,
-                "post_id": data["post_id"]
+                "post_id": data["postId"]
             ]
             
             
@@ -68,5 +68,54 @@ public class CommentController {
         
         
     } // create
+    
+    
+    
+//****************************************************************************************************************
+//    showComments
+//****************************************************************************************************************
+    
+    public func showComments(id: Int, handler: @escaping (Any) -> Void){
+          let url = api + "api/comments/\(id)"
+          
+          AF.request(url, method: .get).responseJSON{ response in
+              
+              var status = response.response?.statusCode ?? 500
+              
+              switch response.result {
+              case .success(let data):
+                  if(status == 401) {
+                      let response_data: [String: Any] = [
+                          "status" : 401,
+                          "data" : data
+                      ]
+                      
+                      handler(response_data)
+                  } else if (status == 200) {
+                      let response_data: [String: Any] = [
+                          "status" : "Success",
+                          "data" : data,
+                      ]
+                      do{
+                          handler(data)
+                      } catch (let error) {
+                          print(error)
+                      }
+                      
+                    }
+                  
+//                  print("comments Data: \(data)")
+                  
+              case .failure(let error):
+                  let response_data: [String: Any] = [
+                      "status" : 500,
+                      "error" : error
+                  ]
+                  print(error)
+                  
+                  handler(response_data)
+              }
+          }
+    } // show
     
 }
