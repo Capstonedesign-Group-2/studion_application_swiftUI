@@ -13,6 +13,8 @@ import SwiftUI
 import mobileffmpeg
 
 class AudioEngineController{
+    
+    
     static let sharedInstance = AudioEngineController()
     
     let engine = AudioEngine()
@@ -124,7 +126,7 @@ class AudioEngineController{
             settings()
         }
         let volume = VolumeController.sharedInstance.getVolume(socketID: socketID)
-        mixer.volume = Float(20 * volume.volume * volume.masterVolume)
+        mixer.volume = Float(5 * volume.volume * volume.masterVolume)
         
         
         switch key {
@@ -156,7 +158,7 @@ class AudioEngineController{
             settings()
         }
         let volume = VolumeController.sharedInstance.getVolume(socketID: socketID)
-        mixer.volume = Float(20 * volume.volume * volume.masterVolume)
+        mixer.volume = Float(5 * volume.volume * volume.masterVolume)
         
         switch key {
         case "p_48":

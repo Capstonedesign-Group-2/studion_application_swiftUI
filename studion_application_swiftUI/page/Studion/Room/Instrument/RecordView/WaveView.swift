@@ -9,31 +9,42 @@ struct WaveView: View {
     
     @State var table: Table?
     @State var isUrl = false
+    
+    @State var width: CGFloat = 0
+    @State var width1: CGFloat = 650
 
     var body: some View {
         
-        VStack {
+        ZStack {
             
-            if isUrl {
+            VStack {
                 
-                TableDataView(view: TableView(table!))
-                              
-            } else {
-                Text("URL Error")
+                if isUrl {
+                    
+                    TableDataView(view: TableView(table!))
+                        .frame(width: 650, height: 200)
+                        
+                    RangeSlider(width: self.$width, width1: self.$width1)
+                                  
+                } else {
+                    Text("URL Error")
+                }
+                                  
+            }   // VStack
+            .onAppear{
+                do {
+                    
+                    let file = try! AVAudioFile(forReading: url)
+                    table = Table(file: file)
+                    
+                    isUrl = true
+                    
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
-                              
-        }
-        .onAppear{
-            do {
-                
-                let file = try! AVAudioFile(forReading: url)
-                table = Table(file: file)
-                isUrl = true
-                
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
+            
+        }   // ZStack
                           
         
         
@@ -46,7 +57,8 @@ struct TableDataView: UIViewRepresentable {
     var view: TableView
 
     func makeUIView(context: Context) -> TableView {
-        view.backgroundColor = UIColor.green
+        view.backgroundColor = UIColor.clear
+        
         return view
     }
 
@@ -55,3 +67,5 @@ struct TableDataView: UIViewRepresentable {
     }
 
 }
+
+

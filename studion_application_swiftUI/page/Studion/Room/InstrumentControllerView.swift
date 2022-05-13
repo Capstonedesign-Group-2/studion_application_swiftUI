@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVFoundation
+import mobileffmpeg
 
 var instrument = ["drum", "piano_button", "guitar", "rec"]
 struct InstrumentControllerView: View {
@@ -33,6 +34,7 @@ struct InstrumentControllerView: View {
     @State var recordFiles: [URL?] = []
     @State var recordFilesPlayCheck: [Bool?] = []
     @State var recordFilesCurrentTime: [Double?] = []
+    @State var recordFilesVolume: [URL?] = []
         
     var body: some View {
         
@@ -55,7 +57,7 @@ struct InstrumentControllerView: View {
                                 GuitarView()
                                     .tag("guitar")
                                 
-                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime)
+                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime, recordFilesVolume: $recordFilesVolume)
                                     .tag("rec")
 
                             }
@@ -230,7 +232,7 @@ struct InstrumentControllerView: View {
                                     .tag("guitar")
                                     .offset(y:-40)
 
-                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime)
+                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime, recordFilesVolume: $recordFilesVolume)
                                     .tag("rec")
                                     .offset(y:-40)
 
@@ -312,14 +314,16 @@ struct InstrumentControllerView: View {
                                         Task {
                                             do {
                                                 let file = try await AudioEngineController.sharedInstance.stopRecord()
-                                                
-                                                
-                                                
-                                                
-                                                
+                                        
                                                 self.recordFiles.append(file)
                                                 self.recordFilesPlayCheck.append(false)
                                                 self.recordFilesCurrentTime.append(0)
+                                                
+                                                let name = UUID().uuidString + ".wav"
+                                                let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
+                                                
+//                                                MobileFFmpeg.execute("-i " + file.absoluteString + " -filter:a \"volume=0.8\" " + url.absoluteString)
+//                                                self.recordFilesVolume.append(url)
                                                 
                                                 
                                                 

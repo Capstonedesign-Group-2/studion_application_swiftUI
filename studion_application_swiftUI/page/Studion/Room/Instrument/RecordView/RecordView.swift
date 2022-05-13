@@ -17,6 +17,7 @@ struct RecordView: View {
     
     @Binding var recordFilesPlayCheck: [Bool?]
     @Binding var recordFilesCurrentTime: [Double?]
+    @Binding var recordFilesVolume: [URL?]
     
     @State var player : AVAudioPlayer!
     @State var isPlaying: Bool = false
@@ -84,7 +85,7 @@ struct RecordView: View {
                                                                                 
                                         Button( action: {
                                             
-                                            RecordController.sharedInstance.setUrl(url: self.recordFiles[(recordFiles.count-1) - index]!)
+                                            RecordController.sharedInstance.setUrl(url: recordFiles[(recordFiles.count-1) - index]!)
 
                                             
                                             self.isEdit.toggle()
@@ -93,20 +94,9 @@ struct RecordView: View {
                                         }
                                         .sheet(isPresented: $isEdit) {
                                             VStack {
+                                                                                                
+                                                WaveView2(isEdit: self.$isEdit)
                                                 
-//                                                WaveView(url: self.recordFiles[(recordFiles.count-1) - index]!)
-                                                
-                                                WaveView2()
-                                                
-                                                Button( action: {
-//                                                    print(image)
-                                                    self.isEdit.toggle()
-                                                }) {
-                                                    Text("end")
-                                                }
-                                                .onAppear{
-                                                    print("recording view")
-                                                }
                                             }
                                         }
                                     }   // HStack
