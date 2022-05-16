@@ -86,7 +86,7 @@ struct PostCard: View {
                         VStack{
                             if (audioURL != nil) {
     //                          Text(audioURL!)
-                                AudioView(audioURL: audioURL, isPlaying: false)
+                                AudioView(audioURL: audioURL)
                                     .matchedGeometryEffect(id: "audio", in: namespace)
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .padding()

@@ -239,7 +239,6 @@ struct PostView: View {
                            print("PostView end")
                            currentPage = 1
                            p = []
-                     
                        }
         
                } // zS
