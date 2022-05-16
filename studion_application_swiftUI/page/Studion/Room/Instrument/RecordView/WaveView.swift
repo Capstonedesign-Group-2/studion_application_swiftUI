@@ -24,7 +24,7 @@ struct WaveView: View {
                     TableDataView(view: TableView(table!))
                         .frame(width: 650, height: 200)
                         
-                    RangeSlider(width: self.$width, width1: self.$width1)
+//                    RangeSlider(width: self.$width, width1: self.$width1)
                                   
                 } else {
                     Text("URL Error")
