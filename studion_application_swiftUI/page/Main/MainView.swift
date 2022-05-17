@@ -40,27 +40,27 @@ struct MainView: View {
                 
                 TabView(selection: $mainRouter) {
                     PostView()
-                        .tag("/")
+                        .tag("house")
                         .transition(.move(edge: .top))
                         .animation(.easeIn)
 
                     ChatRoomList()
-                        .tag("/chat")
+                        .tag("message")
                   
                     CreateView()
-                        .tag("/post/create")
+                        .tag("plus")
                     
                     StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
-                        .tag("/studion")
+                        .tag("rectangle.righthalf.inset.filled.arrow.right")
                         .transition(.move(edge: .top))
                         .animation(.easeIn)
                     
                     SettingView(pageStatus: $pageStatus)
-                        .tag("/setting")
+                        .tag("gearshape")
                 }
                 
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-//                .ignoresSafeArea(.all, edges: .bottom)
+    //                .ignoresSafeArea(.all, edges: .bottom)
                 
                 HStack(spacing: 0) {
     //                ForEach(tabBarImageNames, id: \.self) { image in
