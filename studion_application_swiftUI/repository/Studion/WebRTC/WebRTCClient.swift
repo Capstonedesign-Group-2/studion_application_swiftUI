@@ -336,6 +336,7 @@ final class WebRTCClient: NSObject {
             let sdp = response["sdp"] as! Dictionary<String, Any>
 
 //            self.nameDic[response["offerSendID"] as! String] = response["offerSendName"] as! String
+            print(response["offerSendID"])
             WebRTCDictionaryController.sharedInstance.nameDic[response["offerSendID"] as! String] = response["offerSendName"] as! String
             
             self.socketID = response["offerSendID"] as! String

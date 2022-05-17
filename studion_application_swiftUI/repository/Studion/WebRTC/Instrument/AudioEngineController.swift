@@ -8,8 +8,13 @@
 import Foundation
 import AVFoundation
 import AudioKit
+import ReplayKit
+import SwiftUI
+import mobileffmpeg
 
 class AudioEngineController{
+    
+    
     static let sharedInstance = AudioEngineController()
     
     let engine = AudioEngine()
@@ -34,8 +39,9 @@ class AudioEngineController{
 //  ********************************************************************************
 //  record
 //  ********************************************************************************
-    let player = AudioPlayer()
-    var record :AVAudioFile?
+    let assetWriter = AssetWriter(fileName: "test.wav")
+    @State var file: AVAudioFile?
+    
     
     func settings() {
         
@@ -120,7 +126,7 @@ class AudioEngineController{
             settings()
         }
         let volume = VolumeController.sharedInstance.getVolume(socketID: socketID)
-        mixer.volume = Float(20 * volume.volume * volume.masterVolume)
+        mixer.volume = Float(5 * volume.volume * volume.masterVolume)
         
         
         switch key {
@@ -152,7 +158,7 @@ class AudioEngineController{
             settings()
         }
         let volume = VolumeController.sharedInstance.getVolume(socketID: socketID)
-        mixer.volume = Float(20 * volume.volume * volume.masterVolume)
+        mixer.volume = Float(5 * volume.volume * volume.masterVolume)
         
         switch key {
         case "p_48":
@@ -197,45 +203,36 @@ class AudioEngineController{
         }
     }
     
-    func startRecord() {
+    func startRecord(completion: @escaping (Error?) -> ()) {
+        let recorder = RPScreenRecorder.shared()
+
+        recorder.isMicrophoneEnabled = false
         
-        
-        do {
-            mixer.avAudioNode.installTap(onBus: 0, bufferSize: 1024, format: nil) { (buffer, when) in
-                do {
-                    try self.record?.write(from: buffer)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-            
-            print("recording start")
-        } catch {
-            print(error.localizedDescription)
-        }
+        recorder.startRecording()
+
     }
     
-    func stopRecord() -> AVAudioFile? {
+    func stopRecord() async throws -> URL {
+        let name = UUID().uuidString + ".mov"
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
         
-        mixer.avAudioNode.removeTap(onBus: 0)
-        print("recording stop")
-        print(record)
-        return record
+        let name2 = UUID().uuidString + ".wav"
+        let url2 = FileManager.default.temporaryDirectory.appendingPathComponent(name2)
+        
+        let recorder = RPScreenRecorder.shared()
+        
+        try await recorder.stopRecording(withOutput: url)
+        
+        MobileFFmpeg.execute("-i " + url.absoluteString + " -map 0:a -y " + url2.absoluteString)
+        
+        
+        return url2
     }
     
-    func recordingPlayer(file: AVAudioFile) {
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-        print(file)
-        
-        player.file = file
-        player.play()
-    }
+    
+    
+   
+    
     
 }
 
@@ -291,3 +288,5 @@ struct PianoSample {
         }
     }
 }
+
+

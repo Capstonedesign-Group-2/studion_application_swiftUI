@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVFoundation
+import mobileffmpeg
 
 var instrument = ["drum", "piano_button", "guitar", "rec"]
 struct InstrumentControllerView: View {
@@ -30,8 +31,11 @@ struct InstrumentControllerView: View {
     
     @State var isRecording = false
     let recordController = RecordController()
-    @State var recordFiles: [AVAudioFile?] = []
-    
+    @State var recordFiles: [URL?] = []
+    @State var recordFilesPlayCheck: [Bool?] = []
+    @State var recordFilesCurrentTime: [Double?] = []
+    @State var recordFilesVolume: [URL?] = []
+        
     var body: some View {
         
         if UIDevice.isIpad{
@@ -53,7 +57,7 @@ struct InstrumentControllerView: View {
                                 GuitarView()
                                     .tag("guitar")
                                 
-                                RecordView(recordFiles: $recordFiles)
+                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime, recordFilesVolume: $recordFilesVolume)
                                     .tag("rec")
 
                             }
@@ -132,38 +136,12 @@ struct InstrumentControllerView: View {
                                     
                                     if isRecording {
                                         
-    //                                    Task {
-    //                                        do {
-    //                                            let url = try await self.recordController.stopRecording()
-    //                                            self.recordFiles.append(url)
-    //                                            isRecording = false
-    //
-    //
-    //                                        } catch {
-    //                                            print(error.localizedDescription)
-    //                                        }
-    //                                    }
-//                                        let url: URL? = AudioEngineController.sharedInstance.stop()
-                                        
-//                                        if(url != nil) {
-//                                            self.recordFiles.append(url!)
-//                                        }
-//
+
                                         
                                         isRecording = false
                                         
                                     } else {
-    //                                    self.recordController.startRecording{ error in
-    //                                        if let error = error {
-    //                                            print(error.localizedDescription)
-    //                                            return
-    //                                        }
-    //
-    //                                        isRecording = true
-    //                                    }
-                                        
-                                        
-//                                        AudioEngineController.sharedInstance.record()
+
                                         
                                         isRecording = true
 
@@ -233,18 +211,9 @@ struct InstrumentControllerView: View {
                     
                 } // toolbar
                 
-                
-
-                
-//            } // NavigationView
-//            .navigationViewStyle(StackNavigationViewStyle())
-//            .ignoresSafeArea(.keyboard, edges: .bottom)
-//            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
             
             
         } else { // iPhone View
-            
-//            NavigationView {
                 ZStack {
                     VStack{
                         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
@@ -263,7 +232,7 @@ struct InstrumentControllerView: View {
                                     .tag("guitar")
                                     .offset(y:-40)
 
-                                RecordView(recordFiles: $recordFiles)
+                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime, recordFilesVolume: $recordFilesVolume)
                                     .tag("rec")
                                     .offset(y:-40)
 
@@ -342,39 +311,31 @@ struct InstrumentControllerView: View {
 
                                 Button( action: {
                                     if isRecording {
-
-    //                                    Task {
-    //                                        do {
-    //                                            let url = try await self.recordController.stopRecording()
-    //                                            self.recordFiles.append(url)
-    //                                            isRecording = false
-    //
-    //
-    //                                        } catch {
-    //                                            print(error.localizedDescription)
-    //                                        }
-    //                                    }
-//                                        let url: URL? = AudioEngineController.sharedInstance.stop()
-//
-//                                        if(url != nil) {
-//                                            self.recordFiles.append(url!)
-//                                        }
-//                                        self.recordController.stop()
-//                                        AudioEngineController.sharedInstance.stop()
-                                        let file = AudioEngineController.sharedInstance.stopRecord()
-                                        self.recordFiles.append(file)
+                                        Task {
+                                            do {
+                                                let file = try await AudioEngineController.sharedInstance.stopRecord()
+                                        
+                                                self.recordFiles.append(file)
+                                                self.recordFilesPlayCheck.append(false)
+                                                self.recordFilesCurrentTime.append(0)
+                                                
+                                                let name = UUID().uuidString + ".wav"
+                                                let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
+                                                
+//                                                MobileFFmpeg.execute("-i " + file.absoluteString + " -filter:a \"volume=0.8\" " + url.absoluteString)
+//                                                self.recordFilesVolume.append(url)
+                                                
+                                                
+                                                
+                                            } catch {
+                                                print(error.localizedDescription)
+                                            }
+                                        }
+                                        
                                         
                                         isRecording = false
 
                                     } else {
-    //                                    self.recordController.startRecording{ error in
-    //                                        if let error = error {
-    //                                            print(error.localizedDescription)
-    //                                            return
-    //                                        }
-    //
-    //                                        isRecording = true
-    //                                    }
                                         do {
                                             try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .mixWithOthers)
                                             try AVAudioSession.sharedInstance().setActive(true)
@@ -382,7 +343,9 @@ struct InstrumentControllerView: View {
                                             print(error.localizedDescription)
                                         }
                                         
-                                        AudioEngineController.sharedInstance.startRecord()
+                                        AudioEngineController.sharedInstance.startRecord() { data in
+                                            
+                                        }
 
                                         isRecording = true
 
@@ -453,12 +416,6 @@ struct InstrumentControllerView: View {
 
                 } // toolbar
                 
-                
-
-                
-//            } // NavigationView
-//            .ignoresSafeArea(.keyboard, edges: .bottom)
-//            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
             }
         }
         
@@ -486,3 +443,5 @@ struct InstrumentButton: View {
     }
 }
 }
+
+
