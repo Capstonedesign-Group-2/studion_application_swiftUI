@@ -35,18 +35,26 @@ struct AudioView : View {
     //                Text(audioURL!)
                     
                     Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
-                    Capsule().fill(Color.green).frame(width: self.width, height: 8)
+                    Capsule().fill(Color.green).frame(width: abs(self.width), height: 8)
                         .gesture(DragGesture()
                             .onChanged({ (value) in
                                 let x = value.location.x
-//                                self.width = geometry.size.width - 30
-//                                let percent = x / self.width
-//                                var cntTime = player.currentItem!.currentTime()
-//                                let floatDuration = player.currentItem!.asset.duration
 
+                                self.width = x
+
+                            }).onEnded({ (value) in
+
+                                let x = value.location.x
+
+                                let screen = geometry.size.width - 30
+
+                                let percent = x / screen
                                 
-//                                time = Double(percent) * duration
+                                time = Double(percent) * duration
                                 
+                                self.player.seek(to: CMTime(seconds: time, preferredTimescale: 600))
+//                                print(time)
+
                             }))
 
                 }
@@ -54,7 +62,7 @@ struct AudioView : View {
                 HStack(spacing: geometry.size.width / 5 - 30) {
                     Text(cntTimeString)
                     Spacer()
-                
+                    
                     Button(action: {}, label: {
                         Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
                     }).onTapGesture {
@@ -77,6 +85,8 @@ struct AudioView : View {
             } // hS
             .padding(.top)
             .foregroundColor(Color.black)
+            
+            } // vs
             .onAppear() {
                     guard let url = URL(string: (audioURL)!) else {
                         print("wrong url")
@@ -86,23 +96,18 @@ struct AudioView : View {
                         player.replaceCurrentItem(with: playerItem)
                 
                 
-                    Timer.scheduledTimer(withTimeInterval: 1 / 60, repeats: true) { (_) in
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
 //                            print(audioURL)
                         
                         if isPlaying == true {
                             
-//                            if isEnded {
-//                                time = 0
-//                                value = 0
-//                                isEnded = false
-//                            }
-        
+                            let screen = geometry.size.width - 30
                             
                             time = CMTimeGetSeconds(player.currentTime())
                             
                             if time.isNaN || time.isInfinite || time == 0.0 {
                                 return
-                            } else {
+                            } else { // time format
                                 let totalCntTime = Int(time)
                                 let tMin = totalCntTime / 60
                                 let tSec = totalCntTime % 60
@@ -122,21 +127,18 @@ struct AudioView : View {
                                 self.durationString = dString
                             }
                             
-                            let screen = geometry.size.width - 30
                             value = time / duration
-                            
+//                            self.width = screen * CGFloat(value)
                             
 //                            print(screen)
 //                            print("Value!!!!! : \(value)")
 //                            print("Time!!!!!!! : \(round(time.value()))")
 //                            print("Duration!!!!!!! : \(round(duration.value()))")
 
-                            
                                 if value < 1 {
                                     self.width = screen * CGFloat(value)
                                 } else {
                                     self.width = screen + 30
-//                                    isEnded = false
                                     isPlaying = false
                                 }
 
@@ -145,17 +147,16 @@ struct AudioView : View {
                 
                 }// onAppear
                 .onDisappear() {
-//                    self.time = 0
-//                    self.duration = 0
-//                    self.width = 0
+                    self.time = 0
+                    self.duration = 0
+                    self.width = 0
                     self.durationString = ""
                     self.cntTimeString = ""
                     self.isPlaying = false
                     player.pause()
-//                    player.replaceCurrentItem(with: nil)
+                    player.replaceCurrentItem(with: nil)
                 }
-        
-            } // vs
+            
             
         }.frame(maxWidth: .infinity, maxHeight: 30, alignment: .center) // geometry
             .padding(.bottom, 10)
