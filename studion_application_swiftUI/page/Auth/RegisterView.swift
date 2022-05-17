@@ -28,41 +28,80 @@ struct RegisterView: View {
     
     var body: some View {
         
-        ZStack {
-            VStack {
-                registerTitle()
-                registerForm(name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, isRegister: $isRegister, registerStatus: $registerStatus, isLogin: $isLogin)
-                Spacer()
-                HStack {
-                    Button(action : {
-                        self.registerStatus = false
-                    }) {
-                        Text("로그인")
+        if UIDevice.isIpad {
+            ZStack {
+                VStack {
+                    Spacer()
+                    logoImg()
+                    Spacer()
+                    registerTitle()
+                    registerForm(name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, isRegister: $isRegister, registerStatus: $registerStatus, isLogin: $isLogin)
+                    Spacer()
+                    HStack {
+                        Button(action : {
+                            self.registerStatus = false
+                        }) {
+                            Text("로그인")
+                        }
+                        Text("하러가기")
                     }
-                    Text("하러가기")
                 }
+                .frame(width: 600, alignment: .center)
+                
+    //            NavigationLink(destination: MainView(), isActive: $isRegister ,label: {})
+    //                .isDetailLink(false)
+                
             }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationViewStyle(.stack)
+            .padding()
             
-//            NavigationLink(destination: MainView(), isActive: $isRegister ,label: {})
-//                .isDetailLink(false)
+        } else {
+            ZStack {
+                VStack {
+                    Spacer()
+                    logoImg()
+                    registerTitle()
+                    Spacer()
+                    registerForm(name: $name, email: $email, password: $password, passwordConfrim: $passwordConfrim, isRegister: $isRegister, registerStatus: $registerStatus, isLogin: $isLogin)
+                    Spacer()
+                    HStack {
+                        Button(action : {
+                            self.registerStatus = false
+                        }) {
+                            Text("로그인")
+                        }
+                        Text("하러가기")
+                    }
+                }
+                
+    //            NavigationLink(destination: MainView(), isActive: $isRegister ,label: {})
+    //                .isDetailLink(false)
+                
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationViewStyle(.stack)
+            .padding()
             
-        }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarHidden(true)
-        .navigationViewStyle(.stack)
-        .padding()
-
-        
-        
+        } // else
     }
 }
 
 
 struct registerTitle: View {
     var body: some View{
-        Text("Studion")
-            .font(.largeTitle)
+       Text("New Account")
+            .font(.title)
             .fontWeight(.semibold)
+            .padding(.top, 30)
+    }
+}
+
+struct logoImg: View {
+    var body: some View {
+        Image("Studion-original")
             .padding(.bottom, 20)
     }
 }
@@ -98,7 +137,7 @@ struct registerNameForm: View {
         TextField("name", text: $name)
             .padding()
             .background(registerLightGreyColor)
-            .cornerRadius(5.0)
+            .cornerRadius(15.0)
             .padding(.bottom, 20)
     }
 }
@@ -111,7 +150,7 @@ struct registerEmailForm: View {
         TextField("E-mail", text: $email)
             .padding()
             .background(registerLightGreyColor)
-            .cornerRadius(5.0)
+            .cornerRadius(15.0)
             .padding(.bottom, 20)
     }
 }
@@ -123,7 +162,7 @@ struct registerPasswordForm: View {
         SecureField("Password", text: $password)
             .padding()
             .background(registerLightGreyColor)
-            .cornerRadius(5.0)
+            .cornerRadius(15.0)
             .padding(.bottom, 20)
     }
 }
@@ -135,7 +174,7 @@ struct registerPasswordConfrimForm: View {
         SecureField("PasswordConfrim", text: $passwordConfirm)
             .padding()
             .background(registerLightGreyColor)
-            .cornerRadius(5.0)
+            .cornerRadius(15.0)
             .padding(.bottom, 20)
     }
 }
@@ -227,12 +266,12 @@ struct registerButton: View {
 struct registerButtonLayout: View {
     
     var body: some View {
-        Text("REGSITER")
+        Text("Sign up")
             .font(.headline)
             .foregroundColor(.white)
             .padding()
-            .frame(width: 220, height: 60)
+            .frame(width: 300, height: 60)
             .background(Color.green)
-            .cornerRadius(35.0)
+            .cornerRadius(15.0)
     }
 }

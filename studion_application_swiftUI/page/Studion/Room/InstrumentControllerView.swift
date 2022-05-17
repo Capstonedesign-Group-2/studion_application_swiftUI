@@ -132,17 +132,43 @@ struct InstrumentControllerView: View {
                                 }
                                 
                                 Button( action: {
-                                    print("record")
-                                    
                                     if isRecording {
+                                        Task {
+                                            do {
+                                                let file = try await AudioEngineController.sharedInstance.stopRecord()
                                         
-
+                                                self.recordFiles.append(file)
+                                                self.recordFilesPlayCheck.append(false)
+                                                self.recordFilesCurrentTime.append(0)
+                                                
+                                                let name = UUID().uuidString + ".wav"
+                                                let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
+                                                
+//                                                MobileFFmpeg.execute("-i " + file.absoluteString + " -filter:a \"volume=0.8\" " + url.absoluteString)
+//                                                self.recordFilesVolume.append(url)
+                                                
+                                                
+                                                
+                                            } catch {
+                                                print(error.localizedDescription)
+                                            }
+                                        }
+                                        
                                         
                                         isRecording = false
-                                        
-                                    } else {
 
+                                    } else {
+                                        do {
+                                            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .mixWithOthers)
+                                            try AVAudioSession.sharedInstance().setActive(true)
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
                                         
+                                        AudioEngineController.sharedInstance.startRecord() { data in
+                                            
+                                        }
+
                                         isRecording = true
 
                                     }

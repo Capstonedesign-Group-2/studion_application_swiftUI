@@ -25,13 +25,7 @@ struct CreateView: View {
         
         if UIDevice.isIpad {
             NavigationView() {
-                
-                
                 ZStack {
-//                    Color.black
-//                        .opacity(0.05)
-//                        .ignoresSafeArea()
-                    
                     VStack {
                         Form {
                             Section(header: Text("New Post")){
@@ -80,7 +74,15 @@ struct CreateView: View {
                                         Text("Submit")
                                     }
 
-                            }
+                            } // form
+                            
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 16)
+                                    .stroke(Color.white, lineWidth: 0.1)
+//                                    .shadow(color: Color.black.opacity(0.5), radius: 2, x: 0 , y: 0)
+                            )
+                            .cornerRadius(16.0)
+//                            .shadow(color: .gray, radius: 2)
                             
                         }
                         .padding(.horizontal, 130)
@@ -97,6 +99,7 @@ struct CreateView: View {
 //                    NavigationBar(title: "Create")
                     CreateTitle()
                         .ignoresSafeArea(edges: .all)
+                        .shadow(color: .gray, radius: 2)
                     
                 } // zS
                 
@@ -122,18 +125,16 @@ struct CreateView: View {
                                 // Handle denied access
                                 print("File Import Failed")
                             }
-                            
-                            
-                            
+                                
                         } catch {
                             print(error.localizedDescription)
                         }
                     }
                 } //fileImporter
-                                
 
             } //nav
             .navigationViewStyle(StackNavigationViewStyle())
+
 
             
         } else { //iPhone
@@ -148,6 +149,7 @@ struct CreateView: View {
                                     .padding(.vertical, 12)
                             }
                             TextEditor(text: $content)
+                                .frame(height: 300, alignment: .center)
                         }
                         
                         Button("Pick Image"){
@@ -183,16 +185,15 @@ struct CreateView: View {
                         }
 
                     }
-                    
+                    .navigationTitle("Create")
+                    .navigationBarTitleDisplayMode(.inline)
                 }
-                .navigationTitle("Create")
-                .navigationBarTitleDisplayMode(.inline)
                 
-                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
-                    Color.clear
-                        .frame(height: 50)
-                      .background(Material.bar)
-                }
+//                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+//                    Color.clear
+//                        .frame(height: 50)
+//                      .background(Material.bar)
+//                }
                 //            .background(NavigationBar(title: "Create"))
                 
                 

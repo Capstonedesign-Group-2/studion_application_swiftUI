@@ -15,115 +15,154 @@ struct AudioView : View {
     @State var player = AVPlayer()
     @State var playerItem: AVPlayerItem?
     @State var isPlaying: Bool = false
+    @State var value: Double = 0
+    
+    
+    //time format
+    @State var time: Double = 0
+    @State var duration: Double = 0
+    @State var cntTimeString = ""
+    @State var durationString = ""
     
     var body: some View {
             
-        VStack(spacing: 20) {
+        GeometryReader { geometry in
+        
+            VStack(spacing: 10) {
+                    
+                ZStack(alignment: .leading) {
+                    
+    //                Text(audioURL!)
+                    
+                    Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
+                    Capsule().fill(Color.green).frame(width: abs(self.width), height: 8)
+                        .gesture(DragGesture()
+                            .onChanged({ (value) in
+                                let x = value.location.x
 
-            ZStack(alignment: .leading) {
-                
-//                Text(audioURL!)
-                
-                Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
-                Capsule().fill(Color.green).frame(width: self.width, height: 8)
+                                self.width = x
 
-            }.padding(.top)
-            
-            
-            HStack(spacing: UIScreen.main.bounds.width / 5 - 30) {
-                
-//                Button(action: {
-//
-//                    let increase = self.player.currentTime + 15
-//
-//                    if increase < self.player.duration {
-//                        self.player.currentTime = increase
-//                    }
-//
-//
-//                    }, label: {
-//                        Image(systemName: "goward.15.fill").font(.title)
-//                    }
-//                )
-                
-                Button(action: {
-                    if self.isPlaying {
-                        
-                        player.pause()
-                        self.isPlaying = false
-                        
-                    } else {
-                        
-                        player.play()
-                        self.isPlaying = true
+                            }).onEnded({ (value) in
 
-                    }
-                    }, label: {
-                        Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
-                    }
-                       
-                       
-                       
-                )
-                .onAppear() {
-                        guard let url = URL(string: (audioURL)!) else {
-                            print("wrong url")
-                            return
-                        }
-                    
-                            playerItem = AVPlayerItem(url: url)
-                            player.replaceCurrentItem(with: playerItem)
-                    
-//                        var time = CMTimeGetSeconds(player.currentTime())
-                    
-//                            guard let duration = player.currentItem?.duration else { return }
-//
-//                            print("duration : \(duration)")
-                    
-                        Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
-                            
-                            var time = CMTimeGetSeconds(player.currentTime())
-                            guard let duration = player.currentItem?.duration else { return }
-                    
-//                            print("duration : \(duration)")
-                            
-                            if isPlaying == true {
-//                              print(self.player.currentTime) // time
-                                            
-//                                let screen = UIScreen.main.bounds.width - 30
-//                                let value = CMTime(value: duration, timescale: CMTimeScale(time))
-//                                print(type(of: duration))
-//                                self.width = screen * CGFloat(value)
-                       
-                            }
-                        }
-                    
-                    
-                    
+                                let x = value.location.x
+
+                                let screen = geometry.size.width - 30
+
+                                let percent = x / screen
+                                
+                                time = Double(percent) * duration
+                                
+                                self.player.seek(to: CMTime(seconds: time, preferredTimescale: 600))
+//                                print(time)
+
+                            }))
+
                 }
+            
+                HStack(spacing: geometry.size.width / 5 - 30) {
+                    Text(cntTimeString)
+                    Spacer()
+                    
+                    Button(action: {}, label: {
+                        Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
+                    }).onTapGesture {
+                        if self.isPlaying {
+                            
+                            player.pause()
+                            self.isPlaying = false
 
-                
-//                Button(action: {
-//
-//                    self.player.currentTime -= 15
-//
-//                    }, label: {
-//                        Image(systemName: "backward.15.fill").font(.title)
-//                    }
-//                )
-                
-                
+                        } else {
+                            
+                            player.play()
+                            self.isPlaying = true
+                            
+                        }
+                    }// onTab (touch event for button)
+                    
+                    Spacer()
+                    Text(durationString)
                 
             } // hS
-            .padding(.top, 25)
+            .padding(.top)
             .foregroundColor(Color.black)
             
-            
+            } // vs
+            .onAppear() {
+                    guard let url = URL(string: (audioURL)!) else {
+                        print("wrong url")
+                        return
+                    }
+                        playerItem = AVPlayerItem(url: url)
+                        player.replaceCurrentItem(with: playerItem)
                 
-        } // zS
-    } // vS
-} // view
+                
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { (_) in
+//                            print(audioURL)
+                        
+                        if isPlaying == true {
+                            
+                            let screen = geometry.size.width - 30
+                            
+                            time = CMTimeGetSeconds(player.currentTime())
+                            
+                            if time.isNaN || time.isInfinite || time == 0.0 {
+                                return
+                            } else { // time format
+                                let totalCntTime = Int(time)
+                                let tMin = totalCntTime / 60
+                                let tSec = totalCntTime % 60
+                                let tString = String(format: "%02d:%02d", tMin, tSec)
+                                self.cntTimeString = tString
+                            }
+                            
+                            duration = CMTimeGetSeconds(player.currentItem!.duration)
+                            
+                            if duration.isNaN || duration.isInfinite || duration == 0.0 {
+                                return
+                            } else {
+                                let totalDuration = Int(duration)
+                                let dMin = totalDuration / 60
+                                let dSec = totalDuration % 60
+                                let dString = String(format: "%02d:%02d", dMin, dSec)
+                                self.durationString = dString
+                            }
+                            
+                            value = time / duration
+//                            self.width = screen * CGFloat(value)
+                            
+//                            print(screen)
+//                            print("Value!!!!! : \(value)")
+//                            print("Time!!!!!!! : \(round(time.value()))")
+//                            print("Duration!!!!!!! : \(round(duration.value()))")
 
+                                if value < 1 {
+                                    self.width = screen * CGFloat(value)
+                                } else {
+                                    self.width = screen + 30
+                                    isPlaying = false
+                                }
+
+                        } // time
+                    }
+                
+                }// onAppear
+                .onDisappear() {
+                    self.time = 0
+                    self.duration = 0
+                    self.width = 0
+                    self.durationString = ""
+                    self.cntTimeString = ""
+                    self.isPlaying = false
+                    player.pause()
+                    player.replaceCurrentItem(with: nil)
+                }
+            
+            
+        }.frame(maxWidth: .infinity, maxHeight: 30, alignment: .center) // geometry
+            .padding(.bottom, 10)
+        
+    }// view
+}
 
 
 //struct AudioView_Previews: PreviewProvider {

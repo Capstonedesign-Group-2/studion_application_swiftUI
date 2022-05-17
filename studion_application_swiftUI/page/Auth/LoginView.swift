@@ -24,31 +24,69 @@ struct LoginView: View {
     
     var body: some View {
         
-        ZStack {
-            VStack {
-                Title()
-                BannerImage()
-                loginForm(email: $email, password: $password, isLogin: $isLogin)
-                Spacer()
-                HStack {
-                    Button(action : {
-                        self.registerStatus = true
-                    }) {
-                        Text("회원가입")
-                    }
-                    Text("하러가기")
-                }
-            }
+        
+        if UIDevice.isIpad {
             
-            NavigationLink(destination: RegisterView(registerStatus: $registerStatus, isRegister: $isRegister, isLogin: $isLogin), isActive: $registerStatus, label: {})
-                .isDetailLink(false)
-            NavigationLink(destination: MainView(), isActive: $isLogin ,label: {})
-                .isDetailLink(false)
+            ZStack {
+                VStack {
+//                    Title()
+                    Spacer()
+                    BannerImage()
+                    Spacer()
+                    loginForm(email: $email, password: $password, isLogin: $isLogin)
+                    Spacer()
+                    HStack {
+                        Button(action : {
+                            self.registerStatus = true
+                        }) {
+                            Text("회원가입")
+                        }
+                        Text("하러가기")
+                    }
+                }
+                .frame(width: 500, alignment: .center)
+                
+                NavigationLink(destination: RegisterView(registerStatus: $registerStatus, isRegister: $isRegister, isLogin: $isLogin), isActive: $registerStatus, label: {})
+                    .isDetailLink(false)
+                NavigationLink(destination: MainView(), isActive: $isLogin ,label: {})
+                    .isDetailLink(false)
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationViewStyle(.stack)
+            .padding()
+            
+        } else {
+            
+            ZStack {
+                VStack {
+//                    Title()
+                    Spacer()
+                    BannerImage()
+                    Spacer()
+                    loginForm(email: $email, password: $password, isLogin: $isLogin)
+                    Spacer()
+                    HStack {
+                        Button(action : {
+                            self.registerStatus = true
+                        }) {
+                            Text("회원가입")
+                        }
+                        Text("하러가기")
+                    }
+                }
+                
+                NavigationLink(destination: RegisterView(registerStatus: $registerStatus, isRegister: $isRegister, isLogin: $isLogin), isActive: $registerStatus, label: {})
+                    .isDetailLink(false)
+                NavigationLink(destination: MainView(), isActive: $isLogin ,label: {})
+                    .isDetailLink(false)
+            }
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationViewStyle(.stack)
+            .padding()
+            
         }
-        .navigationBarBackButtonHidden(true)
-        .navigationBarHidden(true)
-        .navigationViewStyle(.stack)
-        .padding()
         
     }
     
@@ -71,10 +109,7 @@ struct Title: View {
 
 struct BannerImage: View {
     var body: some View {
-        Image("piano")
-            .resizable()
-            .aspectRatio(contentMode: .fill)
-            .frame(width: 200, height: 200)
+        Image("Studion-original")
             .padding(.bottom, 20)
     }
 }
@@ -107,7 +142,7 @@ struct emailForm: View {
         TextField("E-mail", text: $email)
             .padding()
             .background(lightGreyColor)
-            .cornerRadius(5.0)
+            .cornerRadius(15.0)
             .padding(.bottom, 20)
     }
 }
@@ -119,7 +154,7 @@ struct passwordForm: View {
         SecureField("Password", text: $password)
             .padding()
             .background(lightGreyColor)
-            .cornerRadius(5.0)
+            .cornerRadius(15.0)
             .padding(.bottom, 20)
     }
 }
@@ -168,12 +203,12 @@ struct loginButton: View {
 struct loginButtonLayout: View {
     
     var body: some View {
-        Text("LOGIN")
+        Text("Sign in")
             .font(.headline)
             .foregroundColor(.white)
             .padding()
-            .frame(width: 220, height: 60)
+            .frame(width: 250, height: 60)
             .background(Color.green)
-            .cornerRadius(35.0)
+            .cornerRadius(16.0)
     }
 }

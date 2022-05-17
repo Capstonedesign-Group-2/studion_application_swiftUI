@@ -21,7 +21,7 @@ struct SplashScreen: View {
             
             ZStack {
                 Image("Logo-1")
-                    .resizable()
+//                    .resizable()
                     .aspectRatio(contentMode: .fit)
                 
                     NavigationLink(destination: LoginView(), isActive: $loginStatus ,label: {} )

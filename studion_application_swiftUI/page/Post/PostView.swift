@@ -10,24 +10,17 @@ import UIKit
 struct PostView: View {
     
     @State var p: [Dictionary<String, Any>?] = []
-    @State var currentPage: Int
-//    @State var image: [Dictionary<String, Any>?] = []
+    @State var currentPage: Int = 0
+    @State var lastPage: Int = 0
     
     init() {
         if UIDevice.isIpad {
             // Disable Scrollbar
             UITableView.appearance().showsVerticalScrollIndicator = false
+        } else {
+            UITableView.appearance().showsVerticalScrollIndicator = false
         }
-        currentPage = 1
     }
-    
-//    @State var images: [Dictionary<String, Any>?] = []
-    @State var imageName: String = ""
-    var isEmptyImg = false
-    
-    @State var maxNum: Int = 8
-    
-    
     
        var body: some View {
            
@@ -35,9 +28,7 @@ struct PostView: View {
            if UIDevice.isIpad { // iPad
                               
                ZStack {
-                   
                     VStack {
-                        
                         List {
                             ForEach(0..<p.count, id: \.self) { index in
                                 
@@ -45,60 +36,69 @@ struct PostView: View {
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
                                 
                                 
-                //                                let image = images.map{ $0 }
+//                                let image = images.map{ $0 }
                                 
-                //                                Button(action: {
-                //                                    print(audios)
-                //                                }, label: {
-                //                                    Text("button1")
-                //                                })
-                                
+//                                Button(action: {
+//                                    print(audios)
+//                                }, label: {
+//                                    Text("button1")
+//                                })
                                 
                                 LazyVStack {
                                     PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
+                                            id: self.p[index]?["id"] as? Int,
                                             image: images.count == 0 ? nil : images[0]?["link"] as? String,
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
                                         )
-                        
-                //                                    Text("\(index)")
-                                        
-                                                        .onAppear() {
-                                                            print(index)
-                                                            if index % 8 == 7 {
-                                                                currentPage += 1
-                                                                print("currentPage : \(currentPage)")
-                                                            } else if index % 8 == 0 {
-                                                                currentPage -= 1
-                                                            }
-                                                            
-                                                            
-                                                            PostController.sharedInstance.show(page: currentPage) { data in
-                            //                                      print(data)
-                                                                let response = data as! Dictionary<String, Any>
-                            //                                      print(response)
-                                                                let posts = response["posts"] as! Dictionary<String, Any>
-                                                                
-                                                                p = posts["data"] as! [Dictionary<String, Any>?]
-                                                                                                  
-                                                                print("Posts Datas : \(p)")
-                                                            } // post
-                                                            
-                                                        }
-                                    
                                     } //vS
+                                    
+                                .onAppear() {
+//                                    print("index : \(index % 8)")
+                                    if index % 8 == 7 {
+                                        if currentPage == lastPage {
+                                            currentPage = lastPage
+                                            return
+                                        } else {
+                                            currentPage += 1
+                                        }
+                                        
+                                        print("currentPage : \(currentPage)")
+                                        
+                                        PostController.sharedInstance.show(page: currentPage) { data in
+                                            let response = data as! Dictionary<String, Any>
+
+                                            let posts = response["posts"] as! Dictionary<String, Any>
+                                            
+                                            p += posts["data"] as! [Dictionary<String, Any>?]
+                                        }
+                                        
+                                    }
+                                    
+                                } // onAppear
+                                
                                 } // ForEach
                             
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
                             } // list
-                                .padding(.horizontal, 150)
+                                .padding(.horizontal, 100)
                         
-//                                .refreshable {
-//                                    self.p.reversed().first
-//                                }
+                        
+                                .refreshable {
+                                    currentPage = 1
+                                    p = []
+                                    
+                                    PostController.sharedInstance.show(page: currentPage) { data in
+                                        let response = data as! Dictionary<String, Any>
+
+                                        let posts = response["posts"] as! Dictionary<String, Any>
+                                        
+                                        p = posts["data"] as! [Dictionary<String, Any>?]
+                                    }
+                               }
                         
                             } // vS
                    
@@ -108,17 +108,25 @@ struct PostView: View {
                                 PostController.sharedInstance.show(page: currentPage) { data in
 //                                      print(data)
                                     let response = data as! Dictionary<String, Any>
-//                                      print(response)
+//                                      print("RES : \(response)")
+                                    
                                     let posts = response["posts"] as! Dictionary<String, Any>
+                                    
+                                    currentPage = posts["current_page"] as! Int
+                                    lastPage = posts["last_page"] as! Int
+                                    print("current : \(currentPage) : last \(lastPage)")
                                     
                                     p = posts["data"] as! [Dictionary<String, Any>?]
                                                                       
-                                    print("Posts Datas : \(p)")
+//                                    print("Posts Datas : \(p)")
                                     
                                 }
                                 
-                            }.onDisappear() {
+                            }
+                            .onDisappear() {
                                 print("PostView end")
+                                currentPage = 1
+                                p = []
                             }
                    
                             .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
@@ -141,20 +149,60 @@ struct PostView: View {
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
                                     
-                                VStack {
-                                    
-                                        PostCard(
+                                LazyVStack {
+                                    PostCard(
                                             title: self.p[index]!["title"] as! String, // Dict type on View
                                             content: self.p[index]!["content"] as! String,
+                                            id: self.p[index]?["id"] as? Int,
                                             image: images.count == 0 ? nil : images[0]?["link"] as? String,
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
                                         )
-                                    } //h1
-                                }// foreach
-                            }// list
-                            .listRowBackground(Color.clear)
+                                    } //vS
+                                    
+                                .onAppear() {
+//                                    print("index : \(index % 8)")
+                                    if index % 8 == 7 {
+                                        if currentPage == lastPage {
+                                            currentPage = lastPage
+                                            return
+                                        } else {
+                                            currentPage += 1
+                                        }
+                                        
+                                        print("currentPage : \(currentPage)")
+                                        
+                                        PostController.sharedInstance.show(page: currentPage) { data in
+                                            let response = data as! Dictionary<String, Any>
+
+                                            let posts = response["posts"] as! Dictionary<String, Any>
+                                            
+                                            p += posts["data"] as! [Dictionary<String, Any>?]
+                                        }
+                                        
+                                    }
+                                    
+                                } // onAppear
+                                
+                            }// foreach
+                            .listRowBackground(Color.white)
                             .listRowSeparator(.hidden)
-                            .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
+//                            .listRowInsets(EdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0))
+                        }// list
+   
+                       
+                            .refreshable {
+                                currentPage = 1
+                                p = []
+                                
+                                PostController.sharedInstance.show(page: currentPage) { data in
+                                    let response = data as! Dictionary<String, Any>
+
+                                    let posts = response["posts"] as! Dictionary<String, Any>
+                                    
+                                    p = posts["data"] as! [Dictionary<String, Any>?]
+                                }
+                           }
+                       
                             .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
                                 Color.clear
                                     .frame(height: 50)
@@ -168,39 +216,43 @@ struct PostView: View {
 //                    .navigationBarTitleDisplayMode(.automatic)
 //                   }.navigationViewStyle(StackNavigationViewStyle())
 
-                                   .onAppear {
-                                       PostController.sharedInstance.show(page: currentPage) { data in
+                                
+                       .onAppear {
+                                       
+                           PostController.sharedInstance.show(page: currentPage) { data in
 
-                       //                          print(data)
-                                               let response = data as! Dictionary<String, Any>
-                       //                          print(response)
-                                               let posts = response["posts"] as! Dictionary<String, Any>
-
-                                               p = posts["data"] as! [Dictionary<String, Any>?]
-
-
-                                   }
-                               }
-                                   .onDisappear{
-                                       print("PostView end")
-                                   }
+//                          print(data)
+                               let response = data as! Dictionary<String, Any>
+//                          print(response)
+                               let posts = response["posts"] as! Dictionary<String, Any>
+                                        
+                               currentPage = posts["current_page"] as! Int
+                               lastPage = posts["last_page"] as! Int
+                                        
+                               p = posts["data"] as! [Dictionary<String, Any>?]
 
                            }
-               .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
-                   Color.clear
-                       .frame(height: 50)
-//                       .background(Material.bar)
-               }
+                               
+                       }
+                                   
+                       .onDisappear{
+                           print("PostView end")
+                           currentPage = 1
+                           p = []
+                       }
+        
+               } // zS
+               
+                        .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
+                            Color.clear
+                                .frame(height: 50)
+//                          .background(Material.bar)
+                        }
 
+        
            } //else
-    }
+       }
 } // view
-
-
-
-//private func fetchData() {
-//    PostController.sharedInstance.show(page: currentPage, handler: <#T##(Any) -> Void#>)
-//}
 
 
 //struct PostView_Previews: PreviewProvider {
@@ -208,20 +260,6 @@ struct PostView: View {
 //        PostView()
 //    }
 //}
-
-
-
-
-
-//          NavigationView{
-//               List(0 ..< 30) { item in
-//                   Text("Hello world!!!!")
-//               }
-//               .searchable(text: $text, placement:
-//                    .navigationBarDrawer(displayMode: .always), prompt: Text("Search Anything"))
-//
-//               .navigationTitle("Posts")
-//           }
 
 
 //    .onAppear{
@@ -247,7 +285,6 @@ struct PostView: View {
 //                    print("post content : " + (post!["content"] as! String))
 //                    content = post!["content"] as! String
 //
-//
 //                    print(post!["id"] as! Int)
 //
 //                    let audios = post!["audios"] as! Array<Dictionary<String, Any>?>
@@ -256,8 +293,6 @@ struct PostView: View {
 //                        print("audio : " + (audio!["link"] as! String))
 //
 //                    }
-//
-//
 //
 //                    let comments = post!["comments"] as! Dictionary<String, Any>
 //                    let comments_datas = comments["data"] as! Array<Dictionary<String,Any>?>
@@ -269,13 +304,8 @@ struct PostView: View {
 //                        }
 //                    }
 //                }
-//
 //                print("**************************************************")
 //            }
-//
-//
-//
-//
 //        }
 //    }
 //    .onDisappear{

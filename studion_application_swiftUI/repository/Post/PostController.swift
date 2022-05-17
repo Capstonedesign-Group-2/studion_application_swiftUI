@@ -107,8 +107,7 @@ public class PostController {
                 
 
             }, to: url, headers: headers).responseJSON { (response) in
-                print("upload")
-                print(response)
+                print("Upload Data : \(response)")
             }
             
             
@@ -150,6 +149,7 @@ public class PostController {
                           "status" : "Success",
                           "data" : data,
                       ]
+                        
                       do{
                           handler(data)
                       } catch (let error) {

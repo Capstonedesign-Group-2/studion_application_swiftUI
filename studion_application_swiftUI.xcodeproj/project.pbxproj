@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		295DC7C2281793F1006A1BB7 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C1281793F1006A1BB7 /* CommentController.swift */; };
+		295DC7C42817B753006A1BB7 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C32817B753006A1BB7 /* CommentView.swift */; };
 		2992C4E427FDB465008EFFCA /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992C4E327FDB465008EFFCA /* NavigationBar.swift */; };
 		2992C4E627FDB489008EFFCA /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992C4E527FDB489008EFFCA /* SearchView.swift */; };
 		2992C4E827FDB4B4008EFFCA /* PostCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992C4E727FDB4B4008EFFCA /* PostCard.swift */; };
@@ -14,6 +16,8 @@
 		29C4C03527EDE2150048D405 /* CreateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4C03427EDE2150048D405 /* CreateView.swift */; };
 		29C4C03827EF61460048D405 /* PostCodableStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4C03727EF61450048D405 /* PostCodableStruct.swift */; };
 		29E94CE22808BAFE000008F4 /* AudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E94CE12808BAFE000008F4 /* AudioView.swift */; };
+		29FCF91F282C8C6B001FE79E /* CommentCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FCF91E282C8C6B001FE79E /* CommentCard.swift */; };
+		29FCF921282CA386001FE79E /* CommentForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29FCF920282CA386001FE79E /* CommentForm.swift */; };
 		550D5F6E2809577D0059BF85 /* NobodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6D2809577D0059BF85 /* NobodyView.swift */; };
 		550D5F70280957880059BF85 /* Player1View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550D5F6F280957880059BF85 /* Player1View.swift */; };
 		5556BFB72824A0DA007EF57D /* Waveform in Frameworks */ = {isa = PBXBuildFile; productRef = 5556BFB62824A0DA007EF57D /* Waveform */; };
@@ -142,6 +146,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		295DC7C1281793F1006A1BB7 /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
+		295DC7C32817B753006A1BB7 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		2992C4E327FDB465008EFFCA /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		2992C4E527FDB489008EFFCA /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		2992C4E727FDB4B4008EFFCA /* PostCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCard.swift; sourceTree = "<group>"; };
@@ -149,6 +155,8 @@
 		29C4C03427EDE2150048D405 /* CreateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateView.swift; sourceTree = "<group>"; };
 		29C4C03727EF61450048D405 /* PostCodableStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCodableStruct.swift; sourceTree = "<group>"; };
 		29E94CE12808BAFE000008F4 /* AudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioView.swift; sourceTree = "<group>"; };
+		29FCF91E282C8C6B001FE79E /* CommentCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCard.swift; sourceTree = "<group>"; };
+		29FCF920282CA386001FE79E /* CommentForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentForm.swift; sourceTree = "<group>"; };
 		550D5F6D2809577D0059BF85 /* NobodyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NobodyView.swift; sourceTree = "<group>"; };
 		550D5F6F280957880059BF85 /* Player1View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Player1View.swift; sourceTree = "<group>"; };
 		5556BFB82824A123007EF57D /* WaveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaveView.swift; sourceTree = "<group>"; };
@@ -296,6 +304,7 @@
 			children = (
 				29C4C03227EDDE0A0048D405 /* PostController.swift */,
 				555E64802806A6DC00C449BC /* SUImagePicker.swift */,
+				295DC7C1281793F1006A1BB7 /* CommentController.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -306,6 +315,16 @@
 				29C4C03727EF61450048D405 /* PostCodableStruct.swift */,
 			);
 			path = Post;
+			sourceTree = "<group>";
+		};
+		29FCF91D282C8B5A001FE79E /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				295DC7C32817B753006A1BB7 /* CommentView.swift */,
+				29FCF91E282C8C6B001FE79E /* CommentCard.swift */,
+				29FCF920282CA386001FE79E /* CommentForm.swift */,
+			);
+			path = Comment;
 			sourceTree = "<group>";
 		};
 		550D5F6C280957640059BF85 /* VolumeControllSlider */ = {
@@ -469,6 +488,7 @@
 		55B98C2227E969FA0057F168 /* Post */ = {
 			isa = PBXGroup;
 			children = (
+				29FCF91D282C8B5A001FE79E /* Comment */,
 				55B98C2327E96A0A0057F168 /* PostView.swift */,
 				29C4C03427EDE2150048D405 /* CreateView.swift */,
 				2992C4E327FDB465008EFFCA /* NavigationBar.swift */,
@@ -927,12 +947,15 @@
 				5556BFCA2828EB32007EF57D /* AssetWriter.swift in Sources */,
 				555E647F280664B100C449BC /* WebRTCDictionaryController.swift in Sources */,
 				55B98C0527E857CA0057F168 /* AuthController.swift in Sources */,
+				295DC7C2281793F1006A1BB7 /* CommentController.swift in Sources */,
 				55B98C3427E9EC4C0057F168 /* RoomCodableStruct.swift in Sources */,
+				29FCF91F282C8C6B001FE79E /* CommentCard.swift in Sources */,
 				55B98C1E27E8BF4C0057F168 /* RegisterView.swift in Sources */,
 				55C648FC27F57B02005603A2 /* UserVolumeStruct.swift in Sources */,
 				55B98C0A27E85A6C0057F168 /* SocketIO.swift in Sources */,
 				55C648FE27F86F42005603A2 /* VolumeController.swift in Sources */,
 				55B98C2727E96F340057F168 /* SettingView.swift in Sources */,
+				295DC7C42817B753006A1BB7 /* CommentView.swift in Sources */,
 				55B98C5027EBF5350057F168 /* InstrumentController.swift in Sources */,
 				55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */,
 				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
@@ -952,6 +975,7 @@
 				55B98C1027E85B950057F168 /* UserInfo.swift in Sources */,
 				2992C4E827FDB4B4008EFFCA /* PostCard.swift in Sources */,
 				55B98C0E27E85B090057F168 /* AuthCodableStruct.swift in Sources */,
+				29FCF921282CA386001FE79E /* CommentForm.swift in Sources */,
 				55B98C8A27EC09890057F168 /* DrumView.swift in Sources */,
 				55B98C8C27EC09950057F168 /* PianoView.swift in Sources */,
 				29C4C03827EF61460048D405 /* PostCodableStruct.swift in Sources */,
@@ -1099,7 +1123,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 49C98WAKUL;
+				DEVELOPMENT_TEAM = SU7RQ4J4BY;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1138,7 +1162,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = 49C98WAKUL;
+				DEVELOPMENT_TEAM = SU7RQ4J4BY;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
