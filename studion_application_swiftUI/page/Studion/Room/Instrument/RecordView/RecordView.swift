@@ -34,6 +34,8 @@ struct RecordView: View {
     @State var avkitPlayer = AVPlayer()
     @State var playerItem: AVPlayerItem?
     
+    
+    
     var body: some View {
         
         VStack {

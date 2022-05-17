@@ -8,6 +8,7 @@
 import SwiftUI
 import Waveform
 import AVFoundation
+import mobileffmpeg
 
 struct WaveView2: View {
     @Binding var isEdit: Bool
@@ -30,185 +31,277 @@ struct WaveView2: View {
     @State var timerWidth = 0.0
     @State var isStart = false
     
+    @State var isPost = false
+    @State var content = ""
+    
+    
+    @State var startPointEditer = 0.0
+    @State var endPointEditoer = 0.0
+    @State var sendURL: URL?
+    
     var body: some View {
         VStack {
             
-            VStack {
-               
-                Waveform(generator: generator, selectedSamples: $selectedSamples, selectionEnabled: .constant(false))
-                    .layoutPriority(1)
-                    .foregroundColor(Color.green)
-                    .background(Color.clear)
-                    .accentColor(Color.green)
-                    .frame(width: 650, height: 200)
+            if !isPost {
+                VStack {
+                   
+                    Waveform(generator: generator, selectedSamples: $selectedSamples, selectionEnabled: .constant(false))
+                        .layoutPriority(1)
+                        .foregroundColor(Color.green)
+                        .background(Color.clear)
+                        .accentColor(Color.green)
+                        .frame(width: 650, height: 200)
+                    
+                    RangeSlider(width: self.$width, width1: self.$width1, endWidth: self.$endWidth)
+                    
+                    HStack {
+                        
+                        Button( action: {
+                            if(!self.player.isPlaying) {
+                                print("play")
+    //                            self.player.play(atTime: playTime)
+                                self.endWidth = 0.0
+                                
+                                let end = 688 - (622 - self.width1)
+    //                            print("end : \(end)")
+                                let start = 38 + (self.width + 10)
+                                let timePercent = (self.width + 10) / 650
+                                var startTime = self.duration * timePercent
+                                
+                                if(startTime == 0.0) {
+                                    startTime = 0.01
+                                }
+                                
+                                self.player.currentTime = startTime
+                                
+                                let endTimePercent = (650 - (622 - self.width1)) / 650
+                                self.endTime = self.duration * endTimePercent
+                                
+                                let playWidth = (688 - (622 - self.width1)) - (38 + (self.width + 10))
+    //                            let playPercent = playWidth / 650
+    //                            print("playPercent : \(playPercent)")
+                                
+                                let playTime = self.endTime - startTime
+    //                            print("playTime : \(playTime)")
+                                self.timerWidth = playWidth / (playTime * 100)
+                                
+                                self.player.play()
+                                
+                                self.isPlaying = true
+                            } else {
+                                print("playing")
+                            }
+                        } ) {
+                            Text("play")
+                        }
+                        
+                        Button( action : {
+                            if(self.player.isPlaying) {
+                                print("stop")
+    //                            self.playTime = self.player.currentTime
+                                self.player.stop()
+                                
+                                self.isPlaying = false
+                                self.endWidth = 0.0
+                            } else {
+                                print("stopping")
+                            }
+                        }) {
+                            Text("stop")
+                        }
+                        
+                        Button( action: {
+                            print("save")
+                        }) {
+                            Text("local save")
+                        }
+                        
+                        Button( action: {
+                            print("post save")
+                            
+                            timeEdite()
+                            isPost.toggle()
+                            
+                        }) {
+                            Text("post save")
+                        }
+                        
+                    } // HStack
+                    
+                    Button( action: {
+                            self.isEdit.toggle()
+                        }) {
+                            Text("end")
+                        }
+                        .onAppear{
+                            print("recording view")
+                        }
+                    
+                }   // VStack
                 
-                RangeSlider(width: self.$width, width1: self.$width1, endWidth: self.$endWidth)
+                .offset(y: 50)
+                
+                Path { path in
+                    path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
+                    path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 210))
+                    path.addLine(to: CGPoint(x: 688 - (622 - self.width1) + 10, y: 210))
+                    path.addLine(to: CGPoint(x:688 - (622 - self.width1) + 10, y:0))
+                    path.closeSubpath()
+                }
+                .fill(Color.green)
+                .opacity(0.1)
+                .offset(y: -240)
+                
+                Path { path in
+                    path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
+                    path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 210))
+                    
+                    
+                    path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y: 210))
+                    path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y:0))
+                    path.closeSubpath()
+                }
+                .fill(Color.blue)
+                .opacity(0.1)
+                .offset(y: -270)
+            }
+            else {
+                
+                Text("간편 업로드")
+        
+                TextEditor(text: $content)
+                    .frame(width: 500, height: 100, alignment: .center)
+                    .background(Color(red: 229/255, green: 229/255, blue: 299/255, opacity: 1.0))
+                    .cornerRadius(10)
                 
                 HStack {
-                    
                     Button( action: {
-                        if(!self.player.isPlaying) {
-                            print("play")
-//                            self.player.play(atTime: playTime)
-                            self.endWidth = 0.0
+                        upload() { data in
                             
-                            let end = 688 - (622 - self.width1)
-//                            print("end : \(end)")
-                            let start = 38 + (self.width + 10)
-                            let timePercent = (self.width + 10) / 650
-                            var startTime = self.duration * timePercent
-                            
-                            if(startTime == 0.0) {
-                                startTime = 0.01
-                            }
-                            self.player.currentTime = startTime
-                            
-                            let endTimePercent = (650 - (622 - self.width1)) / 650
-                            self.endTime = self.duration * endTimePercent
-                            
-                            let playWidth = (688 - (622 - self.width1)) - (38 + (self.width + 10))
-//                            let playPercent = playWidth / 650
-//                            print("playPercent : \(playPercent)")
-                            
-                            let playTime = self.endTime - startTime
-//                            print("playTime : \(playTime)")
-                            self.timerWidth = playWidth / (playTime * 100)
-                            
-                            self.player.play()
-                            
-                            self.isPlaying = true
-                        } else {
-                            print("playing")
                         }
-                    } ) {
-                        Text("play")
-                    }
-                    
-                    Button( action : {
-                        if(self.player.isPlaying) {
-                            print("stop")
-//                            self.playTime = self.player.currentTime
-                            self.player.stop()
-                            
-                            self.isPlaying = false
-                            self.endWidth = 0.0
-                        } else {
-                            print("stopping")
-                        }
+                        
+                        self.isPost = false
                     }) {
-                        Text("stop")
+                        Text("업로드")
                     }
                     
                     Button( action: {
-                        print("save")
+                        self.isPost = false
                     }) {
-                        Text("save")
+                        Text("뒤로가기")
                     }
-                    
-                } // HStack
-                
-                Button( action: {
-                        self.isEdit.toggle()
-                    }) {
-                        Text("end")
-                    }
-                    .onAppear{
-                        print("recording view")
-                    }
-                
-            }   // VStack
-            .onAppear{
-                selectedSamples = 0..<Int(generator.audioBuffer.frameLength)
-                do {
-                    self.player = try AVAudioPlayer(contentsOf: RecordController.sharedInstance.getUrl())
+                }
+               
+            }
+            
+            
+            
+            
+        }   // VStack
+        .onAppear{
+            selectedSamples = 0..<Int(generator.audioBuffer.frameLength)
+            do {
+                self.player = try AVAudioPlayer(contentsOf: RecordController.sharedInstance.getUrl())
 //                    self.player.prepareToPlay()
-                } catch {
-                    print(error.localizedDescription)
-                }
-                self.duration = self.player.duration
-                
-                Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { (_) in
+            } catch {
+                print(error.localizedDescription)
+            }
+            self.duration = self.player.duration
+            
+            Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true) { (_) in
 //                    print(RecordController.sharedInstance.getUrl())
-                    if(self.isPlaying) {
-                        print("------------------------------")
-                        print("self.player.currentTime : \(self.player.currentTime)")
-                        print("self.endTime : \(self.endTime)")
-                                                
-                        if(self.player.currentTime >= self.endTime) {
-                            
-                            print("over")
-                            if(self.player.isPlaying) {
-                                self.player.stop()
-                            }
-                            
-                            self.isPlaying = false
+                if(self.isPlaying) {
+                    print("------------------------------")
+                    print("self.player.currentTime : \(self.player.currentTime)")
+                    print("self.endTime : \(self.endTime)")
+                                            
+                    if(self.player.currentTime >= self.endTime) {
+                        
+                        print("over")
+                        if(self.player.isPlaying) {
+                            self.player.stop()
                         }
                         
-                        if(isStart && self.player.currentTime == 0.0) {
-                            self.isStart = false
-                            self.isPlaying = false
-                        }
-                        
-                        if(!isStart && self.player.currentTime == 0.0) {
-                            isStart = true
-                        }
-                        
-                        
-                        self.endWidth += self.timerWidth
-                        
-//                        if(!isStart && self.player.currentTime == 0.0) {
-//                            isStart = true
-//                        } else if(isStart && self.player.currentTime == 0.0) {
-//
-//                        }
-                        
-                        
-                        
-                        
-                    } else {
-                        print("stop")
+                        self.isPlaying = false
                     }
+                    
+                    if(isStart && self.player.currentTime == 0.0) {
+                        self.isStart = false
+                        self.isPlaying = false
+                    }
+                    
+                    if(!isStart && self.player.currentTime == 0.0) {
+                        isStart = true
+                    }
+                    
+                    self.endWidth += self.timerWidth
+                    
+                    
+                } else {
+//                    print("stop")
                 }
-                
             }
-            .offset(y: 50)
             
+            UITextView.appearance().backgroundColor = .clear
             
-//            Rectangle()
-//                .fill(Color.green)
-//                .frame(width: 650, height: 200)
-//                .opacity(0.1)
-//                .offset(y: -170)
-            Path { path in
-                path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
-                path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 210))
-                path.addLine(to: CGPoint(x: 688 - (622 - self.width1) + 10, y: 210))
-                path.addLine(to: CGPoint(x:688 - (622 - self.width1) + 10, y:0))
-                path.closeSubpath()
-            }
-            .fill(Color.green)
-            .opacity(0.1)
-            .offset(y: -240)
-            
-            Path { path in
-                path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
-                path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 210))
-                
-                
-                path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y: 210))
-                path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y:0))
-                path.closeSubpath()
-            }
-            .fill(Color.blue)
-            .opacity(0.1)
-            .offset(y: -270)
-            
-            
-        }   // ZStack
-        
+        }
         
             
     }
+    
+    func timeEdite() {
+        
+        let end = 688 - (622 - self.width1)
+//                            print("end : \(end)")
+        let start = 38 + (self.width + 10)
+        let timePercent = (self.width + 10) / 650
+        self.startPointEditer = self.duration * timePercent
+        
+        let endTimePercent = (650 - (622 - self.width1)) / 650
+        self.endPointEditoer = self.duration * endTimePercent
+        
+        
+        let name = UUID().uuidString + ".wav"
+        let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
+        
+        MobileFFmpeg.execute("-i \(RecordController.sharedInstance.getUrl()) -ss \(self.startPointEditer) -t \(self.endPointEditoer) -acodec copy \(url)")
+        
+        self.sendURL = url
+    }
+    
+    func upload(handler: @escaping (Any) -> Void) {
+        do {
+            var data: [String: Any] = [
+                "content" : self.content,
+            ]
+            
+            data["audio"] = try Data(contentsOf: self.sendURL!)
+            data["audioURL"] = self.sendURL!
+            
+            PostController.sharedInstance.create(data: data) { data in
+                var response = data as! Dictionary<String, Any>
+                
+                if(response["status"] as! Int == 200) {
+                    print(response)
+                    self.content = ""
+                    handler("true")
+                    
+                } else {
+                    print("error")
+                }
+                
+                print(response)
+            }
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+        
+
+        
+        
+    }
+   
 }
 
 struct RangeSlider: View {
@@ -273,3 +366,4 @@ struct RangeSlider: View {
         }   // VStack
     }
 }
+
