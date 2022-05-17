@@ -223,10 +223,10 @@ class AudioEngineController{
         
         try await recorder.stopRecording(withOutput: url)
         
-        MobileFFmpeg.execute("-i " + url.absoluteString + " -map 0:a -y " + url2.absoluteString)
+        MobileFFmpeg.execute("-i " + url.absoluteString + " -map 0:a -y " + url2.absoluteString) // 오디오 추출
         
         
-        return url2
+        return url2 // 오디오 주소
     }
     
     

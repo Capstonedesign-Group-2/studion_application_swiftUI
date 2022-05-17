@@ -51,7 +51,7 @@ struct NavigationBar: View {
                     .sheet(isPresented: $showSearch) {
                         SearchView()
                     }
-                }.ignoresSafeArea()
+                }.ignoresSafeArea(.all)
                 .frame(maxWidth: .infinity, alignment: .trailing)
                 .padding(.trailing, 20)
                 .padding(.top, 20)

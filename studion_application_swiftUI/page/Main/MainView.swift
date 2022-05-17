@@ -42,6 +42,8 @@ struct MainView: View {
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets
     @State var currentPage: Int = 0
     
+    @State var createForm: Bool = false
+    
     var body: some View {
         
         if UIDevice.isIpad {
@@ -51,21 +53,32 @@ struct MainView: View {
                     PostView()
                         .tag("house")
                         .transition(.move(edge: .top))
-                        .animation(.easeIn)
+//                        .animation(.easeIn)
 
                     ChatRoomList()
                         .tag("message")
                   
-                    CreateView()
+                    CreateScreen()
+                        .onAppear(perform: {
+                            delaySheet()
+                        })
+                        .onTapGesture {
+                            self.createForm = true
+                        }
+                        .onDisappear() {
+                            self.createForm = false
+                        }
                         .tag("plus")
                     
                     StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
                         .tag("rectangle.righthalf.inset.filled.arrow.right")
                         .transition(.move(edge: .top))
-                        .animation(.easeIn)
+//                        .animation(.easeIn)
                     
                     SettingView(pageStatus: $pageStatus)
                         .tag("gearshape")
+                }.sheet(isPresented: $createForm){
+                    CreateView()
                 }
                 
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
@@ -92,6 +105,7 @@ struct MainView: View {
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
             .navigationViewStyle(.stack)
+            
         
         } else { // iPhone UI
 
@@ -147,6 +161,12 @@ struct MainView: View {
 
         } // else
 
+    }// body
+    private func delaySheet() {
+        // Delay of 0.5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            createForm = true
+        }
     }
 }
 

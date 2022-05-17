@@ -119,20 +119,6 @@ struct RoomCardModalView: View {
                                         )
                                         .foregroundColor(.clear)
                                 }
-
-                                
-                                
-                                                        
-//                                Button( action: {
-//        //                            self.roomNumber = roomInfo!.id
-//        //                            self.pageStatus = "/room"
-//                                    self.selectRoomNumber = roomInfo!.id
-//                                    self.selectRoomCheck = true
-//                                } ) {
-//                                    Text("enter")
-//                                }
-//                                .padding(.horizontal, 30)
-//                                .padding(.bottom, 100)
                                 
                                 Button( action: {
                                     self.selectRoomNumber = roomInfo!.id
@@ -150,22 +136,14 @@ struct RoomCardModalView: View {
                                 
                             }   // VStack
                             .padding()
-                            
-                            
-                            
-                            
+     
                             
                         }   // VStack
                         .frame(width: UIScreen.main.bounds.width, height: curHeight)
                         .background(Color(red: 151/255, green: 188/255, blue:98/255))
                         .padding(.horizontal, 30)
                         .zIndex(1)
-                        
-                        
-//                        Spacer()
-//                            .frame(width: UIScreen.main.bounds.width, height: curHeight)
-//                            .background(.white).opacity(0.3)
-//                            .padding(.horizontal, 30)
+
                         
                     }   // ZStack
                     

@@ -99,8 +99,13 @@ struct PostView: View {
                                         p = posts["data"] as! [Dictionary<String, Any>?]
                                     }
                                }
-                        
                             } // vS
+                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                                Color.clear
+                                    .frame(height: 50)
+                                    .background(Color.white)
+                            }
+//                                NavigationBar(title: "Posts")
                    
                    
                    

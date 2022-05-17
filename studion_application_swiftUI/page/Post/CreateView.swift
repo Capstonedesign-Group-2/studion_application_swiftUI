@@ -85,7 +85,7 @@ struct CreateView: View {
 //                            .shadow(color: .gray, radius: 2)
                             
                         }
-                        .padding(.horizontal, 130)
+//                        .padding(.horizontal, 130)
 
                     } // vS
                     
@@ -99,7 +99,6 @@ struct CreateView: View {
 //                    NavigationBar(title: "Create")
                     CreateTitle()
                         .ignoresSafeArea(edges: .all)
-                        .shadow(color: .gray, radius: 2)
                     
                 } // zS
                 
@@ -131,6 +130,7 @@ struct CreateView: View {
                         }
                     }
                 } //fileImporter
+                
 
             } //nav
             .navigationViewStyle(StackNavigationViewStyle())
@@ -273,7 +273,7 @@ struct CreateTitle: View {
     var body: some View{
         ZStack {
             Color.clear
-                .background(.ultraThinMaterial)
+                .background(Color.white)
             
             Text("Create")
                 .font(.largeTitle.weight(.bold))

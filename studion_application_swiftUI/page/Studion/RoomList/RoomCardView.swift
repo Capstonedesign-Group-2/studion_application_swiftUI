@@ -28,71 +28,143 @@ struct RoomCardView: View {
     
     var body: some View {
 
-        
-        ZStack {
-            RoundedRectangle(cornerRadius: 30)
-                .fill(LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .top, endPoint: .bottomTrailing))
+        if UIDevice.isIpad {
+            ZStack {
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .top, endPoint: .bottomTrailing))
+                    
+                    .frame(width: UIScreen.main.bounds.width - 250, height: 250)
+                    .shadow(color: Color(#colorLiteral(red: 0.6251253486, green: 0.6654933095, blue: 0.6063877344, alpha: 0.8470588235)), radius: 25, x: -10, y: 10)
                 
-                .frame(width: 300, height: 200)
-                .shadow(color: Color(#colorLiteral(red: 0.6251253486, green: 0.6654933095, blue: 0.6063877344, alpha: 0.8470588235)), radius: 25, x: -10, y: 10)
+                ZStack {
+                    Circle().fill(Color(#colorLiteral(red: 206/255, green: 212/255, blue:106/255, alpha: 0.8470588235)).opacity(0.3))
+                        .frame(width: 50)
+                    
+                    Image(systemName: roomInfo.locked == 0 ? "lock.open" : "lock")
+                        .resizable()
+                        .frame(width:24, height: 24)
+                        .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
+                }.offset(x: 200, y: -50)
+                
+                Text(roomInfo.title)
+                    .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
+                    .bold()
+                    .font(.largeTitle)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .padding()
+//                    .frame(width: 200,alignment: .topLeading)
+                    .offset(x: 0, y: -50)
+                
+                Text("参加者 : \(roomInfo.users.count) / 4")
+                    .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
+                    .fontWeight(.medium)
+                    .font(.body)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .padding()
+//                    .frame(width: 200, alignment: .topLeading)
+                    .offset(x: 0, y: -10)
+                
+                
+    //            Text(String(roomInfo.users.count) + " / 4")
+    //                .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
+    //                .fontWeight(.medium)
+    //                .font(.body)
+    //                .frame(width: 200,alignment: .topLeading)
+    //                .offset(x: -25, y: 30)
+                
+                ZStack(alignment: .leading) {
+                    let multiplier = width / 4
+                    var percent: CGFloat = CGFloat(roomInfo.users.count)
+                    
+                    RoundedRectangle(cornerRadius: height, style: .continuous)
+                        .frame(width: UIScreen.main.bounds.width - 400, height: height)
+                        .foregroundColor(Color.black.opacity(0.1))
+                    
+                    RoundedRectangle(cornerRadius: height, style: .continuous)
+                        .frame(width: percent * multiplier, height: height)
+                        .background(LinearGradient(gradient: Gradient(colors: [color3, color4]), startPoint: .leading, endPoint: .trailing)
+                                        .clipShape(RoundedRectangle(cornerRadius: height, style: .continuous))
+                        )
+                        .foregroundColor(.clear)
+                }
+                .offset(x: -5, y: 30)
+                
+                
+                
+            }
+             .padding(.bottom, 10)
+            
+        } else {
             
             ZStack {
-                Circle().fill(Color(#colorLiteral(red: 206/255, green: 212/255, blue:106/255, alpha: 0.8470588235)).opacity(0.3))
-                    .frame(width: 50)
+                RoundedRectangle(cornerRadius: 30)
+                    .fill(LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .top, endPoint: .bottomTrailing))
+                    
+                    .frame(width: 300, height: 200)
+                    .shadow(color: Color(#colorLiteral(red: 0.6251253486, green: 0.6654933095, blue: 0.6063877344, alpha: 0.8470588235)), radius: 25, x: -10, y: 10)
                 
-                Image(systemName: roomInfo.locked == 0 ? "lock.open" : "lock")
-                    .resizable()
-                    .frame(width:24, height: 24)
+                ZStack {
+                    Circle().fill(Color(#colorLiteral(red: 206/255, green: 212/255, blue:106/255, alpha: 0.8470588235)).opacity(0.3))
+                        .frame(width: 50)
+                    
+                    Image(systemName: roomInfo.locked == 0 ? "lock.open" : "lock")
+                        .resizable()
+                        .frame(width:24, height: 24)
+                        .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
+                }.offset(x: 100, y: -50)
+                
+                Text(roomInfo.title)
                     .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
-            }.offset(x: 100, y: -50)
-            
-            Text(roomInfo.title)
-                .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
-                .bold()
-                .font(.largeTitle)
-                .lineLimit(1)
-                .truncationMode(.tail)
-                .frame(width: 200,alignment: .topLeading)
-                .offset(x: -25, y: -50)
-            
-            Text("参加者 : \(roomInfo.users.count) / 4")
-                .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
-                .fontWeight(.medium)
-                .font(.body)
-                .lineLimit(1)
-                .truncationMode(.tail)
-                .frame(width: 200, alignment: .topLeading)
-                .offset(x: -25, y: -10)
-            
-            
-//            Text(String(roomInfo.users.count) + " / 4")
-//                .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
-//                .fontWeight(.medium)
-//                .font(.body)
-//                .frame(width: 200,alignment: .topLeading)
-//                .offset(x: -25, y: 30)
-            
-            ZStack(alignment: .leading) {
-                let multiplier = width / 4
-                var percent: CGFloat = CGFloat(roomInfo.users.count)
+                    .bold()
+                    .font(.largeTitle)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .frame(width: 200,alignment: .topLeading)
+                    .offset(x: -25, y: -50)
                 
-                RoundedRectangle(cornerRadius: height, style: .continuous)
-                    .frame(width: width, height: height)
-                    .foregroundColor(Color.black.opacity(0.1))
+                Text("参加者 : \(roomInfo.users.count) / 4")
+                    .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
+                    .fontWeight(.medium)
+                    .font(.body)
+                    .lineLimit(1)
+                    .truncationMode(.tail)
+                    .frame(width: 200, alignment: .topLeading)
+                    .offset(x: -25, y: -10)
                 
-                RoundedRectangle(cornerRadius: height, style: .continuous)
-                    .frame(width: percent * multiplier, height: height)
-                    .background(LinearGradient(gradient: Gradient(colors: [color3, color4]), startPoint: .leading, endPoint: .trailing)
-                                    .clipShape(RoundedRectangle(cornerRadius: height, style: .continuous))
-                    )
-                    .foregroundColor(.clear)
+                
+    //            Text(String(roomInfo.users.count) + " / 4")
+    //                .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
+    //                .fontWeight(.medium)
+    //                .font(.body)
+    //                .frame(width: 200,alignment: .topLeading)
+    //                .offset(x: -25, y: 30)
+                
+                ZStack(alignment: .leading) {
+                    let multiplier = width / 4
+                    var percent: CGFloat = CGFloat(roomInfo.users.count)
+                    
+                    RoundedRectangle(cornerRadius: height, style: .continuous)
+                        .frame(width: width, height: height)
+                        .foregroundColor(Color.black.opacity(0.1))
+                    
+                    RoundedRectangle(cornerRadius: height, style: .continuous)
+                        .frame(width: percent * multiplier, height: height)
+                        .background(LinearGradient(gradient: Gradient(colors: [color3, color4]), startPoint: .leading, endPoint: .trailing)
+                                        .clipShape(RoundedRectangle(cornerRadius: height, style: .continuous))
+                        )
+                        .foregroundColor(.clear)
+                }
+                .offset(x: -5, y: 30)
+                
+                
+                
             }
-            .offset(x: -5, y: 30)
             
+             .padding(.bottom, 10)
             
-            
-        }
-        .padding(.bottom, 10)
+        }// else
     }
 }
 

@@ -65,9 +65,9 @@ struct StudionRoomList: View {
                                             Text("").frame(width:0, height:0))
                                     }
                                     
-                                    NavigationLink(destination: RoomView(selectRoomCheck: $selectRoomCheck, roomNumber: 1), label: {
-                                        Text("enter")
-                                    })
+//                                    NavigationLink(destination: RoomView(selectRoomCheck: $selectRoomCheck, roomNumber: 1), label: {
+//                                        Text("enter")
+//                                    })
                                     
                                     
                                     ForEach(0..<(roomSocket.roomsInfo?.rooms?.count)!, id: \.self) { index in
@@ -110,7 +110,7 @@ struct StudionRoomList: View {
                         }else {
                             Spacer()
                             Text("방이 읎어")
-                               
+                                .font(.largeTitle).fontWeight(.bold)
                             Spacer()
 
                         }

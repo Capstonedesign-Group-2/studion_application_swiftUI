@@ -100,5 +100,98 @@
             landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "49A46B16-F194-4A8B-AA22-FA945305F127"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "studion_application_swiftUI/page/Main/MainView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
+            landmarkName = "delaySheet()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "49A46B16-F194-4A8B-AA22-FA945305F127 - 866269b21c377887"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "studion_application_swiftUI.TabButton.selectedTab.getter : Swift.String"
+                  moduleName = "studion_application_swiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinhokim/studion/studion_application_swiftUI/studion_application_swiftUI/page/Main/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  uuid = "49A46B16-F194-4A8B-AA22-FA945305F127 - 27e59ddc2f906eb3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "studion_application_swiftUI.TabButton.selectedTab.setter : Swift.String"
+                  moduleName = "studion_application_swiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinhokim/studion/studion_application_swiftUI/studion_application_swiftUI/page/Main/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "176">
+               </Location>
+               <Location
+                  uuid = "49A46B16-F194-4A8B-AA22-FA945305F127 - 58d3b16402aa4d02"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "studion_application_swiftUI.TabButton.selectedTab.modify : Swift.String"
+                  moduleName = "studion_application_swiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinhokim/studion/studion_application_swiftUI/studion_application_swiftUI/page/Main/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "49A46B16-F194-4A8B-AA22-FA945305F127 - 75fd6808adcb2610"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "studion_application_swiftUI.TabButton.selectedTab.modify : Swift.String with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "studion_application_swiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinhokim/studion/studion_application_swiftUI/studion_application_swiftUI/page/Main/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "49A46B16-F194-4A8B-AA22-FA945305F127 - cc272597910d05fb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "studion_application_swiftUI.TabButton.$selectedTab.getter : SwiftUI.Binding&lt;Swift.String&gt;"
+                  moduleName = "studion_application_swiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/jinhokim/studion/studion_application_swiftUI/studion_application_swiftUI/page/Main/MainView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "212">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
