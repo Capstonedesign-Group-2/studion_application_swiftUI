@@ -53,10 +53,16 @@ struct MainView: View {
                     PostView()
                         .tag("house")
                         .transition(.move(edge: .top))
+                        .task {
+                            self.createForm = false
+                        }
 //                        .animation(.easeIn)
 
                     ChatRoomList()
                         .tag("message")
+                        .task {
+                            self.createForm = false
+                        }
                   
                     CreateScreen()
                         .onAppear(perform: {
@@ -73,10 +79,17 @@ struct MainView: View {
                     StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
                         .tag("rectangle.righthalf.inset.filled.arrow.right")
                         .transition(.move(edge: .top))
+                        .task {
+                            self.createForm = false
+                        }
 //                        .animation(.easeIn)
                     
                     SettingView(pageStatus: $pageStatus)
                         .tag("gearshape")
+                        .task {
+                            self.createForm = false
+                        }
+                    
                 }.sheet(isPresented: $createForm){
                     CreateView()
                 }

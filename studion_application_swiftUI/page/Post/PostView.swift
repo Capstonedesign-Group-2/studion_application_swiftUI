@@ -86,7 +86,6 @@ struct PostView: View {
                             } // list
                                 .padding(.horizontal, 100)
                         
-                        
                                 .refreshable {
                                     currentPage = 1
                                     p = []
@@ -105,11 +104,11 @@ struct PostView: View {
                                     .frame(height: 50)
                                     .background(Color.white)
                             }
-//                                NavigationBar(title: "Posts")
+                                NavigationBar(title: "Sound cloud")
                    
                    
                    
-                            .onAppear {
+                            .onAppear() {
                                 PostController.sharedInstance.show(page: currentPage) { data in
 //                                      print(data)
                                     let response = data as! Dictionary<String, Any>
@@ -214,7 +213,7 @@ struct PostView: View {
                                   .background(Material.bar)
                             }
                         } // vS
-                            NavigationBar(title: "Posts")
+                            NavigationBar(title: "Sound cloud")
 
 
 //                    .navigationTitle("Posts")

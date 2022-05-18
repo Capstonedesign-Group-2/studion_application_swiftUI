@@ -185,8 +185,8 @@ struct CreateView: View {
                         }
 
                     }
-                    .navigationTitle("Create")
-                    .navigationBarTitleDisplayMode(.inline)
+//                    .navigationTitle("Create")
+//                    .navigationBarTitleDisplayMode(.inline)
                 }
                 
 //                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
@@ -218,9 +218,9 @@ struct CreateView: View {
                         }
                     }
                 }
+                NavigationBar(title: "Studion")
                 
-                
-            }
+            }// navView
             .navigationViewStyle(.stack)
         }
         

@@ -13,8 +13,6 @@ import URLImage
 struct PostCard: View {
     
     @Namespace var namespace
-    @State var show: Bool = false
-    @State var play: Bool = false
     @State var comment: Bool = false
     
     @State var title = ""
@@ -45,7 +43,6 @@ struct PostCard: View {
                                     RoundedRectangle(cornerRadius: 0)
                                         .stroke(Color.gray, lineWidth: 0.5)
                             )
-                            
                             MenuView()
                             
                         }
@@ -115,22 +112,6 @@ struct PostCard: View {
                     }
                     
                 } //vS
-                
-                
-                
-//              if !show {
-//
-//              } else { // tap one
-//
-//              } // else
-//
-//
-//          }
-//          .onTapGesture {
-//              withAnimation {
-//                  show.toggle()
-//              }
-//          }.transition(.slide)
         
                 .background(Color.white)
                 .overlay(
@@ -141,10 +122,13 @@ struct PostCard: View {
                 .shadow(color: .gray, radius: 2)
         
             } //zS
+            .onTapGesture { // disable blank touch
+                return
+            }
             
             Spacer()
 
-        } else {
+        } else { // iPhone
             
             ZStack{
                 VStack() {
@@ -242,41 +226,15 @@ struct PostCard: View {
 //                Spacer()
         
             } //zS
+            .onTapGesture { // disable blank touch
+                return
+            }
 
         }// else
         
     }
 }
     
-
-
-struct MenuView: View {
-    var body: some View {
-        Menu {
-            Button(action: {
-                    print("btn1")
-                }, label: {
-                    Text("edit")
-                })
-                
-            Button(action: {
-                    print("btn2")
-                }, label: {
-                    Text("Delete")
-                })
-                
-            } label: {
-                Label("", systemImage: "ellipsis")
-            }
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .foregroundColor(Color.black)
-    }
-}
-
-
-
-
-
 //struct PostCard_Previews: PreviewProvider {
 //    static var previews: some View {
 //        PostCard(title: "title", content: "content")

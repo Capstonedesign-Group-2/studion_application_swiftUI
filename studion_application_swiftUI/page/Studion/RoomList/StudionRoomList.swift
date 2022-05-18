@@ -98,6 +98,8 @@ struct StudionRoomList: View {
 
                                 
                             }   // ScrollView
+                            
+//                            navigationTitle("Studion")
 //                            .padding(.top, 30)
 //                            .navigationTitle("Studion")
 //                            .navigationBarTitleDisplayMode(.inline)
@@ -124,9 +126,6 @@ struct StudionRoomList: View {
                                  .background(Material.bar)
                 }
 
-                
-                                
-                
                 NavigationBar(title: "Studion")
                 
                 RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo, selectRoomCheck: $selectRoomCheck, selectRoomNumber: $selectRoomNumber)
