@@ -9,6 +9,8 @@ import SwiftUI
 
 struct MenuView: View {
     
+    var audioURLString: String
+    
     @State var isActive: Bool = false
     
     var body: some View {
@@ -28,7 +30,7 @@ struct MenuView: View {
                 .foregroundColor(Color.black)
             }// vS
             
-        NavigationLink(destination: RelayView(), isActive: $isActive) {
+        NavigationLink(destination: RelayView(audioURLString: audioURLString), isActive: $isActive) {
             EmptyView()
         }// navLink
     }
