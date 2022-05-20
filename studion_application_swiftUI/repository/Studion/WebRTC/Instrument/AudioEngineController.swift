@@ -11,6 +11,8 @@ import AudioKit
 import ReplayKit
 import SwiftUI
 import mobileffmpeg
+import STKAudioKit
+import AudioKitEX
 
 class AudioEngineController{
     
@@ -42,6 +44,12 @@ class AudioEngineController{
     let assetWriter = AssetWriter(fileName: "test.wav")
     @State var file: AVAudioFile?
     
+//  ********************************************************************************
+//  Effect
+//  ********************************************************************************
+    let shaker = Shaker()
+    var sequencer = Sequencer()
+    var callbackInst = CallbackInstrument()
     
     func settings() {
         
@@ -104,6 +112,10 @@ class AudioEngineController{
             }
         }
         
+        
+        
+        let fader = Fader(shaker)
+        fader.gain = 20.0
         
         
         

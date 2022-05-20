@@ -28,6 +28,9 @@ struct PostCard: View {
     //audio
     @State var audioURL: String?
     
+    @State var isNext = false
+    @State var isNext2 = false
+    
     
     var body: some View {
             
@@ -46,7 +49,7 @@ struct PostCard: View {
                                         .stroke(Color.gray, lineWidth: 0.5)
                             )
                             
-                            MenuView()
+                            MenuView(isNext: $isNext, isNext2: $isNext2)
                             
                         }
                     }
@@ -114,6 +117,9 @@ struct PostCard: View {
                         CommentView(postId: id!)
                     }
                     
+                    
+                    NavigationLink(destination: Test(), isActive: $isNext, label: {})
+                    
                 } //vS
                 
                 
@@ -160,7 +166,7 @@ struct PostCard: View {
                                         .stroke(Color.gray, lineWidth: 0.5)
                             )
                             
-                            MenuView()
+                            MenuView(isNext: $isNext, isNext2: $isNext2)
                             
                         }
                     }
@@ -229,6 +235,9 @@ struct PostCard: View {
                             .sheet(isPresented: $comment) {
                                 CommentView(postId: id!)
                             }
+                    
+                    NavigationLink(destination: Test(), isActive: $isNext, label: {})
+                    NavigationLink(destination: Test2(), isActive: $isNext2, label: {})
                     } //vS
         
                 .background(Color.white)
@@ -251,16 +260,24 @@ struct PostCard: View {
 
 
 struct MenuView: View {
+    @Binding var isNext:Bool
+    @Binding var isNext2: Bool
+    
     var body: some View {
         Menu {
             Button(action: {
                     print("btn1")
+                    isNext.toggle()
+                    print(isNext)
                 }, label: {
                     Text("edit")
                 })
                 
+            
             Button(action: {
                     print("btn2")
+                isNext2.toggle()
+                
                 }, label: {
                     Text("Delete")
                 })
@@ -272,15 +289,4 @@ struct MenuView: View {
             .foregroundColor(Color.black)
     }
 }
-
-
-
-
-
-//struct PostCard_Previews: PreviewProvider {
-//    static var previews: some View {
-//        PostCard(title: "title", content: "content")
-//    }
-//}
-
 

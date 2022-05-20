@@ -30,6 +30,9 @@
 		555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647A27FE910900C449BC /* AudioEngineController.swift */; };
 		555E647F280664B100C449BC /* WebRTCDictionaryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E647E280664B100C449BC /* WebRTCDictionaryController.swift */; };
 		555E64812806A6DC00C449BC /* SUImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 555E64802806A6DC00C449BC /* SUImagePicker.swift */; };
+		55B4CDCE283487FF00676035 /* STKAudioKit in Frameworks */ = {isa = PBXBuildFile; productRef = 55B4CDCD283487FF00676035 /* STKAudioKit */; };
+		55B4CDD028348EDE00676035 /* Test.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B4CDCF28348EDE00676035 /* Test.swift */; };
+		55B4CDD2283490D800676035 /* Test2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B4CDD1283490D800676035 /* Test2.swift */; };
 		55B98BF027E83E1D0057F168 /* studion_application_swiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */; };
 		55B98BF227E83E1D0057F168 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B98BF127E83E1D0057F168 /* ContentView.swift */; };
 		55B98BF427E83E1D0057F168 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 55B98BF327E83E1D0057F168 /* Assets.xcassets */; };
@@ -167,6 +170,9 @@
 		555E647A27FE910900C449BC /* AudioEngineController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioEngineController.swift; sourceTree = "<group>"; };
 		555E647E280664B100C449BC /* WebRTCDictionaryController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebRTCDictionaryController.swift; sourceTree = "<group>"; };
 		555E64802806A6DC00C449BC /* SUImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SUImagePicker.swift; sourceTree = "<group>"; };
+		55B4CDCC283487E800676035 /* STKAudioKit-5.3.0 */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "STKAudioKit-5.3.0"; path = "../../../Downloads/STKAudioKit-5.3.0"; sourceTree = "<group>"; };
+		55B4CDCF28348EDE00676035 /* Test.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test.swift; sourceTree = "<group>"; };
+		55B4CDD1283490D800676035 /* Test2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Test2.swift; sourceTree = "<group>"; };
 		55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = studion_application_swiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		55B98BEF27E83E1D0057F168 /* studion_application_swiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = studion_application_swiftUIApp.swift; sourceTree = "<group>"; };
 		55B98BF127E83E1D0057F168 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -293,6 +299,7 @@
 				7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */,
 				5556BFBC2824A4A7007EF57D /* AudioKitUI in Frameworks */,
 				5556BFB72824A0DA007EF57D /* Waveform in Frameworks */,
+				55B4CDCE283487FF00676035 /* STKAudioKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,9 +362,18 @@
 			path = RecordView;
 			sourceTree = "<group>";
 		};
+		55B4CC52283483DE00676035 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				55B4CDCC283487E800676035 /* STKAudioKit-5.3.0 */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		55B98BE327E83E1D0057F168 = {
 			isa = PBXGroup;
 			children = (
+				55B4CC52283483DE00676035 /* Packages */,
 				55B98BEE27E83E1D0057F168 /* studion_application_swiftUI */,
 				55B98BED27E83E1D0057F168 /* Products */,
 				640E38267862658A983A696A /* Pods */,
@@ -495,6 +511,8 @@
 				2992C4E527FDB489008EFFCA /* SearchView.swift */,
 				2992C4E727FDB4B4008EFFCA /* PostCard.swift */,
 				29E94CE12808BAFE000008F4 /* AudioView.swift */,
+				55B4CDCF28348EDE00676035 /* Test.swift */,
+				55B4CDD1283490D800676035 /* Test2.swift */,
 			);
 			path = Post;
 			sourceTree = "<group>";
@@ -759,6 +777,7 @@
 			packageProductDependencies = (
 				5556BFB62824A0DA007EF57D /* Waveform */,
 				5556BFBB2824A4A7007EF57D /* AudioKitUI */,
+				55B4CDCD283487FF00676035 /* STKAudioKit */,
 			);
 			productName = studion_application_swiftUI;
 			productReference = 55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */;
@@ -958,12 +977,14 @@
 				295DC7C42817B753006A1BB7 /* CommentView.swift in Sources */,
 				55B98C5027EBF5350057F168 /* InstrumentController.swift in Sources */,
 				55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */,
+				55B4CDD028348EDE00676035 /* Test.swift in Sources */,
 				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
 				29C4C03327EDDE0A0048D405 /* PostController.swift in Sources */,
 				5556BFB92824A123007EF57D /* WaveView.swift in Sources */,
 				55B98C9127EC782D0057F168 /* LeftBarView.swift in Sources */,
 				555E647B27FE910900C449BC /* AudioEngineController.swift in Sources */,
 				555E64812806A6DC00C449BC /* SUImagePicker.swift in Sources */,
+				55B4CDD2283490D800676035 /* Test2.swift in Sources */,
 				55B98C3827EA9C6B0057F168 /* ServerAdress.swift in Sources */,
 				5556BFC02824C04F007EF57D /* WaveView2.swift in Sources */,
 				55B98C2C27E96F6B0057F168 /* ChatRoomList.swift in Sources */,
@@ -1123,7 +1144,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = SU7RQ4J4BY;
+				DEVELOPMENT_TEAM = 49C98WAKUL;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1162,7 +1183,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"studion_application_swiftUI/Preview Content\"";
-				DEVELOPMENT_TEAM = SU7RQ4J4BY;
+				DEVELOPMENT_TEAM = 49C98WAKUL;
 				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1243,6 +1264,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5556BFBA2824A4A7007EF57D /* XCRemoteSwiftPackageReference "AudioKitUI" */;
 			productName = AudioKitUI;
+		};
+		55B4CDCD283487FF00676035 /* STKAudioKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = STKAudioKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
