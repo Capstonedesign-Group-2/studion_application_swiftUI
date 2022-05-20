@@ -40,18 +40,19 @@ public class CommentController {
             
             
                     
-            AF.request(url, method: .post, parameters: parameter, headers: headers).responseData { response in
+            AF.request(url, method: .post, parameters: parameter, headers: headers).responseJSON { response in
                 var status = response.response?.statusCode ?? 500
                 switch response.result{
                             
                     //통신성공
                 case .success(let data):
                     if(status == 200){
+                        handler(data)
                         print("value: \(data) 통신 성공!!!!! Success!!")
                     }else {
                         print(status)
                     }
-                      
+                
                     //통신실패
                 case .failure(let error):
                     print("error: \(error)")

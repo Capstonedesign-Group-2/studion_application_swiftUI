@@ -20,6 +20,7 @@ struct NavigationBar: View {
         if UIDevice.isIpad {
             
             ZStack {
+                Color.white
                 Text(title)
                     .font(.largeTitle.weight(.bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -28,8 +29,8 @@ struct NavigationBar: View {
             }
             .frame(height: 70)
             .frame(maxHeight: .infinity, alignment: .top)
-            .background(.green)
-            .edgesIgnoringSafeArea(.top)
+//            .background(.white)
+//            .edgesIgnoringSafeArea(.top)
             
         } else {
             

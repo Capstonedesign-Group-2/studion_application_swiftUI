@@ -122,7 +122,7 @@ struct PostView: View {
                                     
                                     p = posts["data"] as! [Dictionary<String, Any>?]
                                                                       
-//                                    print("Posts Datas : \(p)")
+                                    print("Posts Datas : \(p)")
                                     
                                 }
                                 
