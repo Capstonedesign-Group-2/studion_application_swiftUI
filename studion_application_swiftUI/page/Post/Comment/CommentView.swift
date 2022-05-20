@@ -12,6 +12,8 @@ struct CommentView: View {
     @State var postId: Int = 0
     @State var c: [Dictionary<String, Any>?] = []
     @State var empty: Bool = false
+    @State var confirmRefresh = false
+    
     
     var body: some View {
         
@@ -22,27 +24,28 @@ struct CommentView: View {
                     
                     VStack {
                         
-                        if empty {
-                            VStack {
-                                Text("No Comments here....")
-                                    .font(.title)
-                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                            }
-                            .background(Color.clear)
-                            
-                        } else {
+//                        if empty {
+//                            VStack {
+//                                Text("No Comments here....")
+//                                    .font(.title)
+//                                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+//                            }
+//                            .background(Color.clear)
+//
+//                        } else {
                             VStack {
                                 List {
                                     ForEach(0..<self.c.count, id: \.self){ comment in
                                         
                                         
-                                        let users = self.c[comment]?["user"] as! Dictionary<String, Any>?
+//                                        let users = self.c[comment]?["user"] as! Dictionary<String, Any>?
                                         
                                         VStack {
                                             CommentCard(
                                                 pId: postId,
-                                                user: users?.count == 0 ? nil : users?["name"] as? String,
-                                                content: self.c[comment]!["content"] as! String
+                                                c: $c[comment]
+//                                                user: users?.count == 0 ? nil : users?["name"] as? String,
+//                                                content: self.c[comment]!["content"] as! String
                                             )
                                         }
                                     }// for
@@ -60,7 +63,7 @@ struct CommentView: View {
                                         
                                         let comments = response["comments"] as! Dictionary<String, Any>
                                         
-                                        c = comments["data"] as! [Dictionary<String, Any>?]
+                                        c += comments["data"] as! [Dictionary<String, Any>?]
                                         
                                     }
                                }
@@ -82,12 +85,12 @@ struct CommentView: View {
                                         }
                                     }
                                 }// onAppear
-                            }// else
+//                            }// else
                         }// vS
                     }// vS
                     Spacer()
                     VStack {
-                        CommentForm(postId: postId)
+                        CommentForm(postId: postId, c: $c)
                             .foregroundColor(Color.white)
                     }//vS
                     

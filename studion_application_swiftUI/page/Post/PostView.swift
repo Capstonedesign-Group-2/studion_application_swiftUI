@@ -86,7 +86,6 @@ struct PostView: View {
                             } // list
                                 .padding(.horizontal, 100)
                         
-                        
                                 .refreshable {
                                     currentPage = 1
                                     p = []
@@ -99,12 +98,17 @@ struct PostView: View {
                                         p = posts["data"] as! [Dictionary<String, Any>?]
                                     }
                                }
-                        
                             } // vS
+                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                                Color.clear
+                                    .frame(height: 50)
+                                    .background(Color.white)
+                            }
+                                NavigationBar(title: "Sound cloud")
                    
                    
                    
-                            .onAppear {
+                            .onAppear() {
                                 PostController.sharedInstance.show(page: currentPage) { data in
 //                                      print(data)
                                     let response = data as! Dictionary<String, Any>
@@ -118,7 +122,7 @@ struct PostView: View {
                                     
                                     p = posts["data"] as! [Dictionary<String, Any>?]
                                                                       
-//                                    print("Posts Datas : \(p)")
+                                    print("Posts Datas : \(p)")
                                     
                                 }
                                 
@@ -209,7 +213,7 @@ struct PostView: View {
                                   .background(Material.bar)
                             }
                         } // vS
-                            NavigationBar(title: "Posts")
+                            NavigationBar(title: "Sound cloud")
 
 
 //                    .navigationTitle("Posts")

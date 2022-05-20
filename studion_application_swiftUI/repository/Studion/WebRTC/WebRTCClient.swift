@@ -304,7 +304,7 @@ final class WebRTCClient: NSObject {
 //            print(pcDic)
 //            if(self.pcDic[answer["answerSendID"] as! String] != nil) {
 //                let peerConnection = self.pcDic[answer["answerSendID"] as! String]! as RTCPeerConnection
-                let peerConnection = WebRTCDictionaryController.sharedInstance.pcDic[answer["answerSendID"] as! String]! as RTCPeerConnection
+            let peerConnection = WebRTCDictionaryController.sharedInstance.pcDic[answer["answerSendID"] as! String]! as RTCPeerConnection
     //
                 peerConnection.setRemoteDescription(sdp) {data in
     //                print("daas")

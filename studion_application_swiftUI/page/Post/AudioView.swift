@@ -34,8 +34,8 @@ struct AudioView : View {
                     
     //                Text(audioURL!)
                     
-                    Capsule().fill(Color.black.opacity(0.08)).frame(height: 8)
-                    Capsule().fill(Color.green).frame(width: abs(self.width), height: 8)
+                    Capsule().fill(Color.black.opacity(0.08)).frame(height: 10)
+                    Capsule().fill(Color.green).frame(width: abs(self.width), height: 10)
                         .gesture(DragGesture()
                             .onChanged({ (value) in
                                 let x = value.location.x
@@ -56,6 +56,7 @@ struct AudioView : View {
 //                                print(time)
 
                             }))
+                        .animation(.easeIn)
 
                 }
             

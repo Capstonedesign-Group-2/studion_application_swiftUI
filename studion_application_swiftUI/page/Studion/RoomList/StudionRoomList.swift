@@ -65,9 +65,9 @@ struct StudionRoomList: View {
                                             Text("").frame(width:0, height:0))
                                     }
                                     
-                                    NavigationLink(destination: RoomView(selectRoomCheck: $selectRoomCheck, roomNumber: 1), label: {
-                                        Text("enter")
-                                    })
+//                                    NavigationLink(destination: RoomView(selectRoomCheck: $selectRoomCheck, roomNumber: 1), label: {
+//                                        Text("enter")
+//                                    })
                                     
                                     
                                     ForEach(0..<(roomSocket.roomsInfo?.rooms?.count)!, id: \.self) { index in
@@ -98,6 +98,8 @@ struct StudionRoomList: View {
 
                                 
                             }   // ScrollView
+                            
+//                            navigationTitle("Studion")
 //                            .padding(.top, 30)
 //                            .navigationTitle("Studion")
 //                            .navigationBarTitleDisplayMode(.inline)
@@ -110,7 +112,7 @@ struct StudionRoomList: View {
                         }else {
                             Spacer()
                             Text("방이 읎어")
-                               
+                                .font(.largeTitle).fontWeight(.bold)
                             Spacer()
 
                         }
@@ -124,9 +126,6 @@ struct StudionRoomList: View {
                                  .background(Material.bar)
                 }
 
-                
-                                
-                
                 NavigationBar(title: "Studion")
                 
                 RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo, selectRoomCheck: $selectRoomCheck, selectRoomNumber: $selectRoomNumber)

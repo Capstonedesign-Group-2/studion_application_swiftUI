@@ -23,22 +23,96 @@ static var isIpad: Bool {
 }
 
 
+struct HomeView: View {
+    var body: some View {
+        VStack {
+            MainView()
+        }
+    }
+}
+
+var tabs = ["house", "message", "plus", "rectangle.righthalf.inset.filled.arrow.right", "gearshape"]
+
 struct MainView: View {
     @State var pageStatus = "/"
     @State var roomNumber = 1
     @State var mainRouter = "/"
     
-    
-    let tabBarImageNames = ["house", "message", "plus", "rectangle.righthalf.inset.filled.arrow.right", "gearshape"]
+    @State var selectedTab = "house"
     @State var edge = UIApplication.shared.windows.first?.safeAreaInsets
     @State var currentPage: Int = 0
+    
+    @State var createForm: Bool = false
     
     var body: some View {
         
         if UIDevice.isIpad {
             ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                 
-                TabView(selection: $mainRouter) {
+                TabView(selection: $selectedTab) {
+                    PostView()
+                        .tag("house")
+                        .transition(.move(edge: .top))
+//                        .animation(.easeIn)
+
+                    ChatRoomList()
+                        .tag("message")
+                  
+                    CreateScreen()
+                        .onAppear(perform: {
+                            delaySheet()
+                        })
+                        .onTapGesture {
+                            self.createForm = true
+                        }
+                        .onDisappear() {
+                            self.createForm = false
+                        }
+                        .tag("plus")
+                    
+                    StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
+                        .tag("rectangle.righthalf.inset.filled.arrow.right")
+                        .transition(.move(edge: .top))
+//                        .animation(.easeIn)
+                    
+                    SettingView(pageStatus: $pageStatus)
+                        .tag("gearshape")
+                    
+                }.sheet(isPresented: $createForm){
+                    CreateView()
+                }
+                
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
+//                    .ignoresSafeArea(.all, edges: .bottom)
+                
+                HStack(spacing: 0) {
+                    
+                    ForEach(tabs, id: \.self) { image in
+                        TabButton(image: image, selectedTab: $selectedTab)
+                        
+                        if image != tabs.last {
+                            Spacer(minLength: 0)
+                        }
+                    }
+                }// hS
+                .padding(.horizontal, 230)
+                .padding(.vertical, 5)
+                .background(Color.white)
+                
+            }// zS
+            .ignoresSafeArea(.keyboard, edges: .bottom)
+            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
+            
+            .navigationBarBackButtonHidden(true)
+            .navigationBarHidden(true)
+            .navigationViewStyle(.stack)
+            
+        
+        } else { // iPhone UI
+
+            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
+
+                TabView(selection: $selectedTab) {
                     PostView()
                         .tag("house")
                         .transition(.move(edge: .top))
@@ -59,126 +133,57 @@ struct MainView: View {
                         .tag("gearshape")
                 }
                 
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-    //                .ignoresSafeArea(.all, edges: .bottom)
-                
-                HStack(spacing: 0) {
-    //                ForEach(tabBarImageNames, id: \.self) { image in
-                    ForEach(0..<tabBarImageNames.count) { index in
-                        TabButton(index: index, tabBarImageNames: tabBarImageNames, mainRouter: $mainRouter, currentPage: $currentPage)
-                        if tabBarImageNames[index] != tabBarImageNames.last {
-                            Spacer(minLength: 0)
-                            
-                        }
-                    }
-                }
-                .padding(.horizontal, 250)
-                .padding(.vertical, 5)
-                .background(Color.white)
-                
-            }
-            .ignoresSafeArea(.keyboard, edges: .bottom)
-            .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
-            
-            .navigationBarBackButtonHidden(true)
-            .navigationBarHidden(true)
-            .navigationViewStyle(.stack)
-        
-        } else { // iPhone UI
-            
-            ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
-                
-                TabView(selection: $mainRouter) {
-                    PostView()
-                        .tag("/")
-                        .transition(.move(edge: .top))
-                        .animation(.easeIn)
-
-                    
-                    ChatRoomList()
-                        .tag("/chat")
-                  
-                    CreateView()
-                        .tag("/post/create")
-                    
-                    StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
-                        .tag("/studion")
-                    
-                    SettingView(pageStatus: $pageStatus)
-                        .tag("/setting")
-                    
-                }
-                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always)) // swipe
+                .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never)) // swipe
 //                .ignoresSafeArea(.all, edges: .bottom)
-                
+
                 HStack(spacing: 0) {
-    //                ForEach(tabBarImageNames, id: \.self) { image in
-                    ForEach(0..<tabBarImageNames.count) { index in
-                        TabButton(index: index, tabBarImageNames: tabBarImageNames, mainRouter: $mainRouter, currentPage: $currentPage)
+                    
+                    ForEach(tabs, id: \.self) { image in
+                        TabButton(image: image, selectedTab: $selectedTab)
                         
-                        if tabBarImageNames[index] != tabBarImageNames.last {
+                        if image != tabs.last {
                             Spacer(minLength: 0)
                         }
                     }
-                }
+                }// hS
+                
                 .padding(.horizontal, 25)
                 .padding(.vertical, 5)
                 .background(Color.white)
-//                .clipShape(Capsule())
-//                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
-//                .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y:5)
-//                .padding(.horizontal)
-//                .padding(.bottom, edge!.bottom == 0 ? 20: 0)
                 
             } //zS
+            
             .ignoresSafeArea(.keyboard, edges: .bottom)
             .background(Color.black.opacity(0.05).ignoresSafeArea(.all, edges: .all))
-            
+
             .navigationBarBackButtonHidden(true)
             .navigationBarHidden(true)
             .navigationViewStyle(.stack)
-            
+
+        } // else
+
+    }// body
+    private func delaySheet() {
+        // Delay of 0.5 seconds
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            createForm = true
         }
-    
     }
 }
 
 struct TabButton: View {
-    var index: Int
-    var tabBarImageNames: [String]
     
-    @Binding var mainRouter: String
-    @Binding var currentPage: Int
+    var image: String
+    
+    @Binding var selectedTab: String
     
     var body: some View {
-        Button(action: {
-            print(index)
-            switch tabBarImageNames[index] {
-            case "house" :
-                self.mainRouter = "/"
-                self.currentPage = 0
-            case "message" :
-                self.mainRouter = "/chat"
-                self.currentPage = 1
-            case "plus" :
-                self.mainRouter = "/post/create"
-                self.currentPage = 2
-            case "rectangle.righthalf.inset.filled.arrow.right" :
-                self.mainRouter = "/studion"
-                self.currentPage = 3
-            case "gearshape" :
-                self.mainRouter = "/setting"
-                self.currentPage = 4
-            default:
-                self.mainRouter = "/"
-                self.currentPage = 0
-            }
-        }) {
+        
+        Button(action: {selectedTab = image}) {
             
-            Image(systemName: "\(tabBarImageNames[index])")
-                .foregroundColor(currentPage == index ? Color.green : Color.gray)
+            Image(systemName: "\(image)")
+                .foregroundColor(selectedTab == image ? Color.green : Color.black)
                 .padding()
-                
         }
     }
 }

@@ -12,15 +12,17 @@ struct CommentForm: View {
     @State var hintText: String = "Comments"
     @State var content: String = ""
     @State var postId: Int
+    @Binding var c: [Dictionary<String, Any>?]
     
     var body: some View {
             
         HStack{
 //            HStack {
                 TextField("\(hintText)", text: $content)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
                 .foregroundColor(Color.black)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 0)
+                        RoundedRectangle(cornerRadius: 5)
                             .stroke(Color.gray, lineWidth: 0.5)
                     )
                     Button(action: {
@@ -28,6 +30,7 @@ struct CommentForm: View {
                             self.hintText = "Something has need..."
                         }
                         write()
+                        
                         content = ""
                     }) {
                         Text("Write")
@@ -45,15 +48,15 @@ struct CommentForm: View {
         ]
         
         CommentController.sharedInstance.createComment(data: data) { data in
-            var response = data as! Dictionary<String, Any>
-            
-            if response["Status"] as! Int == 200 {
-                print(response)
-            } else {
-                print("Failed...")
+            CommentController.sharedInstance.showComments(id: postId) { comment in
+                
+                let response = comment as! Dictionary<String, Any>
+//                                      print("RES : \(response)")
+                
+                let comments = response["comments"] as! Dictionary<String, Any>
+                
+                self.c = comments["data"] as! [Dictionary<String, Any>?]
             }
-            
-            print(response)
         }
     }
     

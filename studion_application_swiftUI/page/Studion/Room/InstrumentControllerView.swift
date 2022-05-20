@@ -11,15 +11,12 @@ import mobileffmpeg
 
 var instrument = ["drum", "piano_button", "guitar", "rec"]
 struct InstrumentControllerView: View {
-//    @Binding var mainRouter: String
-//    @Binding var pageStatus: String
     @Binding var selectRoomCheck: Bool
     
     var dcDic:[String: Any]
     var pcDic:[String: Any]
     var userArray:[String]
     var nameDic: [String: String]
-    
     
     
     @State var selectedTab = "drum"
@@ -49,10 +46,8 @@ struct InstrumentControllerView: View {
                                 DrumView(dcDic: dcDic)
                                     .tag("drum")
 
-
-
-                            PianoView(pcDic: pcDic, dcDic: dcDic)
-                                .tag("piano_button")
+                                PianoView(pcDic: pcDic, dcDic: dcDic)
+                                    .tag("piano_button")
 
                                 GuitarView()
                                     .tag("guitar")
@@ -79,33 +74,16 @@ struct InstrumentControllerView: View {
                             .padding(.horizontal, 25)
                             .padding(.vertical, 5)
                             .background(Color.white)
-                            .clipShape(Capsule())
-                            .shadow(color: Color.black.opacity(0.15), radius: 5, x:5, y: 5)
-                            .shadow(color: Color.black.opacity(0.15), radius: 5, x: -5, y: -5)
-                            .padding(.horizontal)
-                            .padding(.bottom, edge!.bottom == 0 ? 20: 0)
-                            
-                            
-                            
                             
                         }  // ZStack
                         Spacer()
-                        
-                        
                     } // VStack
-                    
-                    
-                    
                     LeftBarView(userArray: userArray, nameDic: nameDic)
                         .offset(x: showLeftMenu ? -0 : -(width))
                         .background(Color.black.opacity(showLeftMenu ? 0.5 : 0).ignoresSafeArea(.all))
-                    
-                    
                 } // ZStack
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        
-                        
                         Button( action: {
                             print("left button")
                             withAnimation(.spring()){self.showLeftMenu.toggle()}
@@ -154,7 +132,6 @@ struct InstrumentControllerView: View {
                                             }
                                         }
                                         
-                                        
                                         isRecording = false
 
                                     } else {
@@ -183,12 +160,8 @@ struct InstrumentControllerView: View {
                                         .padding(.leading, 10)
                                         .foregroundColor(isRecording ? .red : .blue)
                                     
-                                    
-                                    
                                 }
                             }
-                            
-                            
                             
                         }
                     
