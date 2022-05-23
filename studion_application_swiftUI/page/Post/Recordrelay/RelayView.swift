@@ -81,6 +81,7 @@ struct RelayView: View {
                     print("drum end")
                 }
             }
+            .background(Color("mainDark").opacity(0.1))
             
         } else { // iPhone View
             

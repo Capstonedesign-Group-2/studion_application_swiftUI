@@ -28,36 +28,36 @@ struct RelayAudio: View {
     
     @State var roomUser: [Any] = []
     
+    
     var body: some View {
         VStack {
+            
             HStack {
                 
                 Button( action: {
-                    
+
                     if isPlaying {
-                        
+
                         player.pause()
                         self.isPlaying = false
-                        
+
                     } else {
-                        
-//                        print(audioURLString)
+
+                        print(audioURLString)
                         let url = URL(string: (audioURLString))
-//                        print(url)
-                        
+                        print(url)
+
                         playerItem = AVPlayerItem(url: url!)
                         player.replaceCurrentItem(with: playerItem)
-                        
+
                         player.play()
-                        
+
                         self.isPlaying = true
-                        
+
                     }
-                    
-                    
-                    
                 }) {
-                    Text(isPlaying ? "멈춤" : "플레이")
+                    Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
+                        .foregroundColor(Color("mainColor"))
                 }
                 
                 Button( action: {
@@ -69,10 +69,6 @@ struct RelayAudio: View {
                                 let file = try await AudioEngineController.sharedInstance.stopRecord()
                                 
                                 recordURL.append(file)
-                                
-                                
-                                
-                                
                                 isRecording = false
                                 
                             } catch {
@@ -109,7 +105,7 @@ struct RelayAudio: View {
                                 self.isEdit = true
                                 
                             }) {
-                                Text("녹음 : \(index)")
+                                Text("녹음 : \(index + 1)")
                                     .sheet(isPresented: $isEdit) {
                                         WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
                                     }

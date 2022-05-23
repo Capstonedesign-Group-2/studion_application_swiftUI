@@ -28,8 +28,11 @@ struct RoomCardModalView: View {
     
     let width:CGFloat = 300
     var height: CGFloat = 20
-    var color3 = Color(red: 252/255, green: 246/255, blue: 245/255)
-    var color4 = Color(red: 44/255, green:95/255, blue: 45/255)
+//    var color3 = Color(red: 252/255, green: 246/255, blue: 245/255)
+//    var color4 = Color(red: 44/255, green:95/255, blue: 45/255)
+    
+    var color3 = Color("mainColor2")
+    var color4 = Color("mainColor")
     
     
     var dragPercentage: Double {
@@ -84,12 +87,14 @@ struct RoomCardModalView: View {
                                     .font(.system(size: 40))
                                     .fontWeight(.bold)
                                     .padding(.bottom, 15)
-                                    .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
+//                                    .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
+                                    .foregroundColor(Color.white)
                                 
                                 Text(roomInfo!.content)
                                     .font(.body)
                                     .padding(.bottom, 15)
-                                    .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
+//                                    .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
+                                    .foregroundColor(Color.white)
                                 
         //                        Text(String(roomInfo!.users.count))
         //                            .font(.body)
@@ -140,7 +145,8 @@ struct RoomCardModalView: View {
                             
                         }   // VStack
                         .frame(width: UIScreen.main.bounds.width, height: curHeight)
-                        .background(Color(red: 151/255, green: 188/255, blue:98/255))
+//                        .background(Color(red: 151/255, green: 188/255, blue:98/255))
+                        .background(Color("mainDark2"))
                         .padding(.horizontal, 30)
                         .zIndex(1)
 

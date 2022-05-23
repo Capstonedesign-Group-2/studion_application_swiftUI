@@ -15,13 +15,17 @@ struct NavigationBar: View {
 //    @Binding var hasScrolled: Bool
     @State var showSearch = false
     
+    
     var body: some View {
         
         if UIDevice.isIpad {
             
             ZStack {
-                Color.white
+                Color("mainColor")
+                    .edgesIgnoringSafeArea(.all)
+                
                 Text(title)
+                    .foregroundColor(Color.white)
                     .font(.largeTitle.weight(.bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 20)
@@ -29,8 +33,6 @@ struct NavigationBar: View {
             }
             .frame(height: 70)
             .frame(maxHeight: .infinity, alignment: .top)
-//            .background(.white)
-//            .edgesIgnoringSafeArea(.top)
             
         } else {
             
