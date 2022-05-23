@@ -35,8 +35,8 @@ struct PostView: View {
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
                                 
-                                let audio = audios[0] as! Dictionary<String, Any>
-                                let composers = audio["composers"] as? [Any]
+                                let audio = audios.count == 0 ? nil : (audios[0] as! Dictionary<String, Any>)
+                                let composers = audio == nil ? nil : audio!["composers"] as? [Any]
                                 
                                 
 //                                let image = images.map{ $0 }
@@ -157,8 +157,8 @@ struct PostView: View {
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
 //                                let composers = audios["composers"] as? [Any]
-                                let audio = audios[0] as! Dictionary<String, Any>
-                                let composers = audio["composers"] as? [Any]
+                                let audio = audios.count == 0 ? nil : (audios[0] as! Dictionary<String, Any>)
+                                let composers = audio == nil ? nil : audio!["composers"] as? [Any]
                                     
                                 LazyVStack {
                                     PostCard(
