@@ -527,7 +527,7 @@ struct LeftBarView: View {
             .padding(.top, edges!.bottom == 0 ? 15 : edges?.bottom)
             .frame(width: UIScreen.main.bounds.width * 4/5)
             .background(Color.white)
-            .ignoresSafeArea(.all, edges: .vertical)
+//            .ignoresSafeArea(.all, edges: .vertical)
 
             Spacer(minLength: 0)
             

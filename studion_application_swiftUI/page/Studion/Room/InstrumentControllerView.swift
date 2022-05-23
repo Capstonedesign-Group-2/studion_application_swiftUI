@@ -43,7 +43,7 @@ struct InstrumentControllerView: View {
             
 //            NavigationView {
                 ZStack {
-                    VStack{
+                    VStack {
                         ZStack(alignment: Alignment(horizontal: .center, vertical: .bottom)) {
                             TabView(selection: $selectedTab) {
 
@@ -61,10 +61,9 @@ struct InstrumentControllerView: View {
 
                             }
                             .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
-                            .ignoresSafeArea(.all, edges: .bottom)
+                            .ignoresSafeArea(.all)
                             
-                            
-                            
+
                             
                             HStack(spacing: 0) {
                                 ForEach(instrument, id: \.self) { image in
@@ -75,17 +74,26 @@ struct InstrumentControllerView: View {
                                     }
                                 }
                             }
-                            .padding(.horizontal, 25)
+                            .padding(.horizontal, 230)
                             .padding(.vertical, 5)
                             .background(Color.white)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 0)
+                                    .stroke(Color.gray, lineWidth: 0.5)
+                                    .edgesIgnoringSafeArea(.bottom)
+                            )
                             
                         }  // ZStack
                         Spacer()
                     } // VStack
                     LeftBarView(userArray: userArray, nameDic: nameDic)
                         .offset(x: showLeftMenu ? -0 : -(width))
-                        .background(Color.black.opacity(showLeftMenu ? 0.5 : 0).ignoresSafeArea(.all))
+                        .background(Color.black.opacity(showLeftMenu ? 0.5 : 0)
+                            .ignoresSafeArea(.all))
+                    
+        
                 } // ZStack
+            
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         Button( action: {
@@ -94,21 +102,24 @@ struct InstrumentControllerView: View {
                             
                             
                         }) {
+                            
                             HStack {
                                 if showRightMenu == false {
                                     if showLeftMenu {
                                         Image(systemName: "xmark.circle.fill")
                                             .resizable()
                                             .scaledToFit()
+                                            .foregroundColor(Color("mainColor3"))
                                             .frame(width: 40, height: 40)
-                                            .font(.title)
+                                            .font(.largeTitle)
                                             .offset(y: 20)
                                     } else {
                                         Image(systemName: "speaker.circle.fill")
                                             .resizable()
                                             .scaledToFit()
+                                            .foregroundColor(Color("mainColor3"))
                                             .frame(width: 40, height: 40)
-                                            .font(.title)
+                                            .font(.largeTitle)
                                             .offset(y: 20)
                                     }
                                 }
@@ -160,10 +171,10 @@ struct InstrumentControllerView: View {
                                         .resizable()
                                         .scaledToFit()
                                         .frame(width: 40, height: 40)
-                                        .font(.title)
+                                        .font(.largeTitle)
                                         .offset(y: 20)
                                         .padding(.leading, 10)
-                                        .foregroundColor(isRecording ? .red : .blue)
+                                        .foregroundColor(isRecording ? .red.opacity(0.5) : Color("mainColor3"))
                                     
                                 }
                             }
@@ -188,15 +199,17 @@ struct InstrumentControllerView: View {
                                     Image(systemName: "arrowshape.turn.up.backward.2.circle.fill")
                                         .resizable()
                                         .scaledToFit()
+                                        .foregroundColor(Color("mainColor3"))
                                         .frame(width: 40, height: 40)
-                                        .font(.title)
+                                        .font(.largeTitle)
                                         .offset(y: 20)
                                 } else {
                                     Image(systemName: "message.circle.fill")
                                         .resizable()
                                         .scaledToFit()
+                                        .foregroundColor(Color("mainColor3"))
                                         .frame(width: 40, height: 40)
-                                        .font(.title)
+                                        .font(.largeTitle)
                                         .offset(y: 20)
                                 }
                                 
@@ -204,8 +217,9 @@ struct InstrumentControllerView: View {
                                 Image(systemName: "arrowshape.turn.up.backward.2.circle.fill")
                                     .resizable()
                                     .scaledToFit()
+                                    .foregroundColor(Color.red.opacity(0.5))
                                     .frame(width: 40, height: 40)
-                                    .font(.title)
+                                    .font(.largeTitle)
                                     .offset(y: 20)
                             }
                             
@@ -214,6 +228,7 @@ struct InstrumentControllerView: View {
                     } // ToolbarItem
                     
                 } // toolbar
+            
                 
             
             
