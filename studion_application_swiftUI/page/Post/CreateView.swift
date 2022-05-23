@@ -32,6 +32,7 @@ struct CreateView: View {
                                 ZStack{
                                     if content.isEmpty {
                                         Text(hintText)
+                                            .font(.largeTitle)
                                             .foregroundColor(Color(UIColor.placeholderText))
                                             .padding(.horizontal, 8)
                                             .padding(.vertical, 12)
@@ -40,10 +41,13 @@ struct CreateView: View {
                                         .frame(height: 600, alignment: .center)
                                 }
                                 
-                                Button("Pick Image"){
-        //                                    showDocPicker = true
+                                Button(action: {
                                     showingImagePicker.toggle()
+                                }) {
+                                    Text("Pick ImageFile")
+                                        .foregroundColor(Color("mainColor"))
                                 }
+                                
                                 .sheet(isPresented: self.$showingImagePicker) {
             //                        DocumentPicker(image: $image)
                                     SUImagePicker(sourceType: .photoLibrary) { (image) in
@@ -54,14 +58,14 @@ struct CreateView: View {
                                     }
                                 }
                                 
-                                
-                                Button("Pick Audio"){
-//                                    showDocPicker = true
+                                Button(action: {
                                     showingAudioPicker.toggle()
                                     print(showingAudioPicker)
+                                }) {
+                                    Text("Pick AudioFile")
+                                        .foregroundColor(Color("mainColor"))
                                 }
                                 
-                                                                
                                 
                                     Button(action: {
                                         if(checkText(content: content)){
@@ -71,9 +75,9 @@ struct CreateView: View {
                                         content = ""
                                     })
                                     {
-                                        Text("Submit")
-                                    }
-
+                                    Text("Submit")
+                                        .foregroundColor(Color("mainColor"))
+                                }
                             } // form
                             
                             .overlay(
@@ -152,10 +156,13 @@ struct CreateView: View {
                                 .frame(height: 300, alignment: .center)
                         }
                         
-                        Button("Pick Image"){
-//                                    showDocPicker = true
+                        Button(action: {
                             showingImagePicker.toggle()
+                        }) {
+                            Text("Pick ImageFile")
+                                .foregroundColor(Color("mainColor"))
                         }
+                        
                         .sheet(isPresented: self.$showingImagePicker) {
     //                        DocumentPicker(image: $image)
                             SUImagePicker(sourceType: .photoLibrary) { (image) in
@@ -166,10 +173,12 @@ struct CreateView: View {
                             }
                         }
                         
-                        Button("Pick Audio"){
-//                                    showDocPicker = true
+                        Button(action: {
                             showingAudioPicker.toggle()
                             print(showingAudioPicker)
+                        }) {
+                            Text("Pick AudioFile")
+                                .foregroundColor(Color("mainColor"))
                         }
                         
                         
@@ -182,6 +191,7 @@ struct CreateView: View {
                             })
                             {
                             Text("Submit")
+                                .foregroundColor(Color("mainColor"))
                         }
 
                     }
@@ -272,10 +282,10 @@ struct CreateView: View {
 struct CreateTitle: View {
     var body: some View{
         ZStack {
-            Color.clear
-                .background(Color.white)
+            Color("mainColor")
             
             Text("Create")
+                .foregroundColor(.white)
                 .font(.largeTitle.weight(.bold))
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .padding(.leading, 20)

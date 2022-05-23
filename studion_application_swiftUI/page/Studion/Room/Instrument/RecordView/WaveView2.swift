@@ -45,7 +45,10 @@ struct WaveView2: View {
     @State var roomUserArray: [Any] = []
     
     var body: some View {
-        VStack {
+        
+        NavigationView {
+            
+            VStack {
             
             if !isPost {
                 VStack {
@@ -146,6 +149,7 @@ struct WaveView2: View {
                         }
                     
                 }   // VStack
+                .frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .center)
                 
                 .offset(y: 50)
                 
@@ -172,13 +176,16 @@ struct WaveView2: View {
                 .fill(Color.blue)
                 .opacity(0.1)
                 .offset(y: -270)
+                
+                
             } else {
                 
                 
                 HStack {
                     Text("Composers")
-                        .font(.title).fontWeight(.semibold)
+                        .font(.title).fontWeight(.bold)
                         .foregroundColor(Color("mainColor3"))
+                        .padding()
                     
                     Spacer()
                     
@@ -189,9 +196,8 @@ struct WaveView2: View {
                         
                         
                         Circle()
-//                            .fill(Color(red: 2/255, green: 52/255, blue: 63/255))
                             .fill(Color("mainDark2"))
-                            .frame(width: 100, height: 70)
+                            .frame(width: 60, height: 60)
                             .padding()
                             .background(Circle().stroke(Color.white, lineWidth: 5))
                             .overlay(
@@ -200,9 +206,9 @@ struct WaveView2: View {
                                     .fontWeight(.bold)
                                     .lineLimit(1)
                                     .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
-                                    .padding()
 //                                    .rotationEffect(.degrees(90.0))
                             )
+                            .clipped()
                     }
                 }
                 
@@ -234,55 +240,25 @@ struct WaveView2: View {
                             self.isPost = false
                         }) {
                             Text("업로드")
+                                .foregroundColor(Color("mainColor2"))
                         }
                         Button( action: {
                             self.isPost = false
                         }) {
                             Text("뒤로가기")
+                                .foregroundColor(Color.red.opacity(0.5))
                         }
                     }
 
                 } // form
-                
-                
-
-                
-                
-//                Text("간편 업로드")
-//
-//                TextEditor(text: $content)
-//                    .frame(width: 500, height: 100, alignment: .center)
-//                    .background(Color(red: 229/255, green: 229/255, blue: 299/255, opacity: 1.0))
-//                    .cornerRadius(10)
-                
-//                HStack {
-//                    Button( action: {
-//                        if(checkText(content: content)){
-//                            self.hintText = "무언가를 입력해주세요....."
-//                        }
-//                        upload() { data in
-//
-//                        }
-//
-//                        self.isPost = false
-//                    }) {
-//                        Text("업로드")
-//                    }
-//
-//                    Button( action: {
-//                        self.isPost = false
-//                    }) {
-//                        Text("뒤로가기")
-//                    }
-//                }
-               
-//            }
-            
             
             }
-            
-        }   // VStack
-        .frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .center)
+        }   //vS
+            .frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .center)
+            .navigationTitle("Recording Relay")
+            .navigationBarTitleDisplayMode(.inline)
+    }// Nav
+        
         .onAppear{
             selectedSamples = 0..<Int(generator.audioBuffer.frameLength)
             do {
@@ -334,12 +310,9 @@ struct WaveView2: View {
             
             roomUserArray = roomUser[0] as! [Any]
             
-        }
         
-        
-        
-            
     }
+}
     
     func timeEdite() {
         

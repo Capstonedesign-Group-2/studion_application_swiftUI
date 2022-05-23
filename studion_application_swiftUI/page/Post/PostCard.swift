@@ -28,32 +28,51 @@ struct PostCard: View {
     
     var composers:[Any]?
     
+    @State var userId: Int
+    
     var body: some View {
             
         if UIDevice.isIpad {
             ZStack{
                 VStack {
                     HStack {
+                        
                         ZStack {
+                            
+                            Circle()
+                                .fill(Color("mainDark2"))
+                                .frame(minWidth: 50, minHeight: 50, alignment: .leading)
+                                .background(Circle().stroke(Color.white, lineWidth: 5))
+                                .padding()
+                                .overlay(
+                                    Text(title)
+                                        .font(.title)
+                                        .fontWeight(.bold)
+                                        .lineLimit(1)
+                                        .foregroundColor(.white)
+                                        .clipped()
+                                    )
+                                
+                            
                             Text(title)
+                                .foregroundColor(.black)
                                 .font(.largeTitle.weight(.bold))
                                 .matchedGeometryEffect(id: "title", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 0)
-                                        .stroke(Color.gray, lineWidth: 0.5)
-                            )
+                                    
+                                    Spacer()
+                                    if (audioURL != nil) {
+                                        MenuView(audioURLString: audioURL!, postUserId: userId, composers: composers)
+        //                                    .foregroundColor(Color("mainColor"))
+                                    }
                             
-                            if (audioURL != nil) {
-                                MenuView(audioURLString: audioURL!, composers: composers)
-                                    .foregroundColor(Color("mainColor"))
-                            } else {
-                                //
-                            }
-                            
-                        }
-                    }
+                        }// zS
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 0)
+                                .stroke(Color.gray, lineWidth: 0.5)
+                    )
+                }
                     
                 VStack {
                     if((image) != nil){
@@ -152,7 +171,7 @@ struct PostCard: View {
                             )
                             
                             if (audioURL != nil) {
-                                MenuView(audioURLString: audioURL!, composers: composers)
+                                MenuView(audioURLString: audioURL!, postUserId: userId, composers: composers)
                                     .foregroundColor(Color("mainColor"))
                             } else {
                                 //

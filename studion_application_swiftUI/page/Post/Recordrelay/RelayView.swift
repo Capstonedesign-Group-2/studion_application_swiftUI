@@ -81,7 +81,7 @@ struct RelayView: View {
                     print("drum end")
                 }
             }
-            .background(Color("mainDark").opacity(0.1))
+            .background(Color("mainDark3").opacity(0.1))
             
         } else { // iPhone View
             
@@ -122,6 +122,8 @@ struct RelayView: View {
 //                Spacer()
 
             } // Vstack
+            .background(Color("mainDark3").opacity(0.1))
+            
             .onAppear{
                 print("drum start")
             }
@@ -129,6 +131,7 @@ struct RelayView: View {
                 print("drum end")
             }
         }
+        
         
     }// body
         

@@ -6,12 +6,17 @@
 //
 
 import SwiftUI
+import AudioKit
 
 struct MenuView: View {
     
     var audioURLString: String
     
     @State var isActive: Bool = false
+    @State var postId = 0
+    
+    @State var postUserId: Int
+    @State var currentUserId = UserInfo.userInfo.user?.id
     
     var composers:[Any]?
     
@@ -25,6 +30,16 @@ struct MenuView: View {
                         Text("Go to Recoding Relay")
                         .font(.body).fontWeight(.semibold)
                     })
+                
+                if postUserId == currentUserId {
+                    Button(action: {
+                        delete()
+                    }) {
+                        Text("Delete")
+                            .foregroundColor(.orange.opacity(0.5))
+                    }
+                }
+                
                 } label: {
                         Label("", systemImage: "ellipsis")
                 }// menu
@@ -35,6 +50,12 @@ struct MenuView: View {
         NavigationLink(destination: RelayView(audioURLString: audioURLString, composers: composers), isActive: $isActive) {
             EmptyView()
         }// navLink
+    }
+    
+    func delete() {
+        PostController.sharedInstance.delete(postId: postId, userId: postUserId) { response in
+            
+        }
     }
 }
 
