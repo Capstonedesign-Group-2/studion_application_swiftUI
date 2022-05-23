@@ -24,6 +24,9 @@ struct RelayAudio: View {
     
     @State var isEdit = false
     
+    var composers:[Any]?
+    
+    @State var roomUser: [Any] = []
     
     var body: some View {
         VStack {
@@ -38,9 +41,9 @@ struct RelayAudio: View {
                         
                     } else {
                         
-                        print(audioURLString)
+//                        print(audioURLString)
                         let url = URL(string: (audioURLString))
-                        print(url)
+//                        print(url)
                         
                         playerItem = AVPlayerItem(url: url!)
                         player.replaceCurrentItem(with: playerItem)
@@ -66,6 +69,9 @@ struct RelayAudio: View {
                                 let file = try await AudioEngineController.sharedInstance.stopRecord()
                                 
                                 recordURL.append(file)
+                                
+                                
+                                
                                 
                                 isRecording = false
                                 
@@ -105,7 +111,7 @@ struct RelayAudio: View {
                             }) {
                                 Text("녹음 : \(index)")
                                     .sheet(isPresented: $isEdit) {
-//                                        WaveView2(isEdit: self.$isEdit, roomUser:)
+                                        WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
                                     }
                                     
                             }
@@ -118,5 +124,11 @@ struct RelayAudio: View {
                 
             } // HStack
         } // VStack
+        .onAppear{
+//            print("releay audio")
+//            print(composers)
+            roomUser = [composers]
+//            roomUser = [composers]
+        }
     }
 }

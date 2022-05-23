@@ -26,6 +26,7 @@ struct PostCard: View {
     //audio
     @State var audioURL: String?
     
+    var composers:[Any]?
     
     var body: some View {
             
@@ -43,7 +44,7 @@ struct PostCard: View {
                                     RoundedRectangle(cornerRadius: 0)
                                         .stroke(Color.gray, lineWidth: 0.5)
                             )
-                            MenuView(audioURLString: audioURL!)
+                            MenuView(audioURLString: audioURL!, composers: composers)
                             
                         }
                     }
@@ -144,7 +145,7 @@ struct PostCard: View {
                                         .stroke(Color.gray, lineWidth: 0.5)
                             )
                             
-                            MenuView(audioURLString: audioURL!)
+                            MenuView(audioURLString: audioURL!, composers: composers)
                             
                         }
                     }
@@ -228,6 +229,10 @@ struct PostCard: View {
             } //zS
             .onTapGesture { // disable blank touch
                 return
+            }
+            .onAppear{
+//                print("A")
+//                print(composers)
             }
 
         }// else

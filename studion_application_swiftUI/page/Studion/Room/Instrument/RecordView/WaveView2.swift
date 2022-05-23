@@ -176,6 +176,7 @@ struct WaveView2: View {
                 HStack {
                     Text("간편 업로드")
 
+                    
                     ForEach(0..<roomUserArray.count, id: \.self) { index in
                         
                         let userInfo = roomUserArray[index] as! Dictionary<String, Any>

@@ -23,7 +23,8 @@ struct RelayView: View {
         GridItem(.adaptive(minimum: 9, maximum: 9))
     ]
     
-
+    var composers:[Any]?
+    
     var body: some View {
         
         if UIDevice.isIpad {
@@ -31,7 +32,7 @@ struct RelayView: View {
             ZStack {
                 
                 VStack(spacing: 70) {
-                    RelayAudio(audioURLString: audioURLString)
+                    RelayAudio(audioURLString: audioURLString, composers: composers)
                     
                     HStack (spacing: 100){
                         
@@ -84,7 +85,7 @@ struct RelayView: View {
         } else { // iPhone View
             
             VStack (spacing: 20){
-                RelayAudio(audioURLString: audioURLString)
+                RelayAudio(audioURLString: audioURLString, composers: composers)
 //                Spacer()
     //                .frame(height: 20)
                 HStack (spacing: 20){

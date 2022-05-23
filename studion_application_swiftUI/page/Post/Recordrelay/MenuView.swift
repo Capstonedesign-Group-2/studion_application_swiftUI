@@ -13,6 +13,8 @@ struct MenuView: View {
     
     @State var isActive: Bool = false
     
+    var composers:[Any]?
+    
     var body: some View {
         
         VStack {
@@ -30,7 +32,7 @@ struct MenuView: View {
                 .foregroundColor(Color.black)
             }// vS
             
-        NavigationLink(destination: RelayView(audioURLString: audioURLString), isActive: $isActive) {
+        NavigationLink(destination: RelayView(audioURLString: audioURLString, composers: composers), isActive: $isActive) {
             EmptyView()
         }// navLink
     }
