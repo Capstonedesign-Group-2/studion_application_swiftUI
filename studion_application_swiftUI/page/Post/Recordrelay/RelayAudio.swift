@@ -105,7 +105,7 @@ struct RelayAudio: View {
                             }) {
                                 Text("녹음 : \(index)")
                                     .sheet(isPresented: $isEdit) {
-                                        WaveView2(isEdit: self.$isEdit)
+//                                        WaveView2(isEdit: self.$isEdit, roomUser:)
                                     }
                                     
                             }

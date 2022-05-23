@@ -32,6 +32,10 @@ struct InstrumentControllerView: View {
     @State var recordFilesPlayCheck: [Bool?] = []
     @State var recordFilesCurrentTime: [Double?] = []
     @State var recordFilesVolume: [URL?] = []
+    
+    var roomNumber: Int
+    
+    var roomUser: [Any]
         
     var body: some View {
         
@@ -52,7 +56,7 @@ struct InstrumentControllerView: View {
                                 GuitarView()
                                     .tag("guitar")
                                 
-                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime, recordFilesVolume: $recordFilesVolume)
+                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime, recordFilesVolume: $recordFilesVolume, roomUser: roomUser)
                                     .tag("rec")
 
                             }
@@ -119,12 +123,13 @@ struct InstrumentControllerView: View {
                                                 self.recordFilesPlayCheck.append(false)
                                                 self.recordFilesCurrentTime.append(0)
                                                 
-                                                let name = UUID().uuidString + ".wav"
-                                                let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
+//                                                let name = UUID().uuidString + ".wav"
+//                                                let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
                                                 
 //                                                MobileFFmpeg.execute("-i " + file.absoluteString + " -filter:a \"volume=0.8\" " + url.absoluteString)
 //                                                self.recordFilesVolume.append(url)
-                                                
+                                                let socket = SocketIO.sharedInstance.getSocket()
+                                                socket.emit("people_recording", self.roomNumber)
                                                 
                                                 
                                             } catch {
@@ -231,7 +236,7 @@ struct InstrumentControllerView: View {
                                     .tag("guitar")
                                     .offset(y:-40)
 
-                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime, recordFilesVolume: $recordFilesVolume)
+                                RecordView(recordFiles: $recordFiles, recordFilesPlayCheck: $recordFilesPlayCheck, recordFilesCurrentTime: $recordFilesCurrentTime, recordFilesVolume: $recordFilesVolume, roomUser: roomUser)
                                     .tag("rec")
                                     .offset(y:-40)
 
@@ -318,12 +323,14 @@ struct InstrumentControllerView: View {
                                                 self.recordFilesPlayCheck.append(false)
                                                 self.recordFilesCurrentTime.append(0)
                                                 
-                                                let name = UUID().uuidString + ".wav"
-                                                let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
+//                                                let name = UUID().uuidString + ".wav"
+//                                                let url = FileManager.default.temporaryDirectory.appendingPathComponent(name)
                                                 
 //                                                MobileFFmpeg.execute("-i " + file.absoluteString + " -filter:a \"volume=0.8\" " + url.absoluteString)
 //                                                self.recordFilesVolume.append(url)
                                                 
+                                                let socket = SocketIO.sharedInstance.getSocket()
+                                                socket.emit("people_recording", self.roomNumber)
                                                 
                                                 
                                             } catch {

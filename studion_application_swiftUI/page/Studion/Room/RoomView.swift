@@ -25,7 +25,7 @@ struct RoomView: View {
     @ObservedObject var webRTCConnect = WebRTCConnect()
     
     var body: some View {
-        InstrumentControllerView(selectRoomCheck: $selectRoomCheck, dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic, userArray: webRTCConnect.userArray, nameDic: webRTCConnect.nameDic)
+        InstrumentControllerView(selectRoomCheck: $selectRoomCheck, dcDic: webRTCConnect.dcDic, pcDic: webRTCConnect.pcDic, userArray: webRTCConnect.userArray, nameDic: webRTCConnect.nameDic, roomNumber: roomNumber, roomUser: webRTCConnect.roomUser)
         
 //        Text(WebRTCDictionaryController.sharedInstance.dcDic.description)
         .onAppear{
@@ -67,6 +67,7 @@ final class WebRTCConnect: ObservableObject {
 //    @Published var volumeDic: [String: Any] = [:]
     @Published var userArray: [String] = []
     @Published var nameDic: [String: String] = [:]
+    @Published var roomUser: [Any] = []
 
     
     init() {
@@ -129,6 +130,14 @@ final class WebRTCConnect: ObservableObject {
                 self.userArray = response["userArray"] as! [String]
                 self.nameDic = response["nameDic"] as! [String: String]
             }
+        }
+        
+        socket.on("people_recording_on") { data, ack in
+//            print("room users : \(data)")
+            
+            self.roomUser = data as! Array<Any>
+            
+            
         }
         
         

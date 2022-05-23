@@ -39,6 +39,10 @@ struct WaveView2: View {
     @State var endPointEditoer = 0.0
     @State var sendURL: URL?
     
+    var roomUser: [Any]
+    
+    @State var roomUserArray: [Any] = []
+    
     var body: some View {
         VStack {
             
@@ -120,6 +124,9 @@ struct WaveView2: View {
                             print("post save")
                             
                             timeEdite()
+                            
+                            
+                            
                             isPost.toggle()
                             
                         }) {
@@ -166,8 +173,29 @@ struct WaveView2: View {
                 .offset(y: -270)
             }
             else {
-                
-                Text("간편 업로드")
+                HStack {
+                    Text("간편 업로드")
+
+                    ForEach(0..<roomUserArray.count, id: \.self) { index in
+                        
+                        let userInfo = roomUserArray[index] as! Dictionary<String, Any>
+                        let user = userInfo["user"] as! Dictionary<String, Any>
+                        
+                        
+                        Circle()
+                            .fill(Color(red: 2/255, green: 52/255, blue: 63/255))
+                            .frame(width: 50, height: 50)
+                            .background(Circle().stroke(Color.white, lineWidth: 5))
+                            .overlay(
+                                Text(user["name"] as! String)
+                                    .font(.largeTitle)
+                                    .fontWeight(.bold)
+                                    .lineLimit(1)
+                                    .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
+//                                    .rotationEffect(.degrees(90.0))
+                            )
+                    }
+                } // HStack
         
                 TextEditor(text: $content)
                     .frame(width: 500, height: 100, alignment: .center)
@@ -244,7 +272,14 @@ struct WaveView2: View {
             
             UITextView.appearance().backgroundColor = .clear
             
+//            print(roomUser[0])
+//            print(roomUser.count)
+            
+            roomUserArray = roomUser[0] as! [Any]
+            
         }
+        
+        
         
             
     }
@@ -277,6 +312,19 @@ struct WaveView2: View {
             
             data["audio"] = try Data(contentsOf: self.sendURL!)
             data["audioURL"] = self.sendURL!
+            
+            var userArray: [Int] = []
+            
+            roomUserArray.enumerated().forEach {
+                let userName = $1 as! Dictionary<String, Any>
+                userArray.append(userName["user_id"] as! Int)
+//                let composer = "composer[\($0)]"
+//                data[composer] = userName["user_id"]
+                
+            }
+            
+//            print(data)
+            data["composers"] = userArray
             
             PostController.sharedInstance.create(data: data) { data in
                 var response = data as! Dictionary<String, Any>

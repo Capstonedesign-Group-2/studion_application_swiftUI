@@ -34,6 +34,7 @@ struct RecordView: View {
     @State var avkitPlayer = AVPlayer()
     @State var playerItem: AVPlayerItem?
     
+    var roomUser: [Any]
     
     
     var body: some View {
@@ -97,7 +98,7 @@ struct RecordView: View {
                                         .sheet(isPresented: $isEdit) {
                                             VStack {
                                                                                                 
-                                                WaveView2(isEdit: self.$isEdit)
+                                                WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
                                                 
                                             }
                                         }

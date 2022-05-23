@@ -34,10 +34,24 @@ public class PostController {
                 
             ]
 
-        let parameter : [String: Any] = [
+        var parameter : [String: Any] = [
             "content": data["content"]!,
             "user_id": UserInfo.userInfo.user?.id,
         ]
+            
+            print(data["composers"])
+            
+            if(data["composers"] != nil) {
+                let user_id = data["composers"] as! [Int]
+                
+                user_id.enumerated().forEach{
+                    let composer = "composers[\($0)]"
+                    parameter[composer] = $1
+                }
+            }
+            
+            print(parameter)
+            
             
             if(data["image"] != nil) {
                 print("image type")
@@ -79,9 +93,12 @@ public class PostController {
                 for (key, value) in parameter {
                                 if let temp = value as? String {
                                     multipartFormData.append(Data(temp.utf8), withName: key)
+                                    print("string")
                                 }
                                 if let temp = value as? Int {
                                     multipartFormData.append("\(temp)".data(using: .utf8)!, withName: key)
+                                    print(temp)
+//                                    print("\(key) : \(temp)".data(using: .utf8)!)
                                 }
 
                             }
@@ -107,7 +124,8 @@ public class PostController {
                 
 
             }, to: url, headers: headers).responseJSON { (response) in
-                print("Upload Data : \(response)")
+//                print("Upload Data : \(response)")
+                print("success")
             }
             
             
