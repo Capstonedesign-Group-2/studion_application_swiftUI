@@ -35,6 +35,9 @@ struct PostView: View {
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
                                 
+                                let audio = audios[0] as! Dictionary<String, Any>
+                                let composers = audio["composers"] as? [Any]
+                                
                                 
 //                                let image = images.map{ $0 }
                                 
@@ -50,7 +53,8 @@ struct PostView: View {
                                             content: self.p[index]!["content"] as! String,
                                             id: self.p[index]?["id"] as? Int,
                                             image: images.count == 0 ? nil : images[0]?["link"] as? String,
-                                            audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String
+                                            audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String,
+                                            composers: composers
                                         )
                                     } //vS
                                     
