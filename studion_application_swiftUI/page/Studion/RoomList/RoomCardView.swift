@@ -11,10 +11,13 @@ struct RoomCardView: View {
     
     var roomInfo: RoomCodableStruct.roomInfo
     
-    var color2 = Color(#colorLiteral(red: 0, green: 0.5452187657, blue: 0, alpha: 0.8470588235))
+//    var color2 = Color(#colorLiteral(red: 0, green: 0.5452187657, blue: 0, alpha: 0.8470588235))
 //    var color2 = Color(#colorLiteral(red: 0.5897991657, green: 1, blue: 0.7255712152, alpha: 0.8470588235))
-    var color1 = Color(red: 7/255, green: 85/255, blue: 59/255)
+//    var color1 = Color(red: 7/255, green: 85/255, blue: 59/255)
 //    var color2 = Color(red: 7/255, green: 85/255, blue: 59/255)
+    
+    var color1 = Color("mainColor3")
+    var color2 = Color("mainColor")
     
     
     var width: CGFloat = 250
@@ -22,8 +25,11 @@ struct RoomCardView: View {
     
 //    var color3 =  Color(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1))
 //    var color4 = Color(#colorLiteral(red: 0, green: 0.6787529588, blue: 0, alpha: 1))
-    var color3 = Color(red: 252/255, green: 246/255, blue: 245/255)
-    var color4 = Color(red: 206/255, green: 212/255, blue:106/255)
+//    var color3 = Color(red: 252/255, green: 246/255, blue: 245/255)
+//    var color4 = Color(red: 206/255, green: 212/255, blue:106/255)
+    
+    var color3 = Color("mainColor2")
+    var color4 = Color("mainColor")
     
     
     var body: some View {
@@ -75,7 +81,7 @@ struct RoomCardView: View {
     //                .offset(x: -25, y: 30)
                 
                 ZStack(alignment: .leading) {
-                    let multiplier = width / 4
+                    let multiplier = (UIScreen.main.bounds.width - 400) / 4
                     var percent: CGFloat = CGFloat(roomInfo.users.count)
                     
                     RoundedRectangle(cornerRadius: height, style: .continuous)
@@ -96,7 +102,7 @@ struct RoomCardView: View {
             }
              .padding(.bottom, 10)
             
-        } else {
+        } else { // iPhone
             
             ZStack {
                 RoundedRectangle(cornerRadius: 30)

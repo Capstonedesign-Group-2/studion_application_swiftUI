@@ -1,8 +1,8 @@
 //
-//  WaveView2.swift
+//  RecordWave.swift
 //  studion_application_swiftUI
 //
-//  Created by 김진홍 on 2022/05/06.
+//  Created by Jinho Kim on 2022/05/23.
 //
 
 import SwiftUI
@@ -10,11 +10,12 @@ import Waveform
 import AVFoundation
 import mobileffmpeg
 
-struct WaveView2: View {
-    @Binding var isEdit: Bool
+struct RecordWave: View {
+//    @Binding var isEdit: Bool
     
     @State var width: CGFloat = -10
     @State var width1: CGFloat = 622
+    @State var audioUrl: String
     
     @State var generator = WaveformGenerator(audioFile: try! AVAudioFile(forReading: RecordController.sharedInstance.getUrl()))!
     @State var selectedSamples = 0..<1
@@ -33,7 +34,6 @@ struct WaveView2: View {
     
     @State var isPost = false
     @State var content = ""
-    @State var hintText: String = "This is input form"
     
     
     @State var startPointEditer = 0.0
@@ -130,14 +130,14 @@ struct WaveView2: View {
                         
                     } // HStack
                     
-                    Button( action: {
-                            self.isEdit.toggle()
-                        }) {
-                            Text("end")
-                        }
-                        .onAppear{
-                            print("recording view")
-                        }
+//                    Button( action: {
+//                            self.isEdit.toggle()
+//                        }) {
+//                            Text("end")
+//                        }
+//                        .onAppear{
+//                            print("recording view")
+//                        }
                     
                 }   // VStack
                 
@@ -166,79 +166,38 @@ struct WaveView2: View {
                 .fill(Color.blue)
                 .opacity(0.1)
                 .offset(y: -270)
-                
-            } else {
-                
-                
-                Form {
-                    Section(header: Text("Simple Upload")){
-                        ZStack{
-                            if content.isEmpty {
-                                Text(hintText)
-                                    .foregroundColor(Color(UIColor.placeholderText))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 12)
-                            }
-                            TextEditor(text: $content)
-                                .frame(height: 600, alignment: .center)
-                        }
-                        
-                                                        
-                        
-                        Button( action: {
-                            if(checkText(content: content)){
-                                self.hintText = "무언가를 입력해주세요....."
-                            }
-                            upload() { data in
-                                
-                            }
-                            
-                            self.isPost = false
-                        }) {
-                            Text("업로드")
-                        }
-                        Button( action: {
-                            self.isPost = false
-                        }) {
-                            Text("뒤로가기")
-                        }
-                    }
-
-                } // form
-                
-                
-//                Text("간편 업로드")
-//
-//                TextEditor(text: $content)
-//                    .frame(width: 500, height: 100, alignment: .center)
-//                    .background(Color(red: 229/255, green: 229/255, blue: 299/255, opacity: 1.0))
-//                    .cornerRadius(10)
-                
-//                HStack {
-//                    Button( action: {
-//                        if(checkText(content: content)){
-//                            self.hintText = "무언가를 입력해주세요....."
-//                        }
-//                        upload() { data in
-//
-//                        }
-//
-//                        self.isPost = false
-//                    }) {
-//                        Text("업로드")
-//                    }
-//
-//                    Button( action: {
-//                        self.isPost = false
-//                    }) {
-//                        Text("뒤로가기")
-//                    }
-//                }
-               
-//            }
-            
-            
             }
+            else {
+                
+                Text("간편 업로드")
+        
+                TextEditor(text: $content)
+                    .frame(width: 500, height: 100, alignment: .center)
+                    .background(Color(red: 229/255, green: 229/255, blue: 299/255, opacity: 1.0))
+                    .cornerRadius(10)
+                
+                HStack {
+                    Button( action: {
+                        upload() { data in
+                            
+                        }
+                        
+                        self.isPost = false
+                    }) {
+                        Text("업로드")
+                    }
+                    
+                    Button( action: {
+                        self.isPost = false
+                    }) {
+                        Text("뒤로가기")
+                    }
+                }
+               
+            }
+            
+            
+            
             
         }   // VStack
         .frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .center)
@@ -312,8 +271,6 @@ struct WaveView2: View {
         
         self.sendURL = url
     }
-        
-
     
     func upload(handler: @escaping (Any) -> Void) {
         do {
@@ -343,20 +300,14 @@ struct WaveView2: View {
             print(error.localizedDescription)
         }
         
+
+        
         
     }
    
 }
-        
-        func checkText(content: String) -> Bool {
-            if(content == " " || content == ""){
-                return true
-            } else {
-                return false
-            }
-        }
 
-struct RangeSlider: View {
+struct RecordRangeSlider: View {
     
 //    @State var width : CGFloat = 0
 //    @State var width1: CGFloat = 622

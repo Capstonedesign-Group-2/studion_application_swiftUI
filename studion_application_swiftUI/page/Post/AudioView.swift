@@ -35,7 +35,7 @@ struct AudioView : View {
     //                Text(audioURL!)
                     
                     Capsule().fill(Color.black.opacity(0.08)).frame(height: 10)
-                    Capsule().fill(Color.green).frame(width: abs(self.width), height: 10)
+                    Capsule().fill(Color("mainColor")).frame(width: abs(self.width), height: 10)
                         .gesture(DragGesture()
                             .onChanged({ (value) in
                                 let x = value.location.x
@@ -66,6 +66,7 @@ struct AudioView : View {
                     
                     Button(action: {}, label: {
                         Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
+                            .foregroundColor(Color("mainColor"))
                     }).onTapGesture {
                         if self.isPlaying {
                             

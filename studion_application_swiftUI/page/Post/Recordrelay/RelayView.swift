@@ -11,6 +11,8 @@ import Combine
 import AVFoundation
 
 struct RelayView: View {
+    var audioURLString: String
+    
     var dcDic: [String: Any]?
 
     let instrumentController = InstrumentController()
@@ -29,7 +31,7 @@ struct RelayView: View {
             ZStack {
                 
                 VStack(spacing: 70) {
-                    RelayAudio()
+                    RelayAudio(audioURLString: audioURLString)
                     
                     HStack (spacing: 100){
                         
@@ -78,11 +80,12 @@ struct RelayView: View {
                     print("drum end")
                 }
             }
+            .background(Color("mainDark").opacity(0.1))
             
         } else { // iPhone View
             
             VStack (spacing: 20){
-
+                RelayAudio(audioURLString: audioURLString)
 //                Spacer()
     //                .frame(height: 20)
                 HStack (spacing: 20){

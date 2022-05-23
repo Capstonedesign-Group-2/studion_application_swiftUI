@@ -208,14 +208,14 @@ struct PayButton: View {
 
     //                                RoundedRectangle(cornerRadius: 16, style: .continuous)
                                 Circle()
-                                        .foregroundColor(.white)
+                                    .foregroundColor(.gray.opacity(0.5))
                                         .blur(radius: 4)
                                         .offset(x: -8, y: -8)
 
     //                                RoundedRectangle(cornerRadius: 16, style: .continuous)
                                 Circle()
                                         .fill(
-                                            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9019607843, green: 0.9294117647, blue: 0.9882352941, alpha: 1)), Color.white]), startPoint: .topLeading, endPoint: .bottomTrailing)
+                                            LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9019607843, green: 0.9294117647, blue: 0.9882352941, alpha: 1)), Color.white.opacity(0.5)]), startPoint: .topLeading, endPoint: .bottomTrailing)
                                             )
                                         .padding(2)
                                         .blur(radius: 2)

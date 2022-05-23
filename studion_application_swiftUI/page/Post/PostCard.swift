@@ -43,7 +43,12 @@ struct PostCard: View {
                                     RoundedRectangle(cornerRadius: 0)
                                         .stroke(Color.gray, lineWidth: 0.5)
                             )
-                            MenuView()
+                            if (audioURL != nil) {
+                                MenuView(audioURLString: audioURL!)
+                                    .foregroundColor(Color("mainColor"))
+                            } else {
+                                //
+                            }
                             
                         }
                     }
@@ -144,7 +149,7 @@ struct PostCard: View {
                                         .stroke(Color.gray, lineWidth: 0.5)
                             )
                             
-                            MenuView()
+                            MenuView(audioURLString: audioURL!)
                             
                         }
                     }
@@ -240,5 +245,4 @@ struct PostCard: View {
 //        PostCard(title: "title", content: "content")
 //    }
 //}
-
 

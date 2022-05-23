@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29095CA5283B24E0004FC929 /* RecordWave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29095CA4283B24E0004FC929 /* RecordWave.swift */; };
 		290A87AE2835000100DAE3B2 /* RelayAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290A87AD2835000100DAE3B2 /* RelayAudio.swift */; };
 		295DC7C2281793F1006A1BB7 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C1281793F1006A1BB7 /* CommentController.swift */; };
 		295DC7C42817B753006A1BB7 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C32817B753006A1BB7 /* CommentView.swift */; };
@@ -150,6 +151,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29095CA4283B24E0004FC929 /* RecordWave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordWave.swift; sourceTree = "<group>"; };
 		290A87AD2835000100DAE3B2 /* RelayAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayAudio.swift; sourceTree = "<group>"; };
 		295DC7C1281793F1006A1BB7 /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
 		295DC7C32817B753006A1BB7 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				29D19D482834FE7700F4FE29 /* MenuView.swift */,
 				29D19D4A2834FEB500F4FE29 /* RelayView.swift */,
 				290A87AD2835000100DAE3B2 /* RelayAudio.swift */,
+				29095CA4283B24E0004FC929 /* RecordWave.swift */,
 			);
 			path = Recordrelay;
 			sourceTree = "<group>";
@@ -979,6 +982,7 @@
 				55B98C2727E96F340057F168 /* SettingView.swift in Sources */,
 				295DC7C42817B753006A1BB7 /* CommentView.swift in Sources */,
 				55B98C5027EBF5350057F168 /* InstrumentController.swift in Sources */,
+				29095CA5283B24E0004FC929 /* RecordWave.swift in Sources */,
 				55B98C3627EA98E40057F168 /* RoomCardView.swift in Sources */,
 				55B98C1A27E88B7F0057F168 /* SplashScreen.swift in Sources */,
 				29D19D492834FE7700F4FE29 /* MenuView.swift in Sources */,
