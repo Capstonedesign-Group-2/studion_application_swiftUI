@@ -1,11 +1,11 @@
 {
   "images" : [
     {
-      "filename" : "bass-drum.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "bass-drum.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

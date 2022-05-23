@@ -107,11 +107,11 @@ struct StudionRoomList: View {
 
                         }
 
-                        
 
-                        }else {
+                        } else {
                             Spacer()
                             Text("방이 읎어")
+                                .foregroundColor(Color("mainDark"))
                                 .font(.largeTitle).fontWeight(.bold)
                             Spacer()
 
@@ -120,9 +120,10 @@ struct StudionRoomList: View {
 
                         
                     }   // VStack
+                
                 .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
                     Color.clear
-                        .frame(height: 50)
+                        .frame(height: 70)
                                  .background(Material.bar)
                 }
 

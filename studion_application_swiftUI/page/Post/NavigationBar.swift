@@ -22,7 +22,7 @@ struct NavigationBar: View {
             
             ZStack {
                 Color("mainColor")
-                    .edgesIgnoringSafeArea(.all)
+//                    .edgesIgnoringSafeArea(.all)
                 
                 Text(title)
                     .foregroundColor(Color.white)
@@ -31,8 +31,9 @@ struct NavigationBar: View {
                     .padding(.leading, 20)
                     .padding(.top, 20)
             }
-            .frame(height: 70)
+            .frame(height: 70, alignment: .top)
             .frame(maxHeight: .infinity, alignment: .top)
+//            .ignoresSafeArea(.all)
             
         } else {
             
@@ -68,9 +69,9 @@ struct NavigationBar: View {
 //                .padding(.top, 20)
                 
             }
-            .ignoresSafeArea(.all)
             .frame(height: 70)
             .frame(maxHeight: .infinity, alignment: .top)
+            .ignoresSafeArea(.all)
             
         } // if
         

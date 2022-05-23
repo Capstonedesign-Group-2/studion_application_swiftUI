@@ -110,6 +110,12 @@ struct MainView: View {
                 .padding(.horizontal, 230)
                 .padding(.vertical, 5)
                 .background(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                        .edgesIgnoringSafeArea(.bottom)
+                )
+                
                 
             }// zS
             .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -162,6 +168,11 @@ struct MainView: View {
                 .padding(.horizontal, 25)
                 .padding(.vertical, 5)
                 .background(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                )
+                .edgesIgnoringSafeArea(.bottom)
                 
             } //zS
             

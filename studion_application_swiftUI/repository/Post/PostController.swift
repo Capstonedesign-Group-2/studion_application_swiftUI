@@ -131,7 +131,6 @@ public class PostController {
             
             
     } else {
-            print("AA")
                 
             let response_data : [String: Any] = [
                 "status" : 401,
@@ -195,35 +194,25 @@ public class PostController {
 //****************************************************************************************************************
     
     public func delete(postId: Int, userId: Int, handler: @escaping (Any) -> Void) {
-        let url = api + "api/posts/\(postId)"
-        
+        let url = api + "api/posts\(postId)"
         
         var parameter : [String: Any] = [
-            "post_id": postId,
             "user_id": userId
         ]
         
-        AF.request(url, method: .delete, parameters: parameter).validate().responseData { response in
-            
-            var status = response.response?.statusCode ?? 500
-            
-                switch response.result{
-            
-                //통신성공
-                case .success(let data):
-                if(status == 200){
-                    print("Delete Success!!")
-                }else {
-                    print(status)
+        AF.request(url, method: .delete) // ????????????? error 405
+                .validate(statusCode: 200..<300)
+//                .validate(contentType: ["application/json"])
+                .responseData { response in
+                    switch response.result {
+                    case .success:
+                        print("Validation Successful")
+                    case let .failure(error):
+                        print(error)
+                    }
                 }
-            
-                //통신실패
-                case .failure(let error):
-                print("error: \(error)")
-            }
-        }
-    }
         
+    }
 }
 
 

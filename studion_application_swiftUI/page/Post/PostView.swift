@@ -89,8 +89,19 @@ struct PostView: View {
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
+                            
                             } // list
+                        
+                        
                                 .padding(.horizontal, 100)
+                                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                                    NavigationBar(title: "Sound cloud")
+                                        .frame(height: 50)
+                                        .background(Color("mainColor"))
+//                                    Color.clear
+//                                        .frame(height: 50)
+//                                        .background(Color.white)
+                                }
                         
                                 .refreshable {
                                     currentPage = 1
@@ -105,15 +116,7 @@ struct PostView: View {
                                     }
                                }
                             } // vS
-                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
-                                Color.clear
-                                    .frame(height: 50)
-                                    .background(Color.white)
-                            }
-                                NavigationBar(title: "Sound cloud")
-                   
-                   
-                   
+                                
                             .onAppear() {
                                 PostController.sharedInstance.show(page: currentPage) { data in
 //                                      print(data)
@@ -138,14 +141,15 @@ struct PostView: View {
                                 currentPage = 1
                                 p = []
                             }
+                        
                    
-                            .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
-                                Color.clear
-                                    .background(.ultraThinMaterial)
-                                    .frame(height: 50)
-                            }
-
-                        }
+                    .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
+                        Color.clear
+                            .background(.ultraThinMaterial)
+                            .frame(height: 50)
+                    }
+                   
+               }// zS
                
 
            } else { // iPhone
@@ -159,10 +163,7 @@ struct PostView: View {
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
 //                                let composers = audios["composers"] as? [Any]
-<<<<<<< HEAD
-=======
-                                
->>>>>>> 8fb25791d36844e14e7e35d7f5be9dbb29142547
+
                                 let audio = audios.count == 0 ? nil : (audios[0] as! Dictionary<String, Any>)
                                 let composers = audio == nil ? nil : audio!["composers"] as? [Any]
                                     

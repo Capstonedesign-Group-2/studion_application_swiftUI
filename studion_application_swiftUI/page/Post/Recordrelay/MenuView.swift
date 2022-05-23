@@ -53,9 +53,7 @@ struct MenuView: View {
     }
     
     func delete() {
-        PostController.sharedInstance.delete(postId: postId, userId: postUserId) { response in
-            
-        }
+        PostController.sharedInstance.delete(postId: postId, userId: postUserId, handler: {_ in })
     }
 }
 

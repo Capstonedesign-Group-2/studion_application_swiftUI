@@ -36,7 +36,7 @@ struct RelayView: View {
                     
                     HStack (spacing: 100){
                         
-                        PayButton(key: "Q", imageName: "ride")
+                        PayButton(key: "Q", imageName: "crash")
 
                         PayButton(key: "W", imageName: "hi-hat")
 
@@ -91,7 +91,7 @@ struct RelayView: View {
     //                .frame(height: 20)
                 HStack (spacing: 20){
                     
-                    PayButton(key: "Q", imageName: "ride")
+                    PayButton(key: "Q", imageName: "crash")
 
                     PayButton(key: "W", imageName: "hi-hat")
 

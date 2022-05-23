@@ -48,74 +48,161 @@ struct RecordView: View {
                 } else {
                     Spacer()
                         .frame(height: 50)
-                    ScrollView {
-                            VStack {
-                                ForEach(0..<recordFiles.count , id: \.self) {index in
+                    
+                    if UIDevice.isIpad {
+                        
+                        ScrollView {
+                                VStack {
+                                    ForEach(0..<recordFiles.count , id: \.self) {index in
 
-                                    HStack {
-                                        
-                                        VStack {
-                                            Button(action : {
+                                        HStack {
+                                            
+                                            VStack {
+                                                Button(action : {
+                                                    
+                                                    if(self.player!.isPlaying) {
+                                                        self.player!.stop()
+                                                    } else {
+                                                        do {
+                                                            self.player! = try AVAudioPlayer(contentsOf: self.recordFiles[(recordFiles.count-1) - index]!)
+                                                            self.player!.play()
+                                                        } catch {
+                                                            print(error.localizedDescription)
+                                                        }
+                                                    }
+                                                    
+                                                    
+                                                }) {
+                                                    Image("record-rm")
+                                                        .resizable()
+                                                        .frame(width: 400, height: 400)
+                                                }
+                                            
                                                 
-                                                if(self.player!.isPlaying) {
-                                                    self.player!.stop()
-                                                } else {
-                                                    do {
-                                                        self.player! = try AVAudioPlayer(contentsOf: self.recordFiles[(recordFiles.count-1) - index]!)
-                                                        self.player!.play()
-                                                    } catch {
-                                                        print(error.localizedDescription)
+                                                
+                                                Text("record - \((recordFiles.count-1) - index + 1)")
+                                                    .font(.largeTitle).fontWeight(.bold)
+                                                    .foregroundColor(Color("mainDark"))
+                                                    .frame(width: 400)
+                                                    .onTapGesture {
+                                                        RecordController.sharedInstance.setUrl(url: recordFiles[(recordFiles.count-1) - index]!)
+                                                        self.isEdit.toggle()
+                                                    }
+                                                    .sheet(isPresented: $isEdit) {
+                                                        VStack {
+                                                                                                            
+                                                            WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
+                                                            
+                                                        }
+                                                    }
+                                            }   // VStack
+                                            
+                                            Spacer()
+                                                .frame(width: 50)
+                                            
+//                                            Button( action: {
+//
+//                                                RecordController.sharedInstance.setUrl(url: recordFiles[(recordFiles.count-1) - index]!)
+//
+//
+//                                                self.isEdit.toggle()
+//                                            }) {
+//                                                Text("edit")
+//                                                    .font(.title3).fontWeight(.semibold)
+//                                                    .foregroundColor(Color("mainColor3"))
+//                                            }
+//                                            .sheet(isPresented: $isEdit) {
+//                                                VStack {
+//
+//                                                    WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
+//
+//                                                }
+//                                            }
+                                            
+                                            
+                                        }   // HStack
+                                }   // ForEach
+                            }   // VStack
+                        }   // ScrollView
+                        .frame(width: UIScreen.main.bounds.width, alignment: .center)
+                        
+                        
+                    } else {
+                        ScrollView {
+                                VStack {
+                                    ForEach(0..<recordFiles.count , id: \.self) {index in
+
+                                        HStack {
+                                            
+                                            VStack {
+                                                Button(action : {
+                                                    
+                                                    if(self.player!.isPlaying) {
+                                                        self.player!.stop()
+                                                    } else {
+                                                        do {
+                                                            self.player! = try AVAudioPlayer(contentsOf: self.recordFiles[(recordFiles.count-1) - index]!)
+                                                            self.player!.play()
+                                                        } catch {
+                                                            print(error.localizedDescription)
+                                                        }
+                                                    }
+                                                    
+                                                    
+                                                }) {
+                                                    Image("record-rm")
+                                                        .resizable()
+                                                        .frame(width: 100, height: 100)
+                                                }
+                                                .sheet(isPresented: $isEdit) {
+                                                    VStack {
+                                                                                                        
+                                                        WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
+                                                        
                                                     }
                                                 }
                                                 
                                                 
-                                            }) {
-                                                Image("record-rm")
-                                                    .resizable()
-                                                    .frame(width: 100, height: 100)
-                                            }
+                                                Text("record - \((recordFiles.count-1) - index + 1)")
+                                                    .foregroundColor(Color("mainDark"))
+                                                    .frame(width: 100)
+                                                    .onTapGesture {
+                                                        RecordController.sharedInstance.setUrl(url: recordFiles[(recordFiles.count-1) - index]!)
+                                                        self.isEdit.toggle()
+                                                    }
+                                            }   // VStack
                                             
-                                            Text("record - \((recordFiles.count-1) - index)")
-                                                .frame(width: 100)
-                                        }   // VStack
-                                        
-                                        Spacer()
-                                            .frame(width: 30)
-                                        
-
-                                        
-                                        
-                                                                                
-                                        Button( action: {
+                                            Spacer()
+                                                .frame(width: 30)
                                             
-                                            RecordController.sharedInstance.setUrl(url: recordFiles[(recordFiles.count-1) - index]!)
 
                                             
-                                            self.isEdit.toggle()
-                                        }) {
-                                            Text("edit")
-                                        }
-                                        .sheet(isPresented: $isEdit) {
-                                            VStack {
-                                                                                                
-                                                WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
-                                                
-                                            }
-                                        }
-                                    }   // HStack
-                                    
-                                    
-                                    
-                                    
-            
-                                
-                            }   // ForEach
-                        }   // VStack
-                    }   // ScrollView
-                    .frame(width: UIScreen.main.bounds.width)
-                    
-                    
-                
+                                            
+                                                                                    
+//                                            Button( action: {
+//
+//                                                RecordController.sharedInstance.setUrl(url: recordFiles[(recordFiles.count-1) - index]!)
+//
+//
+//                                                self.isEdit.toggle()
+//                                            }) {
+//                                                Text("edit")
+//                                                    .font(.title3).fontWeight(.semibold)
+//                                                    .foregroundColor(Color("mainColor3"))
+//                                            }
+//                                            .sheet(isPresented: $isEdit) {
+//                                                VStack {
+//
+//                                                    WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
+//
+//                                                }
+//                                            }
+                                        }   // HStack
+                                }   // ForEach
+                            }   // VStack
+                        }   // ScrollView
+                        .frame(width: UIScreen.main.bounds.width)
+                    }
                 
             }
         
