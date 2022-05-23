@@ -20,9 +20,16 @@ struct SplashScreen: View {
         NavigationView {
             
             ZStack {
-                Image("Logo-1")
-//                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                VStack {
+                    Image("Logo-1")
+//                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .padding(.bottom, 25)
+                    Image("Logo")
+//                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
+//                    .aspectRatio(contentMode: .fit)
                 
                     NavigationLink(destination: LoginView(), isActive: $loginStatus ,label: {} )
                     .isDetailLink(false)

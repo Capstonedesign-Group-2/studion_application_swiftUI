@@ -95,6 +95,7 @@ struct registerTitle: View {
        Text("New Account")
             .font(.title)
             .fontWeight(.semibold)
+            .foregroundColor(Color("mainColor3"))
             .padding(.top, 30)
     }
 }
@@ -271,7 +272,7 @@ struct registerButtonLayout: View {
             .foregroundColor(.white)
             .padding()
             .frame(width: 300, height: 60)
-            .background(Color.green)
+            .background(Color("mainColor3"))
             .cornerRadius(15.0)
     }
 }

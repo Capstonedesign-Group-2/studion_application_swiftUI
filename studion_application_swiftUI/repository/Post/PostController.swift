@@ -189,6 +189,40 @@ public class PostController {
               }
           }
     } // show
+    
+//****************************************************************************************************************
+//    Delete
+//****************************************************************************************************************
+    
+    public func delete(postId: Int, userId: Int, handler: @escaping (Any) -> Void) {
+        let url = api + "api/posts/\(postId)"
+        
+        
+        var parameter : [String: Any] = [
+            "post_id": postId,
+            "user_id": userId
+        ]
+        
+        AF.request(url, method: .delete, parameters: parameter).validate().responseData { response in
+            
+            var status = response.response?.statusCode ?? 500
+            
+                switch response.result{
+            
+                //통신성공
+                case .success(let data):
+                if(status == 200){
+                    print("Delete Success!!")
+                }else {
+                    print(status)
+                }
+            
+                //통신실패
+                case .failure(let error):
+                print("error: \(error)")
+            }
+        }
+    }
         
 }
 

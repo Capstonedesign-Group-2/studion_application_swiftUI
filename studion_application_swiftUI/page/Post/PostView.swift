@@ -54,7 +54,8 @@ struct PostView: View {
                                             id: self.p[index]?["id"] as? Int,
                                             image: images.count == 0 ? nil : images[0]?["link"] as? String,
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String,
-                                            composers: composers
+                                            composers: composers,
+                                            userId: self.p[index]!["user_id"] as! Int
                                         )
                                     } //vS
                                     
@@ -69,6 +70,7 @@ struct PostView: View {
                                         }
                                         
                                         print("currentPage : \(currentPage)")
+                                        print("lastPage : \(lastPage)")
                                         
                                         PostController.sharedInstance.show(page: currentPage) { data in
                                             let response = data as! Dictionary<String, Any>
@@ -157,6 +159,10 @@ struct PostView: View {
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
 //                                let composers = audios["composers"] as? [Any]
+<<<<<<< HEAD
+=======
+                                
+>>>>>>> 8fb25791d36844e14e7e35d7f5be9dbb29142547
                                 let audio = audios.count == 0 ? nil : (audios[0] as! Dictionary<String, Any>)
                                 let composers = audio == nil ? nil : audio!["composers"] as? [Any]
                                     
@@ -167,7 +173,8 @@ struct PostView: View {
                                             id: self.p[index]?["id"] as? Int,
                                             image: images.count == 0 ? nil : images[0]?["link"] as? String,
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String,
-                                            composers: composers
+                                            composers: composers,
+                                            userId: self.p[index]!["user_id"] as! Int
                                         )
                                     } //vS
                                     

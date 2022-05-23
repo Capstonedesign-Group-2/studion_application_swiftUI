@@ -208,7 +208,7 @@ struct loginButtonLayout: View {
             .foregroundColor(.white)
             .padding()
             .frame(width: 250, height: 60)
-            .background(Color.green)
+            .background(Color("mainColor3"))
             .cornerRadius(16.0)
     }
 }

@@ -9,14 +9,19 @@ import SwiftUI
 
 struct ProgressView: View {
     var body: some View {
-        Image("Logo")
-            .resizable()
-            .aspectRatio(contentMode: .fit)
+        VStack {
+            Image("Logo-1")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+            Image("Logo")
+                .resizable()
+                .aspectRatio(contentMode: .fit)
+        }
     }
 }
 
-struct ProgressView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProgressView()
-    }
-}
+//struct ProgressView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        ProgressView()
+//    }
+//}
