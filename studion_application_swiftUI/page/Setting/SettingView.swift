@@ -23,7 +23,7 @@ struct SettingView: View {
                 }) {Text("Logout")}
             }
             .alert(isPresented: $logoutToggle) {
-                Alert(title: Text("로그아웃?"), primaryButton: .destructive(Text("응!")){
+                Alert(title: Text("ログアウトしますか。"), primaryButton: .destructive(Text("確認")){
                     self.logout() {data in
                         if(data as! Bool == true) {
                             print("zz")
@@ -33,12 +33,12 @@ struct SettingView: View {
                             self.logoutStatus = true
                         }
                     }
-                }, secondaryButton: .cancel(Text("아뇨?")) {})
+                }, secondaryButton: .cancel(Text("戻る")) {})
             }
-            .alert("로그아웃 오류!", isPresented: $logoutStatus) {
-                Button("응") {}
+            .alert("ログアウトエラー", isPresented: $logoutStatus) {
+                Button("はい") {}
             } message : {
-                Text("조금 있다 다시")
+                Text("後でやり直しましょう。")
             }
             
             NavigationLink(destination: LoginView(), isActive: $isLogout, label: {})

@@ -41,9 +41,10 @@ struct RegisterView: View {
                         Button(action : {
                             self.registerStatus = false
                         }) {
-                            Text("로그인")
+                            Text("ログイン")
+                                .foregroundColor(Color("mainColor3"))
                         }
-                        Text("하러가기")
+                        Text("しに行く")
                     }
                 }
                 .frame(width: 600, alignment: .center)
@@ -70,9 +71,10 @@ struct RegisterView: View {
                         Button(action : {
                             self.registerStatus = false
                         }) {
-                            Text("로그인")
+                            Text("ログイン")
+                                .foregroundColor(Color("mainColor3"))
                         }
-                        Text("하러가기")
+                        Text("しに行く")
                     }
                 }
                 
@@ -92,7 +94,7 @@ struct RegisterView: View {
 
 struct registerTitle: View {
     var body: some View{
-       Text("New Account")
+       Text("新しいアカウント")
             .font(.title)
             .fontWeight(.semibold)
             .foregroundColor(Color("mainColor3"))
@@ -135,7 +137,7 @@ struct registerNameForm: View {
     @Binding var name: String
     
     var body: some View {
-        TextField("name", text: $name)
+        TextField("ネーム", text: $name)
             .padding()
             .background(registerLightGreyColor)
             .cornerRadius(15.0)
@@ -160,7 +162,7 @@ struct registerPasswordForm: View {
     @Binding var password: String
     
     var body: some View {
-        SecureField("Password", text: $password)
+        SecureField("パスワード", text: $password)
             .padding()
             .background(registerLightGreyColor)
             .cornerRadius(15.0)
@@ -172,7 +174,7 @@ struct registerPasswordConfrimForm: View {
     @Binding var passwordConfirm: String
     
     var body: some View {
-        SecureField("PasswordConfrim", text: $passwordConfirm)
+        SecureField("パスワード確認", text: $passwordConfirm)
             .padding()
             .background(registerLightGreyColor)
             .cornerRadius(15.0)
@@ -198,14 +200,14 @@ struct registerButton: View {
     var body: some View {
         Button(action: {
             if (blackCheck(name: name, email: email, password: password, passwordConfrim: passwordConfrim)) {
-                self.registerErrorTitle = "공백!"
-                self.registerError = "어딘가에 공백이 있어요!!"
+                self.registerErrorTitle = "ブランク!"
+                self.registerError = "どこかにブランクがあります!!"
                 self.registerErrorStatus = true
                 
                 return
             } else if (passwordCheck(password: password, passwordConfrim: passwordConfrim)) {
-                self.registerErrorTitle = "비밀번호가 같지 않아요!!"
-                self.registerError = "비밀번호좀 같게 해줘요!!"
+                self.registerErrorTitle = "パスワードエラー!!"
+                self.registerError = "パスワードが異なります。!!"
                 self.registerErrorStatus = true
                 
                 return
@@ -218,8 +220,8 @@ struct registerButton: View {
                 
                 if(register["status"] as! Int == 422) {
                     print(register)
-                    self.registerErrorTitle = "회원가입 오류"
-                    self.registerError = "이미 가입이 되어 있는 이메일 입니다."
+                    self.registerErrorTitle = "会員登録エラー"
+                    self.registerError = "既に登録済みのアカウントです。"
                     self.registerErrorStatus = true
                     return
                 } else if(register["status"] as! Int == 200) {

@@ -10,10 +10,11 @@ import AudioKit
 
 struct MenuView: View {
     
-    var audioURLString: String
+    @State var audioURLString: String = ""
     
     @State var isActive: Bool = false
-    @State var postId = 0
+    @State var isDelete: Bool = false
+    @State var postId: Int?
     
     @State var postUserId: Int
     @State var currentUserId = UserInfo.userInfo.user?.id
@@ -24,28 +25,54 @@ struct MenuView: View {
         
         VStack {
             Menu {
-                Button(action: {
-                    self.isActive = true
-                }, label: {
-                        Text("Go to Recoding Relay")
-                        .font(.body).fontWeight(.semibold)
-                    })
+                
+                if audioURLString != "" {
+                    
+                    Button(action: {
+                        self.isActive = true
+                    }, label: {
+                            Text("録音リレー")
+                            .font(.body).fontWeight(.semibold)
+                        })
+                } else {// audioUrlCheck
+                    Text("音楽ファイルがありません。")
+                }
                 
                 if postUserId == currentUserId {
                     Button(action: {
-                        delete()
-                    }) {
-                        Text("Delete")
-                            .foregroundColor(.orange.opacity(0.5))
-                    }
+                        self.isDelete = true
+                    }, label: {
+                        Text("削除")
+                            .foregroundColor(Color.red.opacity(0.5))
+                    })
                 }
                 
                 } label: {
                         Label("", systemImage: "ellipsis")
+                        .foregroundColor(Color.black)
                 }// menu
                 .frame(maxWidth: .infinity, alignment: .trailing)
-                .foregroundColor(Color.black)
+
             }// vS
+        .alert(isPresented: $isDelete) {
+            Alert(title: Text("Delete"),
+                    message: Text("Are you sure??"),
+                  primaryButton: .default (
+                    {
+                        Text("Cancel")
+                    }(), action: {
+                        self.isDelete = false
+                    }),
+                  secondaryButton: .destructive(
+                    {
+                        Text("Delete")
+                            .foregroundColor(.red.opacity(0.5))
+                    }(), action: {
+                        delete()
+                        
+                    })
+            )
+        }
             
         NavigationLink(destination: RelayView(audioURLString: audioURLString, composers: composers), isActive: $isActive) {
             EmptyView()
@@ -53,7 +80,7 @@ struct MenuView: View {
     }
     
     func delete() {
-        PostController.sharedInstance.delete(postId: postId, userId: postUserId, handler: {_ in })
+        PostController.sharedInstance.delete(postId: postId!, userId: postUserId, handler: {_ in })
     }
 }
 

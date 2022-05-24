@@ -10,7 +10,7 @@ import AVFoundation
 
 struct CreateView: View {
     
-    @State var hintText: String = "This is input form"
+    @State var hintText: String = "入力フォーム"
     @State var content: String = ""
     @State var image: Data?
     @State var audio: Data?
@@ -28,7 +28,7 @@ struct CreateView: View {
                 ZStack {
                     VStack {
                         Form {
-                            Section(header: Text("New Post")){
+                            Section(header: Text("新しくサウせい")){
                                 ZStack{
                                     if content.isEmpty {
                                         Text(hintText)
@@ -44,7 +44,7 @@ struct CreateView: View {
                                 Button(action: {
                                     showingImagePicker.toggle()
                                 }) {
-                                    Text("Pick ImageFile")
+                                    Text("写真アップロード")
                                         .foregroundColor(Color("mainColor"))
                                 }
                                 
@@ -62,20 +62,20 @@ struct CreateView: View {
                                     showingAudioPicker.toggle()
                                     print(showingAudioPicker)
                                 }) {
-                                    Text("Pick AudioFile")
+                                    Text("音楽ファイルをアップロード")
                                         .foregroundColor(Color("mainColor"))
                                 }
                                 
                                 
                                     Button(action: {
                                         if(checkText(content: content)){
-                                            self.hintText = "무언가를 입력해주세요....."
+                                            self.hintText = "文字を入力してください。"
                                         }
                                         create()
                                         content = ""
                                     })
                                     {
-                                    Text("Submit")
+                                    Text("登録")
                                         .foregroundColor(Color("mainColor"))
                                 }
                             } // form

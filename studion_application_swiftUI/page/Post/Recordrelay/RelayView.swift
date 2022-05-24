@@ -31,8 +31,13 @@ struct RelayView: View {
             
             ZStack {
                 
-                VStack(spacing: 70) {
+                VStack {
                     RelayAudio(audioURLString: audioURLString, composers: composers)
+                }
+//                    Spacer()
+                
+                VStack(spacing: 70) {
+                    
                     
                     HStack (spacing: 100){
                         

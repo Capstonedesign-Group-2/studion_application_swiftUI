@@ -37,22 +37,22 @@ struct PostCard: View {
                 VStack {
                     HStack {
                         
-                        ZStack {
+                        HStack {
                             
                             Circle()
                                 .fill(Color("mainDark2"))
                                 .frame(minWidth: 50, minHeight: 50, alignment: .leading)
                                 .background(Circle().stroke(Color.white, lineWidth: 5))
-                                .padding()
                                 .overlay(
                                     Text(title)
-                                        .font(.title)
+                                        .font(.title2)
                                         .fontWeight(.bold)
-                                        .lineLimit(1)
+                                        .lineLimit(0)
                                         .foregroundColor(.white)
-                                        .clipped()
                                     )
-                                
+                                .clipped()
+                                .padding(.horizontal)
+//                                Spacer()
                             
                             Text(title)
                                 .foregroundColor(.black)
@@ -63,8 +63,10 @@ struct PostCard: View {
                                     
                                     Spacer()
                                     if (audioURL != nil) {
-                                        MenuView(audioURLString: audioURL!, postUserId: userId, composers: composers)
+                                        MenuView(audioURLString: audioURL!, postId: id, postUserId: userId, composers: composers)
         //                                    .foregroundColor(Color("mainColor"))
+                                    } else {
+                                        MenuView(audioURLString: "", postId: id, postUserId: userId, composers: composers)
                                     }
                             
                         }// zS
@@ -171,10 +173,10 @@ struct PostCard: View {
                             )
                             
                             if (audioURL != nil) {
-                                MenuView(audioURLString: audioURL!, postUserId: userId, composers: composers)
+                                MenuView(audioURLString: audioURL!, postId: id, postUserId: userId, composers: composers)
                                     .foregroundColor(Color("mainColor"))
                             } else {
-                                //
+                                MenuView(audioURLString: "", postId: id, postUserId: userId, composers: composers)
                             }
                             
                         }

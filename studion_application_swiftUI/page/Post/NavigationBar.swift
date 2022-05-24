@@ -25,7 +25,7 @@ struct NavigationBar: View {
 //                    .edgesIgnoringSafeArea(.all)
                 
                 Text(title)
-                    .foregroundColor(Color.white)
+                    .foregroundColor(.white.opacity(0.9))
                     .font(.largeTitle.weight(.bold))
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(.leading, 20)

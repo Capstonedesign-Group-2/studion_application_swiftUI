@@ -194,13 +194,22 @@ public class PostController {
 //****************************************************************************************************************
     
     public func delete(postId: Int, userId: Int, handler: @escaping (Any) -> Void) {
-        let url = api + "api/posts\(postId)"
+        
+        let tokenController = JWTToken()
+        let TOKEN:String? = tokenController.getToken()
+        
+        if (TOKEN != nil) {
+            let url = api + "api/posts/\(postId)"
+            let headers: HTTPHeaders = [
+                "Authorization" : "Bearer \(TOKEN!)"
+            ]
         
         var parameter : [String: Any] = [
             "user_id": userId
         ]
+        print(url)
         
-        AF.request(url, method: .delete) // ????????????? error 405
+        AF.request(url, method: .delete, parameters: parameter, headers: headers) // ????????????? error 405
                 .validate(statusCode: 200..<300)
 //                .validate(contentType: ["application/json"])
                 .responseData { response in
@@ -210,8 +219,13 @@ public class PostController {
                     case let .failure(error):
                         print(error)
                     }
-                }
-        
+                }//af
+        } else {
+            let response_data : [String: Any] = [
+                "status" : 401,
+            ]
+            handler(response_data)
+        }
     }
 }
 
