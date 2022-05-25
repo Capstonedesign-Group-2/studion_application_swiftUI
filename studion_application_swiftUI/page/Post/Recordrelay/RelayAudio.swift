@@ -37,74 +37,63 @@ struct RelayAudio: View {
                 
                 VStack {
                     
-                    HStack {
+                    
+                    VStack {
+                    
+                        RelayAudioView(audioURL: audioURLString, isPlaying: $isPlaying)
+                                .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+                                .padding(.horizontal , 150)
+                                .padding(.vertical, 50)
                         
-                        Button( action: {
-
-                            if isPlaying {
-
-                                player.pause()
-                                self.isPlaying = false
-
-                            } else {
-
-                                print(audioURLString)
-                                let url = URL(string: (audioURLString))
-                                print(url)
-
-                                playerItem = AVPlayerItem(url: url!)
-                                player.replaceCurrentItem(with: playerItem)
-
-                                player.play()
-
-                                self.isPlaying = true
-
-                            }
-                        }) {
-                            Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
-                                .foregroundColor(Color("mainColor"))
-                        }
-                        
-                        Button( action: {
                             
-                            if self.isRecording {
+                            Button( action: {
                                 
-                                Task {
+                                if self.isRecording {
+                                    
+                                    Task {
+                                        do {
+                                            let file = try await AudioEngineController.sharedInstance.stopRecord()
+                                            
+                                            recordURL.append(file)
+                                            self.isRecording = false
+                                            self.isPlaying = false
+                                            
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
+                                    }
+                                    
+                                } else {
                                     do {
-                                        let file = try await AudioEngineController.sharedInstance.stopRecord()
-                                        
-                                        recordURL.append(file)
-                                        self.isRecording = false
-                                        
+                                        try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .mixWithOthers)
+                                        try AVAudioSession.sharedInstance().setActive(true)
                                     } catch {
                                         print(error.localizedDescription)
                                     }
-                                }
-                                
-                            } else {
-                                do {
-                                    try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .mixWithOthers)
-                                    try AVAudioSession.sharedInstance().setActive(true)
-                                } catch {
-                                    print(error.localizedDescription)
-                                }
-                                
-                                AudioEngineController.sharedInstance.startRecord() { data in
                                     
+                                    AudioEngineController.sharedInstance.startRecord() { data in
+                                        
+                                    }
+                                    
+                                    self.isRecording = true
+                                    self.isPlaying = true
                                 }
                                 
-                                self.isRecording = true
+                            } ) {
+                                
+                                Image(systemName: isRecording ? "record.circle.fill" : "record.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .font(.largeTitle)
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(isRecording ? .red.opacity(0.5) : Color("mainColor"))
                             }
-                            
-                        } ) {
-                            Text(self.isRecording ? "ストップ" : "録音開始")
-                                .foregroundColor(self.isRecording ? Color.red.opacity(0.5) : Color("mainColor3"))
-                            
-//                            Spacer()
-                        }
+                        
+                        
+                    } // HStack
                         
                         if recordURL.count != 0 {
-                            VStack {
+                            HStack {
                                 ForEach(0..<recordURL.count, id: \.self) { index in
                                     Button( action : {
                                         
@@ -113,20 +102,26 @@ struct RelayAudio: View {
                                         self.isEdit = true
                                         
                                     }) {
-                                        Text("録音ファイル : \(index + 1)")
+                                        Image(systemName: "mic.fill")
+                                            .foregroundColor(Color("mainColor3"))
+                                            .padding()
+                                        
+                                        Text("\(index + 1)")
+                                            .foregroundColor(Color("mainColor3"))
+                                            .padding()
                                             .sheet(isPresented: $isEdit) {
                                                 WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
                                             }
                                             
                                     }
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color("mainColor"), lineWidth: 1)
+                                    )
                                 }
-                                    
-                            }
+                            }// hS
                         }
                         
-                        
-                        
-                    } // HStack
                     
                     
                 } // VStack

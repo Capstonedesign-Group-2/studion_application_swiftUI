@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		290A87AE2835000100DAE3B2 /* RelayAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290A87AD2835000100DAE3B2 /* RelayAudio.swift */; };
+		290D3A43283DCB57003D77BB /* RelayAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290D3A42283DCB57003D77BB /* RelayAudioView.swift */; };
 		295DC7C2281793F1006A1BB7 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C1281793F1006A1BB7 /* CommentController.swift */; };
 		295DC7C42817B753006A1BB7 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C32817B753006A1BB7 /* CommentView.swift */; };
 		2992C4E427FDB465008EFFCA /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992C4E327FDB465008EFFCA /* NavigationBar.swift */; };
@@ -151,6 +152,7 @@
 
 /* Begin PBXFileReference section */
 		290A87AD2835000100DAE3B2 /* RelayAudio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayAudio.swift; sourceTree = "<group>"; };
+		290D3A42283DCB57003D77BB /* RelayAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelayAudioView.swift; sourceTree = "<group>"; };
 		295DC7C1281793F1006A1BB7 /* CommentController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentController.swift; sourceTree = "<group>"; };
 		295DC7C32817B753006A1BB7 /* CommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentView.swift; sourceTree = "<group>"; };
 		2992C4E327FDB465008EFFCA /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
@@ -331,6 +333,7 @@
 				29D19D482834FE7700F4FE29 /* MenuView.swift */,
 				29D19D4A2834FEB500F4FE29 /* RelayView.swift */,
 				290A87AD2835000100DAE3B2 /* RelayAudio.swift */,
+				290D3A42283DCB57003D77BB /* RelayAudioView.swift */,
 			);
 			path = Recordrelay;
 			sourceTree = "<group>";
@@ -957,6 +960,7 @@
 			files = (
 				55B98C3B27EAA1530057F168 /* RoomListController.swift in Sources */,
 				29D19D3E28337BD700F4FE29 /* CreateScreen.swift in Sources */,
+				290D3A43283DCB57003D77BB /* RelayAudioView.swift in Sources */,
 				555E647527FD67F900C449BC /* RecordController.swift in Sources */,
 				55B98C3F27EABC9B0057F168 /* RoomCardModalView.swift in Sources */,
 				550D5F70280957880059BF85 /* Player1View.swift in Sources */,

@@ -35,13 +35,13 @@ struct PostCard: View {
         if UIDevice.isIpad {
             ZStack{
                 VStack {
-                    HStack {
-                        
+                    
+                    //title
+                    ZStack {
                         HStack {
-                            
                             Circle()
                                 .fill(Color("mainDark2"))
-                                .frame(minWidth: 50, minHeight: 50, alignment: .leading)
+                                .frame(width: 50, height: 50, alignment: .leading)
                                 .background(Circle().stroke(Color.white, lineWidth: 5))
                                 .overlay(
                                     Text(title)
@@ -51,30 +51,32 @@ struct PostCard: View {
                                         .foregroundColor(.white)
                                     )
                                 .clipped()
-                                .padding(.horizontal)
-//                                Spacer()
+                                .padding(.all, 10)
                             
                             Text(title)
                                 .foregroundColor(.black)
                                 .font(.largeTitle.weight(.bold))
                                 .matchedGeometryEffect(id: "title", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
+                                .padding(.vertical, 10)
+                        }// hS
                                     
-                                    Spacer()
-                                    if (audioURL != nil) {
-                                        MenuView(audioURLString: audioURL!, postId: id, postUserId: userId, composers: composers)
-        //                                    .foregroundColor(Color("mainColor"))
-                                    } else {
-                                        MenuView(audioURLString: "", postId: id, postUserId: userId, composers: composers)
-                                    }
-                            
-                        }// zS
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 0)
-                                .stroke(Color.gray, lineWidth: 0.5)
-                    )
-                }
+                        Spacer()
+                        VStack(alignment: .trailing) {
+                            if (audioURL != nil) {
+                                MenuView(audioURLString: audioURL!, postId: id, postUserId: userId, composers: composers)
+                            } else {
+                                MenuView(audioURLString: "", postId: id, postUserId: userId, composers: composers)
+                            }
+                        }// hS
+                                  
+                                            
+                    }// zS (title)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 0)
+                            .stroke(Color.gray, lineWidth: 0.5)
+                        )
+                    
                     
                 VStack {
                     if((image) != nil){
@@ -158,29 +160,51 @@ struct PostCard: View {
 
         } else { // iPhone
             
-            ZStack{
+            ZStack {
                 VStack() {
-                    HStack {
-                        ZStack {
+                    
+                    //title
+                    ZStack {
+                        HStack {
+                            Circle()
+                                .fill(Color("mainDark2"))
+                                .frame(width: 30, height: 30, alignment: .leading)
+                                .background(Circle().stroke(Color.white, lineWidth: 5))
+                                .overlay(
+                                    Text(title)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .lineLimit(0)
+                                        .foregroundColor(.white)
+                                    )
+                                .clipped()
+                                .padding(.all, 5)
+
+                            
                             Text(title)
                                 .font(.title.weight(.bold))
                                 .matchedGeometryEffect(id: "title", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 0)
-                                        .stroke(Color.gray, lineWidth: 0.5)
-                            )
                             
+                        }// hS
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .trailing) {
                             if (audioURL != nil) {
                                 MenuView(audioURLString: audioURL!, postId: id, postUserId: userId, composers: composers)
                                     .foregroundColor(Color("mainColor"))
                             } else {
                                 MenuView(audioURLString: "", postId: id, postUserId: userId, composers: composers)
                             }
-                            
-                        }
-                    }
+                        }// vS
+                        
+                    }// zS (title)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 0)
+                            .stroke(Color.gray, lineWidth: 0.5)
+                    )
                     
                 VStack {
                     if((image) != nil){

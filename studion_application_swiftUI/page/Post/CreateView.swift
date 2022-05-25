@@ -28,7 +28,7 @@ struct CreateView: View {
                 ZStack {
                     VStack {
                         Form {
-                            Section(header: Text("新しくサウせい")){
+                            Section(header: Text("新しく作成")){
                                 ZStack{
                                     if content.isEmpty {
                                         Text(hintText)
@@ -62,14 +62,14 @@ struct CreateView: View {
                                     showingAudioPicker.toggle()
                                     print(showingAudioPicker)
                                 }) {
-                                    Text("音楽ファイルをアップロード")
+                                    Text("ミュージックアップロード")
                                         .foregroundColor(Color("mainColor"))
                                 }
                                 
                                 
                                     Button(action: {
                                         if(checkText(content: content)){
-                                            self.hintText = "文字を入力してください。"
+                                            self.hintText = "文字を入力してください"
                                         }
                                         create()
                                         content = ""
