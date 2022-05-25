@@ -55,24 +55,24 @@ struct MenuView: View {
 
             }// vS
         .alert(isPresented: $isDelete) {
-            Alert(title: Text("Delete"),
-                    message: Text("Are you sure??"),
+            Alert(title: Text("削除"),
+                    message: Text("本当ですか"),
                   primaryButton: .default (
                     {
-                        Text("Cancel")
+                        Text("いいえ")
                     }(), action: {
                         self.isDelete = false
                     }),
                   secondaryButton: .destructive(
                     {
-                        Text("Delete")
-                            .foregroundColor(.red.opacity(0.5))
+                        Text("はい")
+                            .foregroundColor(.red.opacity(0.7))
                     }(), action: {
                         delete()
-                        
                     })
             )
         }
+        
             
         NavigationLink(destination: RelayView(audioURLString: audioURLString, composers: composers), isActive: $isActive) {
             EmptyView()

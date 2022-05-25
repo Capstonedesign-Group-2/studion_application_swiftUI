@@ -51,16 +51,40 @@ struct WaveView2: View {
             VStack {
             
             if !isPost {
+                
                 VStack {
-                   
-                    Waveform(generator: generator, selectedSamples: $selectedSamples, selectionEnabled: .constant(false))
-                        .layoutPriority(1)
-                        .foregroundColor(Color.green)
-                        .background(Color.clear)
-                        .accentColor(Color.green)
-                        .frame(width: 650, height: 200)
                     
-                    RangeSlider(width: self.$width, width1: self.$width1, endWidth: self.$endWidth)
+                    VStack(alignment: .leading) {
+                        Button( action: {
+                                self.isEdit.toggle()
+                            }) {
+                                Image(systemName: "chevron.backward.square")
+                                    .font(.largeTitle)
+                                    .foregroundColor(.red.opacity(0.5))
+                            }
+                            .onAppear{
+                                print("recording view")
+                            }
+                    }
+                    
+                    ZStack {
+                        Waveform(generator: generator, selectedSamples: $selectedSamples, selectionEnabled: .constant(false))
+                            .layoutPriority(1)
+                            .foregroundColor(Color("mainColor"))
+                            .background(Color.clear)
+                            .accentColor(Color("mainColor"))
+                            .frame(maxWidth: 650, maxHeight: 200, alignment: .center)
+//                            .padding()
+                        
+                        RangeSlider(width: self.$width, width1: self.$width1, endWidth: self.$endWidth)
+                            .frame(maxWidth: 650, maxHeight: 200, alignment: .center)
+                            .padding()
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 0)
+                            .stroke(Color.gray, lineWidth: 0.5)
+                    )
+                   
                     
                     HStack {
                         
@@ -97,25 +121,15 @@ struct WaveView2: View {
                                 
                                 self.isPlaying = true
                             } else {
-                                print("playing")
-                            }
-                        } ) {
-                            Text("play")
-                        }
-                        
-                        Button( action : {
-                            if(self.player.isPlaying) {
                                 print("stop")
     //                            self.playTime = self.player.currentTime
                                 self.player.stop()
                                 
                                 self.isPlaying = false
                                 self.endWidth = 0.0
-                            } else {
-                                print("stopping")
                             }
-                        }) {
-                            Text("stop")
+                        } ) {
+                            Text(isPlaying ? "stop" : "play")
                         }
                         
                         Button( action: {
@@ -129,8 +143,6 @@ struct WaveView2: View {
                             
                             timeEdite()
                             
-                            
-                            
                             isPost.toggle()
                             
                         }) {
@@ -139,43 +151,38 @@ struct WaveView2: View {
                         
                     } // HStack
                     
-                    Button( action: {
-                            self.isEdit.toggle()
-                        }) {
-                            Text("end")
-                        }
-                        .onAppear{
-                            print("recording view")
-                        }
                     
                 }   // VStack
                 .frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .center)
-                
                 .offset(y: 50)
                 
-                Path { path in
-                    path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
-                    path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 210))
-                    path.addLine(to: CGPoint(x: 688 - (622 - self.width1) + 10, y: 210))
-                    path.addLine(to: CGPoint(x:688 - (622 - self.width1) + 10, y:0))
-                    path.closeSubpath()
+                ZStack {
+                    
+                    Path { path in
+                        path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
+                        path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 200))
+                        path.addLine(to: CGPoint(x: 688 - (622 - self.width1) + 10, y: 200))
+                        path.addLine(to: CGPoint(x:688 - (622 - self.width1) + 10, y:0))
+                        path.closeSubpath()
+                    }
+                    .fill(Color("mainDark3"))
+                    .opacity(0.1)
+                    .offset(y: -250)
+                    
+                    Path { path in
+                        path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
+                        path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 200))
+                        
+                        
+                        path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y: 200))
+                        path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y:0))
+                        path.closeSubpath()
+                    }
+                    .fill(Color("mainColor3"))
+                    .opacity(0.5)
+                    .offset(y: -250)
                 }
-                .fill(Color.green)
-                .opacity(0.1)
-                .offset(y: -240)
                 
-                Path { path in
-                    path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
-                    path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 210))
-                    
-                    
-                    path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y: 210))
-                    path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y:0))
-                    path.closeSubpath()
-                }
-                .fill(Color.blue)
-                .opacity(0.1)
-                .offset(y: -270)
                 
                 
             } else {
@@ -255,6 +262,10 @@ struct WaveView2: View {
             }
         }   //vS
             .frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .center)
+            .overlay(
+                RoundedRectangle(cornerRadius: 0)
+                    .stroke(Color.gray, lineWidth: 0.5)
+            )
             .navigationTitle("Recording Relay")
             .navigationBarTitleDisplayMode(.inline)
     }// Nav
@@ -319,7 +330,8 @@ struct WaveView2: View {
                 ]
                 
                 var user:[String: Any] = [
-                    "user" : name
+                    "user" : name,
+                    "user_id" : UserInfo.userInfo.getUserInfo()?.id as! Int
                 ]
                 
                 roomUserArray.append(user)
@@ -418,17 +430,17 @@ struct RangeSlider: View {
         VStack {
             ZStack (alignment: .leading){
                 Rectangle()
-                    .fill(Color.black.opacity(0.20))
+                    .fill(Color("mainDark3").opacity(0.5))
                     .frame(width: 650 ,height: 6)
                 
                 Rectangle()
-                    .fill(Color.blue)
+                    .fill(Color("mainColor3"))
                     .frame(width: self.width1 - self.width + 30, height: 6)
                     .offset(x: self.width)
                 
                 HStack (spacing: 0){
                     Circle()
-                        .fill(Color.green)
+                        .fill(Color("mainDark").opacity(0.7))
                         .frame(width: 25, height: 25)
                         .offset(x: self.width)
                         .gesture(
@@ -446,7 +458,7 @@ struct RangeSlider: View {
                         )
                     
                     Circle()
-                        .fill(Color.green)
+                        .fill(Color.orange.opacity(0.7))
                         .frame(width: 25, height: 25)
                         .offset(x: self.width1)
                         .gesture(

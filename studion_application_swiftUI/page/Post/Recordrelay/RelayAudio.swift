@@ -56,7 +56,6 @@ struct RelayAudio: View {
                                             
                                             recordURL.append(file)
                                             self.isRecording = false
-                                            self.isPlaying = false
                                             
                                         } catch {
                                             print(error.localizedDescription)
@@ -76,7 +75,6 @@ struct RelayAudio: View {
                                     }
                                     
                                     self.isRecording = true
-                                    self.isPlaying = true
                                 }
                                 
                             } ) {
