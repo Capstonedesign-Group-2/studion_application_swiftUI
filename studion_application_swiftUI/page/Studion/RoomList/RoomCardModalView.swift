@@ -31,6 +31,9 @@ struct RoomCardModalView: View {
 //    var color3 = Color(red: 252/255, green: 246/255, blue: 245/255)
 //    var color4 = Color(red: 44/255, green:95/255, blue: 45/255)
     
+    var color1 = Color("mainDark2")
+    var color2 = Color("mainColor3")
+    
     var color3 = Color("mainColor2")
     var color4 = Color("mainColor")
     
@@ -84,17 +87,18 @@ struct RoomCardModalView: View {
                             
                             VStack {
                                 Text(roomInfo!.title)
-                                    .font(.system(size: 40))
+                                    .font(.title)
                                     .fontWeight(.bold)
                                     .padding(.bottom, 15)
 //                                    .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
-                                    .foregroundColor(Color.white)
+                                    .foregroundColor(.white.opacity(0.9))
                                 
                                 Text(roomInfo!.content)
-                                    .font(.body)
+                                    .font(.title3)
+                                    .fontWeight(.semibold)
                                     .padding(.bottom, 15)
 //                                    .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
-                                    .foregroundColor(Color.white)
+                                    .foregroundColor(.white.opacity(0.9))
                                 
         //                        Text(String(roomInfo!.users.count))
         //                            .font(.body)
@@ -132,7 +136,8 @@ struct RoomCardModalView: View {
                                     Text("Enter")
                                         .bold()
                                         .frame(width: 200, height: 50)
-                                        .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
+                                        .foregroundColor(.white.opacity(0.9))
+//                                        .foregroundColor(Color(red: 44/255, green:95/255, blue: 45/255))
                                         .background(LinearGradient(gradient: Gradient(colors: [color3, color4]), startPoint: .leading, endPoint: .trailing))
                                         .clipShape(Capsule())
                                     
@@ -146,7 +151,8 @@ struct RoomCardModalView: View {
                         }   // VStack
                         .frame(width: UIScreen.main.bounds.width, height: curHeight)
 //                        .background(Color(red: 151/255, green: 188/255, blue:98/255))
-                        .background(Color("mainDark2"))
+//                        .background(Color("mainDark2"))
+                        .background(LinearGradient(gradient: Gradient(colors: [color1, color2]), startPoint: .leading, endPoint: .trailing))
                         .padding(.horizontal, 30)
                         .zIndex(1)
 
@@ -182,7 +188,7 @@ struct RoomCardModalView: View {
                 Rectangle()
                     .frame(height: curHeight / 2)
             }
-            .foregroundColor(Color(red: 151/255, green: 188/255, blue:98/255))
+                .foregroundColor(Color.white)
         )
         .animation(isDragging ? nil : .easeInOut(duration: 0.45))
     }

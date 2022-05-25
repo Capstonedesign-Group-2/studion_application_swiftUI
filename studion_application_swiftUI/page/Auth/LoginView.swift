@@ -39,9 +39,10 @@ struct LoginView: View {
                         Button(action : {
                             self.registerStatus = true
                         }) {
-                            Text("회원가입")
+                            Text("会員登録")
+                                .foregroundColor(Color("mainColor3"))
                         }
-                        Text("하러가기")
+                        Text("しに行く")
                     }
                 }
                 .frame(width: 500, alignment: .center)
@@ -70,9 +71,10 @@ struct LoginView: View {
                         Button(action : {
                             self.registerStatus = true
                         }) {
-                            Text("회원가입")
+                            Text("会員登録")
+                                .foregroundColor(Color("mainColor3"))
                         }
-                        Text("하러가기")
+                        Text("しに行く")
                     }
                 }
                 
@@ -125,7 +127,7 @@ struct loginForm: View {
         emailForm(email: $email)
         passwordForm(password: $password)
         
-        Text(loginFail ? "아이디나 비밀번호가 잘못 되었습니다." : "")
+        Text(loginFail ? "IDやパスワードのどちらかが異なります。" : "")
             .offset(y: -10)
             .foregroundColor(.red)
             .font(.system(size:15))
@@ -208,7 +210,7 @@ struct loginButtonLayout: View {
             .foregroundColor(.white)
             .padding()
             .frame(width: 250, height: 60)
-            .background(Color.green)
+            .background(Color("mainColor3"))
             .cornerRadius(16.0)
     }
 }

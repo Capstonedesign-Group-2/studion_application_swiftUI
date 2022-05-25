@@ -107,11 +107,11 @@ struct StudionRoomList: View {
 
                         }
 
-                        
 
-                        }else {
+                        } else {
                             Spacer()
-                            Text("방이 읎어")
+                            Text("今は静かですね。")
+                                .foregroundColor(Color("mainDark"))
                                 .font(.largeTitle).fontWeight(.bold)
                             Spacer()
 
@@ -120,13 +120,14 @@ struct StudionRoomList: View {
 
                         
                     }   // VStack
+                
                 .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
                     Color.clear
-                        .frame(height: 50)
+                        .frame(height: 70)
                                  .background(Material.bar)
                 }
 
-                NavigationBar(title: "Studion")
+                NavigationBar(title: "スタジオん")
                 
                 RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo, selectRoomCheck: $selectRoomCheck, selectRoomNumber: $selectRoomNumber)
                     

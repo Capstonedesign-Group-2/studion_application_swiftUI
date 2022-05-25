@@ -51,11 +51,17 @@ struct MainView: View {
                 
                 TabView(selection: $selectedTab) {
                     PostView()
+                        .onAppear() {
+                            self.createForm = false
+                        }
                         .tag("house")
                         .transition(.move(edge: .top))
 //                        .animation(.easeIn)
 
                     ChatRoomList()
+                        .onAppear() {
+                            self.createForm = false
+                        }
                         .tag("message")
                   
                     CreateScreen()
@@ -71,11 +77,17 @@ struct MainView: View {
                         .tag("plus")
                     
                     StudionRoomList(pageStatus: $pageStatus, roomNumber: $roomNumber, mainRouter: $mainRouter)
+                        .onAppear() {
+                            self.createForm = false
+                        }
                         .tag("rectangle.righthalf.inset.filled.arrow.right")
                         .transition(.move(edge: .top))
 //                        .animation(.easeIn)
                     
                     SettingView(pageStatus: $pageStatus)
+                        .onAppear() {
+                            self.createForm = false
+                        }
                         .tag("gearshape")
                     
                 }.sheet(isPresented: $createForm){
@@ -98,6 +110,12 @@ struct MainView: View {
                 .padding(.horizontal, 230)
                 .padding(.vertical, 5)
                 .background(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                        .edgesIgnoringSafeArea(.bottom)
+                )
+                
                 
             }// zS
             .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -150,6 +168,11 @@ struct MainView: View {
                 .padding(.horizontal, 25)
                 .padding(.vertical, 5)
                 .background(Color.white)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                )
+                .edgesIgnoringSafeArea(.bottom)
                 
             } //zS
             

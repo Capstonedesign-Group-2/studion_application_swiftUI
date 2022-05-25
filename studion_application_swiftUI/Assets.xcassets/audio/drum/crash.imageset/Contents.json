@@ -1,16 +1,15 @@
 {
   "images" : [
     {
-      "filename" : "스크린샷 2022-03-21 오후 7.21.04-1.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "ride.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "스크린샷 2022-03-21 오후 7.21.04-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

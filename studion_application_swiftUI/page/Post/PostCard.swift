@@ -28,32 +28,55 @@ struct PostCard: View {
     
     var composers:[Any]?
     
+    @State var userId: Int
+    
     var body: some View {
             
         if UIDevice.isIpad {
             ZStack{
                 VStack {
-                    HStack {
-                        ZStack {
+                    
+                    //title
+                    ZStack {
+                        HStack {
+                            Circle()
+                                .fill(Color("mainDark2"))
+                                .frame(width: 50, height: 50, alignment: .leading)
+                                .background(Circle().stroke(Color.white, lineWidth: 5))
+                                .overlay(
+                                    Text(title)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .lineLimit(0)
+                                        .foregroundColor(.white)
+                                    )
+                                .clipped()
+                                .padding(.all, 10)
+                            
                             Text(title)
+                                .foregroundColor(.black)
                                 .font(.largeTitle.weight(.bold))
                                 .matchedGeometryEffect(id: "title", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 0)
-                                        .stroke(Color.gray, lineWidth: 0.5)
-                            )
-                            
+                                .padding(.vertical, 10)
+                        }// hS
+                                    
+                        Spacer()
+                        VStack(alignment: .trailing) {
                             if (audioURL != nil) {
-                                MenuView(audioURLString: audioURL!, composers: composers)
-                                    .foregroundColor(Color("mainColor"))
+                                MenuView(audioURLString: audioURL!, postId: id, postUserId: userId, composers: composers)
                             } else {
-                                //
+                                MenuView(audioURLString: "", postId: id, postUserId: userId, composers: composers)
                             }
-                            
-                        }
-                    }
+                        }// hS
+                                  
+                                            
+                    }// zS (title)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 0)
+                            .stroke(Color.gray, lineWidth: 0.5)
+                        )
+                    
                     
                 VStack {
                     if((image) != nil){
@@ -137,29 +160,51 @@ struct PostCard: View {
 
         } else { // iPhone
             
-            ZStack{
+            ZStack {
                 VStack() {
-                    HStack {
-                        ZStack {
+                    
+                    //title
+                    ZStack {
+                        HStack {
+                            Circle()
+                                .fill(Color("mainDark2"))
+                                .frame(width: 30, height: 30, alignment: .leading)
+                                .background(Circle().stroke(Color.white, lineWidth: 5))
+                                .overlay(
+                                    Text(title)
+                                        .font(.title2)
+                                        .fontWeight(.bold)
+                                        .lineLimit(0)
+                                        .foregroundColor(.white)
+                                    )
+                                .clipped()
+                                .padding(.all, 5)
+
+                            
                             Text(title)
                                 .font(.title.weight(.bold))
                                 .matchedGeometryEffect(id: "title", in: namespace)
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 0)
-                                        .stroke(Color.gray, lineWidth: 0.5)
-                            )
                             
+                        }// hS
+                        
+                        Spacer()
+                        
+                        VStack(alignment: .trailing) {
                             if (audioURL != nil) {
-                                MenuView(audioURLString: audioURL!, composers: composers)
+                                MenuView(audioURLString: audioURL!, postId: id, postUserId: userId, composers: composers)
                                     .foregroundColor(Color("mainColor"))
                             } else {
-                                //
+                                MenuView(audioURLString: "", postId: id, postUserId: userId, composers: composers)
                             }
-                            
-                        }
-                    }
+                        }// vS
+                        
+                    }// zS (title)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 0)
+                            .stroke(Color.gray, lineWidth: 0.5)
+                    )
                     
                 VStack {
                     if((image) != nil){

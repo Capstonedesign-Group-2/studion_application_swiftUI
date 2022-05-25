@@ -31,12 +31,17 @@ struct RelayView: View {
             
             ZStack {
                 
-                VStack(spacing: 70) {
+                VStack {
                     RelayAudio(audioURLString: audioURLString, composers: composers)
+                }
+//                    Spacer()
+                
+                VStack(spacing: 70) {
+                    
                     
                     HStack (spacing: 100){
                         
-                        PayButton(key: "Q", imageName: "ride")
+                        PayButton(key: "Q", imageName: "crash")
 
                         PayButton(key: "W", imageName: "hi-hat")
 
@@ -81,7 +86,7 @@ struct RelayView: View {
                     print("drum end")
                 }
             }
-            .background(Color("mainDark").opacity(0.1))
+            .background(Color("mainDark3").opacity(0.1))
             
         } else { // iPhone View
             
@@ -91,7 +96,7 @@ struct RelayView: View {
     //                .frame(height: 20)
                 HStack (spacing: 20){
                     
-                    PayButton(key: "Q", imageName: "ride")
+                    PayButton(key: "Q", imageName: "crash")
 
                     PayButton(key: "W", imageName: "hi-hat")
 
@@ -122,6 +127,8 @@ struct RelayView: View {
 //                Spacer()
 
             } // Vstack
+            .background(Color("mainDark3").opacity(0.1))
+            
             .onAppear{
                 print("drum start")
             }
@@ -129,6 +136,7 @@ struct RelayView: View {
                 print("drum end")
             }
         }
+        
         
     }// body
         

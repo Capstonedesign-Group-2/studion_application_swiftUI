@@ -30,101 +30,108 @@ struct RelayAudio: View {
     
     
     var body: some View {
-        VStack {
+        
+        GeometryReader { geometry in
             
-            HStack {
+            ZStack {
                 
-                Button( action: {
-
-                    if isPlaying {
-
-                        player.pause()
-                        self.isPlaying = false
-
-                    } else {
-
-                        print(audioURLString)
-                        let url = URL(string: (audioURLString))
-                        print(url)
-
-                        playerItem = AVPlayerItem(url: url!)
-                        player.replaceCurrentItem(with: playerItem)
-
-                        player.play()
-
-                        self.isPlaying = true
-
-                    }
-                }) {
-                    Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
-                        .foregroundColor(Color("mainColor"))
-                }
-                
-                Button( action: {
+                VStack {
                     
-                    if isRecording {
-                        
-                        Task {
-                            do {
-                                let file = try await AudioEngineController.sharedInstance.stopRecord()
-                                
-                                recordURL.append(file)
-                                isRecording = false
-                                
-                            } catch {
-                                print(error.localizedDescription)
-                            }
-                        }
-                        
-                    } else {
-                        do {
-                            try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .mixWithOthers)
-                            try AVAudioSession.sharedInstance().setActive(true)
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                        
-                        AudioEngineController.sharedInstance.startRecord() { data in
-                            
-                        }
-                        
-                        isRecording = true
-                    }
                     
-                } ) {
-                    Text(isRecording ? "중지" : "녹음")
-                }
-                
-                if recordURL.count != 0 {
                     VStack {
-                        ForEach(0..<recordURL.count, id: \.self) { index in
-                            Button( action : {
+                    
+                        RelayAudioView(audioURL: audioURLString, isPlaying: $isPlaying)
+                                .frame(maxWidth: .infinity, minHeight: 50, alignment: .leading)
+                                .padding(.horizontal , 150)
+                                .padding(.vertical, 50)
+                        
+                            
+                            Button( action: {
                                 
-                                RecordController.sharedInstance.setUrl(url: recordURL[index])
-                                
-                                self.isEdit = true
-                                
-                            }) {
-                                Text("녹음 : \(index + 1)")
-                                    .sheet(isPresented: $isEdit) {
-                                        WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
+                                if self.isRecording {
+                                    
+                                    Task {
+                                        do {
+                                            let file = try await AudioEngineController.sharedInstance.stopRecord()
+                                            
+                                            recordURL.append(file)
+                                            self.isRecording = false
+                                            self.isPlaying = false
+                                            
+                                        } catch {
+                                            print(error.localizedDescription)
+                                        }
                                     }
                                     
+                                } else {
+                                    do {
+                                        try AVAudioSession.sharedInstance().setCategory(.playAndRecord, options: .mixWithOthers)
+                                        try AVAudioSession.sharedInstance().setActive(true)
+                                    } catch {
+                                        print(error.localizedDescription)
+                                    }
+                                    
+                                    AudioEngineController.sharedInstance.startRecord() { data in
+                                        
+                                    }
+                                    
+                                    self.isRecording = true
+                                    self.isPlaying = true
+                                }
+                                
+                            } ) {
+                                
+                                Image(systemName: isRecording ? "record.circle.fill" : "record.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .font(.largeTitle)
+                                    .frame(width: 40, height: 40)
+                                    .foregroundColor(isRecording ? .red.opacity(0.5) : Color("mainColor"))
                             }
+                        
+                        
+                    } // HStack
+                        
+                        if recordURL.count != 0 {
+                            HStack {
+                                ForEach(0..<recordURL.count, id: \.self) { index in
+                                    Button( action : {
+                                        
+                                        RecordController.sharedInstance.setUrl(url: recordURL[index])
+                                        
+                                        self.isEdit = true
+                                        
+                                    }) {
+                                        Image(systemName: "mic.fill")
+                                            .foregroundColor(Color("mainColor3"))
+                                            .padding()
+                                        
+                                        Text("\(index + 1)")
+                                            .foregroundColor(Color("mainColor3"))
+                                            .padding()
+                                            .sheet(isPresented: $isEdit) {
+                                                WaveView2(isEdit: self.$isEdit, roomUser: roomUser)
+                                            }
+                                            
+                                    }
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color("mainColor"), lineWidth: 1)
+                                    )
+                                }
+                            }// hS
                         }
-                            
-                    }
+                        
+                    
+                    
+                } // VStack
+                .frame(maxWidth: .infinity, maxHeight: 100, alignment: .center)
+                .onAppear{
+                    roomUser = [composers]
                 }
                 
-                
-                
-            } // HStack
-        } // VStack
-        .onAppear{
-//            print("releay audio")
-//            print(composers)
-            roomUser = [composers]
-//            roomUser = [composers]
-        }
+            }// zS
+            
+        } // geo
     }
 }

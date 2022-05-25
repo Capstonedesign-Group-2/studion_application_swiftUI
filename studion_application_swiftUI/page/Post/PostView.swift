@@ -54,7 +54,8 @@ struct PostView: View {
                                             id: self.p[index]?["id"] as? Int,
                                             image: images.count == 0 ? nil : images[0]?["link"] as? String,
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String,
-                                            composers: composers
+                                            composers: composers,
+                                            userId: self.p[index]!["user_id"] as! Int
                                         )
                                     } //vS
                                     
@@ -69,6 +70,7 @@ struct PostView: View {
                                         }
                                         
                                         print("currentPage : \(currentPage)")
+                                        print("lastPage : \(lastPage)")
                                         
                                         PostController.sharedInstance.show(page: currentPage) { data in
                                             let response = data as! Dictionary<String, Any>
@@ -87,8 +89,19 @@ struct PostView: View {
                                 .listRowBackground(Color.clear)
                                 .listRowSeparator(.hidden)
                                 .listRowInsets(EdgeInsets(top: 1, leading: 1, bottom: 20, trailing: 1))
+                            
                             } // list
+                        
+                        
                                 .padding(.horizontal, 100)
+                                .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
+                                    NavigationBar(title: "サウンドクモ")
+                                        .frame(height: 50)
+                                        .background(Color("mainColor"))
+//                                    Color.clear
+//                                        .frame(height: 50)
+//                                        .background(Color.white)
+                                }
                         
                                 .refreshable {
                                     currentPage = 1
@@ -103,15 +116,7 @@ struct PostView: View {
                                     }
                                }
                             } // vS
-                            .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
-                                Color.clear
-                                    .frame(height: 50)
-                                    .background(Color.white)
-                            }
-                                NavigationBar(title: "Sound cloud")
-                   
-                   
-                   
+                                
                             .onAppear() {
                                 PostController.sharedInstance.show(page: currentPage) { data in
 //                                      print(data)
@@ -136,14 +141,15 @@ struct PostView: View {
                                 currentPage = 1
                                 p = []
                             }
+                        
                    
-                            .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
-                                Color.clear
-                                    .background(.ultraThinMaterial)
-                                    .frame(height: 50)
-                            }
-
-                        }
+                    .safeAreaInset(edge: .bottom, alignment: .center, spacing: 0) {
+                        Color.clear
+                            .background(.ultraThinMaterial)
+                            .frame(height: 50)
+                    }
+                   
+               }// zS
                
 
            } else { // iPhone
@@ -157,6 +163,7 @@ struct PostView: View {
                                 let images = self.p[index]?["images"] as! [Dictionary<String, Any>?]
                                 let audios = self.p[index]?["audios"] as! [Dictionary<String, Any>?]
 //                                let composers = audios["composers"] as? [Any]
+
                                 let audio = audios.count == 0 ? nil : (audios[0] as! Dictionary<String, Any>)
                                 let composers = audio == nil ? nil : audio!["composers"] as? [Any]
                                     
@@ -167,7 +174,8 @@ struct PostView: View {
                                             id: self.p[index]?["id"] as? Int,
                                             image: images.count == 0 ? nil : images[0]?["link"] as? String,
                                             audioURL: audios.count == 0 ? nil : audios[0]?["link"] as? String,
-                                            composers: composers
+                                            composers: composers,
+                                            userId: self.p[index]!["user_id"] as! Int
                                         )
                                     } //vS
                                     
@@ -226,7 +234,8 @@ struct PostView: View {
                                   .background(Material.bar)
                             }
                         } // vS
-                            NavigationBar(title: "Sound cloud")
+                            NavigationBar(title: "サウンドクモ")
+                                .background(Color("mainColor"))
 
 
 //                    .navigationTitle("Posts")
