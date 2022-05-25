@@ -310,6 +310,21 @@ struct WaveView2: View {
             
             roomUserArray = roomUser[0] as! [Any]
             
+            
+            
+            if(roomUserArray.count == 0) {
+                
+                var name:[String: String] = [
+                    "name" : UserInfo.userInfo.getUserInfo()?.name as! String
+                ]
+                
+                var user:[String: Any] = [
+                    "user" : name
+                ]
+                
+                roomUserArray.append(user)
+            }
+            
         
     }
 }
