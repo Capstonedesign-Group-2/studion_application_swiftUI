@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		290A87AE2835000100DAE3B2 /* RelayAudio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290A87AD2835000100DAE3B2 /* RelayAudio.swift */; };
 		290D3A43283DCB57003D77BB /* RelayAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 290D3A42283DCB57003D77BB /* RelayAudioView.swift */; };
+		290D3A49283F5802003D77BB /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 290D3A48283F5802003D77BB /* AlertToast */; };
 		295DC7C2281793F1006A1BB7 /* CommentController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C1281793F1006A1BB7 /* CommentController.swift */; };
 		295DC7C42817B753006A1BB7 /* CommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295DC7C32817B753006A1BB7 /* CommentView.swift */; };
 		2992C4E427FDB465008EFFCA /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2992C4E327FDB465008EFFCA /* NavigationBar.swift */; };
@@ -301,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E274E5CC2545354826F7274 /* Pods_studion_application_swiftUI.framework in Frameworks */,
+				290D3A49283F5802003D77BB /* AlertToast in Frameworks */,
 				5556BFBC2824A4A7007EF57D /* AudioKitUI in Frameworks */,
 				5556BFB72824A0DA007EF57D /* Waveform in Frameworks */,
 			);
@@ -782,6 +784,7 @@
 			packageProductDependencies = (
 				5556BFB62824A0DA007EF57D /* Waveform */,
 				5556BFBB2824A4A7007EF57D /* AudioKitUI */,
+				290D3A48283F5802003D77BB /* AlertToast */,
 			);
 			productName = studion_application_swiftUI;
 			productReference = 55B98BEC27E83E1D0057F168 /* studion_application_swiftUI.app */;
@@ -814,6 +817,7 @@
 			packageReferences = (
 				5556BFB52824A0DA007EF57D /* XCRemoteSwiftPackageReference "Waveform" */,
 				5556BFBA2824A4A7007EF57D /* XCRemoteSwiftPackageReference "AudioKitUI" */,
+				290D3A47283F5802003D77BB /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 55B98BED27E83E1D0057F168 /* Products */;
 			projectDirPath = "";
@@ -1243,6 +1247,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		290D3A47283F5802003D77BB /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		5556BFB52824A0DA007EF57D /* XCRemoteSwiftPackageReference "Waveform" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pixlwave/Waveform";
@@ -1262,6 +1274,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		290D3A48283F5802003D77BB /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 290D3A47283F5802003D77BB /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
 		5556BFB62824A0DA007EF57D /* Waveform */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5556BFB52824A0DA007EF57D /* XCRemoteSwiftPackageReference "Waveform" */;

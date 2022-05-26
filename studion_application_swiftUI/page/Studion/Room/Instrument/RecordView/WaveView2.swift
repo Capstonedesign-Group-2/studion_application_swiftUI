@@ -9,6 +9,7 @@ import SwiftUI
 import Waveform
 import AVFoundation
 import mobileffmpeg
+import AlertToast
 
 struct WaveView2: View {
     @Binding var isEdit: Bool
@@ -34,6 +35,7 @@ struct WaveView2: View {
     //Simple upload
     @State var content = ""
     @State var hintText: String = "入力フォーム"
+    @State var successd: Bool = false
     
     
     @State var startPointEditer = 0.0
@@ -103,17 +105,6 @@ struct WaveView2: View {
                         
                         Spacer()
                         
-//                        VStack(alignment: .leading, spacing: 30) {
-//                            Button( action: {
-//                                    self.isEdit.toggle()
-//                                }) {
-//                                    Image(systemName: "chevron.backward.square")
-//                                        .font(.largeTitle)
-//                                        .foregroundColor(.red.opacity(0.5))
-//                                        .padding()
-//                                }
-//                        }
-                        
                         VStack(alignment: .leading, spacing: 30) {
                             Button( action: {
                                 if(!self.player.isPlaying) {
@@ -173,22 +164,6 @@ struct WaveView2: View {
                                     .padding()
                             }
                         } // saveBtn
-                        
-//                        VStack(alignment: .trailing, spacing: 30) {
-//                            Button( action: {
-//                                print("post save")
-//
-//                                timeEdite()
-//
-//                                isPost.toggle()
-//
-//                            }) {
-//                                Image(systemName: "square.and.arrow.up")
-//                                    .font(.largeTitle)
-//                                    .foregroundColor(Color("mainColor"))
-//                                    .padding()
-//                            }
-//                        } // uploadBtn
  
                         Spacer()
                         
@@ -262,6 +237,7 @@ struct WaveView2: View {
                                         } else {
                                             timeEdite()
                                             upload() { data in }
+                                            self.successd.toggle()
                                         }
                                        
                                         
@@ -282,6 +258,10 @@ struct WaveView2: View {
                             }// zS
                         }// form
                     }// form vS
+                    
+                    .toast(isPresenting: $successd) {
+                        AlertToast(displayMode: .alert, type: .complete(Color("mainColor")), title: "成功しました")
+                    }
                     
                 }   // VStack
                 

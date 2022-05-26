@@ -12,6 +12,7 @@ struct PostView: View {
     @State var p: [Dictionary<String, Any>?] = []
     @State var currentPage: Int = 0
     @State var lastPage: Int = 0
+    @State var isDeleted: Bool = false
     
     init() {
         if UIDevice.isIpad {
