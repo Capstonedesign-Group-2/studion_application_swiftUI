@@ -95,7 +95,7 @@ struct PostView: View {
                         
                                 .padding(.horizontal, 100)
                                 .safeAreaInset(edge: .top, alignment: .center, spacing: 0) {
-                                    NavigationBar(title: "サウンドクモ")
+                                    NavigationBar(title: "サウンドくも")
                                         .frame(height: 50)
                                         .background(Color("mainColor"))
 //                                    Color.clear
