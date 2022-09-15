@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AVFoundation
+import AlertToast
 
 struct CreateView: View {
     
@@ -19,6 +20,8 @@ struct CreateView: View {
     
     @State var showingImagePicker = false
     @State var showingAudioPicker = false
+    
+    @State var isCreated: Bool = false
     
     
     var body: some View {
@@ -70,9 +73,11 @@ struct CreateView: View {
                                     Button(action: {
                                         if(checkText(content: content)){
                                             self.hintText = "文字を入力してください"
+                                        } else {
+                                            create()
+                                            content = ""
+                                            self.isCreated.toggle()
                                         }
-                                        create()
-                                        content = ""
                                     })
                                     {
                                     Text("登録")
@@ -138,6 +143,10 @@ struct CreateView: View {
 
             } //nav
             .navigationViewStyle(StackNavigationViewStyle())
+            .toast(isPresenting: $isCreated) {
+                AlertToast(displayMode: .alert, type: .complete(Color("mainColor")), title: "成功しました")
+            }
+
 
 
             
@@ -185,9 +194,11 @@ struct CreateView: View {
                             Button(action: {
                                 if(checkText(content: content)){
                                     self.hintText = "무언가를 입력해주세요....."
+                                } else {
+                                    create()
+                                    content = ""
+                                    self.isCreated.toggle()
                                 }
-                                create()
-                                content = ""
                             })
                             {
                             Text("Submit")
@@ -232,6 +243,10 @@ struct CreateView: View {
                 
             }// navView
             .navigationViewStyle(.stack)
+            .toast(isPresenting: $isCreated) {
+                AlertToast(displayMode: .alert, type: .complete(Color("mainColor")), title: "成功しました")
+            }
+
         }
         
         

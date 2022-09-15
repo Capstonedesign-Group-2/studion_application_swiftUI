@@ -9,6 +9,7 @@ import SwiftUI
 import Waveform
 import AVFoundation
 import mobileffmpeg
+import AlertToast
 
 struct WaveView2: View {
     @Binding var isEdit: Bool
@@ -31,9 +32,10 @@ struct WaveView2: View {
     @State var timerWidth = 0.0
     @State var isStart = false
     
-    @State var isPost = false
+    //Simple upload
     @State var content = ""
-    @State var hintText: String = "This is input form"
+    @State var hintText: String = "入力フォーム"
+    @State var successd: Bool = false
     
     
     @State var startPointEditer = 0.0
@@ -49,8 +51,6 @@ struct WaveView2: View {
         NavigationView {
             
             VStack(alignment: .center) {
-            
-            if !isPost {
                 
                 VStack {
                     
@@ -62,10 +62,10 @@ struct WaveView2: View {
                                     .foregroundColor(Color("mainColor"))
                                     .background(Color.clear)
                                     .accentColor(Color("mainColor"))
-                                    .frame(maxWidth: 650, maxHeight: 200, alignment: .center)
+                                    .frame(width: 650, height: 200, alignment: .center)
                                     .overlay(
                                         RangeSlider(width: self.$width, width1: self.$width1, endWidth: self.$endWidth)
-                                            .frame(maxWidth: 650, maxHeight: 200, alignment: .center)
+                                            .frame(width: 650, height: 200, alignment: .center)
                                             .padding()
                                     )
                             }.background(
@@ -84,8 +84,8 @@ struct WaveView2: View {
                                     Path { path in
                                         path.move(to: CGPoint(x: (self.width), y: 0))
                                         path.addLine(to: CGPoint(x: (self.width), y: 200))
-                                        path.addLine(to: CGPoint(x: (self.width) + (self.endWidth + 10), y: 200))
-                                        path.addLine(to: CGPoint(x: (self.width) + (self.endWidth + 10), y: 0))
+                                        path.addLine(to: CGPoint(x: (self.width) + (self.endWidth), y: 200))
+                                        path.addLine(to: CGPoint(x: (self.width) + (self.endWidth), y: 0))
                                         path.closeSubpath()
                                     }
                                     .fill(Color("mainColor3"))
@@ -104,20 +104,6 @@ struct WaveView2: View {
                     HStack {
                         
                         Spacer()
-                        
-                        VStack(alignment: .leading, spacing: 30) {
-                            Button( action: {
-                                    self.isEdit.toggle()
-                                }) {
-                                    Image(systemName: "chevron.backward.square")
-                                        .font(.largeTitle)
-                                        .foregroundColor(.red.opacity(0.5))
-                                        .padding()
-                                }
-                                .onAppear{
-                                    print("recording view")
-                                }
-                        }
                         
                         VStack(alignment: .leading, spacing: 30) {
                             Button( action: {
@@ -178,115 +164,107 @@ struct WaveView2: View {
                                     .padding()
                             }
                         } // saveBtn
-                        
-                        VStack(alignment: .trailing, spacing: 30) {
-                            Button( action: {
-                                print("post save")
-                                
-                                timeEdite()
-                                
-                                isPost.toggle()
-                                
-                            }) {
-                                Image(systemName: "square.and.arrow.up")
-                                    .font(.largeTitle)
-                                    .foregroundColor(Color("mainColor"))
-                                    .padding()
-                            }
-                        } // uploadBtn
  
                         Spacer()
                         
                     } // HStack
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 0)
+                            .stroke(Color.gray, lineWidth: 0.5)
+                    )
                     
                     Spacer()
                     
+                    VStack {
+                        HStack {
+                            Text("Composers")
+                                .font(.title).fontWeight(.bold)
+                                .foregroundColor(Color("mainColor3"))
+                                .padding()
+                            
+                            Spacer()
+                            
+                            ForEach(0..<roomUserArray.count, id: \.self) { index in
+                                
+                                let userInfo = roomUserArray[index] as! Dictionary<String, Any>
+                                let user = userInfo["user"] as! Dictionary<String, Any>
+                                
+                                
+                                Circle()
+                                    .fill(Color("mainDark2"))
+                                    .frame(width: 60, height: 60)
+                                    .padding()
+                                    .background(Circle().stroke(Color.white, lineWidth: 5))
+                                    .overlay(
+                                        Text(user["name"] as! String)
+                                            .font(.largeTitle)
+                                            .fontWeight(.bold)
+                                            .lineLimit(1)
+                                            .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
+        //                                    .rotationEffect(.degrees(90.0))
+                                    )
+                                    .clipped()
+                            }
+                        }
+                        
+                        Spacer()
+                        
+                        Form {
+                            Section(header: Text("簡単アップロード")){
+                                ZStack{
+                                    if content.isEmpty {
+                                        Text(hintText)
+                                            .foregroundColor(Color(UIColor.placeholderText))
+                                            .padding(.horizontal, 8)
+                                            .padding(.vertical, 12)
+                                    }
+                                    TextEditor(text: $content)
+                                        .frame(height: 150, alignment: .center)
+                                }
+                                
+                                HStack {
+                                    
+                                    Spacer()
+                                    
+                                    Button(action: {}) {
+                                        Image(systemName: "square.and.arrow.up")
+                                            .font(.largeTitle)
+                                            .foregroundColor(Color("mainColor2"))
+                                            .padding()
+                                    }.onTapGesture {
+                                        if(checkText(content: content)){
+                                            self.hintText = "文字を入力してください"
+                                        } else {
+                                            timeEdite()
+                                            upload() { data in }
+                                            self.successd.toggle()
+                                        }
+                                       
+                                        
+                                    }
+                                    
+                                    
+                                    Button(action: {}) {
+                                            Image(systemName: "chevron.backward.square")
+                                                .font(.largeTitle)
+                                                .foregroundColor(.red.opacity(0.5))
+                                                .padding()
+                                        }.onTapGesture {
+                                            self.isEdit.toggle()
+                                        }
+                                    
+                                    Spacer()
+                                }// hS
+                            }// zS
+                        }// form
+                    }// form vS
+                    
+                    .toast(isPresenting: $successd) {
+                        AlertToast(displayMode: .alert, type: .complete(Color("mainColor")), title: "成功しました")
+                    }
                     
                 }   // VStack
                 
-                .overlay(
-                    RoundedRectangle(cornerRadius: 0)
-                        .stroke(Color.gray, lineWidth: 0.5)
-                )
-//                .offset(y: 50)
-                
-                
-                
-            } else {
-                
-                
-                HStack {
-                    Text("Composers")
-                        .font(.title).fontWeight(.bold)
-                        .foregroundColor(Color("mainColor3"))
-                        .padding()
-                    
-                    Spacer()
-                    
-                    ForEach(0..<roomUserArray.count, id: \.self) { index in
-                        
-                        let userInfo = roomUserArray[index] as! Dictionary<String, Any>
-                        let user = userInfo["user"] as! Dictionary<String, Any>
-                        
-                        
-                        Circle()
-                            .fill(Color("mainDark2"))
-                            .frame(width: 60, height: 60)
-                            .padding()
-                            .background(Circle().stroke(Color.white, lineWidth: 5))
-                            .overlay(
-                                Text(user["name"] as! String)
-                                    .font(.largeTitle)
-                                    .fontWeight(.bold)
-                                    .lineLimit(1)
-                                    .foregroundColor(Color(red: 252/255, green: 246/255, blue: 245/255))
-//                                    .rotationEffect(.degrees(90.0))
-                            )
-                            .clipped()
-                    }
-                }
-                
-                Spacer()
-                
-                Form {
-                    Section(header: Text("Simple Upload")){
-                        ZStack{
-                            if content.isEmpty {
-                                Text(hintText)
-                                    .foregroundColor(Color(UIColor.placeholderText))
-                                    .padding(.horizontal, 8)
-                                    .padding(.vertical, 12)
-                            }
-                            TextEditor(text: $content)
-                                .frame(height: 600, alignment: .center)
-                        }
-                        
-                                                        
-                        
-                        Button( action: {
-                            if(checkText(content: content)){
-                                self.hintText = "무언가를 입력해주세요....."
-                            }
-                            upload() { data in
-                                
-                            }
-                            
-                            self.isPost = false
-                        }) {
-                            Text("업로드")
-                                .foregroundColor(Color("mainColor2"))
-                        }
-                        Button( action: {
-                            self.isPost = false
-                        }) {
-                            Text("뒤로가기")
-                                .foregroundColor(Color.red.opacity(0.5))
-                        }
-                    }
-
-                } // form
-            
-            }
         }   //vS
             .frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .center)
             .overlay(
@@ -506,4 +484,3 @@ struct RangeSlider: View {
         }   // VStack
     }
 }
-
