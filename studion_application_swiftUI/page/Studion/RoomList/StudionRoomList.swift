@@ -110,7 +110,7 @@ struct StudionRoomList: View {
 
                         } else {
                             Spacer()
-                            Text("今は静かですね。")
+                            Text("今は静かですね")
                                 .foregroundColor(Color("mainDark"))
                                 .font(.largeTitle).fontWeight(.bold)
                             Spacer()
@@ -127,7 +127,7 @@ struct StudionRoomList: View {
                                  .background(Material.bar)
                 }
 
-                NavigationBar(title: "スタジオん")
+                NavigationBar(title: "スタジオン")
                 
                 RoomCardModalView(roomNumber: $roomNumber, pageStatus: $pageStatus, isShowing: $showModal, roomInfo: roomInfo, selectRoomCheck: $selectRoomCheck, selectRoomNumber: $selectRoomNumber)
                     

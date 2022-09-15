@@ -13,8 +13,8 @@ import mobileffmpeg
 struct WaveView2: View {
     @Binding var isEdit: Bool
     
-    @State var width: CGFloat = -10
-    @State var width1: CGFloat = 622
+    @State var width: CGFloat = 0
+    @State var width1: CGFloat = 600
     
     @State var generator = WaveformGenerator(audioFile: try! AVAudioFile(forReading: RecordController.sharedInstance.getUrl()))!
     @State var selectedSamples = 0..<1
@@ -48,140 +48,167 @@ struct WaveView2: View {
         
         NavigationView {
             
-            VStack {
+            VStack(alignment: .center) {
             
             if !isPost {
                 
                 VStack {
                     
-                    VStack(alignment: .leading) {
-                        Button( action: {
-                                self.isEdit.toggle()
-                            }) {
-                                Image(systemName: "chevron.backward.square")
-                                    .font(.largeTitle)
-                                    .foregroundColor(.red.opacity(0.5))
-                            }
-                            .onAppear{
-                                print("recording view")
-                            }
-                    }
-                    
                     ZStack {
-                        Waveform(generator: generator, selectedSamples: $selectedSamples, selectionEnabled: .constant(false))
-                            .layoutPriority(1)
-                            .foregroundColor(Color("mainColor"))
-                            .background(Color.clear)
-                            .accentColor(Color("mainColor"))
-                            .frame(maxWidth: 650, maxHeight: 200, alignment: .center)
-//                            .padding()
+                            
+                            VStack {
+                                Waveform(generator: generator, selectedSamples: $selectedSamples, selectionEnabled: .constant(false))
+                                    .layoutPriority(1)
+                                    .foregroundColor(Color("mainColor"))
+                                    .background(Color.clear)
+                                    .accentColor(Color("mainColor"))
+                                    .frame(maxWidth: 650, maxHeight: 200, alignment: .center)
+                                    .overlay(
+                                        RangeSlider(width: self.$width, width1: self.$width1, endWidth: self.$endWidth)
+                                            .frame(maxWidth: 650, maxHeight: 200, alignment: .center)
+                                            .padding()
+                                    )
+                            }.background(
+                                ZStack {
+                                    Path { path in
+                                        path.move(to: CGPoint(x: self.width, y: 0))
+                                        path.addLine(to: CGPoint(x: self.width, y: 200))
+                                        path.addLine(to: CGPoint(x: (self.width1 + 50), y: 200))
+                                        path.addLine(to: CGPoint(x: (self.width1 + 50), y:0))
+                                        path.closeSubpath()
+                                    }
+                                    .fill(Color("mainDark3"))
+                                    .opacity(0.5)
+//                                    .offset(y: -250)
+                                    
+                                    Path { path in
+                                        path.move(to: CGPoint(x: (self.width), y: 0))
+                                        path.addLine(to: CGPoint(x: (self.width), y: 200))
+                                        path.addLine(to: CGPoint(x: (self.width) + (self.endWidth + 10), y: 200))
+                                        path.addLine(to: CGPoint(x: (self.width) + (self.endWidth + 10), y: 0))
+                                        path.closeSubpath()
+                                    }
+                                    .fill(Color("mainColor3"))
+                                    .opacity(0.3)
+//                                    .offset(y: -250)
+                                }
+                            )
                         
-                        RangeSlider(width: self.$width, width1: self.$width1, endWidth: self.$endWidth)
-                            .frame(maxWidth: 650, maxHeight: 200, alignment: .center)
-                            .padding()
                     }
                     .overlay(
                         RoundedRectangle(cornerRadius: 0)
                             .stroke(Color.gray, lineWidth: 0.5)
                     )
-                   
+                    .padding()
                     
                     HStack {
                         
-                        Button( action: {
-                            if(!self.player.isPlaying) {
-                                print("play")
-    //                            self.player.play(atTime: playTime)
-                                self.endWidth = 0.0
-                                
-                                let end = 688 - (622 - self.width1)
-    //                            print("end : \(end)")
-                                let start = 38 + (self.width + 10)
-                                let timePercent = (self.width + 10) / 650
-                                var startTime = self.duration * timePercent
-                                
-                                if(startTime == 0.0) {
-                                    startTime = 0.01
+                        Spacer()
+                        
+                        VStack(alignment: .leading, spacing: 30) {
+                            Button( action: {
+                                    self.isEdit.toggle()
+                                }) {
+                                    Image(systemName: "chevron.backward.square")
+                                        .font(.largeTitle)
+                                        .foregroundColor(.red.opacity(0.5))
+                                        .padding()
                                 }
-                                
-                                self.player.currentTime = startTime
-                                
-                                let endTimePercent = (650 - (622 - self.width1)) / 650
-                                self.endTime = self.duration * endTimePercent
-                                
-                                let playWidth = (688 - (622 - self.width1)) - (38 + (self.width + 10))
-    //                            let playPercent = playWidth / 650
-    //                            print("playPercent : \(playPercent)")
-                                
-                                let playTime = self.endTime - startTime
-    //                            print("playTime : \(playTime)")
-                                self.timerWidth = playWidth / (playTime * 100)
-                                
-                                self.player.play()
-                                
-                                self.isPlaying = true
-                            } else {
-                                print("stop")
-    //                            self.playTime = self.player.currentTime
-                                self.player.stop()
-                                
-                                self.isPlaying = false
-                                self.endWidth = 0.0
+                                .onAppear{
+                                    print("recording view")
+                                }
+                        }
+                        
+                        VStack(alignment: .leading, spacing: 30) {
+                            Button( action: {
+                                if(!self.player.isPlaying) {
+                                    print("play")
+        //                            self.player.play(atTime: playTime)
+                                    self.endWidth = 0.0
+                                    
+                                    let end = 685 - (625 - self.width1)
+        //                            print("end : \(end)")
+                                    let start = 38 + (self.width + 10)
+                                    let timePercent = (self.width + 10) / 650
+                                    var startTime = self.duration * timePercent
+                                    
+                                    if(startTime == 0.0) {
+                                        startTime = 0.01
+                                    }
+                                    
+                                    self.player.currentTime = startTime
+                                    
+                                    let endTimePercent = (650 - (622 - self.width1)) / 650
+                                    self.endTime = self.duration * endTimePercent
+                                    
+                                    let playWidth = (688 - (622 - self.width1)) - (38 + (self.width + 10))
+        //                            let playPercent = playWidth / 650
+        //                            print("playPercent : \(playPercent)")
+                                    
+                                    let playTime = self.endTime - startTime
+        //                            print("playTime : \(playTime)")
+                                    self.timerWidth = playWidth / (playTime * 100)
+                                    
+                                    self.player.play()
+                                    
+                                    self.isPlaying = true
+                                } else {
+                                    print("stop")
+        //                            self.playTime = self.player.currentTime
+                                    self.player.stop()
+                                    
+                                    self.isPlaying = false
+                                    self.endWidth = 0.0
+                                }
+                            } ) {
+                                Image(systemName: self.isPlaying ? "pause.fill" : "play.fill").font(.title)
+                                    .font(.largeTitle)
+                                    .foregroundColor(Color("mainColor"))
+                                    .padding()
                             }
-                        } ) {
-                            Text(isPlaying ? "stop" : "play")
-                        }
+                        } // playBtn
                         
-                        Button( action: {
-                            print("save")
-                        }) {
-                            Text("local save")
-                        }
+                        VStack(alignment: .center, spacing: 30) {
+                            Button( action: {
+                                print("save")
+                            }) {
+                                Image(systemName: "square.and.arrow.down")
+                                    .font(.largeTitle)
+                                    .foregroundColor(Color("mainColor"))
+                                    .padding()
+                            }
+                        } // saveBtn
                         
-                        Button( action: {
-                            print("post save")
-                            
-                            timeEdite()
-                            
-                            isPost.toggle()
-                            
-                        }) {
-                            Text("post save")
-                        }
+                        VStack(alignment: .trailing, spacing: 30) {
+                            Button( action: {
+                                print("post save")
+                                
+                                timeEdite()
+                                
+                                isPost.toggle()
+                                
+                            }) {
+                                Image(systemName: "square.and.arrow.up")
+                                    .font(.largeTitle)
+                                    .foregroundColor(Color("mainColor"))
+                                    .padding()
+                            }
+                        } // uploadBtn
+ 
+                        Spacer()
                         
                     } // HStack
                     
+                    Spacer()
+                    
                     
                 }   // VStack
-                .frame(maxWidth: .infinity, maxHeight:.infinity, alignment: .center)
-                .offset(y: 50)
                 
-                ZStack {
-                    
-                    Path { path in
-                        path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
-                        path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 200))
-                        path.addLine(to: CGPoint(x: 688 - (622 - self.width1) + 10, y: 200))
-                        path.addLine(to: CGPoint(x:688 - (622 - self.width1) + 10, y:0))
-                        path.closeSubpath()
-                    }
-                    .fill(Color("mainDark3"))
-                    .opacity(0.1)
-                    .offset(y: -250)
-                    
-                    Path { path in
-                        path.move(to: CGPoint(x:38 + (self.width + 10), y: 0))
-                        path.addLine(to: CGPoint(x: 38 + (self.width + 10), y: 200))
-                        
-                        
-                        path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y: 200))
-                        path.addLine(to: CGPoint(x: 38 + (self.width + 10) + self.endWidth, y:0))
-                        path.closeSubpath()
-                    }
-                    .fill(Color("mainColor3"))
-                    .opacity(0.5)
-                    .offset(y: -250)
-                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 0)
+                        .stroke(Color.gray, lineWidth: 0.5)
+                )
+//                .offset(y: 50)
                 
                 
                 
@@ -439,8 +466,8 @@ struct RangeSlider: View {
                     .offset(x: self.width)
                 
                 HStack (spacing: 0){
-                    Circle()
-                        .fill(Color("mainDark").opacity(0.7))
+                    Rectangle()
+                        .fill(Color.white)
                         .frame(width: 25, height: 25)
                         .offset(x: self.width)
                         .gesture(
@@ -457,18 +484,18 @@ struct RangeSlider: View {
                                 })
                         )
                     
-                    Circle()
-                        .fill(Color.orange.opacity(0.7))
+                    Rectangle()
+                        .fill(Color.yellow)
                         .frame(width: 25, height: 25)
                         .offset(x: self.width1)
                         .gesture(
                             DragGesture()
                                 .onChanged({ (value) in
                                     
-                                    if(value.location.x <= 622 && value.location.x >= self.width) {
+                                    if(value.location.x <= 600 && value.location.x >= self.width) {
                                         self.width1 = value.location.x
 
-                                        print("width1 : \(self.width1)")
+                                        print("width1 : \(self.width1 - 30)")
                                         self.endWidth = 0.0
                                     }
                                 })

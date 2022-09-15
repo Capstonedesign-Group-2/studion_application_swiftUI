@@ -1,0 +1,32 @@
+{
+  "pins" : [
+    {
+      "identity" : "audiokit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/AudioKit.git",
+      "state" : {
+        "revision" : "8df18dd095cf83a4d8e35b5a42e5a4cfadfc88b7",
+        "version" : "5.5.2"
+      }
+    },
+    {
+      "identity" : "audiokitui",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AudioKit/AudioKitUI",
+      "state" : {
+        "revision" : "f9459fa0c1029055da48d974e8b6acb88b171c4d",
+        "version" : "0.2.0"
+      }
+    },
+    {
+      "identity" : "waveform",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/pixlwave/Waveform",
+      "state" : {
+        "branch" : "main",
+        "revision" : "f8c7066bbdd08db84817e8be9b19534b03fdd913"
+      }
+    }
+  ],
+  "version" : 2
+}
